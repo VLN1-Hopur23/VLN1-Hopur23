@@ -21,11 +21,20 @@ void ConsoleUI::run()
     cout << "quit\t\t- Exit program\n";
     cout << endl;
 
+<<<<<<< HEAD
     string command;
+=======
+    string command = "";
+>>>>>>> e6b772d99a853c18c7a08dee3f28939cf75f7c2a
     cin >> command;
 
     if (command == "list")
     {
+<<<<<<< HEAD
+=======
+        cout << endl;
+
+>>>>>>> e6b772d99a853c18c7a08dee3f28939cf75f7c2a
         displayListOfScientist();
 
         cout << "Choose how you want your list sorted\n";
@@ -91,7 +100,11 @@ void ConsoleUI::run()
             cin >> yearOfBirth;
         }
 
+<<<<<<< HEAD
         cout << "Enter year of death if appropriate:" << endl;
+=======
+        cout << "Enter year of death or - if the person is still alive:" << endl;
+>>>>>>> e6b772d99a853c18c7a08dee3f28939cf75f7c2a
         cin >> yearOfDeath;
         while (cin.fail())
         {
@@ -111,16 +124,40 @@ void ConsoleUI::run()
     }
     else if (command == "save")
     {
+<<<<<<< HEAD
         //TODO
     }
     else if (command == "quit")
     {
         //TODO
+=======
+        // TO DO
+    }
+    else if (command == "quit")
+    {
+        // TO DO
+>>>>>>> e6b772d99a853c18c7a08dee3f28939cf75f7c2a
     }
     else
     {
         cout << "Please choose one of the given options!\n";
     }
+<<<<<<< HEAD
+}
+
+void ConsoleUI::displayListOfScientist()
+{
+   /* //TODO
+    vector<Scientist> scientists = _service.getScientist();
+
+    cout << "Scientist name:" << endl;
+    cout << "===============" << endl;
+    for (size_t i = 0; i < scientists.size(); i++)
+    {
+        cout << scientists[i].getName() << endl;
+    }*/
+=======
+>>>>>>> e6b772d99a853c18c7a08dee3f28939cf75f7c2a
 }
 
 void ConsoleUI::displayListOfScientist()
@@ -135,3 +172,4 @@ void ConsoleUI::displayListOfScientist()
         cout << scientists[i].getName() << endl;
     }*/
 }
+
