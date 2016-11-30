@@ -21,7 +21,7 @@ void ConsoleUI::run()
     cout << "quit\t\t- Exit program\n";
     cout << endl;
 
-    string command;
+    string command = "";
     cin >> command;
 
     if (command == "list")
