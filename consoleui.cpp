@@ -64,30 +64,7 @@ void ConsoleUI::List()
     string sort;
     cin >> sort;
     displayListOfScientist(sort);
-    // ///////////////////////////////////Er inni byggt i displayListOfS... functioninu og dar er default sort by name
-    /*if (sort == "name")
-    {
-        displayListOfScientist(sort);
-        //TODO
-    }
-    else if (sort == "age")
-    {
-        displayListOfScientist(sort);
-    }
-    else if (sort == "birth")
-    {
-        displayListOfScientist(sort);//TODO
-    }
-    else if (sort == "death")
-    {
-        displayListOfScientist(sort);
-    }
-    else
-    {
-        cout << "Please choose one of the given options!\n";
-        //TODO keep the program running
-    }*/
-    // //////////////////////////////////////////
+
 }
 
 void ConsoleUI::Register()
