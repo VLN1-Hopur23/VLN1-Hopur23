@@ -7,7 +7,8 @@ DataAccess::DataAccess()
 {
 }
 
-Scientist DataAccess::getData(ScientistService& scientists)
+
+void DataAccess::getData(ScientistService& scientists)
 {
     ifstream file;
     Scientist person;
@@ -36,10 +37,25 @@ Scientist DataAccess::getData(ScientistService& scientists)
         //cout << "File cannot open" << endl;
     }
 
-    return person;
 }
 
-void DataAccess::writeData(Scientist scientist)
+void DataAccess::writeData(const ScientistService& scientists)
 {
-    scientist.getName();
+    ofstream file;
+
+    file.open("computerScientists.txt");
+
+    if (file)
+    {
+        for (int i = 0; i < scientists.getSize(); i++)
+        {
+            file << scientists.getScientist(i).getName();
+            file << scientists.getScientist(i).getGender();
+            file << scientists.getScientist(i).getYearOfBirth();
+            file << scientists.getScientist(i).getYearOfDeath();
+            file << "###";
+        }
+    }
+
+    file.close();
 }

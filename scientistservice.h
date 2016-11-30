@@ -15,7 +15,9 @@ public:
 
     void addScientist(Scientist scientist);
 
-    Scientist getScientist(int index);
+    Scientist getScientist(int index) const;
+
+    int getSize() const;
 };
 
 #endif // SCIENTISTSERVICE_H

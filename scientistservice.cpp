@@ -22,7 +22,12 @@ void ScientistService::addScientist(Scientist scientist)
     */
 }
 
-Scientist ScientistService::getScientist(int index)
+Scientist ScientistService::getScientist(int index) const
 {
     return _scientists[index];
+}
+
+int ScientistService::getSize() const
+{
+    return _scientists.size();
 }

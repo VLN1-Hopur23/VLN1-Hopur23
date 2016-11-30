@@ -2,6 +2,7 @@
 #define DATAACCESS_H
 
 #include <fstream>
+#include "scientistservice.h"
 #include "scientist.h"
 #include "scientistservice.h"
 
@@ -12,9 +13,10 @@ class DataAccess
 public:
     DataAccess();
 
-    Scientist getData(ScientistService& scientists);
 
-    void writeData(Scientist scientist);
+    void getData(ScientistService& scientists);
+
+    void writeData(const ScientistService& scientists);
 };
 
 #endif // DATAACCESS_H
