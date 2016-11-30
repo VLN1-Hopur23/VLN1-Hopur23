@@ -17,6 +17,10 @@ bool ScientitComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
+bool ScientitComparisonAgeForward (Scientist i, Scientist j)
+{
+    return (i.getAge()<j.getAge());
+}
 struct ScientitComparisonGenderForward {
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
@@ -28,9 +32,9 @@ ScientistService::ScientistService()
 {
     vector<Scientist> performers;
 
-    Scientist p("duran duran","f",1640,1700);
-    Scientist p2("madona","m",1953,1999);
-    Scientist p3("ALi","f",2130,2200);
+    Scientist p("duran duran","f",1640,1700); //60 ara
+    Scientist p2("madona","m",1953,1999 ); //46 ara
+    Scientist p3("ALi","f",2130,2200); //70 ara
 
     performers.push_back(p);
     performers.push_back(p2);
@@ -51,7 +55,12 @@ ScientistService::ScientistService()
     else if (sort == "death")
     {
         std::sort(performers.begin(), performers.end(), ScientitComparisonYearOfDeathForward);
-    }else
+    }
+    else if (sort == "age")
+    {
+        std::sort(performers.begin(), performers.end(), ScientitComparisonAgeForward);
+    }
+    else
     {
         //default is to sort by name
         ScientitComparisonNameForward cmp;

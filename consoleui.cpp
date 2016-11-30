@@ -94,7 +94,7 @@ void ConsoleUI::run()
     }
 }
 
-void ConsoleUI::registerScientist()
+void ConsoleUI::Register()
 {
     string name;
     string gender;
@@ -134,9 +134,11 @@ void ConsoleUI::registerScientist()
         cin >> yearOfDeath;
     }
 
-    //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
+    Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
 
-    //service.addScientist(newScientist);
+    service.addScientist(newScientist);
+
+    cout << "Scientist added!" << endl;
 }
 
 void ConsoleUI::displayListOfScientist(string sort)
@@ -150,16 +152,3 @@ void ConsoleUI::displayListOfScientist(string sort)
         cout << scientists[i].getName() << endl;
     }
 }
-
-/*void ConsoleUI::displayListOfPerformers()
-{
-    vector<Performer> performers = _service.getPerformers();
-
-    cout << "Performer name:" << endl;
-    cout << "===============" << endl;
-    for (size_t i =0; i< performers.size();i++)
-    {
-        cout << performers[i].getName() <<endl;
-    }
-}*/
-

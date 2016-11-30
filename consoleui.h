@@ -1,9 +1,7 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 
-#include "scientist.h"
 #include "scientistservice.h"
-#include <iostream>
 
 using namespace std;
 
@@ -19,7 +17,7 @@ public:
 
 private:
     void displayListOfScientist(string sort);
-    void registerScientist();
+    void Register();
 
 private:
     ScientistService _service;
