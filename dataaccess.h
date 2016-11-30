@@ -16,6 +16,8 @@ public:
     void getData(vector<Scientist>& scientists);
 
     void writeData(const vector<Scientist>& scientists);
+
+
 };
 
 #endif // DATAACCESS_H

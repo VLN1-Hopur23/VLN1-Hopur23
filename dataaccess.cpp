@@ -44,23 +44,26 @@ void DataAccess::getData(vector<Scientist>& scientists)
 
 }
 
-void DataAccess::writeData(const vector<Scientist>& scientists)
+void DataAccess::writeData(const vector <Scientist>& scientists)
 {
     ofstream file;
+    int index = scientists.size() + 1;
 
-    file.open("computerScientists.txt");
+    file.open("computerScientists.txt", ios_base::app);
+
 
     if (file)
     {
-        for (size_t i = 0; i < scientists.size(); i++)
-        {
-            file << scientists[i].getName();
-            file << scientists[i].getGender();
-            file << scientists[i].getYearOfBirth();
-            file << scientists[i].getYearOfDeath();
-            file << "####";
-        }
+
+        file << scientists[index].getName() << endl;
+        file << scientists[index].getGender() << endl;
+        file << scientists[index].getYearOfBirth() << endl;
+        file << scientists[index].getYearOfDeath() << endl;
+        file << "####";
+
     }
 
     file.close();
 }
+
+
