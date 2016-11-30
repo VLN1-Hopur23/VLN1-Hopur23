@@ -1,5 +1,6 @@
 #include "scientist.h"
 
+
 using namespace std;
 
 Scientist::Scientist()
@@ -33,4 +34,16 @@ int Scientist::getYearOfBirth() const
 int Scientist::getYearOfDeath() const
 {
     return _yearOfDeath;
+}
+
+int Scientist::getAge() const
+{
+    if(_yearOfDeath != 0)
+    {
+        return _yearOfDeath - _yearOfBirth;
+    }
+    else
+    {
+        return 2016 - _yearOfBirth; // 2016 er notad sem arid i dag
+    }
 }

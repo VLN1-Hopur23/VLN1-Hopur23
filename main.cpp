@@ -1,8 +1,10 @@
-#include <QCoreApplication>
+//#include <QCoreApplication> // thurfum ekki
 #include <iostream>
 #include "consoleui.h"
 
 using namespace std;
+
+
 
 int main()
 {
