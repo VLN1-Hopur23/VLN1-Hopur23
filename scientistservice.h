@@ -15,7 +15,7 @@ public:
 
     void addScientist(Scientist scientist);
     vector<Scientist> getScientists(string sort);
-
+    vector<Scientist> searchScientists(string searchData);
     Scientist getScientist(int index);
 };
 

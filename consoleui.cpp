@@ -42,6 +42,7 @@ void ConsoleUI::run()
         else if (command == "search" || command == "Search")
         {
             //TODO: Search functionality
+            Search();
         }
         else if (command == "save" || command == "Save")
         {
@@ -55,6 +56,21 @@ void ConsoleUI::run()
         {
             cout << "Please choose one of the given options!\n";
         }
+    }
+}
+
+void ConsoleUI::Search()
+{
+    string searchData;
+    //Call the function searchScientists
+    cout << "Searching by first letter/s in the name" << endl;
+    cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
+    cin >> searchData;
+    vector<Scientist> foundScientists = _service.searchScientists(searchData);
+    cout << endl;
+    for (size_t i = 0; i < foundScientists.size(); i++)
+    {
+        cout << foundScientists[i].getName() << endl;
     }
 }
 
