@@ -2,9 +2,8 @@
 #define DATAACCESS_H
 
 #include <fstream>
-#include "scientistservice.h"
+#include <vector>
 #include "scientist.h"
-#include "scientistservice.h"
 
 using namespace std;
 
@@ -14,9 +13,9 @@ public:
     DataAccess();
 
 
-    void getData(ScientistService& scientists);
+    void getData(vector<Scientist>& scientists);
 
-    void writeData(const ScientistService& scientists);
+    void writeData(const vector<Scientist>& scientists);
 };
 
 #endif // DATAACCESS_H

@@ -8,7 +8,7 @@ DataAccess::DataAccess()
 }
 
 
-void DataAccess::getData(ScientistService& scientists)
+void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
     Scientist person;
@@ -20,16 +20,21 @@ void DataAccess::getData(ScientistService& scientists)
     file.open("computerScientists.txt");
     if(file.is_open())
     {
-        while(delimiter != "####")
+        while (!file.eof())
         {
-            file >> temp;
-            file >> t;
-            file >> one;
-            file >> two;
-            file >> delimiter;
+            delimiter = "";
 
-            Scientist person(temp, t, one, two);
-            scientists.addScientist(person);
+            while(delimiter != "####")
+            {
+                file >> temp;
+                file >> t;
+                file >> one;
+                file >> two;
+                file >> delimiter;
+
+                Scientist person(temp, t, one, two);
+                scientists.push_back(person);
+            }
         }
     }
     else
@@ -39,7 +44,7 @@ void DataAccess::getData(ScientistService& scientists)
 
 }
 
-void DataAccess::writeData(const ScientistService& scientists)
+void DataAccess::writeData(const vector<Scientist>& scientists)
 {
     ofstream file;
 
@@ -47,13 +52,13 @@ void DataAccess::writeData(const ScientistService& scientists)
 
     if (file)
     {
-        for (int i = 0; i < scientists.getSize(); i++)
+        for (size_t i = 0; i < scientists.size(); i++)
         {
-            file << scientists.getScientist(i).getName();
-            file << scientists.getScientist(i).getGender();
-            file << scientists.getScientist(i).getYearOfBirth();
-            file << scientists.getScientist(i).getYearOfDeath();
-            file << "###";
+            file << scientists[i].getName();
+            file << scientists[i].getGender();
+            file << scientists[i].getYearOfBirth();
+            file << scientists[i].getYearOfDeath();
+            file << "####";
         }
     }
 
