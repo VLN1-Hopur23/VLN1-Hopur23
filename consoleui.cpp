@@ -59,7 +59,7 @@ void ConsoleUI::run()
         }
         else
         {
-            cout << "Please choose one of the given options!/n";
+            cout << "Please choose one of the given options!\n";
             //TODO keep the program running
         }
     }
@@ -72,15 +72,36 @@ void ConsoleUI::run()
 
         cout << "Enter the name of the person:" << endl;
         cin >> name;
+        //check?
 
-        cout << "Enter gender:" << endl;
+        cout << "Enter gender (m for male, f for female):" << endl;
         cin >> gender;
+        while (gender != "m" && gender != "f")
+        {
+            cout << "Please enter either m or f!\n";
+            cin.clear();
+            cin >> gender;
+        }
 
         cout << "Enter year of birth:" << endl;
         cin >> yearOfBirth;
+        while (cin.fail())
+        {
+            cout << "Please enter a valid option!\n";
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> yearOfBirth;
+        }
 
-        cout << "Enter year of death:" << endl;
+        cout << "Enter year of death or - if the person is still alive:" << endl;
         cin >> yearOfDeath;
+        while (cin.fail())
+        {
+            cout << "Please enter a valid option!\n";
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> yearOfDeath;
+        }
 
         //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
 
@@ -100,12 +121,20 @@ void ConsoleUI::run()
     }
     else
     {
-        cout << "Please choose one of the given options!/n";
+        cout << "Please choose one of the given options!\n";
     }
 }
 
 void ConsoleUI::displayListOfScientist()
 {
-    //vector<Scientist> scientists
+   /* //TODO
+    vector<Scientist> scientists = _service.getScientist();
+
+    cout << "Scientist name:" << endl;
+    cout << "===============" << endl;
+    for (size_t i = 0; i < scientists.size(); i++)
+    {
+        cout << scientists[i].getName() << endl;
+    }*/
 }
 

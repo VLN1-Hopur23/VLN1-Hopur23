@@ -17,8 +17,8 @@ public:
 private:
     void displayListOfScientist();
 
-/*private:
-    ScientistService service;*/
+private:
+    ScientistService _service;
 
 };
 
