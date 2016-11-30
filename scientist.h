@@ -19,11 +19,14 @@ public:
     int getYearOfBirth() const;
 
     int getYearOfDeath() const;
+
+    int getAge() const;
 private:
     string _name;
     string _gender;
     int _yearOfBirth;
     int _yearOfDeath;
+
 
 };
 

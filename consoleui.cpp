@@ -26,88 +26,11 @@ void ConsoleUI::run()
 
     if (command == "list")
     {
-        cout << endl;
-
-
-
-        cout << "Choose how you want your list sorted\n";
-        cout << endl;
-        cout << "name\t\t- Sort by name\n";
-        cout << "age\t\t- Sort by age\n";
-        cout << "birth\t\t- Sort by year of birth\n";
-        cout << "death\t\t- Sort by year of death\n";
-        cout << endl;
-
-        string sort;
-        cin >> sort;
-        displayListOfScientist(sort);
-        //Er inni byggt i displayListOfS... functioninu og dar er default sort by name
-        /*if (sort == "name")
-        {
-            displayListOfScientist(sort);
-            //TODO
-        }
-        else if (sort == "age")
-        {
-            displayListOfScientist(sort);
-        }
-        else if (sort == "birth")
-        {
-            displayListOfScientist(sort);//TODO
-        }
-        else if (sort == "death")
-        {
-            displayListOfScientist(sort);
-        }
-        else
-        {
-            cout << "Please choose one of the given options!\n";
-            //TODO keep the program running
-        }*/
+       List();
     }
     else if (command == "register")
     {
-        string name;
-        string gender;
-        int yearOfBirth;
-        int yearOfDeath;
-
-        cout << "Enter the name of the person:" << endl;
-        cin >> name;
-        //check?
-
-        cout << "Enter gender (m for male, f for female):" << endl;
-        cin >> gender;
-        while (gender != "m" && gender != "f")
-        {
-            cout << "Please enter either m or f!\n";
-            cin.clear();
-            cin >> gender;
-        }
-
-        cout << "Enter year of birth:" << endl;
-        cin >> yearOfBirth;
-        while (cin.fail())
-        {
-            cout << "Please enter a valid option!\n";
-            cin.clear();
-            cin.ignore(256, '\n');
-            cin >> yearOfBirth;
-        }
-
-        cout << "Enter year of death or - if the person is still alive:" << endl;
-        cin >> yearOfDeath;
-        while (cin.fail())
-        {
-            cout << "Please enter a valid option!\n";
-            cin.clear();
-            cin.ignore(256, '\n');
-            cin >> yearOfDeath;
-        }
-
-        //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
-
-        //service.addScientist(newScientist);
+        Register();
     }
     else if (command == "search")
     {
@@ -127,6 +50,92 @@ void ConsoleUI::run()
     }
 }
 
+void ConsoleUI::List()
+{
+    cout << endl;
+    cout << "Choose how you want your list sorted\n";
+    cout << endl;
+    cout << "name\t\t- Sort by name\n";
+    cout << "age\t\t- Sort by age\n";
+    cout << "birth\t\t- Sort by year of birth\n";
+    cout << "death\t\t- Sort by year of death\n";
+    cout << endl;
+
+    string sort;
+    cin >> sort;
+    displayListOfScientist(sort);
+    // ///////////////////////////////////Er inni byggt i displayListOfS... functioninu og dar er default sort by name
+    /*if (sort == "name")
+    {
+        displayListOfScientist(sort);
+        //TODO
+    }
+    else if (sort == "age")
+    {
+        displayListOfScientist(sort);
+    }
+    else if (sort == "birth")
+    {
+        displayListOfScientist(sort);//TODO
+    }
+    else if (sort == "death")
+    {
+        displayListOfScientist(sort);
+    }
+    else
+    {
+        cout << "Please choose one of the given options!\n";
+        //TODO keep the program running
+    }*/
+    // //////////////////////////////////////////
+}
+
+void ConsoleUI::Register()
+{
+    string name;
+    string gender;
+    int yearOfBirth;
+    int yearOfDeath;
+    int age;
+
+    cout << "Enter the name of the person:" << endl;
+    cin >> name;
+    //check?
+
+    cout << "Enter gender (m for male, f for female):" << endl;
+    cin >> gender;
+    while (gender != "m" && gender != "f")
+    {
+        cout << "Please enter either m or f!\n";
+        cin.clear();
+        cin >> gender;
+    }
+
+    cout << "Enter year of birth:" << endl;
+    cin >> yearOfBirth;
+    while (cin.fail())
+    {
+        cout << "Please enter a valid option!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> yearOfBirth;
+    }
+
+    cout << "Enter year of death or - if the person is still alive:" << endl;
+    cin >> yearOfDeath;
+    while (cin.fail())
+    {
+        cout << "Please enter a valid option!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> yearOfDeath;
+    }
+
+    //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
+
+    //service.addScientist(newScientist);
+}
+
 void ConsoleUI::displayListOfScientist(string sort)
 {
     //TODO
@@ -134,21 +143,36 @@ void ConsoleUI::displayListOfScientist(string sort)
 
     cout << "Scientist name:" << endl;
     cout << "===============" << endl;
+    cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout <<"\t\t\t\t\tYear\tYear" << endl;
+
     for (size_t i = 0; i < scientists.size(); i++)
     {
-        cout << scientists[i].getName() << endl;
+        string Name = scientists[i].getName();
+        cout << scientists[i].getName();
+        if(Name.size()<8)
+        {
+            cout<< "\t\t\t\t";
+        }
+        else if(Name.size()<16)
+        {
+            cout << "\t\t\t";
+        }
+        else if(Name.size()<24)
+        {
+            cout<< "\t\t";
+        }
+        else if(Name.size()<30)
+        {
+            cout<< "\t";
+        }
+
+        cout << scientists[i].getGender() << "\t" <<scientists[i].getYearOfBirth()<< "\t" <<scientists[i].getYearOfDeath() << "\t" << scientists[i].getAge() << endl;
+
     }
 }
 
-/*void ConsoleUI::displayListOfPerformers()
-{
-    vector<Performer> performers = _service.getPerformers();
 
-    cout << "Performer name:" << endl;
-    cout << "===============" << endl;
-    for (size_t i =0; i< performers.size();i++)
-    {
-        cout << performers[i].getName() <<endl;
-    }
-}*/
+
+
 

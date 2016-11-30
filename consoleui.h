@@ -16,6 +16,8 @@ public:
 
 private:
     void displayListOfScientist(string sort);
+    void List();
+    void Register();
 
 private:
     ScientistService _service;
