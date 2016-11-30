@@ -4,7 +4,10 @@
 #include "scientist.h"
 #include "scientistservice.h"
 #include <iostream>
-#include <string>
+
+using namespace std;
+
+// Presentation layer
 
 class ConsoleUI
 {
@@ -16,6 +19,7 @@ public:
 
 private:
     void displayListOfScientist(string sort);
+    void registerScientist();
 
 private:
     ScientistService _service;
