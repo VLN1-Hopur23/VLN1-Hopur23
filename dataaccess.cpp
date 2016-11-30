@@ -1,11 +1,13 @@
 #include "dataaccess.h"
 
+using namespace std;
+
 
 DataAccess::DataAccess()
 {
 }
 
-Scientist DataAccess::getData()
+Scientist DataAccess::getData(ScientistService& scientists)
 {
     ifstream file;
     Scientist person;
@@ -25,13 +27,13 @@ Scientist DataAccess::getData()
             file >> two;
             file >> delimiter;
 
-            person.Scientist(temp, t, one, two);
-            addScientist(person);
+            Scientist person(temp, t, one, two);
+            scientists.addScientist(person);
         }
     }
     else
     {
-        cout << "File cannot open" << endl;
+        //cout << "File cannot open" << endl;
     }
 
     return person;

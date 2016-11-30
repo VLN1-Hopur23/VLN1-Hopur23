@@ -12,7 +12,7 @@ class DataAccess
 public:
     DataAccess();
 
-    Scientist getData();
+    Scientist getData(ScientistService& scientists);
 
     void writeData(Scientist scientist);
 };
