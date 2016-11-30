@@ -31,5 +31,3 @@ private:
 };
 
 #endif // SCIENTIST_H
-
-

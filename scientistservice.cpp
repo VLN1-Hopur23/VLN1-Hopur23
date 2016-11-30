@@ -43,20 +43,20 @@ ScientistService::ScientistService()
     //TODO: logic
     //sort by name
 
-    if (sort == "name")
+    if (sort == "name" || sort == "Name")
     {
         ScientitComparisonNameForward cmp;
         std::sort(performers.begin(), performers.end(), cmp);
     }
-    else if (sort == "birth")
+    else if (sort == "birth" || sort == "Birth")
     {
         std::sort(performers.begin(), performers.end(), ScientitComparisonYearOfBirthForward);
     }
-    else if (sort == "death")
+    else if (sort == "death" || sort == "Death")
     {
         std::sort(performers.begin(), performers.end(), ScientitComparisonYearOfDeathForward);
     }
-    else if (sort == "age")
+    else if (sort == "age" || sort == "Age")
     {
         std::sort(performers.begin(), performers.end(), ScientitComparisonAgeForward);
     }
@@ -76,14 +76,14 @@ ScientistService::ScientistService()
    // _scientists.push_back(scientist);
 }
 
-/*Scientist ScientistService::getScientist(int index)
+Scientist ScientistService::getScientist(int index)
 {
     //return _scientists[index];
 }
 */
 
 /*/////////////////////////////////////////////////////////////
-/*
+
 #include "performerservice.h"
 #include <algorithm>
 

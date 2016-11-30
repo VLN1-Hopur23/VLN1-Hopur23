@@ -22,7 +22,6 @@ private:
 
 private:
     ScientistService _service;
-
 };
 
 #endif // CONSOLEUI_H

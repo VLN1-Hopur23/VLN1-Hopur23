@@ -20,7 +20,6 @@ void ConsoleUI::run()
 
     while(loop == true)
     {
-
         cout << "Choose a command:\n";
         cout << endl;
         cout << "register\t- Register a scientist\n";
@@ -31,6 +30,7 @@ void ConsoleUI::run()
         cout << endl;
 
         cin >> command;
+
         if (command == "list" || command == "List")
         {
             List();
@@ -45,7 +45,7 @@ void ConsoleUI::run()
         }
         else if (command == "save" || command == "Save")
         {
-            // TO DO
+            // TODO
         }
         else if (command == "quit" || command == "Quit")
         {
@@ -61,7 +61,8 @@ void ConsoleUI::run()
 void ConsoleUI::List()
 {
     string sort;
-    while(sort != "back")
+
+    while(sort != "back" || sort!= "Back")
     {
         cout << endl;
         cout << "Choose how you want your list sorted\n";
@@ -74,10 +75,10 @@ void ConsoleUI::List()
         cout << endl;
 
         cin >> sort;
+
         displayListOfScientist(sort);
     }
 }
-
 
 void ConsoleUI::Register()
 {
@@ -92,7 +93,7 @@ void ConsoleUI::Register()
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
-    while (gender != "m" && gender != "f")
+    while (gender != "m" && gender != "M" && gender != "f" && gender != "F")
     {
         cout << "Please enter either m or f!\n";
         cin.clear();
