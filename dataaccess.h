@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include "scientist.h"
+#include "scientistservice.h"
 
 using namespace std;
 
