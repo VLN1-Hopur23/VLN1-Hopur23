@@ -1,10 +1,11 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 
-#include "scientist.h"
 #include "scientistservice.h"
-#include <iostream>
-#include <string>
+
+using namespace std;
+
+// Presentation layer
 
 class ConsoleUI
 {
@@ -16,8 +17,8 @@ public:
 
 private:
     void displayListOfScientist(string sort);
-    void List();
     void Register();
+    void List();
 
 private:
     ScientistService _service;

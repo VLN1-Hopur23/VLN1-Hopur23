@@ -1,9 +1,12 @@
-#include <iostream>
-#include <string>
 #include "consoleui.h"
 #include "scientist.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
+
+// Presentation layer
 
 ConsoleUI::ConsoleUI()
 {
@@ -12,60 +15,69 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::run()
 {
-    cout << "Choose a command:\n";
-    cout << endl;
-    cout << "register\t- Register a scientist\n";
-    cout << "list\t\t- Display the list of scientists\n";
-    cout << "search\t\t- Search\n";
-    cout << "save\t\t- Save changes\n";
-    cout << "quit\t\t- Exit program\n";
-    cout << endl;
-
     string command;
-    cin >> command;
+    bool loop = true;
 
-    if (command == "list")
+    while(loop == true)
     {
-       List();
-    }
-    else if (command == "register")
-    {
-        Register();
-    }
-    else if (command == "search")
-    {
-        //TODO
-    }
-    else if (command == "save")
-    {
-        // TO DO
-    }
-    else if (command == "quit")
-    {
-        // TO DO
-    }
-    else
-    {
-        cout << "Please choose one of the given options!\n";
+
+        cout << "Choose a command:\n";
+        cout << endl;
+        cout << "register\t- Register a scientist\n";
+        cout << "list\t\t- Display the list of scientists\n";
+        cout << "search\t\t- Search\n";
+        cout << "save\t\t- Save changes\n";
+        cout << "quit\t\t- Exit program\n";
+        cout << endl;
+
+        cin >> command;
+        if (command == "list" || command == "List")
+        {
+            List();
+        }
+        else if (command == "register" || command == "Register")
+        {
+            Register();
+        }
+        else if (command == "search" || command == "Search")
+        {
+            //TODO: Search functionality
+        }
+        else if (command == "save" || command == "Save")
+        {
+            // TO DO
+        }
+        else if (command == "quit" || command == "Quit")
+        {
+            loop = false;
+        }
+        else
+        {
+            cout << "Please choose one of the given options!\n";
+        }
     }
 }
 
 void ConsoleUI::List()
 {
-    cout << endl;
-    cout << "Choose how you want your list sorted\n";
-    cout << endl;
-    cout << "name\t\t- Sort by name\n";
-    cout << "age\t\t- Sort by age\n";
-    cout << "birth\t\t- Sort by year of birth\n";
-    cout << "death\t\t- Sort by year of death\n";
-    cout << endl;
-
     string sort;
-    cin >> sort;
-    displayListOfScientist(sort);
+    while(sort != "back")
+    {
+        cout << endl;
+        cout << "Choose how you want your list sorted\n";
+        cout << endl;
+        cout << "name\t\t- Sort by name\n";
+        cout << "age\t\t- Sort by age\n";
+        cout << "birth\t\t- Sort by year of birth\n";
+        cout << "death\t\t- Sort by year of death\n";
+        cout << "back\t\t- Back to main menu\n";
+        cout << endl;
 
+        cin >> sort;
+        displayListOfScientist(sort);
+    }
 }
+
 
 void ConsoleUI::Register()
 {
@@ -73,7 +85,6 @@ void ConsoleUI::Register()
     string gender;
     int yearOfBirth;
     int yearOfDeath;
-    int age;
 
     cout << "Enter the name of the person:" << endl;
     cin >> name;
@@ -108,9 +119,11 @@ void ConsoleUI::Register()
         cin >> yearOfDeath;
     }
 
-    //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
+    Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
 
     //service.addScientist(newScientist);
+
+    cout << "Scientist added!" << endl;
 }
 
 void ConsoleUI::displayListOfScientist(string sort)
@@ -118,8 +131,8 @@ void ConsoleUI::displayListOfScientist(string sort)
     //TODO
     vector<Scientist> scientists = _service.getScientists(sort);
 
-    cout << "Scientist name:" << endl;
-    cout << "===============" << endl;
+
+    cout << "===============================================================" << endl;
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
@@ -147,9 +160,5 @@ void ConsoleUI::displayListOfScientist(string sort)
         cout << scientists[i].getGender() << "\t" <<scientists[i].getYearOfBirth()<< "\t" <<scientists[i].getYearOfDeath() << "\t" << scientists[i].getAge() << endl;
 
     }
+      cout << "===============================================================" << endl;
 }
-
-
-
-
-
