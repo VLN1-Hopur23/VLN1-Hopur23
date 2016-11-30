@@ -18,6 +18,8 @@ public:
     Scientist getScientist(int index) const;
 
     int getSize() const;
+
+    bool ifExist(string name);
 };
 
 #endif // SCIENTISTSERVICE_H
