@@ -28,7 +28,7 @@ void ConsoleUI::run()
     {
         cout << endl;
 
-        displayListOfScientist();
+
 
         cout << "Choose how you want your list sorted\n";
         cout << endl;
@@ -40,28 +40,30 @@ void ConsoleUI::run()
 
         string sort;
         cin >> sort;
-
-        if (sort == "name")
+        displayListOfScientist(sort);
+        //Er inni byggt i displayListOfS... functioninu og dar er default sort by name
+        /*if (sort == "name")
         {
+            displayListOfScientist(sort);
             //TODO
         }
         else if (sort == "age")
         {
-            //TODO
+            displayListOfScientist(sort);
         }
         else if (sort == "birth")
         {
-            //TODO
+            displayListOfScientist(sort);//TODO
         }
         else if (sort == "death")
         {
-            //TODO
+            displayListOfScientist(sort);
         }
         else
         {
             cout << "Please choose one of the given options!\n";
             //TODO keep the program running
-        }
+        }*/
     }
     else if (command == "register")
     {
@@ -125,16 +127,28 @@ void ConsoleUI::run()
     }
 }
 
-void ConsoleUI::displayListOfScientist()
+void ConsoleUI::displayListOfScientist(string sort)
 {
-   /* //TODO
-    vector<Scientist> scientists = _service.getScientist();
+    //TODO
+    vector<Scientist> scientists = _service.getScientists(sort);
 
     cout << "Scientist name:" << endl;
     cout << "===============" << endl;
     for (size_t i = 0; i < scientists.size(); i++)
     {
         cout << scientists[i].getName() << endl;
-    }*/
+    }
 }
+
+/*void ConsoleUI::displayListOfPerformers()
+{
+    vector<Performer> performers = _service.getPerformers();
+
+    cout << "Performer name:" << endl;
+    cout << "===============" << endl;
+    for (size_t i =0; i< performers.size();i++)
+    {
+        cout << performers[i].getName() <<endl;
+    }
+}*/
 

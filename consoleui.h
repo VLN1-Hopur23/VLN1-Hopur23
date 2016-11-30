@@ -15,7 +15,7 @@ public:
     void run();
 
 private:
-    void displayListOfScientist();
+    void displayListOfScientist(string sort);
 
 private:
     ScientistService _service;

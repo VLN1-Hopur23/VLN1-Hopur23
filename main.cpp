@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+//#include <QCoreApplication> // thurfum ekki
 #include <iostream>
 #include "consoleui.h"
 

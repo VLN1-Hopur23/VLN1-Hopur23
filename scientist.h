@@ -7,11 +7,6 @@ using namespace std;
 
 class Scientist
 {
-    string _name;
-    string _gender;
-    int _yearOfBirth;
-    int _yearOfDeath;
-
 public:
     Scientist();
 
@@ -24,8 +19,14 @@ public:
     int getYearOfBirth() const;
 
     int getYearOfDeath() const;
-
+private:
+    string _name;
+    string _gender;
+    int _yearOfBirth;
+    int _yearOfDeath;
 
 };
 
 #endif // SCIENTIST_H
+
+
