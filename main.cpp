@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+
 #include <iostream>
 #include "consoleui.h"
 

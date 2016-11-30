@@ -7,19 +7,19 @@ using namespace std;
 
 class Scientist
 {
-    string _name;
-    string _gender;
-    int _yearOfBirth;
-    int _yearOfDeath;
+    string _name = "";
+    char _gender;
+    int _yearOfBirth = 0;
+    int _yearOfDeath = 0;
 
 public:
     Scientist();
 
-    Scientist(string name, string gender, int yearOfBirth, int yearOfDeath);
+    Scientist(string name, char gender, int yearOfBirth, int yearOfDeath);
 
     string getName() const;
 
-    string getGender() const;
+    char getGender() const;
 
     int getYearOfBirth() const;
 

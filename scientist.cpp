@@ -6,7 +6,7 @@ Scientist::Scientist()
 {
 }
 
-Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeath)
+Scientist::Scientist(string name, char gender, int yearOfBirth, int yearOfDeath)
 {
     _name = name;
     _gender = gender;
@@ -20,7 +20,7 @@ string Scientist::getName() const
     return _name;
 }
 
-string Scientist::getGender() const
+char Scientist::getGender() const
 {
     return _gender;
 }
