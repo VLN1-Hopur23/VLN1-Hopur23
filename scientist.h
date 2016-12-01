@@ -2,6 +2,10 @@
 #define SCIENTIST_H
 
 #include <string>
+#include <stdio.h>      /* puts, printf */
+#include <time.h>       /* time_t, struct tm, time, localtime */
+#include <iostream>
+
 
 using namespace std;
 
@@ -21,6 +25,9 @@ public:
     int getYearOfDeath() const;
 
     int getAge() const;
+
+    int getYearToDay() const;
+
 private:
     string _name;
     string _gender;
@@ -31,5 +38,7 @@ private:
 };
 
 #endif // SCIENTIST_H
+
+
 
 

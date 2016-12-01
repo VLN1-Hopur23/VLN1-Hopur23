@@ -33,7 +33,7 @@ ScientistService::ScientistService()
     vector<Scientist> performers;
 
     Scientist p("duran duran","f",1640,1700); //60 ara
-    Scientist p2("madona","m",1953,1999 ); //46 ara
+    Scientist p2("madona","m",1953,0 ); //46 ara
     Scientist p3("ALi","f",2130,2200); //70 ara
 
     performers.push_back(p);
