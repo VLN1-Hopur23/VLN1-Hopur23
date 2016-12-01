@@ -13,6 +13,7 @@ class ScientistService
     DataAccess _data;
 
 public:
+
     ScientistService();
 
     void addScientist(Scientist scientist);
@@ -23,15 +24,17 @@ public:
 
     bool ifExist(string name);
 
-    void sortScientists(string sort);
-
     vector<int> searchScientists(string searchData);
+
+    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
     vector<Scientist> getScientistVector();
 
+    bool DataAccessWorks();
+
     void save();
 
-    void load();
+    bool load();
 };
 
 #endif // SCIENTISTSERVICE_H

@@ -4,24 +4,30 @@
 
 using namespace std;
 
-struct ScientitComparisonNameForward {
+//operator instrument that compares names in alphabetical order
+struct ScientistComparisonNameForward
+{
     bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
 };
 
-bool ScientitComparisonYearOfBirthForward (Scientist i, Scientist j)
+//operator instrument that compares year of birth in ascending order
+bool ScientistComparisonYearOfBirthForward (Scientist i, Scientist j)
 {
     return (i.getYearOfBirth()<j.getYearOfBirth());
 }
 
-bool ScientitComparisonYearOfDeathForward (Scientist i, Scientist j)
+bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
-bool ScientitComparisonAgeForward (Scientist i, Scientist j)
+
+bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
-struct ScientitComparisonGenderForward {
+
+struct ScientistComparisonGenderForward
+{
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
 
@@ -29,53 +35,55 @@ ScientistService::ScientistService()
 {
 }
 
- void ScientistService::sortScientists(string sort)
+ vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
-
     //TODO: logic
     //sort by name
 
-    if (sort == "name" || sort == "Name")
+
+    if (sort == "name" || sort == "Name" || sort == "n")
+
     {
-        ScientitComparisonNameForward cmp;
+        ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
-    else if (sort == "birth" || sort == "Birth")
+    else if (sort == "birth" || sort == "Birth" || sort == "b")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfBirthForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfBirthForward);
     }
-    else if (sort == "death" || sort == "Death")
+    else if (sort == "death" || sort == "Death" || sort == "d")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfDeathForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfDeathForward);
     }
-    else if (sort == "age" || sort == "Age")
+    else if (sort == "age" || sort == "Age" || sort == "a")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonAgeForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonAgeForward);
     }
     else
     {
         //default is to sort by name
-        ScientitComparisonNameForward cmp;
+        ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
+    return _listOfScientists;
 }
 
 vector<int> ScientistService::searchScientists(string searchData)
 {
     vector<int> foundScientists;
 
-    for(unsigned long i = 0; i < _scientists.size(); i++){
+    for(unsigned long i = 0; i < _scientists.size(); i++)
+    {
         string name = _scientists[i].getName();
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
-            foundScientists.push_back(i);
 
+            foundScientists.push_back(i);
         }
     }
     return foundScientists; //remeber to change
 }
-
 
 void ScientistService::addScientist(Scientist scientist)
 {
@@ -107,7 +115,6 @@ bool ScientistService::ifExist(string name)
            return true;
        }
    }
-
    return false;
 }
 
@@ -116,7 +123,19 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
-void ScientistService::load()
+bool ScientistService::load()
 {
     _data.getData(_scientists);
+
+    return DataAccessWorks();
+}
+
+bool ScientistService::DataAccessWorks()
+{
+    if (_data.DataOk && _data.FileOpen)
+    {
+        return true;
+    }
+
+    return false;
 }

@@ -1,13 +1,13 @@
 #include "dataaccess.h"
 
 using namespace std;
-
-
+// constructor
 DataAccess::DataAccess()
 {
+
 }
 
-//les ur allri skra eftir visindamonnum
+//reads scientist from file to vector
 void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
@@ -27,32 +27,33 @@ void DataAccess::getData(vector<Scientist>& scientists)
         {
             delimiter = "";
 
-            //while(delimiter != "####")
+            getline(file, name);
+            getline(file, gender);
+            getline(file, yearOfBirth);
+            getline(file, yearOfDeath);
+            getline(file, delimiter);
+
+            int yearOfBirthInt = atoi(yearOfBirth.c_str());
+            int yearOfDeathInt = atoi(yearOfDeath.c_str());
+
+            //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
             {
-
-                getline(file, name);
-                getline(file, gender);
-                getline(file, yearOfBirth);
-                getline(file, yearOfDeath);
-                getline(file, delimiter);
-
-                int yearOfBirthInt = atoi(yearOfBirth.c_str());
-                int yearOfDeathInt = atoi(yearOfDeath.c_str());
-
-                //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
-                {
-                    Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
-                    scientists.push_back(person);
-                }
+                Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
+                scientists.push_back(person);
             }
+            //else
+            {
+             //   DataOk = false;
+            }
+
         }
     }
     else
     {
-        //cout << "File cannot open" << endl;
+        FileOpen = false;
     }
 }
-
+//validates the scientists characteristic in the file
 bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;
@@ -89,17 +90,15 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
         return false;
     }
 }
-
+// writes a new scientist in the file
 void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
 
     file.open("computerScientists.txt", ios_base::app);
 
-
     if (file)
     {
-
         file << scientist.getName() << endl;
         file << scientist.getGender() << endl;
         file << scientist.getYearOfBirth() << endl;

@@ -14,46 +14,49 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    _service.load();
-
-    while(loop == true)
+    bool openFileWorks= _service.load();
+    if (openFileWorks)
     {
-        cout << "Choose a command:\n";
-        cout << endl;
-        cout << "register\t- Register a scientist\n";
-        cout << "list\t\t- Display the list of scientists\n";
-        cout << "search\t\t- Search\n";
-        cout << "save\t\t- Save changes\n";
-        cout << "quit\t\t- Exit program\n";
-        cout << endl;
+        while(loop == true)
+        {
+            cout << "Choose a command:\n";
+            cout << endl;
+            cout << "register\t- Register a scientist\n";
+            cout << "list\t\t- Display the list of scientists\n";
+            cout << "search\t\t- Search\n";
+            cout << "save\t\t- Save changes\n";
+            cout << "quit\t\t- Exit program\n";
+            cout << endl;
 
-        cin >> command;
+            cin >> command;
 
-        if (command == "list" || command == "List")
-        {
-            List();
+            // The user can use one lowe case letter for shortcut
+            if (command == "list" || command == "List" || command == "l")
+            {
+                List();
+            }
+            else if (command == "register" || command == "Register" || command == "r")
+            {
+                Register();
+            }
+            else if (command == "search" || command == "Search" || command == "s")
+            {
+                //TODO: Search functionality
+                Search();
+            }
+            else if (command == "quit" || command == "Quit" || command == "q")
+            {
+                loop = false;
+            }
+            else
+            {
+                cout << "Please choose one of the given options!\n";
+            }
         }
-        else if (command == "register" || command == "Register")
-        {
-            Register();
-        }
-        else if (command == "search" || command == "Search")
-        {
-            //TODO: Search functionality
-            Search();
-        }
-        else if (command == "save" || command == "Save")
-        {
-            // TODO
-        }
-        else if (command == "quit" || command == "Quit")
-        {
-            loop = false;
-        }
-        else
-        {
-            cout << "Please choose one of the given options!\n";
-        }
+    }
+    else
+    {
+        cout << "Error with opening file" << endl;
     }
 }
 
@@ -88,8 +91,7 @@ void ConsoleUI::List()
 {
     string sort;
 
-
-    while(sort != "back" && sort!= "Back")
+    while(sort != "back" && sort!= "Back" && sort != "b")
     {
         cout << endl;
         cout << "Choose how you want your list sorted\n";
@@ -102,8 +104,12 @@ void ConsoleUI::List()
         cout << endl;
 
         cin >> sort;
+        vector<Scientist> _AllScientist = _service.getScientistVector();
+        _AllScientist = SortVector( _AllScientist, sort);
 
-        displayListOfScientist(sort);
+
+
+        displayListOfScientist(_AllScientist);
     }
 }
 
@@ -131,19 +137,31 @@ void ConsoleUI::Register()
     cin >> yearOfBirth;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> yearOfBirth;
     }
+    while (yearOfBirth > 9999 || yearOfBirth < 0)
+    {
+        cout << "ERROR!! Please enter a valid year of birth!\n";
+        cin.clear();
+        cin >> yearOfBirth;
+    }
 
-    cout << "Enter year of death or - if the person is still alive:" << endl;
+    cout << "Enter year of death or 0 if the person is still alive:" << endl;
     cin >> yearOfDeath;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
+        cin >> yearOfDeath;
+    }
+    while (yearOfDeath > 99999 || yearOfDeath < yearOfBirth)
+    {
+        cout << "ERROR!! Please enter a valid year of death!\n";
+        cin.clear();
         cin >> yearOfDeath;
     }
 
@@ -154,9 +172,9 @@ void ConsoleUI::Register()
     cout << endl;
 }
 
-void ConsoleUI::displayListOfScientist(string sort)
+void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
 {
-    vector<Scientist> _scientists = _service.getScientistVector();
+    //vector<Scientist> _scientists = _service.getScientistVector();
 
     cout << "===============================================================" << endl;
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
@@ -186,4 +204,10 @@ void ConsoleUI::displayListOfScientist(string sort)
         cout << _scientists[i].getGender() << "\t" <<_scientists[i].getYearOfBirth()<< "\t" <<_scientists[i].getYearOfDeath() << "\t" << _scientists[i].getAge() << endl;
     }
       cout << "===============================================================" << endl;
+}
+
+
+vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
+{
+   return _service.sortScientists(_listOfScientist, sort);
 }
