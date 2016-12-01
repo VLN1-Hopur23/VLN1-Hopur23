@@ -58,8 +58,6 @@ ScientistService::ScientistService()
         ScientitComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
-
-
 }
 
 vector<Scientist> ScientistService::searchScientists(string searchData)
