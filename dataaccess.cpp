@@ -7,7 +7,7 @@ DataAccess::DataAccess()
 {
 }
 
-//les ur allri skra eftir visindamonnum
+//reads scientist from file to vector
 void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
