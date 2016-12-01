@@ -6,7 +6,6 @@
 #include <time.h>       /* time_t, struct tm, time, localtime */
 #include <iostream>
 
-
 using namespace std;
 
 class Scientist

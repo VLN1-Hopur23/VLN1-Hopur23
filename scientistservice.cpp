@@ -4,7 +4,8 @@
 
 using namespace std;
 
-struct ScientitComparisonNameForward {
+struct ScientitComparisonNameForward
+{
     bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
 };
 
@@ -17,11 +18,14 @@ bool ScientitComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
+
 bool ScientitComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
-struct ScientitComparisonGenderForward {
+
+struct ScientitComparisonGenderForward
+{
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
 
@@ -29,9 +33,9 @@ ScientistService::ScientistService()
 {
 
 }
+
  void ScientistService::sortScientists(string sort)
 {
-
     //TODO: logic
     //sort by name
 
@@ -64,18 +68,17 @@ vector<Scientist> ScientistService::searchScientists(string searchData)
 {
     vector<Scientist> foundScientists;
 
-    for(unsigned long i = 0; i < _scientists.size(); i++){
+    for(unsigned long i = 0; i < _scientists.size(); i++)
+    {
         string name = _scientists[i].getName();
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
             foundScientists.push_back(_scientists[i]);
-
         }
     }
     return foundScientists; //remeber to change
 }
-
 
 void ScientistService::addScientist(Scientist scientist)
 {
@@ -95,7 +98,6 @@ Scientist ScientistService::getScientist(int index) const
 }
 */
 
-
 int ScientistService::getSize() const
 {
     return _scientists.size();
@@ -110,7 +112,6 @@ bool ScientistService::ifExist(string name)
            return true;
        }
    }
-
    return false;
 }
 
