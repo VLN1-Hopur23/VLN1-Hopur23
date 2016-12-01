@@ -12,12 +12,14 @@ void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
     Scientist person;
-    string temp;
-    string t;
-    int one;
-    int two;
+    string name;
+    string gender;
+    int yearOfBirth;
+    int yearOfDeath;
     string delimiter;
+
     file.open("computerScientists.txt");
+
     if(file.is_open())
     {
         while (!file.eof())
@@ -26,13 +28,13 @@ void DataAccess::getData(vector<Scientist>& scientists)
 
             while(delimiter != "####")
             {
-                file >> temp;
-                file >> t;
-                file >> one;
-                file >> two;
+                file >> name;
+                file >> gender;
+                file >> yearOfBirth;
+                file >> yearOfDeath;
                 file >> delimiter;
 
-                Scientist person(temp, t, one, two);
+                Scientist person(name, gender, yearOfBirth, yearOfDeath);
                 scientists.push_back(person);
             }
         }
