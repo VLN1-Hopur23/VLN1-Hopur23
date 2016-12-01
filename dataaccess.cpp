@@ -104,7 +104,7 @@ void DataAccess::writeNewScientist(Scientist scientist)
         file << scientist.getGender() << endl;
         file << scientist.getYearOfBirth() << endl;
         file << scientist.getYearOfDeath() << endl;
-        file << "####";
+        file << "####\n";
     }
 
     file.close();

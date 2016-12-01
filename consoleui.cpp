@@ -107,8 +107,8 @@ void ConsoleUI::Register()
     int yearOfDeath;
 
     cout << "Enter the name of the person:" << endl;
-    cin >> name;
-    //check?
+    cin.ignore();
+    getline(cin,name);
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
