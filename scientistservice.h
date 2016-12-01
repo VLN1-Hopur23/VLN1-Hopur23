@@ -21,9 +21,10 @@ public:
 
     bool ifExist(string name);
 
-    vector<Scientist> getScientists(string sort);
+    void sortScientists(string sort);
     vector<Scientist> searchScientists(string searchData);
     Scientist getScientist(int index);
+    vector<Scientist> getScientistVector();
 
 };
 

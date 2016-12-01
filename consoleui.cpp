@@ -78,6 +78,7 @@ void ConsoleUI::List()
 {
     string sort;
 
+
     while(sort != "back" && sort!= "Back")
     {
         cout << endl;
@@ -146,18 +147,16 @@ void ConsoleUI::Register()
 
 void ConsoleUI::displayListOfScientist(string sort)
 {
-    //TODO
-    vector<Scientist> scientists = _service.getScientists(sort);
-
+    vector<Scientist> _scientists = _service.getScientistVector();
 
     cout << "===============================================================" << endl;
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < scientists.size(); i++)
+    for (size_t i = 0; i < _scientists.size(); i++)
     {
-        string Name = scientists[i].getName();
-        cout << scientists[i].getName();
+        string Name = _scientists[i].getName();
+        cout << _scientists[i].getName();
         if(Name.size()<8)
         {
             cout<< "\t\t\t\t";
@@ -175,7 +174,7 @@ void ConsoleUI::displayListOfScientist(string sort)
             cout<< "\t";
         }
 
-        cout << scientists[i].getGender() << "\t" <<scientists[i].getYearOfBirth()<< "\t" <<scientists[i].getYearOfDeath() << "\t" << scientists[i].getAge() << endl;
+        cout << _scientists[i].getGender() << "\t" <<_scientists[i].getYearOfBirth()<< "\t" <<_scientists[i].getYearOfDeath() << "\t" << _scientists[i].getAge() << endl;
     }
       cout << "===============================================================" << endl;
 }
