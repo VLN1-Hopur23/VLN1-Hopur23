@@ -1,5 +1,6 @@
 #include "scientist.h"
 
+
 using namespace std;
 
 Scientist::Scientist()
@@ -43,6 +44,28 @@ int Scientist::getAge() const
     }
     else
     {
-        return 2016 - _yearOfBirth; // 2016 er notad sem arid i dag
+        return getYearToDay() - _yearOfBirth; // 2016 er notad sem arid i dag
     }
+}
+
+int Scientist::getYearToDay() const
+{
+      time_t rawtime;
+      struct tm * timeinfo;
+
+      time (&rawtime);
+      timeinfo = localtime (&rawtime);
+      //printf ("Current local time and date: %s", asctime(timeinfo));  //prints out logal time in ascicharecters
+
+
+
+      // get the only the year in integer form from localtime
+      string str = asctime(timeinfo);
+      int LastSpace = str.find_last_of(" ")+1;
+      int StrEnd = str.size();
+      string StringYearToDay = str.substr( LastSpace,StrEnd);
+      int YearToDay = std::stoi (StringYearToDay);
+
+      return YearToDay;
+
 }
