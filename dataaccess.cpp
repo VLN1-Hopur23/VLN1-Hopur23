@@ -39,13 +39,6 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 int yearOfBirthInt = atoi(yearOfBirth.c_str());
                 int yearOfDeathInt = atoi(yearOfDeath.c_str());
 
-                cout << name << endl;
-                cout << gender << endl;
-                cout << yearOfBirthInt << endl;
-                cout << yearOfDeathInt << endl;
-                cout << delimiter << endl;
-
-
                 //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
                 {
                     Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
@@ -58,8 +51,8 @@ void DataAccess::getData(vector<Scientist>& scientists)
     {
         //cout << "File cannot open" << endl;
     }
-
 }
+
 bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;
