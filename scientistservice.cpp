@@ -4,27 +4,29 @@
 
 using namespace std;
 
-struct ScientitComparisonNameForward
+//operator instrument that compares names in alphabetical order
+struct ScientistComparisonNameForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
 };
 
-bool ScientitComparisonYearOfBirthForward (Scientist i, Scientist j)
+//operator instrument that compares year of birth in ascending order
+bool ScientistComparisonYearOfBirthForward (Scientist i, Scientist j)
 {
     return (i.getYearOfBirth()<j.getYearOfBirth());
 }
 
-bool ScientitComparisonYearOfDeathForward (Scientist i, Scientist j)
+bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
 
-bool ScientitComparisonAgeForward (Scientist i, Scientist j)
+bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
 
-struct ScientitComparisonGenderForward
+struct ScientistComparisonGenderForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
@@ -41,25 +43,25 @@ ScientistService::ScientistService()
 
     if (sort == "name" || sort == "Name" || sort == "n")
     {
-        ScientitComparisonNameForward cmp;
+        ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
     else if (sort == "birth" || sort == "Birth" || sort == "b")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfBirthForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfBirthForward);
     }
     else if (sort == "death" || sort == "Death" || sort == "d")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfDeathForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfDeathForward);
     }
     else if (sort == "age" || sort == "Age" || sort == "a")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonAgeForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonAgeForward);
     }
     else
     {
         //default is to sort by name
-        ScientitComparisonNameForward cmp;
+        ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
 }

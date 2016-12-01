@@ -53,7 +53,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
         FileOpen = false;
     }
 }
-//
+//validates the scientists characteristic in the file
 bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;
@@ -90,7 +90,7 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
         return false;
     }
 }
-
+// writes a new scientist in the file
 void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
