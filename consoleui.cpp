@@ -103,8 +103,8 @@ void ConsoleUI::Register()
     int yearOfDeath;
 
     cout << "Enter the name of the person:" << endl;
-    cin >> name;
-    //check?
+    cin.ignore();
+    getline(cin,name);
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
@@ -150,7 +150,7 @@ void ConsoleUI::displayListOfScientist(string sort)
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < _scientists.size(); i++)
+    for (size_t i = 0; i < _scientists.size() - 1; i++)
     {
         string Name = _scientists[i].getName();
         cout << _scientists[i].getName();
