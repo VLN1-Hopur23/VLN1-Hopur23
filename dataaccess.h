@@ -18,7 +18,6 @@ public:
 
     void writeData(const vector<Scientist>& scientists);
 
-
 };
 
 #endif // DATAACCESS_H
