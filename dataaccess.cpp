@@ -2,9 +2,9 @@
 
 using namespace std;
 
-
 DataAccess::DataAccess()
 {
+
 }
 
 //les ur allri skra eftir visindamonnum
@@ -29,7 +29,6 @@ void DataAccess::getData(vector<Scientist>& scientists)
 
             //while(delimiter != "####")
             {
-
                 getline(file, name);
                 getline(file, gender);
                 getline(file, yearOfBirth);
@@ -96,10 +95,8 @@ void DataAccess::writeNewScientist(Scientist scientist)
 
     file.open("computerScientists.txt", ios_base::app);
 
-
     if (file)
     {
-
         file << scientist.getName() << endl;
         file << scientist.getGender() << endl;
         file << scientist.getYearOfBirth() << endl;

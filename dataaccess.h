@@ -20,7 +20,6 @@ public:
 
 private:
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
-
 };
 
 #endif // DATAACCESS_H

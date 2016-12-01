@@ -1,6 +1,5 @@
 #include "scientist.h"
 
-
 using namespace std;
 
 Scientist::Scientist()
@@ -57,8 +56,6 @@ int Scientist::getYearToDay() const
       timeinfo = localtime (&rawtime);
       //printf ("Current local time and date: %s", asctime(timeinfo));  //prints out logal time in ascicharecters
 
-
-
       // get the only the year in integer form from localtime
       string str = asctime(timeinfo);
       int LastSpace = str.find_last_of(" ")+1;
@@ -67,5 +64,4 @@ int Scientist::getYearToDay() const
       int YearToDay = std::stoi (StringYearToDay);
 
       return YearToDay;
-
 }

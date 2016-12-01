@@ -33,24 +33,21 @@ void ConsoleUI::run()
 
         cin >> command;
 
-        if (command == "list" || command == "List")
+        // The user can use one lowe case letter for shortcut
+        if (command == "list" || command == "List" || command == "l")
         {
             List();
         }
-        else if (command == "register" || command == "Register")
+        else if (command == "register" || command == "Register" || command == "r")
         {
             Register();
         }
-        else if (command == "search" || command == "Search")
+        else if (command == "search" || command == "Search" || command == "s")
         {
             //TODO: Search functionality
             Search();
         }
-        else if (command == "save" || command == "Save")
-        {
-            // TODO
-        }
-        else if (command == "quit" || command == "Quit")
+        else if (command == "quit" || command == "Quit" || command == "q")
         {
             loop = false;
         }
@@ -79,7 +76,6 @@ void ConsoleUI::Search()
 void ConsoleUI::List()
 {
     string sort;
-
 
     while(sort != "back" && sort!= "Back")
     {
@@ -129,7 +125,7 @@ void ConsoleUI::Register()
         cin >> yearOfBirth;
     }
 
-    cout << "Enter year of death or - if the person is still alive:" << endl;
+    cout << "Enter year of death or 0 if the person is still alive:" << endl;
     cin >> yearOfDeath;
     while (cin.fail())
     {
