@@ -11,6 +11,7 @@ DataAccess::DataAccess()
 void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
+    ofstream file2("newfile.txt");
     Scientist person;
     string name;
     string gender;
@@ -26,21 +27,29 @@ void DataAccess::getData(vector<Scientist>& scientists)
         {
             delimiter = "";
 
-            while(delimiter != "####")
+            //while(delimiter != "####")
             {
-                file >> name;
-                file >> gender;
-                file >> yearOfBirth;
-                file >> yearOfDeath;
-                file >> delimiter;
 
-                int yearOfBirthInt = stoi(yearOfBirth);
-                int yearOfDeathInt = stoi(yearOfDeath);
+                getline(file, name);
+                getline(file, gender);
+                getline(file, yearOfBirth);
+                getline(file, yearOfDeath);
+                getline(file, delimiter);
 
-                if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
+                int yearOfBirthInt = atoi(yearOfBirth.c_str());
+                int yearOfDeathInt = atoi(yearOfDeath.c_str());
+
+                cout << name << endl;
+                cout << gender << endl;
+                cout << yearOfBirthInt << endl;
+                cout << yearOfDeathInt << endl;
+                cout << delimiter << endl;
+
+
+                //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
                 {
-                Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
-                scientists.push_back(person);
+                    Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
+                    scientists.push_back(person);
                 }
             }
         }
@@ -88,10 +97,9 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     }
 }
 
-void DataAccess::writeData(const vector <Scientist>& scientists)
+void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
-    int index = scientists.size() + 1;
 
     file.open("computerScientists.txt", ios_base::app);
 
@@ -99,12 +107,11 @@ void DataAccess::writeData(const vector <Scientist>& scientists)
     if (file)
     {
 
-        file << scientists[index].getName() << endl;
-        file << scientists[index].getGender() << endl;
-        file << scientists[index].getYearOfBirth() << endl;
-        file << scientists[index].getYearOfDeath() << endl;
+        file << scientist.getName() << endl;
+        file << scientist.getGender() << endl;
+        file << scientist.getYearOfBirth() << endl;
+        file << scientist.getYearOfDeath() << endl;
         file << "####";
-
     }
 
     file.close();

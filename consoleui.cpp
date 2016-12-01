@@ -52,7 +52,6 @@ void ConsoleUI::run()
         }
         else if (command == "quit" || command == "Quit")
         {
-            _service.save();
             loop = false;
         }
         else
