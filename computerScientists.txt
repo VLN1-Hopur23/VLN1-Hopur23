@@ -26,7 +26,7 @@ m
 Richard Stallman
 m 
 1953 
--
+0
 ####
 Blaise Pascal
 m 
@@ -36,7 +36,7 @@ m
 Steve Wozniak 
 m 
 1950 
--
+0
 ####
 Grace Hopper 
 f 

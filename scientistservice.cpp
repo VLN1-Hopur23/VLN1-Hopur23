@@ -10,7 +10,6 @@ void ScientistService::addScientist(Scientist scientist)
 
     if (isin == false)
     {
-
          _scientists.push_back(scientist);
     }
 }
