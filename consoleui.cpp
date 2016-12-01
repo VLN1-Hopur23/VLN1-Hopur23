@@ -18,6 +18,8 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
+    _service.load();
+
     while(loop == true)
     {
         cout << "Choose a command:\n";
@@ -50,6 +52,7 @@ void ConsoleUI::run()
         }
         else if (command == "quit" || command == "Quit")
         {
+            _service.save();
             loop = false;
         }
         else

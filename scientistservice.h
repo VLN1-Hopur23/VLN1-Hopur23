@@ -2,6 +2,7 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
+#include "dataaccess.h"
 #include <vector>
 
 using namespace std;
@@ -9,6 +10,7 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+    DataAccess _data;
 
 public:
     ScientistService();
@@ -26,6 +28,9 @@ public:
     Scientist getScientist(int index);
     vector<Scientist> getScientistVector();
 
+    void save();
+
+    void load();
 };
 
 #endif // SCIENTISTSERVICE_H
