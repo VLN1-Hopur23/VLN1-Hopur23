@@ -154,7 +154,7 @@ void ConsoleUI::displayListOfScientist(string sort)
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < _scientists.size(); i++)
+    for (size_t i = 0; i < _scientists.size() - 1; i++)
     {
         string Name = _scientists[i].getName();
         cout << _scientists[i].getName();
