@@ -27,8 +27,8 @@ struct ScientitComparisonGenderForward {
 
 ScientistService::ScientistService()
 {
-
 }
+
  void ScientistService::sortScientists(string sort)
 {
 
@@ -60,16 +60,16 @@ ScientistService::ScientistService()
     }
 }
 
-vector<Scientist> ScientistService::searchScientists(string searchData)
+vector<int> ScientistService::searchScientists(string searchData)
 {
-    vector<Scientist> foundScientists;
+    vector<int> foundScientists;
 
     for(unsigned long i = 0; i < _scientists.size(); i++){
         string name = _scientists[i].getName();
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
-            foundScientists.push_back(_scientists[i]);
+            foundScientists.push_back(i);
 
         }
     }
@@ -88,13 +88,10 @@ void ScientistService::addScientist(Scientist scientist)
     }
 }
 
-/*
 Scientist ScientistService::getScientist(int index) const
 {
-    //return _scientists[index];
+    return _scientists[index];
 }
-*/
-
 
 int ScientistService::getSize() const
 {

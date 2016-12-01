@@ -2,6 +2,11 @@
 #define CONSOLEUI_H
 
 #include "scientistservice.h"
+#include "scientist.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
 
 using namespace std;
 

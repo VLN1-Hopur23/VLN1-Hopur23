@@ -1,8 +1,4 @@
 #include "consoleui.h"
-#include "scientist.h"
-#include <iostream>
-#include <string>
-#include <vector>
 
 using namespace std;
 
@@ -68,12 +64,24 @@ void ConsoleUI::Search()
     cout << "Searching by first letter/s in the name" << endl;
     cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
     cin >> searchData;
-    vector<Scientist> foundScientists = _service.searchScientists(searchData);
+    vector<int> foundScientists = _service.searchScientists(searchData);
     cout << endl;
     for (size_t i = 0; i < foundScientists.size(); i++)
     {
-        cout << foundScientists[i].getName() << endl;
+        cout << i << ". ";
+        cout.width(20);
+        cout << left;
+        cout << _service.getScientist(foundScientists[i]).getName();
+        cout << "\t";
+        cout << _service.getScientist(foundScientists[i]).getGender();
+        cout << "\t";
+        cout << left << _service.getScientist(foundScientists[i]).getYearOfBirth();
+        cout << "\t";
+        cout << left << _service.getScientist(foundScientists[i]).getYearOfDeath();
+        cout << endl;
     }
+
+    cout << endl;
 }
 
 void ConsoleUI::List()

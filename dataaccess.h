@@ -18,6 +18,8 @@ public:
 
     void writeNewScientist(Scientist scientist);
 
+    void writeData(vector<Scientist> scientists);
+
 private:
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
 

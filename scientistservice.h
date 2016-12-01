@@ -24,8 +24,9 @@ public:
     bool ifExist(string name);
 
     void sortScientists(string sort);
-    vector<Scientist> searchScientists(string searchData);
-    Scientist getScientist(int index);
+
+    vector<int> searchScientists(string searchData);
+
     vector<Scientist> getScientistVector();
 
     void save();
