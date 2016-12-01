@@ -16,10 +16,11 @@ public:
     void run();
 
 private:
-    void displayListOfScientist(string sort);
+    void displayListOfScientist(vector<Scientist> _scientists);
     void Register();
     void List();
     void Search();
+    vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
 private:
     ScientistService _service;

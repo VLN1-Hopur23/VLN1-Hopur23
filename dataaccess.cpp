@@ -43,7 +43,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
             }
             //else
             {
-                DataOk = false;
+             //   DataOk = false;
             }
 
         }

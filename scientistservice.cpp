@@ -36,12 +36,14 @@ ScientistService::ScientistService()
 
 }
 
- void ScientistService::sortScientists(string sort)
+ vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
     //TODO: logic
     //sort by name
 
+
     if (sort == "name" || sort == "Name" || sort == "n")
+
     {
         ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
@@ -64,6 +66,7 @@ ScientistService::ScientistService()
         ScientistComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
+    return _listOfScientists;
 }
 
 vector<Scientist> ScientistService::searchScientists(string searchData)
