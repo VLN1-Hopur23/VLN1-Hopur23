@@ -2,6 +2,7 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
+#include "dataaccess.h"
 #include <vector>
 
 using namespace std;
@@ -9,6 +10,7 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+    DataAccess _data;
 
 public:
     ScientistService();
@@ -21,10 +23,14 @@ public:
 
     bool ifExist(string name);
 
-    vector<Scientist> getScientists(string sort);
+    void sortScientists(string sort);
     vector<Scientist> searchScientists(string searchData);
     Scientist getScientist(int index);
+    vector<Scientist> getScientistVector();
 
+    void save();
+
+    void load();
 };
 
 #endif // SCIENTISTSERVICE_H

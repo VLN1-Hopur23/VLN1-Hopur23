@@ -29,17 +29,8 @@ ScientistService::ScientistService()
 {
 
 }
- vector<Scientist> ScientistService::getScientists(string sort)
+ void ScientistService::sortScientists(string sort)
 {
-    vector<Scientist> performers;
-
-    Scientist p("duran duran","f",1640,1700); //60 ara
-    Scientist p2("madona","m",1953,0 ); //46 ara
-    Scientist p3("ALi","f",2130,2200); //70 ara
-
-    performers.push_back(p);
-    performers.push_back(p2);
-    performers.push_back(p3);
 
     //TODO: logic
     //sort by name
@@ -47,55 +38,38 @@ ScientistService::ScientistService()
     if (sort == "name" || sort == "Name")
     {
         ScientitComparisonNameForward cmp;
-        std::sort(performers.begin(), performers.end(), cmp);
+        std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
     else if (sort == "birth" || sort == "Birth")
     {
-        std::sort(performers.begin(), performers.end(), ScientitComparisonYearOfBirthForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfBirthForward);
     }
     else if (sort == "death" || sort == "Death")
     {
-        std::sort(performers.begin(), performers.end(), ScientitComparisonYearOfDeathForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfDeathForward);
     }
     else if (sort == "age" || sort == "Age")
     {
-        std::sort(performers.begin(), performers.end(), ScientitComparisonAgeForward);
+        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonAgeForward);
     }
     else
     {
         //default is to sort by name
         ScientitComparisonNameForward cmp;
-        std::sort(performers.begin(), performers.end(), cmp);
+        std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
-
-    return performers;
 }
 
-vector<Scientist> ScientistService::searchScientists(string searchData){
-    vector<Scientist> performers;
-
+vector<Scientist> ScientistService::searchScientists(string searchData)
+{
     vector<Scientist> foundScientists;
 
-    Scientist p("duran duran","f",1640,1700); //60 ara
-    Scientist p2("madona","m",1953,1999 ); //46 ara
-    Scientist p3("ALi","f",2130,2200); //70 ara
-    Scientist p4("Anna","f",1640,1700); //60 ara
-    Scientist p5("Arnaldur","m",1953,1999 ); //46 ara
-
-    performers.push_back(p);
-    performers.push_back(p2);
-    performers.push_back(p3);
-    performers.push_back(p4);
-    performers.push_back(p5);
-
-
-
-    for(unsigned long i = 0; i < performers.size(); i++){
-        string name = performers[i].getName();
+    for(unsigned long i = 0; i < _scientists.size(); i++){
+        string name = _scientists[i].getName();
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
-            foundScientists.push_back(performers[i]);
+            foundScientists.push_back(_scientists[i]);
 
         }
     }
@@ -110,8 +84,8 @@ void ScientistService::addScientist(Scientist scientist)
     if (isin == false)
     {
          _scientists.push_back(scientist);
+         _data.writeNewScientist(scientist);
     }
-   // _scientists.push_back(scientist);
 }
 
 /*
@@ -138,4 +112,14 @@ bool ScientistService::ifExist(string name)
    }
 
    return false;
+}
+
+vector<Scientist> ScientistService::getScientistVector()
+{
+    return _scientists;
+}
+
+void ScientistService::load()
+{
+    _data.getData(_scientists);
 }
