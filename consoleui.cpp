@@ -90,8 +90,12 @@ void ConsoleUI::List()
         cout << endl;
 
         cin >> sort;
+        vector<Scientist> _AllScientist = _service.getScientistVector();
+        _AllScientist = SortVector( _AllScientist, sort);
 
-        displayListOfScientist(sort);
+
+
+        displayListOfScientist(_AllScientist);
     }
 }
 
@@ -142,9 +146,9 @@ void ConsoleUI::Register()
     cout << endl;
 }
 
-void ConsoleUI::displayListOfScientist(string sort)
+void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
 {
-    vector<Scientist> _scientists = _service.getScientistVector();
+    //vector<Scientist> _scientists = _service.getScientistVector();
 
     cout << "===============================================================" << endl;
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
@@ -174,4 +178,9 @@ void ConsoleUI::displayListOfScientist(string sort)
         cout << _scientists[i].getGender() << "\t" <<_scientists[i].getYearOfBirth()<< "\t" <<_scientists[i].getYearOfDeath() << "\t" << _scientists[i].getAge() << endl;
     }
       cout << "===============================================================" << endl;
+}
+
+vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
+{
+   return _service.sortScientists(_listOfScientist, sort);
 }

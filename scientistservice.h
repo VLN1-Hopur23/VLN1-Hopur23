@@ -23,7 +23,7 @@ public:
 
     bool ifExist(string name);
 
-    void sortScientists(string sort);
+    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
     vector<Scientist> searchScientists(string searchData);
     Scientist getScientist(int index);
     vector<Scientist> getScientistVector();

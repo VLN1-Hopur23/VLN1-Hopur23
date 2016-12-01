@@ -34,34 +34,36 @@ ScientistService::ScientistService()
 
 }
 
- void ScientistService::sortScientists(string sort)
+ vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
     //TODO: logic
     //sort by name
 
+
     if (sort == "name" || sort == "Name")
     {
         ScientitComparisonNameForward cmp;
-        std::sort(_scientists.begin(), _scientists.end(), cmp);
+        std::sort(_listOfScientists.begin(), _listOfScientists.end(), cmp);
     }
     else if (sort == "birth" || sort == "Birth")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfBirthForward);
+        std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonYearOfBirthForward);
     }
     else if (sort == "death" || sort == "Death")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfDeathForward);
+        std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonYearOfDeathForward);
     }
     else if (sort == "age" || sort == "Age")
     {
-        std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonAgeForward);
+        std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonAgeForward);
     }
     else
     {
         //default is to sort by name
         ScientitComparisonNameForward cmp;
-        std::sort(_scientists.begin(), _scientists.end(), cmp);
+        std::sort(_listOfScientists.begin(), _listOfScientists.end(), cmp);
     }
+    return _listOfScientists;
 }
 
 vector<Scientist> ScientistService::searchScientists(string searchData)
