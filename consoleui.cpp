@@ -18,6 +18,8 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
+    _service.load();
+
     while(loop == true)
     {
         cout << "Choose a command:\n";
@@ -137,9 +139,8 @@ void ConsoleUI::Register()
         cin >> yearOfDeath;
     }
 
-    //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
-
-    //service.addScientist(newScientist);
+    Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+    _service.addScientist(scientist);
 
     cout << "Scientist added!" << endl;
     cout << endl;

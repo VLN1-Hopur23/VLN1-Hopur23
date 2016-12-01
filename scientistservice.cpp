@@ -84,6 +84,7 @@ void ScientistService::addScientist(Scientist scientist)
     if (isin == false)
     {
          _scientists.push_back(scientist);
+         _data.writeNewScientist(scientist);
     }
 }
 
@@ -113,7 +114,12 @@ bool ScientistService::ifExist(string name)
    return false;
 }
 
-vector<Scientist> ScientistService:: getScientistVector()
+vector<Scientist> ScientistService::getScientistVector()
 {
     return _scientists;
+}
+
+void ScientistService::load()
+{
+    _data.getData(_scientists);
 }

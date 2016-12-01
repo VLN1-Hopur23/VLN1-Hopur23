@@ -11,11 +11,12 @@ DataAccess::DataAccess()
 void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
+    ofstream file2("newfile.txt");
     Scientist person;
     string name;
     string gender;
-    int yearOfBirth;
-    int yearOfDeath;
+    string yearOfBirth;
+    string yearOfDeath;
     string delimiter;
 
     file.open("computerScientists.txt");
@@ -26,16 +27,23 @@ void DataAccess::getData(vector<Scientist>& scientists)
         {
             delimiter = "";
 
-            while(delimiter != "####")
+            //while(delimiter != "####")
             {
-                file >> name;
-                file >> gender;
-                file >> yearOfBirth;
-                file >> yearOfDeath;
-                file >> delimiter;
 
-                Scientist person(name, gender, yearOfBirth, yearOfDeath);
-                scientists.push_back(person);
+                getline(file, name);
+                getline(file, gender);
+                getline(file, yearOfBirth);
+                getline(file, yearOfDeath);
+                getline(file, delimiter);
+
+                int yearOfBirthInt = atoi(yearOfBirth.c_str());
+                int yearOfDeathInt = atoi(yearOfDeath.c_str());
+
+                //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
+                {
+                    Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
+                    scientists.push_back(person);
+                }
             }
         }
     }
@@ -43,13 +51,48 @@ void DataAccess::getData(vector<Scientist>& scientists)
     {
         //cout << "File cannot open" << endl;
     }
-
 }
 
-void DataAccess::writeData(const vector <Scientist>& scientists)
+bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
+{
+    bool nameBool = false;
+    bool genderBool = false;
+    bool yearOfBirthBool = false;
+    bool yearOfDeathBool = false;
+    bool delimiterBool = false;
+    if(name != "" && name !="####")
+    {
+        nameBool = true;
+    }
+    if(gender == "m" || gender =="f")
+    {
+        genderBool = true;
+    }
+    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt<2016)//yearToDay
+    {
+        yearOfBirthBool = true;
+    }
+    if(yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016 ||yearOfDeathInt ==0)//yearToDay
+    {
+        yearOfDeathBool = true;
+    }
+    if(delimiter == "####")
+    {
+        delimiterBool =true;
+    }
+    if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
-    int index = scientists.size() + 1;
 
     file.open("computerScientists.txt", ios_base::app);
 
@@ -57,12 +100,11 @@ void DataAccess::writeData(const vector <Scientist>& scientists)
     if (file)
     {
 
-        file << scientists[index].getName() << endl;
-        file << scientists[index].getGender() << endl;
-        file << scientists[index].getYearOfBirth() << endl;
-        file << scientists[index].getYearOfDeath() << endl;
+        file << scientist.getName() << endl;
+        file << scientist.getGender() << endl;
+        file << scientist.getYearOfBirth() << endl;
+        file << scientist.getYearOfDeath() << endl;
         file << "####";
-
     }
 
     file.close();
