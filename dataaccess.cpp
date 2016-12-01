@@ -1,7 +1,7 @@
 #include "dataaccess.h"
 
 using namespace std;
-
+// constructor
 DataAccess::DataAccess()
 {
 
@@ -27,31 +27,33 @@ void DataAccess::getData(vector<Scientist>& scientists)
         {
             delimiter = "";
 
-            //while(delimiter != "####")
+            getline(file, name);
+            getline(file, gender);
+            getline(file, yearOfBirth);
+            getline(file, yearOfDeath);
+            getline(file, delimiter);
+
+            int yearOfBirthInt = atoi(yearOfBirth.c_str());
+            int yearOfDeathInt = atoi(yearOfDeath.c_str());
+
+            //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
             {
-                getline(file, name);
-                getline(file, gender);
-                getline(file, yearOfBirth);
-                getline(file, yearOfDeath);
-                getline(file, delimiter);
-
-                int yearOfBirthInt = atoi(yearOfBirth.c_str());
-                int yearOfDeathInt = atoi(yearOfDeath.c_str());
-
-                //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
-                {
-                    Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
-                    scientists.push_back(person);
-                }
+                Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
+                scientists.push_back(person);
             }
+            //else
+            {
+                DataOk = false;
+            }
+
         }
     }
     else
     {
-        //cout << "File cannot open" << endl;
+        FileOpen = false;
     }
 }
-
+//
 bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;

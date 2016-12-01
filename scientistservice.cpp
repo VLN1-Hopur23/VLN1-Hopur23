@@ -120,7 +120,19 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
-void ScientistService::load()
+bool ScientistService::load()
 {
     _data.getData(_scientists);
+
+    return DataAccessWorks();
+}
+
+bool ScientistService::DataAccessWorks()
+{
+    if (_data.DataOk && _data.FileOpen)
+    {
+        return true;
+    }
+
+    return false;
 }
