@@ -136,9 +136,8 @@ void ConsoleUI::Register()
         cin >> yearOfDeath;
     }
 
-    //Scientist newScientist(name, gender, yearOfBirth, yearOfDeath);
-
-    //service.addScientist(newScientist);
+    Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+    _service.addScientist(scientist);
 
     cout << "Scientist added!" << endl;
     cout << endl;
