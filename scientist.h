@@ -2,30 +2,38 @@
 #define SCIENTIST_H
 
 #include <string>
+#include <stdio.h>      /* puts, printf */
+#include <time.h>       /* time_t, struct tm, time, localtime */
+#include <iostream>
+
 
 using namespace std;
 
 class Scientist
 {
-    string _name = "";
-    char _gender;
-    int _yearOfBirth = 0;
-    int _yearOfDeath = 0;
-
 public:
     Scientist();
 
-    Scientist(string name, char gender, int yearOfBirth, int yearOfDeath);
+    Scientist(string name, string gender, int yearOfBirth, int yearOfDeath);
 
     string getName() const;
 
-    char getGender() const;
+    string getGender() const;
 
     int getYearOfBirth() const;
 
     int getYearOfDeath() const;
 
+    int getAge() const;
 
+    int getYearToDay() const;
+
+private:
+    string _name;
+    string _gender;
+    int _yearOfBirth;
+    int _yearOfDeath;
 };
 
 #endif // SCIENTIST_H
+

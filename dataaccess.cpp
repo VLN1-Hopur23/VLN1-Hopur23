@@ -13,7 +13,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
     ifstream file;
     Scientist person;
     string temp;
-    char t;
+    string t;
     int one;
     int two;
     string delimiter;
