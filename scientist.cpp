@@ -1,7 +1,6 @@
 #include "scientist.h"
 
 
-
 using namespace std;
 
 Scientist::Scientist()
@@ -15,7 +14,6 @@ Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeat
     _yearOfBirth = yearOfBirth;
     _yearOfDeath = yearOfDeath;
 }
-
 
 string Scientist::getName() const
 {

@@ -19,10 +19,10 @@ private:
     void displayListOfScientist(string sort);
     void Register();
     void List();
+    void Search();
 
 private:
     ScientistService _service;
-
 };
 
 #endif // CONSOLEUI_H
