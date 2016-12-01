@@ -17,6 +17,7 @@ public:
     void getData(vector<Scientist>& scientists);
 
     void writeData(const vector<Scientist>& scientists);
+
 private:
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
 
