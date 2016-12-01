@@ -27,6 +27,7 @@ private:
     void Register();
     void List();
     void Search();
+    void printFrame();
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
 private:
