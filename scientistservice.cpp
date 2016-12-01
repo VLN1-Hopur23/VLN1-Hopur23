@@ -39,20 +39,20 @@ ScientistService::ScientistService()
     //TODO: logic
     //sort by name
 
-    if (sort == "name" || sort == "Name")
+    if (sort == "name" || sort == "Name" || sort == "n")
     {
         ScientitComparisonNameForward cmp;
         std::sort(_scientists.begin(), _scientists.end(), cmp);
     }
-    else if (sort == "birth" || sort == "Birth")
+    else if (sort == "birth" || sort == "Birth" || sort == "b")
     {
         std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfBirthForward);
     }
-    else if (sort == "death" || sort == "Death")
+    else if (sort == "death" || sort == "Death" || sort == "d")
     {
         std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonYearOfDeathForward);
     }
-    else if (sort == "age" || sort == "Age")
+    else if (sort == "age" || sort == "Age" || sort == "a")
     {
         std::sort(_scientists.begin(), _scientists.end(), ScientitComparisonAgeForward);
     }
