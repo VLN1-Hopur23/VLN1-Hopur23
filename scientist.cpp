@@ -4,6 +4,7 @@ using namespace std;
 
 Scientist::Scientist()
 {
+
 }
 
 Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeath)

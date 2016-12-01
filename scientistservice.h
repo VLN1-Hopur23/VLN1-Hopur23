@@ -21,13 +21,6 @@ public:
 
 #endif // SCIENTISTSERVICE_H
 
-
-
-
-
-
-
-
 /*#ifndef PERFORMERSERVICE_H
 #define PERFORMERSERVICE_H
 

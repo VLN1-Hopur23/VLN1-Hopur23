@@ -27,6 +27,7 @@ struct ScientitComparisonGenderForward {
 
 ScientistService::ScientistService()
 {
+
 }
  vector<Scientist> ScientistService::getScientists(string sort)
 {
@@ -70,7 +71,6 @@ ScientistService::ScientistService()
     return performers;
 }
 
-
 /*void ScientistService::addScientist(Scientist scientist)
 {
    // _scientists.push_back(scientist);
@@ -89,7 +89,8 @@ Scientist ScientistService::getScientist(int index)
 
 using namespace std;
 
-struct PerformerComparison {
+struct PerformerComparison
+{
     bool operator() (Performer i, Performer j) {return (i.getName()<j.getName());}
 };
 
@@ -98,23 +99,23 @@ PerformerService::PerformerService()
 
 }
 
- vector<Performer> PerformerService::getPerformers(ToDO: parameter)
- {
-     vector<Performer> performers;
+vector<Performer> PerformerService::getPerformers(ToDO: parameter)
+{
+    vector<Performer> performers;
 
-     Performer p("duran duran", 41);
-     Performer p2("madona", 55);
-     Performer p3("ALi", 35);
+    Performer p("duran duran", 41);
+    Performer p2("madona", 55);
+    Performer p3("ALi", 35);
 
-     performers.push_back(p);
-     performers.push_back(p2);
-     performers.push_back(p3);
+    performers.push_back(p);
+    performers.push_back(p2);
+    performers.push_back(p3);
 
-     //TODO: logic
-     //sort by name
-     PerformerComparison cmp;
-     std::sort(performers.begin(), performers.end(), cmp);
+    //TODO: logic
+    //sort by name
+    PerformerComparison cmp;
+    std::sort(performers.begin(), performers.end(), cmp);
 
-     return performers;
- }
+    return performers;
+}
 */

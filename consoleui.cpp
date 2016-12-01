@@ -62,7 +62,7 @@ void ConsoleUI::List()
 {
     string sort;
 
-    while(sort != "back" || sort!= "Back")
+    while(sort != "back" && sort!= "Back")
     {
         cout << endl;
         cout << "Choose how you want your list sorted\n";
@@ -125,6 +125,7 @@ void ConsoleUI::Register()
     //service.addScientist(newScientist);
 
     cout << "Scientist added!" << endl;
+    cout << endl;
 }
 
 void ConsoleUI::displayListOfScientist(string sort)
@@ -159,7 +160,6 @@ void ConsoleUI::displayListOfScientist(string sort)
         }
 
         cout << scientists[i].getGender() << "\t" <<scientists[i].getYearOfBirth()<< "\t" <<scientists[i].getYearOfDeath() << "\t" << scientists[i].getAge() << endl;
-
     }
       cout << "===============================================================" << endl;
 }
