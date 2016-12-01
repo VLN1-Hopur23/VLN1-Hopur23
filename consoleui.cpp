@@ -83,7 +83,7 @@ void ConsoleUI::List()
 {
     string sort;
 
-    while(sort != "back" && sort!= "Back")
+    while(sort != "back" && sort!= "Back" && sort != "b")
     {
         cout << endl;
         cout << "Choose how you want your list sorted\n";
@@ -125,9 +125,15 @@ void ConsoleUI::Register()
     cin >> yearOfBirth;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
+        cin >> yearOfBirth;
+    }
+    while (yearOfBirth > 9999 || yearOfBirth < 0)
+    {
+        cout << "ERROR!! Please enter a valid year of birth!\n";
+        cin.clear();
         cin >> yearOfBirth;
     }
 
@@ -135,9 +141,15 @@ void ConsoleUI::Register()
     cin >> yearOfDeath;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
+        cin >> yearOfDeath;
+    }
+    while (yearOfDeath > 99999 || yearOfDeath < yearOfBirth)
+    {
+        cout << "ERROR!! Please enter a valid year of death!\n";
+        cin.clear();
         cin >> yearOfDeath;
     }
 
