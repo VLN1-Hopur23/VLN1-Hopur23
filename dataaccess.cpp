@@ -14,8 +14,8 @@ void DataAccess::getData(vector<Scientist>& scientists)
     Scientist person;
     string name;
     string gender;
-    int yearOfBirth;
-    int yearOfDeath;
+    string yearOfBirth;
+    string yearOfDeath;
     string delimiter;
 
     file.open("computerScientists.txt");
@@ -34,8 +34,14 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 file >> yearOfDeath;
                 file >> delimiter;
 
-                Scientist person(name, gender, yearOfBirth, yearOfDeath);
+                int yearOfBirthInt = stoi(yearOfBirth);
+                int yearOfDeathInt = stoi(yearOfDeath);
+
+                if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
+                {
+                Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
+                }
             }
         }
     }
@@ -44,6 +50,42 @@ void DataAccess::getData(vector<Scientist>& scientists)
         //cout << "File cannot open" << endl;
     }
 
+}
+bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
+{
+    bool nameBool = false;
+    bool genderBool = false;
+    bool yearOfBirthBool = false;
+    bool yearOfDeathBool = false;
+    bool delimiterBool = false;
+    if(name != "" && name !="####")
+    {
+        nameBool = true;
+    }
+    if(gender == "m" || gender =="f")
+    {
+        genderBool = true;
+    }
+    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt<2016)//yearToDay
+    {
+        yearOfBirthBool = true;
+    }
+    if(yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016 ||yearOfDeathInt ==0)//yearToDay
+    {
+        yearOfDeathBool = true;
+    }
+    if(delimiter == "####")
+    {
+        delimiterBool =true;
+    }
+    if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void DataAccess::writeData(const vector <Scientist>& scientists)
