@@ -40,20 +40,21 @@ ScientistService::ScientistService()
     //sort by name
 
 
-    if (sort == "name" || sort == "Name")
+    if (sort == "name" || sort == "Name" || sort == "n")
+
     {
         ScientitComparisonNameForward cmp;
         std::sort(_listOfScientists.begin(), _listOfScientists.end(), cmp);
     }
-    else if (sort == "birth" || sort == "Birth")
+    else if (sort == "birth" || sort == "Birth" || sort == "b")
     {
         std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonYearOfBirthForward);
     }
-    else if (sort == "death" || sort == "Death")
+    else if (sort == "death" || sort == "Death" || sort == "d")
     {
         std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonYearOfDeathForward);
     }
-    else if (sort == "age" || sort == "Age")
+    else if (sort == "age" || sort == "Age" || sort == "a")
     {
         std::sort(_listOfScientists.begin(), _listOfScientists.end(), ScientitComparisonAgeForward);
     }
@@ -122,7 +123,19 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
-void ScientistService::load()
+bool ScientistService::load()
 {
     _data.getData(_scientists);
+
+    return DataAccessWorks();
+}
+
+bool ScientistService::DataAccessWorks()
+{
+    if (_data.DataOk && _data.FileOpen)
+    {
+        return true;
+    }
+
+    return false;
 }

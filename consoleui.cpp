@@ -18,43 +18,49 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    _service.load();
-
-    while(loop == true)
+    bool openFileWorks= _service.load();
+    if (openFileWorks)
     {
-        cout << "Choose a command:\n";
-        cout << endl;
-        cout << "register\t- Register a scientist\n";
-        cout << "list\t\t- Display the list of scientists\n";
-        cout << "search\t\t- Search\n";
-        cout << "save\t\t- Save changes\n";
-        cout << "quit\t\t- Exit program\n";
-        cout << endl;
+        while(loop == true)
+        {
+            cout << "Choose a command:\n";
+            cout << endl;
+            cout << "register\t- Register a scientist\n";
+            cout << "list\t\t- Display the list of scientists\n";
+            cout << "search\t\t- Search\n";
+            cout << "save\t\t- Save changes\n";
+            cout << "quit\t\t- Exit program\n";
+            cout << endl;
 
-        cin >> command;
+            cin >> command;
 
-        // The user can use one lowe case letter for shortcut
-        if (command == "list" || command == "List" || command == "l")
-        {
-            List();
+            // The user can use one lowe case letter for shortcut
+            if (command == "list" || command == "List" || command == "l")
+            {
+                List();
+            }
+            else if (command == "register" || command == "Register" || command == "r")
+            {
+                Register();
+            }
+            else if (command == "search" || command == "Search" || command == "s")
+            {
+                //TODO: Search functionality
+                Search();
+            }
+            else if (command == "quit" || command == "Quit" || command == "q")
+            {
+                loop = false;
+            }
+            else
+            {
+                cout << "Please choose one of the given options!\n";
+            }
         }
-        else if (command == "register" || command == "Register" || command == "r")
-        {
-            Register();
-        }
-        else if (command == "search" || command == "Search" || command == "s")
-        {
-            //TODO: Search functionality
-            Search();
-        }
-        else if (command == "quit" || command == "Quit" || command == "q")
-        {
-            loop = false;
-        }
-        else
-        {
-            cout << "Please choose one of the given options!\n";
-        }
+    }
+    else
+    {
+        cout << "Error with opening file" << endl;
     }
 }
 
@@ -77,7 +83,7 @@ void ConsoleUI::List()
 {
     string sort;
 
-    while(sort != "back" && sort!= "Back")
+    while(sort != "back" && sort!= "Back" && sort != "b")
     {
         cout << endl;
         cout << "Choose how you want your list sorted\n";
@@ -123,9 +129,15 @@ void ConsoleUI::Register()
     cin >> yearOfBirth;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
+        cin >> yearOfBirth;
+    }
+    while (yearOfBirth > 9999 || yearOfBirth < 0)
+    {
+        cout << "ERROR!! Please enter a valid year of birth!\n";
+        cin.clear();
         cin >> yearOfBirth;
     }
 
@@ -133,9 +145,15 @@ void ConsoleUI::Register()
     cin >> yearOfDeath;
     while (cin.fail())
     {
-        cout << "Please enter a valid option!\n";
+        cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
         cin.ignore(256, '\n');
+        cin >> yearOfDeath;
+    }
+    while (yearOfDeath > 99999 || yearOfDeath < yearOfBirth)
+    {
+        cout << "ERROR!! Please enter a valid year of death!\n";
+        cin.clear();
         cin >> yearOfDeath;
     }
 
@@ -179,6 +197,7 @@ void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
     }
       cout << "===============================================================" << endl;
 }
+
 
 vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
 {

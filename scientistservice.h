@@ -27,10 +27,11 @@ public:
     vector<Scientist> searchScientists(string searchData);
     Scientist getScientist(int index);
     vector<Scientist> getScientistVector();
+    bool DataAccessWorks();
 
     void save();
 
-    void load();
+    bool load();
 };
 
 #endif // SCIENTISTSERVICE_H
