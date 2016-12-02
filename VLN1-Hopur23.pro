@@ -13,10 +13,12 @@ SOURCES += main.cpp \
     consoleui.cpp \
     scientist.cpp \
     scientistservice.cpp \
-    dataaccess.cpp
+    dataaccess.cpp \
+    localtime.cpp
 
 HEADERS += \
     consoleui.h \
     scientist.h \
     scientistservice.h \
-    dataaccess.h
+    dataaccess.h \
+    localtime.h
