@@ -1,10 +1,9 @@
 #ifndef SCIENTIST_H
 #define SCIENTIST_H
 
-#include <string>
-#include <stdio.h>      /* puts, printf */
-#include <time.h>       /* time_t, struct tm, time, localtime */
+
 #include <iostream>
+#include "localtime.h"
 
 using namespace std;
 
@@ -40,6 +39,7 @@ private:
     string _gender;
     int _yearOfBirth;
     int _yearOfDeath;
+    LocalTime _Time ;
 };
 
 #endif // SCIENTIST_H

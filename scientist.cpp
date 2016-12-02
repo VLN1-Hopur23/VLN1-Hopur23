@@ -43,7 +43,7 @@ int Scientist::getAge() const
     }
     else
     {
-        return getYearToDay() - _yearOfBirth; // 2016 er notad sem arid i dag
+        return _Time.getYearToDay() - _yearOfBirth; // 2016 er notad sem arid i dag
     }
 }
 //updates year to the current year of users time

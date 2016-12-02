@@ -67,7 +67,7 @@ struct ScientistComparisonGenderForward
     return _listOfScientists;
 }
 //search for scientist by name
-vector<int> ScientistService::searchScientists(string searchData)
+vector<int> ScientistService::searchScientists(string& searchData)
 {
     vector<int> foundScientists;
 
