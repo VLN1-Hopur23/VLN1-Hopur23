@@ -4,6 +4,9 @@
 
 using namespace std;
 
+ScientistService::ScientistService()
+{
+}
 //operator instrument that compares names of scientists in alphabetical order
 struct ScientistComparisonNameForward
 {
@@ -20,21 +23,19 @@ bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
-//instrument that compares
+//instrument that compares age between scientists in ascending order
 bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
-
+//operator instrument that
+/*
 struct ScientistComparisonGenderForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
 
-ScientistService::ScientistService()
-{
-}
-
+*/
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
     //TODO: logic
