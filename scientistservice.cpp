@@ -72,12 +72,10 @@ vector<int> ScientistService::searchScientists(string& searchData)
         transform(name.begin(), name.end(), name.begin(), ::tolower);
         if(name.substr(0,searchData.size()) == searchData)
         {
-            //If we find the scientist then we...
-
             foundScientists.push_back(i);
         }
     }
-    return foundScientists; //remeber to change
+    return foundScientists;
 }
 
 void ScientistService::addScientist(Scientist scientist)
