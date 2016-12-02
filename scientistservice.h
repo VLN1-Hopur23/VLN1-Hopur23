@@ -34,7 +34,7 @@ public:
 
     bool DataAccessWorks();
 
-    void editScientist(int index, string change, string input);
+    string editScientist(int index, string change, string input);
 
     void deleteScientist(int index);
 };

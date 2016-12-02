@@ -135,7 +135,7 @@ bool ScientistService::DataAccessWorks()
     return false;
 }
 
-void ScientistService::editScientist(int index, string change, string input)
+string ScientistService::editScientist(int index, string change, string input)
 {
     if (change == "name")
     {
