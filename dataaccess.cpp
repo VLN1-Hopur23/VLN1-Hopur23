@@ -42,6 +42,10 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
+            else
+            {
+                DataOk = false;
+            }
         }
     }
     else
