@@ -139,11 +139,17 @@ bool ScientistService::DataAccessWorks()
     return false;
 }
 
-void ScientistService::editScientist(int index, string change, string input)
+string ScientistService::editScientist(int index, string change, string input)
 {
+    string message = "Invalid, ignored";
+    if(index > _scientists.size()){
+        message = "Index out of range";
+    }
     if (change == "name")
     {
-        _scientists[index].setName(input);
+        message = "Name changed successfully from";
+
+        _scientists[index].setName(input); 
     }
     else if (change == "gender")
     {
@@ -157,4 +163,5 @@ void ScientistService::editScientist(int index, string change, string input)
     {
         _scientists[index].setYearOfDeath(stoi(input, 0));
     }
+    return message;
 }
