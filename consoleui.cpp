@@ -102,6 +102,7 @@ void ConsoleUI::Edit()
 
     cout << endl;
     cout << message << endl;
+    cout << endl;
 }
 
 void ConsoleUI::Delete()
