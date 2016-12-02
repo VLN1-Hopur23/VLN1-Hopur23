@@ -1,7 +1,7 @@
 #include "scientist.h"
 
 using namespace std;
-
+//constructors
 Scientist::Scientist()
 {
 
@@ -14,7 +14,7 @@ Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeat
     _yearOfBirth = yearOfBirth;
     _yearOfDeath = yearOfDeath;
 }
-
+//getfunctions
 string Scientist::getName() const
 {
     return _name;
@@ -46,7 +46,7 @@ int Scientist::getAge() const
         return getYearToDay() - _yearOfBirth; // 2016 er notad sem arid i dag
     }
 }
-
+//updates year to the current year of users time
 int Scientist::getYearToDay() const
 {
       time_t rawtime;

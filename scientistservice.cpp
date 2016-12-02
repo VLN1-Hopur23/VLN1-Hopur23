@@ -4,23 +4,23 @@
 
 using namespace std;
 
-//operator instrument that compares names in alphabetical order
+//operator instrument that compares names of scientists in alphabetical order
 struct ScientistComparisonNameForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
 };
 
-//operator instrument that compares year of birth in ascending order
+//instrument that compares year of birth between scientists in ascending order
 bool ScientistComparisonYearOfBirthForward (Scientist i, Scientist j)
 {
     return (i.getYearOfBirth()<j.getYearOfBirth());
 }
-
+//instrument that compares year of death between scientists in ascending order
 bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
-
+//instrument that compares
 bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());

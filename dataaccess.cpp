@@ -1,5 +1,4 @@
 #include "dataaccess.h"
-#include <iostream>
 
 using namespace std;
 // constructor
@@ -114,7 +113,7 @@ void DataAccess::writeNewScientist(Scientist scientist)
 
     file.close();
 }
-//rewrites file, instrument for delete
+//rewrites file, instrument for delete scientists
 void DataAccess::writeData(vector<Scientist> scientists)
 {
     ofstream file;
