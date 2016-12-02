@@ -29,13 +29,6 @@ bool ScientistComparisonAgeForward (Scientist i, Scientist j)
     return (i.getAge()<j.getAge());
 }
 
-//NEED TO USE OR TERMINATE
-/*
-struct ScientistComparisonGenderForward
-{
-    bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
-};
-*/
 //sorts scientist by aplhabetical order, by year of birth, by year of death and by age
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
