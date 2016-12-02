@@ -4,6 +4,10 @@
 
 using namespace std;
 
+ScientistService::ScientistService()
+{
+}
+
 //operator instrument that compares names in alphabetical order
 struct ScientistComparisonNameForward
 {
@@ -26,15 +30,7 @@ bool ScientistComparisonAgeForward (Scientist i, Scientist j)
     return (i.getAge()<j.getAge());
 }
 
-struct ScientistComparisonGenderForward
-{
-    bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
-};
-
-ScientistService::ScientistService()
-{
-}
-
+//sorts scientist by aplhabetical order, by year of birth, by year of death and by age
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
     if (sort == "name" || sort == "Name" || sort == "n")
