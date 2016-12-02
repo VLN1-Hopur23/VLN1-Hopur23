@@ -84,7 +84,9 @@ void ConsoleUI::Edit()
     cin >> input;
     //What do you want to change about this scientist
     string message = _service.editScientist(index, change, input);
+    cout << endl;
     cout << message << endl;
+    cout << endl;
 }
 //direction to delete scientist
 void ConsoleUI::Delete()
