@@ -32,9 +32,9 @@ public:
 
     bool load();
 
-    bool DataAccessWorks();
-
     string editScientist(int index, string change, string input);
+
+    bool DataAccessWorks();
 
     void deleteScientist(int index);
 };

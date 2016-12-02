@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <localtime.h>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ private:
     void Delete();
     void printFrame();
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
+    LocalTime _time;
 
 private:
 

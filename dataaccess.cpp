@@ -72,12 +72,11 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         genderBool = true;
     }
-
-    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt<2016)//yearToDay
+    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt < _time.getYearToDay())
     {
         yearOfBirthBool = true;
     }
-    if((yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016) || yearOfDeathInt == 0)//yearToDay
+    if((yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < _time.getYearToDay()) || yearOfDeathInt == 0)
     {
         yearOfDeathBool = true;
     }

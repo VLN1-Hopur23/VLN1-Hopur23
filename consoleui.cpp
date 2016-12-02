@@ -83,7 +83,8 @@ void ConsoleUI::Edit()
     cout << "Enter the new value: " << endl;
     cin >> input;
     //What do you want to change about this scientist
-    _service.editScientist(index, change, input);
+    string message = _service.editScientist(index, change, input);
+    cout << message << endl;
 }
 //direction to delete scientist
 void ConsoleUI::Delete()
@@ -91,7 +92,6 @@ void ConsoleUI::Delete()
     int index;
     char confirm;
 
-    // To Do delete functionality
     cout << "Delete registered scientist" << endl;
     cout << endl;
     cout << "Enter scientist number to delete: ";
@@ -209,7 +209,7 @@ void ConsoleUI::Register()
         cin.ignore(256, '\n');
         cin >> yearOfBirth;
     }
-    while (yearOfBirth > 9999 || yearOfBirth < 0)
+    while (yearOfBirth > _time.getYearToDay() || yearOfBirth < 0)
     {
         cout << "ERROR!! Please enter a valid year of birth!\n";
         cin.clear();
@@ -225,7 +225,7 @@ void ConsoleUI::Register()
         cin.ignore(256, '\n');
         cin >> yearOfDeath;
     }
-    while (yearOfDeath > 99999 || yearOfDeath < yearOfBirth)
+    while (yearOfDeath > _time.getYearToDay() || ((yearOfDeath < yearOfBirth) && yearOfDeath != 0) )
     {
         cout << "ERROR!! Please enter a valid year of death!\n";
         cin.clear();
@@ -248,7 +248,7 @@ void ConsoleUI::displayListOfScientist()
     cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < _service.getSize() - 1; i++)
+    for (size_t i = 0; i < _service.getSize(); i++)
     {
         cout.fill('0');
         cout.width(2);
