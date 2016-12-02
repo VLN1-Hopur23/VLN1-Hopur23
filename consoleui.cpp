@@ -132,6 +132,7 @@ void ConsoleUI::Search()
     cout << endl;
 
     printFrame();
+    printHeader();
 
     for (size_t i = 0; i < foundScientists.size(); i++)
     {
@@ -244,9 +245,7 @@ void ConsoleUI::displayListOfScientist()
     //vector<Scientist> _scientists = _service.getScientistVector();
 
     printFrame();
-
-    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
-    cout <<"\t\t\t\t\tYear\tYear" << endl;
+    printHeader();
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
@@ -278,6 +277,12 @@ void ConsoleUI::printFrame()
     cout << left << "=";
     cout << endl;
     cout.fill(' ');
+}
+
+void ConsoleUI::printHeader()
+{
+    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout <<"\t\t\t\t\tYear\tYear" << endl;
 }
 
 
