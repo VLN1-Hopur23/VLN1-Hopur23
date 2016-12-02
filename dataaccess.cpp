@@ -36,14 +36,14 @@ void DataAccess::getData(vector<Scientist>& scientists)
             int yearOfBirthInt = atoi(yearOfBirth.c_str());
             int yearOfDeathInt = atoi(yearOfDeath.c_str());
 
-            //if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
+            if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
             {
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
-            //else
+            else
             {
-             //   DataOk = false;
+                DataOk = false;
             }
 
         }
@@ -61,6 +61,9 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     bool yearOfBirthBool = false;
     bool yearOfDeathBool = false;
     bool delimiterBool = false;
+
+    gender = gender.substr(0,1); // get onlie one characther ( to skip space)
+
     if(name != "" && name !="####")
     {
         nameBool = true;
@@ -81,10 +84,12 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         delimiterBool =true;
     }
+    cout<<endl;
     if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
     {
         return true;
     }
+
     else
     {
         return false;
