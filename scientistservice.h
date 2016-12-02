@@ -24,7 +24,7 @@ public:
 
     bool ifExist(string name);
 
-    vector<int> searchScientists(string searchData);
+    vector<int> searchScientists(string& searchData);
 
     vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
@@ -35,6 +35,8 @@ public:
     void save();
 
     bool load();
+
+    void editScientist(int index, string change, string input);
 };
 
 #endif // SCIENTISTSERVICE_H

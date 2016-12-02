@@ -41,9 +41,9 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
-            else
+            //else
             {
-                DataOk = false;
+                //DataOk = false;
             }
 
         }
@@ -84,7 +84,9 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         delimiterBool =true;
     }
-    cout<<endl;
+
+    //cout<<endl;
+
     if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
     {
         return true;
