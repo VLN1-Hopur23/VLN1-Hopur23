@@ -12,7 +12,6 @@
       <li>death year</li>
     </ul>
     <li>User can search the list by first letter/s in the name</li>
-    <li></li>
 </ul>
 ###Extra features:
 <ul>
