@@ -113,7 +113,7 @@ void DataAccess::writeNewScientist(Scientist scientist)
     file.close();
 }
 //rewrites file, instrument for delete scientists
-void DataAccess::writeData(vector<Scientist> scientists)
+void DataAccess::writeData(const vector<Scientist>& scientists)
 {
     ofstream file;
 
@@ -124,7 +124,7 @@ void DataAccess::writeData(vector<Scientist> scientists)
     {
         int index = 0;
 
-        while(!file.eof())
+        while(index < scientists.size())
         {
 
             file << scientists[index].getName() << endl;

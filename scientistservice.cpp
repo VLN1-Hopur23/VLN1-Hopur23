@@ -28,15 +28,14 @@ bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
-//NEED TO USE OR TERMINATE
 
+//NEED TO USE OR TERMINATE
+/*
 struct ScientistComparisonGenderForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
-
-
-
+*/
 //sorts scientist by aplhabetical order, by year of birth, by year of death and by age
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
@@ -138,3 +137,30 @@ bool ScientistService::DataAccessWorks()
 
     return false;
 }
+//user can change characteristic of scientist
+void ScientistService::editScientist(int index, string change, string input)
+{
+    if (change == "name")
+    {
+        _scientists[index].setName(input);
+    }
+    else if (change == "gender")
+    {
+        _scientists[index].setGender(input);
+    }
+    else if (change == "birth")
+    {
+        _scientists[index].setYearOfBirth(stoi(input, 0));
+    }
+    else if (change == "death")
+    {
+        _scientists[index].setYearOfDeath(stoi(input, 0));
+    }
+}
+//user can delete scientist
+void ScientistService::deleteScientist(int index)
+{
+    _scientists.erase(_scientists.begin()+index);
+    _data.writeData(_scientists);
+}
+

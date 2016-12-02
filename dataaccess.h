@@ -18,7 +18,7 @@ public:
 
     void writeNewScientist(Scientist scientist);
 
-    void writeData(vector<Scientist> scientists);
+    void writeData(const vector<Scientist>& scientists);
 
     bool DataOk = true;
 
