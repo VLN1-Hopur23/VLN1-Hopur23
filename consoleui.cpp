@@ -1,8 +1,4 @@
 #include "consoleui.h"
-#include "scientist.h"
-#include <iostream>
-#include <string>
-#include <vector>
 
 using namespace std;
 
@@ -10,7 +6,6 @@ using namespace std;
 
 ConsoleUI::ConsoleUI()
 {
-
 }
 
 void ConsoleUI::run()
@@ -19,6 +14,7 @@ void ConsoleUI::run()
     bool loop = true;
 
     bool openFileWorks= _service.load();
+
     if (openFileWorks)
     {
         while(loop == true)
@@ -71,12 +67,34 @@ void ConsoleUI::Search()
     cout << "Searching by first letter/s in the name" << endl;
     cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
     cin >> searchData;
-    vector<Scientist> foundScientists = _service.searchScientists(searchData);
+
+    vector<int> foundScientists = _service.searchScientists(searchData);
+
     cout << endl;
+
+    printFrame();
+
     for (size_t i = 0; i < foundScientists.size(); i++)
     {
-        cout << foundScientists[i].getName() << endl;
+        cout.fill('0');
+        cout.width(2);
+        cout << right << foundScientists[i] << ". ";
+        cout.fill(' ');
+        cout.width(25);
+        cout << left;
+        cout << _service.getScientist(foundScientists[i]).getName();
+        cout << "\t";
+        cout << _service.getScientist(foundScientists[i]).getGender();
+        cout << "\t";
+        cout << left << _service.getScientist(foundScientists[i]).getYearOfBirth();
+        cout << "\t";
+        cout << left << _service.getScientist(foundScientists[i]).getYearOfDeath();
+        cout << endl;
     }
+
+    printFrame();
+
+    cout << endl;
 }
 
 void ConsoleUI::List()
@@ -168,7 +186,8 @@ void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
 {
     //vector<Scientist> _scientists = _service.getScientistVector();
 
-    cout << "===============================================================" << endl;
+    printFrame();
+
     cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
@@ -195,7 +214,17 @@ void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
 
         cout << _scientists[i].getGender() << "\t" <<_scientists[i].getYearOfBirth()<< "\t" <<_scientists[i].getYearOfDeath() << "\t" << _scientists[i].getAge() << endl;
     }
-      cout << "===============================================================" << endl;
+
+    printFrame();
+}
+
+void ConsoleUI::printFrame()
+{
+    cout.fill('=');
+    cout.width(63);
+    cout << left << "=";
+    cout << endl;
+    cout.fill(' ');
 }
 
 

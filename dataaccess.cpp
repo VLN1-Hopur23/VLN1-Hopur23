@@ -53,7 +53,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
         FileOpen = false;
     }
 }
-//
+//validates the scientists characteristic in the file
 bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;
@@ -95,7 +95,7 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
         return false;
     }
 }
-
+// writes a new scientist in the file
 void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
@@ -114,4 +114,29 @@ void DataAccess::writeNewScientist(Scientist scientist)
     file.close();
 }
 
+void DataAccess::writeData(vector<Scientist> scientists)
+{
+    ofstream file;
 
+    file.open("computerScientists.txt");
+
+
+    if (file)
+    {
+        int index = 0;
+
+        while(!file.eof())
+        {
+
+            file << scientists[index].getName() << endl;
+            file << scientists[index].getGender() << endl;
+            file << scientists[index].getYearOfBirth() << endl;
+            file << scientists[index].getYearOfDeath() << endl;
+            file << "####\n";
+
+            index++;
+        }
+    }
+
+    file.close();
+}
