@@ -38,10 +38,6 @@ struct ScientistComparisonGenderForward
 */
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
-    //TODO: logic
-    //sort by name
-
-
     if (sort == "name" || sort == "Name" || sort == "n")
 
     {
@@ -69,13 +65,16 @@ struct ScientistComparisonGenderForward
     return _listOfScientists;
 }
 
-vector<int> ScientistService::searchScientists(string searchData)
+vector<int> ScientistService::searchScientists(string& searchData)
 {
     vector<int> foundScientists;
+
+    transform(searchData.begin(), searchData.end(), searchData.begin(), ::tolower);
 
     for(unsigned long i = 0; i < _scientists.size(); i++)
     {
         string name = _scientists[i].getName();
+        transform(name.begin(), name.end(), name.begin(), ::tolower);
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
@@ -139,4 +138,24 @@ bool ScientistService::DataAccessWorks()
     }
 
     return false;
+}
+
+void ScientistService::editScientist(int index, string change, string input)
+{
+    if (change == "name")
+    {
+        _scientists[index].setName(input);
+    }
+    else if (change == "gender")
+    {
+        _scientists[index].setGender(input);
+    }
+    else if (change == "birth")
+    {
+        _scientists[index].setYearOfBirth(stoi(input, 0));
+    }
+    else if (change == "death")
+    {
+        _scientists[index].setYearOfDeath(stoi(input, 0));
+    }
 }

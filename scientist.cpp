@@ -65,3 +65,23 @@ int Scientist::getYearToDay() const
 
       return YearToDay;
 }
+
+void Scientist::setName(string name)
+{
+    _name = name;
+}
+
+void Scientist::setGender(string gender)
+{
+    _gender = gender;
+}
+
+void Scientist::setYearOfBirth(int yearOfBirth)
+{
+    _yearOfBirth = yearOfBirth;
+}
+
+void Scientist::setYearOfDeath(int yearOfDeath)
+{
+    _yearOfDeath = yearOfDeath;
+}

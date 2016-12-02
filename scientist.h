@@ -27,6 +27,14 @@ public:
 
     int getYearToDay() const;
 
+    void setName(string name);
+
+    void setGender(string gender);
+
+    void setYearOfBirth(int yearOfBirth);
+
+    void setYearOfDeath(int yearOfDeath);
+
 private:
     string _name;
     string _gender;
