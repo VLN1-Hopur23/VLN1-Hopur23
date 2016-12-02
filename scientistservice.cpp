@@ -37,10 +37,6 @@ ScientistService::ScientistService()
 
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
-    //TODO: logic
-    //sort by name
-
-
     if (sort == "name" || sort == "Name" || sort == "n")
 
     {
