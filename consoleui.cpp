@@ -3,11 +3,11 @@
 using namespace std;
 
 // Presentation layer
-
+//constructor
 ConsoleUI::ConsoleUI()
 {
 }
-
+//runs the whole program
 void ConsoleUI::run()
 {
     string command;
@@ -67,7 +67,7 @@ void ConsoleUI::run()
         cout << "Error with opening file" << endl;
     }
 }
-
+//direction for edit scientist
 void ConsoleUI::Edit()
 {
     // To Do edit functionality
@@ -83,31 +83,42 @@ void ConsoleUI::Edit()
     cout << "Enter the new value: " << endl;
     cin >> input;
     //What do you want to change about this scientist
-    _service.editScientist(index, change, input);
+    string message = _service.editScientist(index, change, input);
+    cout << message << endl;
 }
-
+//direction to delete scientist
 void ConsoleUI::Delete()
 {
     int index;
     char confirm;
 
     cout << "Delete registered scientist" << endl;
+    cout << endl;
     cout << "Enter scientist number to delete: ";
     cin >> index;
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
-    cin >> confirm;
-
-    if (confirm == 'y' || confirm == 'Y')
+    if (index < _service.getSize())
     {
-        _service.deleteScientist(index);
+
+        cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+        cin >> confirm;
+
+        if (confirm == 'y' || confirm == 'Y')
+        {
+            _service.deleteScientist(index);
+
+            cout << endl;
+            cout << "Successfully deleted!\n";
+            cout << endl;
+        }
     }
-
-    cout << endl;
-    cout << "Successfully deleted.\n";
-    cout << endl;
+    else if (index > _service.getSize())
+    {
+        cout << "Exceeded number of entries!\n";
+        cout << endl;
+    }
 }
-
+//direction to search for scientist
 void ConsoleUI::Search()
 {
     string searchData;
@@ -144,7 +155,7 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
-
+//direction to sort list
 void ConsoleUI::List()
 {
     string sort;
@@ -168,7 +179,7 @@ void ConsoleUI::List()
         displayListOfScientist();
     }
 }
-
+//direction to register scientist
 void ConsoleUI::Register()
 {
     string name;
@@ -227,7 +238,7 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
-
+//dislpays list of scientist
 void ConsoleUI::displayListOfScientist()
 {
     //vector<Scientist> _scientists = _service.getScientistVector();

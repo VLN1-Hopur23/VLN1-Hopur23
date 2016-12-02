@@ -13,6 +13,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
     ifstream file;
     ofstream file2("newfile.txt");
     Scientist person;
+    string check;
     string name;
     string gender;
     string yearOfBirth;
@@ -25,8 +26,8 @@ void DataAccess::getData(vector<Scientist>& scientists)
     {
         while (!file.eof())
         {
-            delimiter = "";
 
+            delimiter = "";
             getline(file, name);
             getline(file, gender);
             getline(file, yearOfBirth);
@@ -45,7 +46,6 @@ void DataAccess::getData(vector<Scientist>& scientists)
             {
                 //DataOk = false;
             }
-
         }
     }
     else
@@ -63,11 +63,11 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     bool delimiterBool = false;
 
     gender = gender.substr(0,1); // get onlie one characther ( to skip space)
-
     if(name != "" && name !="####")
     {
         nameBool = true;
     }
+
     if(gender == "m" || gender =="f")
     {
         genderBool = true;
@@ -111,7 +111,7 @@ void DataAccess::writeNewScientist(Scientist scientist)
 
     file.close();
 }
-
+//rewrites file, instrument for delete scientists
 void DataAccess::writeData(const vector<Scientist>& scientists)
 {
     ofstream file;
