@@ -83,7 +83,7 @@ void ConsoleUI::Edit()
     cout << "Enter the new value: " << endl;
     cin >> input;
     //What do you want to change about this scientist
-    //editScientist(index, change, input);
+    _service.editScientist(index, change, input);
 }
 
 void ConsoleUI::Delete()
