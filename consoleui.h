@@ -23,10 +23,12 @@ public:
 
 private:
 
-    void displayListOfScientist(vector<Scientist> _scientists);
+    void displayListOfScientist();
     void Register();
     void List();
     void Search();
+    void Edit();
+    void Delete();
     void printFrame();
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 

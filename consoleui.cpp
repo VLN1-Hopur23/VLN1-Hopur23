@@ -24,7 +24,8 @@ void ConsoleUI::run()
             cout << "register\t- Register a scientist\n";
             cout << "list\t\t- Display the list of scientists\n";
             cout << "search\t\t- Search\n";
-            cout << "save\t\t- Save changes\n";
+            cout << "edit\t\t- Edit scientist\n";
+            cout << "delete\t\t- Delete scientist\n";
             cout << "quit\t\t- Exit program\n";
             cout << endl;
 
@@ -41,8 +42,15 @@ void ConsoleUI::run()
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
-                //TODO: Search functionality
                 Search();
+            }
+            else if (command == "edit" || command == "Edit" || command == "e")
+            {
+                Edit();
+            }
+            else if (command == "delete" || command == "Delete" || command == "d")
+            {
+                Delete();
             }
             else if (command == "quit" || command == "Quit" || command == "q")
             {
@@ -58,6 +66,24 @@ void ConsoleUI::run()
     {
         cout << "Error with opening file" << endl;
     }
+}
+
+void ConsoleUI::Edit()
+{
+    // To Do edit functionality
+    cout << "Edit registered scientist" << endl;
+    //Possible to do list or search
+
+    //Write the number of the scientist you want to change
+
+    //What do you want to change about this scientist
+
+}
+
+void ConsoleUI::Delete()
+{
+    // To Do delete functionality
+    cout << "Delete registered scientist" << endl;
 }
 
 void ConsoleUI::Search()
@@ -117,9 +143,7 @@ void ConsoleUI::List()
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
 
-
-
-        displayListOfScientist(_AllScientist);
+        displayListOfScientist();
     }
 }
 
@@ -182,37 +206,33 @@ void ConsoleUI::Register()
     cout << endl;
 }
 
-void ConsoleUI::displayListOfScientist(vector<Scientist> _scientists)
+void ConsoleUI::displayListOfScientist()
 {
     //vector<Scientist> _scientists = _service.getScientistVector();
 
     printFrame();
 
-    cout << "Scientist name:\t\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < _scientists.size() - 1; i++)
+    for (size_t i = 0; i < _service.getSize() - 1; i++)
     {
-        string Name = _scientists[i].getName();
-        cout << _scientists[i].getName();
-        if(Name.size()<8)
-        {
-            cout<< "\t\t\t\t";
-        }
-        else if(Name.size()<16)
-        {
-            cout << "\t\t\t";
-        }
-        else if(Name.size()<24)
-        {
-            cout<< "\t\t";
-        }
-        else if(Name.size()<30)
-        {
-            cout<< "\t";
-        }
-
-        cout << _scientists[i].getGender() << "\t" <<_scientists[i].getYearOfBirth()<< "\t" <<_scientists[i].getYearOfDeath() << "\t" << _scientists[i].getAge() << endl;
+        cout.fill('0');
+        cout.width(2);
+        cout << right << i << ". ";
+        cout.fill(' ');
+        cout.width(25);
+        cout << left;
+        cout << _service.getScientist(i).getName();
+        cout << "\t";
+        cout << _service.getScientist(i).getGender();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfBirth();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfDeath();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getAge();
+        cout << endl;
     }
 
     printFrame();
