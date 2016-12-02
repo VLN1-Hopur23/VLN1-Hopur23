@@ -3,11 +3,11 @@
 using namespace std;
 
 // Presentation layer
-//constructor
+
 ConsoleUI::ConsoleUI()
 {
 }
-//runs the whole program
+
 void ConsoleUI::run()
 {
     string command;
@@ -19,19 +19,21 @@ void ConsoleUI::run()
     {
         while(loop == true)
         {
+            cout << endl;
             cout << "Choose a command:\n";
             cout << endl;
-            cout << "register\t- Register a scientist\n";
-            cout << "list\t\t- Display the list of scientists\n";
+            cout << "register\t- Register a known character from computer science\n";
+            cout << "list\t\t- Display the list of computer scientists\n";
             cout << "search\t\t- Search\n";
-            cout << "edit\t\t- Edit scientist\n";
-            cout << "delete\t\t- Delete scientist\n";
+            cout << "edit\t\t- Edit computer scientist\n";
+            cout << "delete\t\t- Delete computer scientist\n";
             cout << "quit\t\t- Exit program\n";
             cout << endl;
 
             cin >> command;
+            cout << endl;
 
-            // The user can use one lowe case letter for shortcut
+            // Frequent users could use one lower case letter for shortcut
             if (command == "list" || command == "List" || command == "l")
             {
                 List();
@@ -67,26 +69,41 @@ void ConsoleUI::run()
         cout << "Error with opening file" << endl;
     }
 }
-//direction for edit scientist
+
 void ConsoleUI::Edit()
 {
-    // To Do edit functionality
-    cout << "Edit registered scientist" << endl;
+    cout << "Edit registered computer scientist character" << endl;
+    cout << endl;
+
     int index;
     string change, input;
-    //Possible to do list or search
-    cout << "Enter the index number of the scientist you want to change: " << endl;
+
+    cout << "Enter the index number of the computer scientist you want to change: ";
     cin >> index;
-    //Write the number of the scientist you want to change
-    cout << "Enter what it is that you want to change about the scientist: (name/gender/birth/death) " << endl;
+    while (cin.fail() || index > _service.getSize() || index < 0)
+    {
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> index;
+    }
+    cout << "Enter what it is that you want to change about the computer scientist" << endl;
+    cout << "(name/gender/birth/death): ";
     cin >> change;
-    cout << "Enter the new value: " << endl;
+    while (change != "name" && change != "gender" && change != "birth" && change != "death"){
+        cout << "ERROR!! Please enter a valid option! (name/gender/birth/death)\n";
+        cin.clear();
+        cin >> change;
+    }
+    cout << "Enter the new value: ";
     cin >> input;
-    //What do you want to change about this scientist
+
     string message = _service.editScientist(index, change, input);
+
+    cout << endl;
     cout << message << endl;
 }
-//direction to delete scientist
+
 void ConsoleUI::Delete()
 {
     int index;
@@ -94,35 +111,33 @@ void ConsoleUI::Delete()
 
     cout << "Delete registered scientist" << endl;
     cout << endl;
-    cout << "Enter scientist number to delete: ";
+    cout << "Enter the index number of the scientist to delete: ";
     cin >> index;
-
-    if (index < _service.getSize())
+    while (cin.fail() || index > _service.getSize() || index < 0)
     {
-
-        cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
-        cin >> confirm;
-
-        if (confirm == 'y' || confirm == 'Y')
-        {
-            _service.deleteScientist(index);
-
-            cout << endl;
-            cout << "Successfully deleted!" << endl;
-            cout << endl;
-        }
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> index;
     }
-    else if (index > _service.getSize())
+
+    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+    cin >> confirm;
+
+    if (confirm == 'y' || confirm == 'Y')
     {
-        cout << "Index out of range!" << endl;
+        _service.deleteScientist(index);
+
+        cout << endl;
+        cout << "Successfully deleted!" << endl;
         cout << endl;
     }
 }
-//direction to search for scientist
+
 void ConsoleUI::Search()
 {
     string searchData;
-    //Call the function searchScientists
+
     cout << "Searching by first letter/s in the name" << endl;
     cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
     cin >> searchData;
@@ -132,6 +147,7 @@ void ConsoleUI::Search()
     cout << endl;
 
     printFrame();
+    printHeader();
 
     for (size_t i = 0; i < foundScientists.size(); i++)
     {
@@ -148,6 +164,8 @@ void ConsoleUI::Search()
         cout << left << _service.getScientist(foundScientists[i]).getYearOfBirth();
         cout << "\t";
         cout << left << _service.getScientist(foundScientists[i]).getYearOfDeath();
+        cout << "\t";
+        cout << left << _service.getScientist(foundScientists[i]).getAge();
         cout << endl;
     }
 
@@ -155,7 +173,7 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
-//direction to sort list
+
 void ConsoleUI::List()
 {
     string sort;
@@ -173,13 +191,14 @@ void ConsoleUI::List()
         cout << endl;
 
         cin >> sort;
+
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
 
         displayListOfScientist();
     }
 }
-//direction to register scientist
+
 void ConsoleUI::Register()
 {
     string name;
@@ -193,6 +212,7 @@ void ConsoleUI::Register()
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
+
     while (gender != "m" && gender != "M" && gender != "f" && gender != "F")
     {
         cout << "Please enter either m or f!\n";
@@ -238,15 +258,11 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
-//dislpays list of scientist
+
 void ConsoleUI::displayListOfScientist()
 {
-    //vector<Scientist> _scientists = _service.getScientistVector();
-
     printFrame();
-
-    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
-    cout <<"\t\t\t\t\tYear\tYear" << endl;
+    printHeader();
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
@@ -267,7 +283,6 @@ void ConsoleUI::displayListOfScientist()
         cout << left << _service.getScientist(i).getAge();
         cout << endl;
     }
-
     printFrame();
 }
 
@@ -278,6 +293,12 @@ void ConsoleUI::printFrame()
     cout << left << "=";
     cout << endl;
     cout.fill(' ');
+}
+
+void ConsoleUI::printHeader()
+{
+    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout <<"\t\t\t\t\tYear\tYear" << endl;
 }
 
 vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)

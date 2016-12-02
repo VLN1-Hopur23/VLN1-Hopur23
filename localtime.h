@@ -8,7 +8,9 @@
 class LocalTime
 {
 public:
+
     LocalTime();
+
     int getYearToDay() const;
 };
 
