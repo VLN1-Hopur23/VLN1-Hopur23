@@ -76,7 +76,7 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         yearOfBirthBool = true;
     }
-    if(yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016 ||yearOfDeathInt ==0)//yearToDay
+    if((yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016) || yearOfDeathInt == 0)//yearToDay
     {
         yearOfDeathBool = true;
     }
@@ -84,12 +84,10 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         delimiterBool =true;
     }
-    cout<<endl;
     if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
     {
         return true;
     }
-
     else
     {
         return false;
