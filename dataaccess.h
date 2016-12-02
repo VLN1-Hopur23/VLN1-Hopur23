@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include "scientist.h"
+#include <localtime.h>
 
 using namespace std;
 
@@ -20,14 +21,14 @@ public:
 
     void writeNewScientist(Scientist scientist);
 
-    void writeData(vector<Scientist> scientists);
+    void writeData(const vector<Scientist>& scientists);
 
     bool DataOk = true;
 
     bool FileOpen = true;
 
 private:
-
+    LocalTime _time;
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
 };
 

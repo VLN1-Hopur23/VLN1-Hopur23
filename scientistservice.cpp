@@ -165,3 +165,9 @@ string ScientistService::editScientist(int index, string change, string input)
     }
     return message;
 }
+
+void ScientistService::deleteScientist(int index)
+{
+    _scientists.erase(_scientists.begin()+index);
+    _data.writeData(_scientists);
+}

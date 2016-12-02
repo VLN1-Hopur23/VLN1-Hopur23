@@ -72,11 +72,11 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     {
         genderBool = true;
     }
-    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt<2016)//yearToDay
+    if(yearOfBirth != "" && yearOfBirth != "####" && yearOfBirthInt < _time.getYearToDay())
     {
         yearOfBirthBool = true;
     }
-    if((yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < 2016) || yearOfDeathInt == 0)//yearToDay
+    if((yearOfDeath != "" && yearOfDeath != "####" && yearOfDeathInt < _time.getYearToDay()) || yearOfDeathInt == 0)
     {
         yearOfDeathBool = true;
     }
@@ -112,7 +112,7 @@ void DataAccess::writeNewScientist(Scientist scientist)
     file.close();
 }
 
-void DataAccess::writeData(vector<Scientist> scientists)
+void DataAccess::writeData(const vector<Scientist>& scientists)
 {
     ofstream file;
 
@@ -123,7 +123,7 @@ void DataAccess::writeData(vector<Scientist> scientists)
     {
         int index = 0;
 
-        while(!file.eof())
+        while(index < scientists.size())
         {
 
             file << scientists[index].getName() << endl;

@@ -88,8 +88,24 @@ void ConsoleUI::Edit()
 
 void ConsoleUI::Delete()
 {
-    // To Do delete functionality
+    int index;
+    char confirm;
+
     cout << "Delete registered scientist" << endl;
+    cout << "Enter scientist number to delete: ";
+    cin >> index;
+
+    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+    cin >> confirm;
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        _service.deleteScientist(index);
+    }
+
+    cout << endl;
+    cout << "Successfully deleted.\n";
+    cout << endl;
 }
 
 void ConsoleUI::Search()
@@ -182,7 +198,7 @@ void ConsoleUI::Register()
         cin.ignore(256, '\n');
         cin >> yearOfBirth;
     }
-    while (yearOfBirth > 9999 || yearOfBirth < 0)
+    while (yearOfBirth > _time.getYearToDay() || yearOfBirth < 0)
     {
         cout << "ERROR!! Please enter a valid year of birth!\n";
         cin.clear();
@@ -198,7 +214,7 @@ void ConsoleUI::Register()
         cin.ignore(256, '\n');
         cin >> yearOfDeath;
     }
-    while (yearOfDeath > 99999 || yearOfDeath < yearOfBirth)
+    while (yearOfDeath > _time.getYearToDay() || ((yearOfDeath < yearOfBirth) && yearOfDeath != 0) )
     {
         cout << "ERROR!! Please enter a valid year of death!\n";
         cin.clear();
