@@ -72,12 +72,18 @@ void ConsoleUI::Edit()
 {
     // To Do edit functionality
     cout << "Edit registered scientist" << endl;
+    int index;
+    string change, input;
     //Possible to do list or search
-
+    cout << "Enter the index number of the scientist you want to change: " << endl;
+    cin >> index;
     //Write the number of the scientist you want to change
-
+    cout << "Enter what it is that you want to change about the scientist: (name/gender/birth/death) " << endl;
+    cin >> change;
+    cout << "Enter the new value: " << endl;
+    cin >> input;
     //What do you want to change about this scientist
-
+    //editScientist(index, change, input);
 }
 
 void ConsoleUI::Delete()
@@ -127,16 +133,16 @@ void ConsoleUI::List()
 {
     string sort;
 
-    while(sort != "back" && sort!= "Back" && sort != "b")
+    while(sort != "return" && sort!= "Return" && sort != "r")
     {
         cout << endl;
-        cout << "Choose how you want your list sorted\n";
+        cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by name\n";
         cout << "age\t\t- Sort by age\n";
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
-        cout << "back\t\t- Back to main menu\n";
+        cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
         cin >> sort;
