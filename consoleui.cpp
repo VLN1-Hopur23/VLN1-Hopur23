@@ -93,20 +93,30 @@ void ConsoleUI::Delete()
 
     // To Do delete functionality
     cout << "Delete registered scientist" << endl;
+    cout << endl;
     cout << "Enter scientist number to delete: ";
     cin >> index;
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
-    cin >> confirm;
-
-    if (confirm == 'y' || confirm == 'Y')
+    if (index < _service.getSize())
     {
-        _service.deleteScientist(index);
-    }
 
-    cout << endl;
-    cout << "Successfully deleted.\n";
-    cout << endl;
+        cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+        cin >> confirm;
+
+        if (confirm == 'y' || confirm == 'Y')
+        {
+            _service.deleteScientist(index);
+
+            cout << endl;
+            cout << "Successfully deleted!\n";
+            cout << endl;
+        }
+    }
+    else if (index > _service.getSize())
+    {
+        cout << "Exceeded number of entries!\n";
+        cout << endl;
+    }
 }
 
 void ConsoleUI::Search()
