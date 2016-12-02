@@ -3,15 +3,15 @@
 
 ###Console program with the following functionality:
 <ul>
-   <li>User can register a known person from the history of computer science.</li>
-    <li>User can display the list of known computer scientists in an order sorted by 
+   <li>Users can register a known person from the history of computer science.</li>
+    <li>Users can display the list of known computer scientists in an order sorted by 
     <ul>
       <li>name</li>
       <li>age</li>
       <li>birth year</li> 
       <li>death year</li>
     </ul>
-    <li>User can search the list by first letter/s in the name</li>
+    <li>Users can search the list by first letter/s in the name</li>
 </ul>
 ###Extra features:
 <ul>
