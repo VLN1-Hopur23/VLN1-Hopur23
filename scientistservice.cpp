@@ -161,6 +161,7 @@ string ScientistService::editScientist(int index, string change, string input)
         message = "Death year changed successfully";
         _scientists[index].setYearOfDeath(stoi(input, 0));
     }
+    _data.writeData(_scientists);
     return message;
 }
 

@@ -1,7 +1,6 @@
 #ifndef SCIENTIST_H
 #define SCIENTIST_H
 
-
 #include <iostream>
 #include "localtime.h"
 
@@ -10,6 +9,7 @@ using namespace std;
 class Scientist
 {
 public:
+
     Scientist();
 
     Scientist(string name, string gender, int yearOfBirth, int yearOfDeath);
@@ -34,12 +34,18 @@ public:
 
     void setYearOfDeath(int yearOfDeath);
 
+
 private:
+
     string _name;
+
     string _gender;
+
     int _yearOfBirth;
+
     int _yearOfDeath;
-    LocalTime _Time ;
+
+    LocalTime _Time;
 };
 
 #endif // SCIENTIST_H

@@ -25,14 +25,23 @@ public:
 private:
 
     void displayListOfScientist();
+
     void Register();
+
     void List();
+
     void Search();
+
     void Edit();
+
     void Delete();
+
     void printFrame();
+
     void printHeader();
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
+
     LocalTime _time;
 
 private:
