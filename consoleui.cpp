@@ -108,13 +108,13 @@ void ConsoleUI::Delete()
             _service.deleteScientist(index);
 
             cout << endl;
-            cout << "Successfully deleted!\n";
+            cout << "Successfully deleted!" << endl;
             cout << endl;
         }
     }
     else if (index > _service.getSize())
     {
-        cout << "Exceeded number of entries!\n";
+        cout << "Index out of range!" << endl;
         cout << endl;
     }
 }
@@ -279,7 +279,6 @@ void ConsoleUI::printFrame()
     cout << endl;
     cout.fill(' ');
 }
-
 
 vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
 {
