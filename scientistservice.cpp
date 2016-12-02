@@ -4,39 +4,37 @@
 
 using namespace std;
 
-ScientistService::ScientistService()
-{
-}
-//compares names of scientists in alphabetical order
+//operator instrument that compares names in alphabetical order
 struct ScientistComparisonNameForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
 };
 
-//compares year of birth between scientists in ascending order
+//operator instrument that compares year of birth in ascending order
 bool ScientistComparisonYearOfBirthForward (Scientist i, Scientist j)
 {
     return (i.getYearOfBirth()<j.getYearOfBirth());
 }
-//compares year of death between scientists in ascending order
+
 bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
 {
     return (i.getYearOfDeath()<j.getYearOfDeath());
 }
-//compares age between scientists in ascending order
+
 bool ScientistComparisonAgeForward (Scientist i, Scientist j)
 {
     return (i.getAge()<j.getAge());
 }
 
-//NEED TO USE OR TERMINATE
-/*
 struct ScientistComparisonGenderForward
 {
     bool operator() (Scientist i, Scientist j) {return (i.getGender()<j.getGender());}
 };
-*/
-//sorts scientist by aplhabetical order, by year of birth, by year of death and by age
+
+ScientistService::ScientistService()
+{
+}
+
  vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
 {
     if (sort == "name" || sort == "Name" || sort == "n")
@@ -65,14 +63,17 @@ struct ScientistComparisonGenderForward
     }
     return _listOfScientists;
 }
-//search for scientist by name
+
 vector<int> ScientistService::searchScientists(string& searchData)
 {
     vector<int> foundScientists;
 
+    transform(searchData.begin(), searchData.end(), searchData.begin(), ::tolower);
+
     for(unsigned long i = 0; i < _scientists.size(); i++)
     {
         string name = _scientists[i].getName();
+        transform(name.begin(), name.end(), name.begin(), ::tolower);
         if(name.substr(0,searchData.size()) == searchData)
         {
             //If we find the scientist then we...
@@ -82,7 +83,7 @@ vector<int> ScientistService::searchScientists(string& searchData)
     }
     return foundScientists; //remeber to change
 }
-// adds an registered scientist to vector
+
 void ScientistService::addScientist(Scientist scientist)
 {
     bool isin = ifExist(scientist.getName());
@@ -93,17 +94,17 @@ void ScientistService::addScientist(Scientist scientist)
          _data.writeNewScientist(scientist);
     }
 }
-//get functions
+
 Scientist ScientistService::getScientist(int index) const
 {
     return _scientists[index];
 }
-//get vector size
+
 int ScientistService::getSize() const
 {
     return _scientists.size();
 }
-//validation - registering a scientist that is already registered is not allowed
+
 bool ScientistService::ifExist(string name)
 {
    for (size_t i = 0; i < _scientists.size(); i++)
@@ -115,19 +116,19 @@ bool ScientistService::ifExist(string name)
    }
    return false;
 }
-//get scientist vector
+
 vector<Scientist> ScientistService::getScientistVector()
 {
     return _scientists;
 }
-//loads from file to vector
+
 bool ScientistService::load()
 {
     _data.getData(_scientists);
 
     return DataAccessWorks();
 }
-//validates if DataAccess works
+
 bool ScientistService::DataAccessWorks()
 {
     if (_data.DataOk && _data.FileOpen)
@@ -137,7 +138,7 @@ bool ScientistService::DataAccessWorks()
 
     return false;
 }
-//user can change characteristic of scientist
+
 void ScientistService::editScientist(int index, string change, string input)
 {
     if (change == "name")
@@ -157,10 +158,9 @@ void ScientistService::editScientist(int index, string change, string input)
         _scientists[index].setYearOfDeath(stoi(input, 0));
     }
 }
-//user can delete scientist
+
 void ScientistService::deleteScientist(int index)
 {
     _scientists.erase(_scientists.begin()+index);
     _data.writeData(_scientists);
 }
-
