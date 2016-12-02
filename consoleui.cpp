@@ -248,7 +248,7 @@ void ConsoleUI::displayListOfScientist()
     cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 
-    for (size_t i = 0; i < _service.getSize() - 1; i++)
+    for (size_t i = 0; i < _service.getSize(); i++)
     {
         cout.fill('0');
         cout.width(2);
