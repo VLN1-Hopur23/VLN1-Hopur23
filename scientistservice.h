@@ -16,6 +16,10 @@ public:
 
     ScientistService();
 
+    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
+
+    vector<int> searchScientists(string& searchData);
+
     void addScientist(Scientist scientist);
 
     Scientist getScientist(int index) const;
@@ -24,17 +28,11 @@ public:
 
     bool ifExist(string name);
 
-    vector<int> searchScientists(string& searchData);
-
-    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
-
     vector<Scientist> getScientistVector();
 
-    bool DataAccessWorks();
-
-    void save();
-
     bool load();
+
+    bool DataAccessWorks();
 
     void editScientist(int index, string change, string input);
 

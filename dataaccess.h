@@ -14,8 +14,6 @@ public:
 
     DataAccess();
 
-   // Scientist getData();
-
     void getData(vector<Scientist>& scientists);
 
     void writeNewScientist(Scientist scientist);

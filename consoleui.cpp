@@ -3,11 +3,11 @@
 using namespace std;
 
 // Presentation layer
-
+//constructor
 ConsoleUI::ConsoleUI()
 {
 }
-
+//runs the whole program
 void ConsoleUI::run()
 {
     string command;
@@ -67,7 +67,7 @@ void ConsoleUI::run()
         cout << "Error with opening file" << endl;
     }
 }
-
+//direction for edit scientist
 void ConsoleUI::Edit()
 {
     // To Do edit functionality
@@ -85,7 +85,7 @@ void ConsoleUI::Edit()
     //What do you want to change about this scientist
     _service.editScientist(index, change, input);
 }
-
+//direction to delete scientist
 void ConsoleUI::Delete()
 {
     int index;
@@ -118,7 +118,7 @@ void ConsoleUI::Delete()
         cout << endl;
     }
 }
-
+//direction to search for scientist
 void ConsoleUI::Search()
 {
     string searchData;
@@ -155,7 +155,7 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
-
+//direction to sort list
 void ConsoleUI::List()
 {
     string sort;
@@ -179,7 +179,7 @@ void ConsoleUI::List()
         displayListOfScientist();
     }
 }
-
+//direction to register scientist
 void ConsoleUI::Register()
 {
     string name;
@@ -238,7 +238,7 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
-
+//dislpays list of scientist
 void ConsoleUI::displayListOfScientist()
 {
     //vector<Scientist> _scientists = _service.getScientistVector();
