@@ -26,9 +26,13 @@ private:
 
     void displayListOfScientist();
 
-    void Register();
+    void registerScientist();
 
-    void List();
+    void registerComputer();
+
+    void listScientists();
+
+    void listComputers();
 
     void Search();
 

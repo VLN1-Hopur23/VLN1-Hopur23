@@ -22,8 +22,8 @@ void ConsoleUI::run()
             cout << endl;
             cout << "Choose a command:\n";
             cout << endl;
-            cout << "register\t- Register a known character from computer science\n";
-            cout << "list\t\t- Display the list of computer scientists\n";
+            cout << "register\t- Register a known character or computer from computer science\n";
+            cout << "list\t\t- Display the list of computer scientists or computers\n";
             cout << "search\t\t- Search\n";
             cout << "edit\t\t- Edit computer scientist\n";
             cout << "delete\t\t- Delete computer scientist\n";
@@ -36,39 +36,44 @@ void ConsoleUI::run()
             // Frequent users could use one lower case letter for shortcut
             if (command == "list" || command == "List" || command == "l")
             {
-                string select;
+                string lOption;
+                cout << "Do you want to display the list of scientists or computers?" << endl;
+                cin >> lOption;
 
-                cout << "Select a table to list:\n";
-                cout << endl;
-                cout << "01. Scientists\n";
-                cout << "02. Computers\n";
-                cout << endl;
-                cout << "Choose: ";
-                cin >> select;
-
-                if (select == "1" || select == "Scientists" || select == "scientists")
+                if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S")
                 {
-                    displayListOfScientist();
+                    listScientists();
                 }
-
-                //TODO:
-                /*
-                else if (select == "2" || select == "Computers" || select == "computers")
+                else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C")
                 {
-                    displayListOfComputer();
+                    // TODO: with SQL
+                    // listComputers();
                 }
-                */
-
-
-                // List();
+                else
+                {
+                    cout << "Please choose one of the given options!\n";
+                }
             }
             else if (command == "register" || command == "Register" || command == "r")
             {
-                // Register();
+                string rOption;
+                cout << "Do you want to register a scientist or computer?" << endl;
+                cin >> rOption;
+
+                if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
+                {
+                    // TODO: with SQL
+                    // registerScientist();
+                }
+                else
+                {
+                    // TODO: with SQL
+                    // registerComputer();
+                }
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
-                Search();
+              //  Search();
             }
             else if (command == "edit" || command == "Edit" || command == "e")
             {
@@ -163,6 +168,7 @@ void ConsoleUI::Delete()
 }
 */
 
+/*
 void ConsoleUI::Search()
 {
     string searchData;
@@ -202,10 +208,11 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
+*/
 
 /*
-void ConsoleUI::List()
-{    
+void ConsoleUI::listScientists()
+{
     string sort;
 
     while(sort != "return" && sort!= "Return" && sort != "r")
@@ -227,12 +234,32 @@ void ConsoleUI::List()
 
         displayListOfScientist();
     }
-
 }
 */
 
 /*
-void ConsoleUI::Register()
+void ConsoleUI::listComputers()
+{
+    string cSort;
+
+    while(cSort != "return" && cSort != "Return" && cSort != "r")
+    {
+        cout << endl;
+        cout << "Write the option how you want your list sorted\n";
+        cout << endl;
+        cout << "Name\t\t- Sort by the name\n";
+        cout << "Built\t\t- Sort by the year computers were built\n";
+        cout << "Type\t\t- Sort by type\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+
+        cin >> cSort;
+    }
+}
+*/
+
+/*
+void ConsoleUI::registerScientist()
 {
     string name;
     string gender;
@@ -293,7 +320,30 @@ void ConsoleUI::Register()
 }
 */
 
-void ConsoleUI::displayListOfScientist()
+/*
+void ConsoleUI::registerComputer()
+{
+    string computerName;
+    int computerBuildYear;
+    string computerType;
+
+    cout << "Enter the name of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerName);
+
+    cout << "Enter the year the computer was built: " << endl;
+    cin >> computerBuildYear;
+
+    cout << "Enter the type of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerType);
+
+    cout << "Computer added!" << endl;
+    cout << endl;
+}
+*/
+
+void ConsoleUI::listScientists()
 {
     printFrame();
     printHeader();
