@@ -177,6 +177,7 @@ void ConsoleUI::Search()
 
 void ConsoleUI::List()
 {
+
     string sort;
 
     while(sort != "return" && sort!= "Return" && sort != "r")

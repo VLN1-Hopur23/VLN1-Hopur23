@@ -6,6 +6,9 @@
 #include "scientist.h"
 #include <localtime.h>
 
+#include <QCoreApplication>
+#include <QtSql>
+
 using namespace std;
 
 class DataAccess
@@ -14,6 +17,8 @@ class DataAccess
 public:
 
     DataAccess();
+
+    vector<Scientist> getScientist();
 
     void getData(vector<Scientist>& scientists);
 
@@ -30,6 +35,10 @@ private:
     LocalTime _time;
 
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
+
+    QString dbName = "VLN1-Hopur23.sqlite";
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 };
 
 #endif // DATAACCESS_H
