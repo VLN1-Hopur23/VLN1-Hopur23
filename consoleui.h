@@ -30,7 +30,9 @@ private:
 
     void registerComputer();
 
-    void List();
+    void listScientists();
+
+    void listComputers();
 
     void Search();
 

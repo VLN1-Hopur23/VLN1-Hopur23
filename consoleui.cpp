@@ -22,9 +22,8 @@ void ConsoleUI::run()
             cout << endl;
             cout << "Choose a command:\n";
             cout << endl;
-            cout << "register\t- Register a known character from computer science\n";
-
-            cout << "list\t\t- Display the list of computer scientists\n";
+            cout << "register\t- Register a known character or computer from computer science\n";
+            cout << "list\t\t- Display the list of computer scientists or computers\n";
             cout << "search\t\t- Search\n";
             cout << "edit\t\t- Edit computer scientist\n";
             cout << "delete\t\t- Delete computer scientist\n";
@@ -37,15 +36,30 @@ void ConsoleUI::run()
             // Frequent users could use one lower case letter for shortcut
             if (command == "list" || command == "List" || command == "l")
             {
-                List();
+                string lOption;
+                cout << "Do you want to display the list of scientists or computers?" << endl;
+                cin >> lOption;
+
+                if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S")
+                {
+                    listScientists();
+                }
+                else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C")
+                {
+                    listComputers();
+                }
+                else
+                {
+                    cout << "Please choose one of the given options!\n";
+                }
             }
             else if (command == "register" || command == "Register" || command == "r")
             {
-                string option;
-                cout << "Do you want to register computer or scientist?" << endl;
-                cin >> option;
+                string rOption;
+                cout << "Do you want to register a scientist or computer?" << endl;
+                cin >> rOption;
 
-                if (option == "Scientist" || option == "scientist")
+                if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
                 {
                     registerScientist();
                 }
@@ -187,7 +201,7 @@ void ConsoleUI::Search()
     cout << endl;
 }
 
-void ConsoleUI::List()
+void ConsoleUI::listScientists()
 {
     string sort;
 
@@ -209,6 +223,25 @@ void ConsoleUI::List()
         _AllScientist = SortVector( _AllScientist, sort);
 
         displayListOfScientist();
+    }
+}
+
+void ConsoleUI::listComputers()
+{
+    string cSort;
+
+    while(cSort != "return" && cSort != "Return" && cSort != "r")
+    {
+        cout << endl;
+        cout << "Write the option how you want your list sorted\n";
+        cout << endl;
+        cout << "Name\t\t- Sort by the name\n";
+        cout << "Built\t\t- Sort by the year computers were built\n";
+        cout << "Type\t\t- Sort by type\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+
+        cin >> cSort;
     }
 }
 
@@ -271,6 +304,7 @@ void ConsoleUI::registerScientist()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
+
 void ConsoleUI::registerComputer()
 {
     string computerName;
@@ -291,7 +325,6 @@ void ConsoleUI::registerComputer()
     cout << "Computer added!" << endl;
     cout << endl;
 }
-
 
 void ConsoleUI::displayListOfScientist()
 {
