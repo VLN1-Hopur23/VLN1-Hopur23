@@ -22,7 +22,7 @@ public:
 
     void addScientist(Scientist scientist);
 
-    Scientist getScientist(int index) const;
+    Scientist getScientist(int index);
 
     int getSize() const;
 

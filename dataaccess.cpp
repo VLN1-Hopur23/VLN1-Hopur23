@@ -1,9 +1,36 @@
 #include "dataaccess.h"
 
 using namespace std;
+
 // constructor
 DataAccess::DataAccess()
 {
+}
+
+vector<Scientist> DataAccess::getScientist()
+{
+    vector<Scientist> scientists;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Scientists");
+
+    while (query.next())
+    {
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+
+        int yearOfBirth = query.value("BirthYear").toUInt();
+        int yearOfDeath = query.value("DeathYear").toUInt();
+
+        Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+
+        scientists.push_back(scientist);
+    }
+
+    return scientists;
 
 }
 
@@ -42,9 +69,9 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
-            else
+            //else
             {
-                DataOk = false;
+                //DataOk = false;
             }
         }
     }

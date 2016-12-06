@@ -8,6 +8,7 @@ ScientistService::ScientistService()
 {
 }
 
+
 //operator instrument that compares names in alphabetical order
 struct ScientistComparisonNameForward
 {
@@ -89,8 +90,9 @@ void ScientistService::addScientist(Scientist scientist)
     }
 }
 
-Scientist ScientistService::getScientist(int index) const
+Scientist ScientistService::getScientist(int index)
 {
+    _scientists = _data.getScientist();
     return _scientists[index];
 }
 

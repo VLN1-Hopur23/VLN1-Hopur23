@@ -1,4 +1,4 @@
-//#include <QCoreApplication> // thurfum ekki
+//#include <QCoreApplication>
 #include <iostream>
 #include "consoleui.h"
 #include "scientistservice.h"

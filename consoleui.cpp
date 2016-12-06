@@ -203,6 +203,7 @@ void ConsoleUI::Search()
 
 void ConsoleUI::listScientists()
 {
+
     string sort;
 
     while(sort != "return" && sort!= "Return" && sort != "r")
