@@ -23,6 +23,7 @@ void ConsoleUI::run()
             cout << "Choose a command:\n";
             cout << endl;
             cout << "register\t- Register a known character from computer science\n";
+
             cout << "list\t\t- Display the list of computer scientists\n";
             cout << "search\t\t- Search\n";
             cout << "edit\t\t- Edit computer scientist\n";
@@ -40,7 +41,18 @@ void ConsoleUI::run()
             }
             else if (command == "register" || command == "Register" || command == "r")
             {
-                Register();
+                string option;
+                cout << "Do you want to register computer or scientist?" << endl;
+                cin >> option;
+
+                if (option == "Scientist" || option == "scientist")
+                {
+                    registerScientist();
+                }
+                else
+                {
+                    registerComputer();
+                }
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
@@ -200,7 +212,7 @@ void ConsoleUI::List()
     }
 }
 
-void ConsoleUI::Register()
+void ConsoleUI::registerScientist()
 {
     string name;
     string gender;
@@ -259,6 +271,27 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
+void ConsoleUI::registerComputer()
+{
+    string computerName;
+    int computerBuildYear;
+    string computerType;
+
+    cout << "Enter the name of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerName);
+
+    cout << "Enter the year the computer was built: " << endl;
+    cin >> computerBuildYear;
+
+    cout << "Enter the type of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerType);
+
+    cout << "Computer added!" << endl;
+    cout << endl;
+}
+
 
 void ConsoleUI::displayListOfScientist()
 {
