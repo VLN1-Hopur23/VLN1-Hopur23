@@ -6,6 +6,7 @@ using namespace std;
 
 ScientistService::ScientistService()
 {
+    _scientists = _data.getScientists();
 }
 
 
@@ -79,6 +80,7 @@ vector<int> ScientistService::searchScientists(string& searchData)
     return foundScientists;
 }
 
+/*
 void ScientistService::addScientist(Scientist scientist)
 {
     bool isin = ifExist(scientist.getName());
@@ -89,10 +91,10 @@ void ScientistService::addScientist(Scientist scientist)
          _data.writeNewScientist(scientist);
     }
 }
+*/
 
 Scientist ScientistService::getScientist(int index)
 {
-    _scientists = _data.getScientist();
     return _scientists[index];
 }
 
@@ -118,13 +120,16 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
+/*
 bool ScientistService::load()
 {
     _data.getData(_scientists);
 
     return DataAccessWorks();
 }
+*/
 
+/*
 bool ScientistService::DataAccessWorks()
 {
     if (_data.DataOk && _data.FileOpen)
@@ -134,7 +139,9 @@ bool ScientistService::DataAccessWorks()
 
     return false;
 }
+*/
 
+/*
 string ScientistService::editScientist(int index, string change, string input)
 {
     string message = "Invalid, ignored";
@@ -164,9 +171,12 @@ string ScientistService::editScientist(int index, string change, string input)
     _data.writeData(_scientists);
     return message;
 }
+*/
 
+/*
 void ScientistService::deleteScientist(int index)
 {
     _scientists.erase(_scientists.begin()+index);
     _data.writeData(_scientists);
 }
+*/

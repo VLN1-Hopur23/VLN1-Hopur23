@@ -13,9 +13,9 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    bool openFileWorks= _service.load();
+    // bool openFileWorks= _service.load();
 
-    if (openFileWorks)
+    // if (openFileWorks)
     {
         while(loop == true)
         {
@@ -36,11 +36,35 @@ void ConsoleUI::run()
             // Frequent users could use one lower case letter for shortcut
             if (command == "list" || command == "List" || command == "l")
             {
-                List();
+                string select;
+
+                cout << "Select a table to list:\n";
+                cout << endl;
+                cout << "01. Scientists\n";
+                cout << "02. Computers\n";
+                cout << endl;
+                cout << "Choose: ";
+                cin >> select;
+
+                if (select == "1" || select == "Scientists" || select == "scientists")
+                {
+                    displayListOfScientist();
+                }
+
+                //TODO:
+                /*
+                else if (select == "2" || select == "Computers" || select == "computers")
+                {
+                    displayListOfComputer();
+                }
+                */
+
+
+                // List();
             }
             else if (command == "register" || command == "Register" || command == "r")
             {
-                Register();
+                // Register();
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
@@ -48,11 +72,11 @@ void ConsoleUI::run()
             }
             else if (command == "edit" || command == "Edit" || command == "e")
             {
-                Edit();
+               // Edit();
             }
             else if (command == "delete" || command == "Delete" || command == "d")
             {
-                Delete();
+                // Delete();
             }
             else if (command == "quit" || command == "Quit" || command == "q")
             {
@@ -64,12 +88,13 @@ void ConsoleUI::run()
             }
         }
     }
-    else
+    //else
     {
-        cout << "Error with opening file" << endl;
+      //  cout << "Error with opening file" << endl;
     }
 }
 
+/*
 void ConsoleUI::Edit()
 {
     cout << "Edit registered computer scientist character" << endl;
@@ -104,7 +129,9 @@ void ConsoleUI::Edit()
     cout << message << endl;
     cout << endl;
 }
+*/
 
+/*
 void ConsoleUI::Delete()
 {
     int index;
@@ -134,6 +161,7 @@ void ConsoleUI::Delete()
         cout << endl;
     }
 }
+*/
 
 void ConsoleUI::Search()
 {
@@ -175,9 +203,9 @@ void ConsoleUI::Search()
     cout << endl;
 }
 
+/*
 void ConsoleUI::List()
-{
-
+{    
     string sort;
 
     while(sort != "return" && sort!= "Return" && sort != "r")
@@ -199,8 +227,11 @@ void ConsoleUI::List()
 
         displayListOfScientist();
     }
-}
 
+}
+*/
+
+/*
 void ConsoleUI::Register()
 {
     string name;
@@ -260,6 +291,7 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
+*/
 
 void ConsoleUI::displayListOfScientist()
 {
@@ -285,6 +317,7 @@ void ConsoleUI::displayListOfScientist()
         cout << left << _service.getScientist(i).getAge();
         cout << endl;
     }
+
     printFrame();
 }
 
