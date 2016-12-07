@@ -39,6 +39,7 @@ void ConsoleUI::run()
                 string lOption;
                 cout << "Do you want to display the list of scientists or computers?" << endl;
                 cin >> lOption;
+                cout << endl;
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S")
                 {
@@ -58,18 +59,26 @@ void ConsoleUI::run()
                 string rOption;
                 cout << "Do you want to register a scientist or computer?" << endl;
                 cin >> rOption;
+                cout << endl;
 
                 if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
                 {
                     registerScientist();
                 }
-                else
+                else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C")
                 {
                     registerComputer();
+                }
+                else
+                {
+                    cout << "Please choose one of the given options!\n";
                 }
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
+                string sOption;
+
+
                 Search();
             }
             else if (command == "edit" || command == "Edit" || command == "e")
