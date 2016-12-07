@@ -306,7 +306,6 @@ void ConsoleUI::searchScientists()
     cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
     cin >> searchData;
 
-
     cout << endl;
 }
 
@@ -378,11 +377,17 @@ void ConsoleUI::registerScientist()
     string name;
     string gender;
     int yearOfBirth;
-//  int yearOfDeath;
+    int yearOfDeath;
 
     cout << "Enter the name of the person:" << endl;
-    cin.ignore();
-    getline(cin,name);
+    cin >> name;
+
+    while (name.empty())
+    {
+        cout << "Enter the name of the person:" << endl;
+        cin.clear();
+        cin >> name;
+    }
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
@@ -396,7 +401,7 @@ void ConsoleUI::registerScientist()
 
     cout << "Enter year of birth:" << endl;
     cin >> yearOfBirth;
-/*    while (cin.fail())
+    while (cin.fail())
     {
         cout << "ERROR!! Please enter a valid option!\n";
         cin.clear();
@@ -427,11 +432,9 @@ void ConsoleUI::registerScientist()
     }
 
     Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
-    _service.addScientist(scientist);
-*/
-    cout << "Scientist added!" << endl;
+    string message = _service.addScientist(scientist);
     cout << endl;
-
+    cout << message << endl;
 }
 
 void ConsoleUI::registerComputer()
@@ -486,7 +489,7 @@ void ConsoleUI::displayComputers()
 void ConsoleUI::displayScientists()
 {
     printFrame();
-    printHeader();
+    printScientistHeader();
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
@@ -519,7 +522,7 @@ void ConsoleUI::printFrame()
     cout.fill(' ');
 }
 
-void ConsoleUI::printHeader()
+void ConsoleUI::printScientistHeader()
 {
     cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
