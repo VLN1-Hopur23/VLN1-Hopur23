@@ -18,6 +18,8 @@ public:
 
     ScientistService();
 
+    void retrieveScientists();
+
     vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
     vector<int> searchScientists(string& searchData);

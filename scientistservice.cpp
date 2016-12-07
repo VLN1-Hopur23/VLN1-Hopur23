@@ -6,9 +6,7 @@ using namespace std;
 
 ScientistService::ScientistService()
 {
-    _scientists = _data.getScientists();
 }
-
 
 //operator instrument that compares names in alphabetical order
 struct ScientistComparisonNameForward
@@ -118,6 +116,12 @@ bool ScientistService::ifExist(string name)
 vector<Scientist> ScientistService::getScientistVector()
 {
     return _scientists;
+}
+
+// Fetches table of scientists from SQL database
+void ScientistService::retrieveScientists()
+{
+    _scientists = _data.getScientists();
 }
 
 /*

@@ -43,7 +43,8 @@ void ConsoleUI::run()
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S")
                 {
-                    listScientists();
+                    _service.retrieveScientists();
+                    displayScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C")
                 {
@@ -398,7 +399,7 @@ void ConsoleUI::registerComputer()
 }
 */
 
-void ConsoleUI::listScientists()
+void ConsoleUI::displayScientists()
 {
     printFrame();
     printHeader();
