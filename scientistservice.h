@@ -5,6 +5,7 @@
 //#include "dataaccess.h"
 #include "dbmanager.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 

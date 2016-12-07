@@ -3,7 +3,11 @@
 
 #include <QSqlDatabase>
 #include <QtSql>
+#include <QSqlRecord>
+#include <QSqlError>
+#include <QSqlQuery>
 #include <QDebug>
+#include <QVariant>
 #include <vector>
 #include "scientist.h"
 
@@ -15,6 +19,8 @@ public:
     DbManager();
 
     vector<Scientist> getScientists();
+
+    string addScientist(const Scientist& scientist);
 
 private:
     QSqlDatabase db;
