@@ -98,7 +98,9 @@ vector<Scientist> ScientistService::getScientistVector()
 // Fetches table of scientists from SQL database
 void ScientistService::retrieveScientists()
 {
-    _scientists = _data.getScientists();
+    QString name = QString::fromStdString("Name");
+    QString filter = QString::fromStdString("DESC");
+    _scientists = _data.getScientists(name, filter);
 }
 
 /*

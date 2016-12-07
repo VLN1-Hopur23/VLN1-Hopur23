@@ -7,7 +7,7 @@ DataAccess::DataAccess()
 {
 
 }
-
+/*
 // Reads scientist from file to vector
 void DataAccess::getData(vector<Scientist>& scientists)
 {
@@ -39,7 +39,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
 
             if(checkValidationOfData(name, gender, yearOfBirth, yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
             {
-                Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
+                Scientist person(scientistID, name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
             //else
@@ -138,3 +138,4 @@ void DataAccess::writeData(const vector<Scientist>& scientists)
     }
     file.close();
 }
+*/

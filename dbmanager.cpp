@@ -11,34 +11,45 @@ DbManager::DbManager()
     // Validates the connection
     if (!db.open())
     {
-        qDebug() << "Error: connection with database fail"; // MÁ EKKI VERA HÉR EÐA HVAÐ????????????????
+        qDebug() << "Error: connection with database fail"; // MÁ EKKI VERA HÉR EÐA HVAÐ???????????????? ju thetta aetti ad vera i lagi
     }
     else
     {
-        qDebug() << "Database: connection ok";              // MÁ EKKI VERA HÉR EÐA HVAÐ????????????????
+        qDebug() << "Database: connection ok";              // MÁ EKKI VERA HÉR EÐA HVAÐ???????????????? thetta lika
     }
 }
 
-// Gets scientist and his information from database and reads into Scientist vector
-vector<Scientist> DbManager::getScientists()
+// Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+vector<Scientist> DbManager::getScientists(QString order, QString filter)
 {
     vector<Scientist> scientists;
+    order = QString::fromStdString("Name");
+    filter = QString::fromStdString("DESC");
+
+    order = "Name";
+    filter = "DESC";
 
     db.open();
 
-    QSqlQuery query(db);
+    QSqlQuery querySort(db);
+    /*
+    querySort.prepare("SELECT * FROM Scientists ORDER BY order = :order, filter = :filter)");
+    querySort.bindValue(":order", order);
+    querySort.bindValue(":filter", filter);
+    */
+    querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
+    querySort.exec();
 
-    query.exec("SELECT * FROM Scientists");
-
-    while (query.next())
+    while (querySort.next())
     {
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
+        int scientistID = querySort.value("ScientistID").toUInt();
+        string name = querySort.value("Name").toString().toStdString();
+        string gender = querySort.value("Gender").toString().toStdString();
 
-        int yearOfBirth = query.value("Birthyear").toUInt();
-        int yearOfDeath = query.value("Deathyear").toUInt();
+        int yearOfBirth = querySort.value("Birthyear").toUInt();
+        int yearOfDeath = querySort.value("Deathyear").toUInt();
 
-        Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
         scientists.push_back(scientist);
     }
@@ -83,15 +94,17 @@ vector<Computer> DbManager::getComputers()
 
     while (query.next())
     {
+        int computerID = query.value("ComputerID").toUInt();
+
         string name = query.value("Name").toString().toStdString();
 
-        int Yearbuilt = query.value("Yearbuilt").toUInt();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
 
         string type = query.value("Type").toString().toStdString();
 
         bool built = query.value("Built").toBool();
 
-        Computer computer(name, Yearbuilt, type, built);
+        Computer computer(computerID, name, yearBuilt, type, built);
 
         computers.push_back(computer);
     }

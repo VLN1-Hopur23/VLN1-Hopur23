@@ -1,5 +1,4 @@
 #include "computerservice.h"
-#include <algorithm>
 
 using namespace std;
 

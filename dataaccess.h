@@ -17,7 +17,7 @@ class DataAccess
 public:
 
     DataAccess();
-
+/*
     void getData(vector<Scientist>& scientists);
 
     void writeNewScientist(Scientist scientist);
@@ -26,7 +26,7 @@ public:
 
     bool DataOk = true;
 
-    bool FileOpen = true;
+    bool FileOpen = true;*/
 
 private:
 
