@@ -494,7 +494,7 @@ void ConsoleUI::displayComputers()
 void ConsoleUI::displayScientists()
 {
     printFrame();
-    printHeader();
+    printScientistHeader();
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
@@ -527,7 +527,7 @@ void ConsoleUI::printFrame()
     cout.fill(' ');
 }
 
-void ConsoleUI::printHeader()
+void ConsoleUI::printScientistHeader()
 {
     cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
