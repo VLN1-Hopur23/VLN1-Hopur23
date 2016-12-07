@@ -72,7 +72,7 @@ void ConsoleUI::run()
                 if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
                 {
                     // TODO: with SQL
-                    // registerScientist();
+                    registerScientist();
                 }
                 else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C")
                 {
@@ -345,7 +345,6 @@ void ConsoleUI::listComputers()
 }
 */
 
-/*
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -405,7 +404,6 @@ void ConsoleUI::registerScientist()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
-*/
 
 /*
 void ConsoleUI::registerComputer()

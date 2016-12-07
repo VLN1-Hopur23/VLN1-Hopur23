@@ -76,18 +76,15 @@ vector<int> ScientistService::searchScientists(string& searchData)
     return foundScientists;
 }
 
-/*
 void ScientistService::addScientist(Scientist scientist)
 {
     bool isin = ifExist(scientist.getName());
 
     if (isin == false)
     {
-         _scientists.push_back(scientist);
-         _data.writeNewScientist(scientist);
+         _data.addScientist(scientist);
     }
 }
-*/
 
 Scientist ScientistService::getScientist(size_t index)
 {
