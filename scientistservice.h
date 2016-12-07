@@ -26,9 +26,9 @@ public:
 
     void addScientist(Scientist scientist);
 
-    Scientist getScientist(int index);
+    Scientist getScientist(size_t index);
 
-    int getSize() const;
+    size_t getSize() const;
 
     bool ifExist(string name);
 

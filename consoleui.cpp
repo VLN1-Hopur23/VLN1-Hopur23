@@ -47,12 +47,18 @@ void ConsoleUI::run()
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
                     _service.retrieveScientists();
-                    displayScientists();
+                    listScientists();
+                  //  displayScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
                     // TODO: with SQL
-                     displayComputers();
+
+                    _computers.retrieveComputers();
+                    listComputers();
+                 //  _computers.retrieveComputers();
+                 //   displayComputers();
+
                 }
                 else
                 {
@@ -328,7 +334,7 @@ void ConsoleUI::searchComputers()
     }
 }
 
-void ConsoleUI::displayScientists()
+void ConsoleUI::listScientists()
 {
     string sort;
 
@@ -354,7 +360,7 @@ void ConsoleUI::displayScientists()
     }
 }
 
-void ConsoleUI::displayComputers()
+void ConsoleUI::listComputers()
 {
     string cSort;
 
@@ -455,7 +461,35 @@ void ConsoleUI::registerComputer()
     cout << endl;
 }
 
-void ConsoleUI::displayListOfScientist()
+void ConsoleUI::displayComputers()
+{
+    printFrame();
+    printComputerHeader();
+
+    //for (size_t i = 0; i < 3; i++) //
+    for(size_t i = 0; i < _computers.getSize(); i++)
+    {
+        cout.fill('0');
+        cout.width(2);
+        cout << right << i << ". ";
+        cout.fill(' ');
+        cout.width(40);
+        cout << left;
+        cout << _computers.getComputer(i).getName();
+        cout << "\t";
+        cout << _computers.getComputer(i).getYearBuilt();
+        cout << "\t";
+        cout << left << _computers.getComputer(i).getType();
+        cout << "\t";
+        cout << left << _computers.getComputer(i).getBuilt();
+        cout << "\t";
+        cout << left;
+        cout << endl;
+    }
+    printFrame();
+}
+
+void ConsoleUI::displayScientists()
 {
     printFrame();
     printHeader();
@@ -495,6 +529,12 @@ void ConsoleUI::printHeader()
 {
     cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
+}
+
+void ConsoleUI::printComputerHeader()
+{
+    cout << "Nr. Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
+    cout <<"\t\t\t\t\t" << endl;
 }
 
 vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)

@@ -5,10 +5,10 @@ Computer::Computer()
 
 }
 
-Computer::Computer(string name, int yearBuilt, string type, bool built)
+Computer::Computer(string name, int Yearbuilt, string type, bool built)
 {
     _name = name;
-    _yearBuilt = yearBuilt;
+    _yearBuilt = Yearbuilt;
     _type = type;
     _built = built;
 }

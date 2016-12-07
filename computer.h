@@ -11,7 +11,7 @@ public:
 
     Computer();
 
-    Computer(string name, int yearBuilt, string type, bool built);
+    Computer(string name, int Yearbuilt, string type, bool built);
 
     string getName() const;
 
