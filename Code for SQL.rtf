@@ -1,0 +1,77 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red53\green53\blue53;}
+{\*\expandedcolortbl;\csgray\c100000;\cssrgb\c27059\c27059\c27059;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16260\viewh14700\viewkind0
+\deftab560
+\pard\pardeftab560\slleading20\partightenfactor0
+
+\f0\fs24 \cf2 Code for SQL manager:\
+\
+--DROP TABLE  IF EXISTS Scientist;\
+/*CREATE TABLE IF NOT EXISTS "Scientists" (\
+    "ScientistID" INTEGER NOT NULL PRIMARY KEY,\
+    "Name" VARCHAR(30) NOT NULL,\
+    "Gender" VARCHAR(4) NOT NULL,\
+    "Birthyear" INTEGER NOT NULL,\
+    "Deathyear" INTEGER\
+);\
+*/\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Alan Turning', 'm',1912, 1954);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Ada Lovelace', 'f',1815, 1852);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('John Von Neuman', 'm', 1903, 1957);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Charles Babbage', 'm', 1791, 1871);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Edsger W Dijkstra', 'm', 1930, 2002);\
+--INSERT INTO Scientists (Name,Gender,Birthyear) VALUES ('Richard Stallman', 'm', 1953);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Blaise Pascal', 'm', 1623,1662);\
+--INSERT INTO Scientists (Name,Gender,Birthyear) VALUES ('Steve Wozniak ', 'm', 1950);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Grace Hopper', 'f', 1906, 1992);\
+--INSERT INTO Scientists (Name,Gender,Birthyear, Deathyear) VALUES ('Anita Borg ', 'f', 1949, 2003);\
+--SELECT * FROM Scientists s;\
+--DROP TABLE  IF EXISTS Computers;\
+/*CREATE TABLE IF NOT EXISTS "Computers" (\
+    "ComputerID" INTEGER NOT NULL PRIMARY KEY,\
+    "Name" VARCHAR(30) NOT NULL,\
+    "Yearbuilt" INTEGER,\
+    "Type" VARCHAR(30),\
+    "Built" BOOL NOT NULL\
+);\
+*/\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Difference Engine', 1831,'Mechanic Calculator' ,0);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Analytical', 1837,'' ,0);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('ENIAC', 1946,'Turing-complete' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('The Atanasoff-Berry Computer(ABC)', 1942,'Electronic Digital' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Curta Calculator', 1930,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Harvard Mark 1', 1944,'Relay-based' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('EDVAC', 1945,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('SSEC', 1948,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('CSIRAC', 1955,'Digital' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('EDSAC', 1950,'Electronic delay storage automatic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('ERA 1101', 1950,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Manchester Mark 1', 1949,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Apple Macintosh', 1984,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Personal Computer(PC)', 1982,'Electronic' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('ACE', 1950,'',1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Manchester SSEM', 1948,'Small-Scale' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Apple I', 1976,'Desktop Computer' ,1);\
+--INSERT INTO Computers (Name,Yearbuilt,Type, Built) VALUES ('Apple II', 1977,'Microcomputer' ,1);\
+--SELECT * FROM Computers c;\
+--SELECT * FROM Scientists s;\
+--PRAGMA foreign_keys = ON;\
+--DROP TABLE  IF EXISTS Computers_Scientists;\
+/*\
+CREATE TABLE IF NOT EXISTS Computers_Scientists(\
+       Computer_ScientistID INTEGER NOT NULL PRIMARY KEY,      \
+       ComputerID INTEGER NOT NULL,\
+       ScientistID INTEGER NOT NULL,    \
+       FOREIGN KEY (ComputerID) REFERENCES Computers(ComputerID),\
+       FOREIGN KEY (ScientistID) REFERENCES Scientists(ScientistID)\
+);\
+*/\
+SELECT * FROM Computers_Scientists;\
+--INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES(15, 1);\
+--INSERT INTO Computers_Scientists  (ComputerID,ScientistID) VALUES(2, 4);\
+--INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES(1, 4);\
+--INSERT INTO Computers_Scientists  (ComputerID,ScientistID) VALUES(17 ,8);\
+--INSERT INTO Computers_Scientists  (ComputerID,ScientistID) VALUES(18 ,8);\
+--INSERT INTO Computers_Scientists  (ComputerID,ScientistID) VALUES(7 ,3);}
