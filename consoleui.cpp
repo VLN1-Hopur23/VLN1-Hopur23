@@ -314,7 +314,8 @@ void ConsoleUI::searchScientists()
 
     printFrame();
 
-*/    cout << endl;
+*/
+    cout << endl;
 }
 
 void ConsoleUI::searchComputers()

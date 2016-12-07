@@ -11,11 +11,11 @@ DbManager::DbManager()
     // Validates the connection
     if (!db.open())
     {
-        qDebug() << "Error: connection with database fail";
+        qDebug() << "Error: connection with database fail"; // MÁ EKKI VERA HÉR EÐA HVAÐ????????????????
     }
     else
     {
-        qDebug() << "Database: connection ok";
+        qDebug() << "Database: connection ok";              // MÁ EKKI VERA HÉR EÐA HVAÐ????????????????
     }
 }
 
