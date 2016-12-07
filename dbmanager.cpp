@@ -42,3 +42,31 @@ vector<Scientist> DbManager::getScientists()
 
     return scientists;
 }
+
+vector<Computer> DbManager::getComputers(){
+
+    vector<Computer> computers;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Computers");
+
+    while (query.next())
+    {
+        string name = query.value("Name").toString().toStdString();
+
+        int yearBuilt = query.value("yearBuilt").toUInt();
+
+        string type = query.value("Type").toString().toStdString();
+
+        bool built = query.value("Built").toBool();
+
+        Computer computer(name, yearBuilt, type, built);
+
+        computers.push_back(computer);
+    }
+
+    return computers;
+}

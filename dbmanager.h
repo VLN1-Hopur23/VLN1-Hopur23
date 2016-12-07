@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <vector>
 #include "scientist.h"
+#include "computer.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ public:
     DbManager();
 
     vector<Scientist> getScientists();
+    vector<Computer> getComputers();
 
 private:
     QSqlDatabase db;

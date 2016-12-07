@@ -3,6 +3,8 @@
 
 #include "scientistservice.h"
 #include "scientist.h"
+#include "computer.h"
+#include "computerservice.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -53,6 +55,7 @@ private:
 private:
 
     ScientistService _service;
+    ComputerService _computers;
 };
 
 #endif // CONSOLEUI_H

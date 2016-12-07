@@ -50,6 +50,8 @@ void ConsoleUI::run()
                 {
                     // TODO: with SQL
                     // listComputers();
+                    _computers.retrieveComputers();
+                    displayComputers();
                 }
                 else
                 {
@@ -398,6 +400,14 @@ void ConsoleUI::registerComputer()
     cout << endl;
 }
 */
+void ConsoleUI::displayComputers(){
+
+    //for (size_t i = 0; i < 3; i++) //
+    for(size_t i = 0; i < _computers.getSize(); i++)
+    {
+        cout << _computers.getComputer(i).getName();
+    }
+}
 
 void ConsoleUI::displayScientists()
 {
