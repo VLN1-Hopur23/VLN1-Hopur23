@@ -24,7 +24,6 @@ HEADERS += \
     consoleui.h \
     scientist.h \
     scientistservice.h \
-    dataaccess.h \
     localtime.h \
     dbmanager.h \
     computer.h \

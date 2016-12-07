@@ -266,7 +266,6 @@ void ConsoleUI::deleteScientist()
 
 void ConsoleUI::searchScientists()
 {
-    string searchName;
     string searchData;
 
     while (searchData != "Return" && searchData != "return" && searchData != "r")
@@ -280,22 +279,42 @@ void ConsoleUI::searchScientists()
 
         cin >> searchData;
 
-        if (searchData == "Name" || searchData == "n" || searchData == "N")
+        if (searchData == "name" || searchData == "n" || searchData== "N")
         {
-            cout << "Please insert the name of the object" << endl;
-            cin >> searchName;
-            searchName = "\%"+searchName+"\%";
+            cout << "Please insert the name of the scientist" << endl;
+            cin >> searchData;
+            searchData = "\%"+searchData+"\%";
 
-            _service.getVectorFoundScientists(searchName);
+            _service.getVectorFoundScientists(searchData);
             displayScientists();
         }
-        if (searchData == "Age" || searchData == "a" || searchData == "A")
+        if (searchData == "age" ||searchData == "a" || searchData == "A")
         {
-            cout << "Please insert the age of the object" << endl;
-            cin >> searchName;
-            searchName = "\%"+searchName+"\%";
+            int age;
+            cout << "Please insert the age of the scientist" << endl;
+            cin >> age;
 
-            _service.getVectorFoundScientists(searchName);
+            age = _scientist.getAge();
+
+            _service.getVectorFoundScientists(searchData);
+            displayScientists();
+        }
+        if (searchData == "birth" || searchData == "b" || searchData == "B")
+        {
+            int birth;
+            cout << "Please insert the year of birth of the scientist" << endl;
+            cin >> birth;
+
+            _service.getVectorFoundScientists(searchData);
+            displayScientists();
+        }
+        if (searchData == "death" || searchData == "d" || searchData == "D")
+        {
+            int death;
+            cout << "Please insert the year of birth of the scientist" << endl;
+            cin >> death;
+
+            _service.getVectorFoundScientists(searchData);
             displayScientists();
         }
 
