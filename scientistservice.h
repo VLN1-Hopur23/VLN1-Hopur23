@@ -25,7 +25,7 @@ public:
 
     vector<int> searchScientists(string& searchData);
 
-    void addScientist(Scientist scientist);
+    string addScientist(Scientist scientist);
 
     Scientist getScientist(size_t index);
 
