@@ -34,7 +34,9 @@ private:
 
     void listComputers();
 
-    void Search();
+    void searchScientists();
+
+    void searchComputers();
 
     void Edit();
 
