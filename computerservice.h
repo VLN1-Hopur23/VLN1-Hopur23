@@ -11,10 +11,10 @@ class ComputerService
 {
 public:
     ComputerService();
-    Computer getComputer(int index);
+    Computer getComputer(size_t index);
     vector<Computer> getComputerVector();
     void retrieveComputers();
-    int getSize() const;
+    size_t getSize() const;
 
 private:
     vector<Computer> _computers;

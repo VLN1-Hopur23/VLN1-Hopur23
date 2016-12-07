@@ -441,7 +441,7 @@ void ConsoleUI::displayComputers()
         cout.width(2);
         cout << right << i << ". ";
         cout.fill(' ');
-        cout.width(25);
+        cout.width(40);
         cout << left;
         cout << _computers.getComputer(i).getName();
         cout << "\t";
@@ -501,7 +501,7 @@ void ConsoleUI::printHeader()
 
 void ConsoleUI::printComputerHeader()
 {
-    cout << "Nr. Computer name\t\tYear Built\tType\tBuilt" << endl;
+    cout << "Nr. Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
     cout <<"\t\t\t\t\t" << endl;
 }
 
