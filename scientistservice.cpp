@@ -58,22 +58,9 @@ bool ScientistComparisonAgeForward (Scientist i, Scientist j)
     return _listOfScientists;
 }
 
-vector<int> ScientistService::searchScientists(string& searchData)
+void ScientistService:: getVectorFoundScientists(string& searchData)
 {
-    vector<int> foundScientists;
-
-    transform(searchData.begin(), searchData.end(), searchData.begin(), ::tolower);
-
-    for(unsigned long i = 0; i < _scientists.size(); i++)
-    {
-        string name = _scientists[i].getName();
-        transform(name.begin(), name.end(), name.begin(), ::tolower);
-        if(name.substr(0,searchData.size()) == searchData)
-        {
-            foundScientists.push_back(i);
-        }
-    }
-    return foundScientists;
+    _scientists = _data.searchScientist(searchData);
 }
 
 void ScientistService::addScientist(Scientist scientist)

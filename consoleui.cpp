@@ -268,6 +268,7 @@ void ConsoleUI::deleteScientist()
 
 void ConsoleUI::searchScientists()
 {
+    string searchName;
     string searchData;
 
     while (searchData != "Return" && searchData != "return" && searchData != "r")
@@ -280,41 +281,33 @@ void ConsoleUI::searchScientists()
         cout << "Return\t\t- Return to main menu\n";
 
         cin >> searchData;
+
+        if (searchData == "Name" || searchData == "n" || searchData == "N")
+        {
+            cout << "Please insert the name of the object" << endl;
+            cin >> searchName;
+            searchName = "\%"+searchName+"\%";
+
+            _service.getVectorFoundScientists(searchName);
+            displayScientists();
+        }
+        if (searchData == "Age" || searchData == "a" || searchData == "A")
+        {
+            cout << "Please insert the age of the object" << endl;
+            cin >> searchName;
+            searchName = "\%"+searchName+"\%";
+
+            _service.getVectorFoundScientists(searchName);
+            displayScientists();
+        }
+
     }
 
-/*  cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
+    cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
     cin >> searchData;
 
-    vector<int> foundScientists = _service.searchScientists(searchData);
 
     cout << endl;
-
-    printFrame();
-    printHeader();
-
-    for (size_t i = 0; i < foundScientists.size(); i++)
-    {
-        cout.fill('0');
-        cout.width(2);
-        cout << right << foundScientists[i] << ". ";
-        cout.fill(' ');
-        cout.width(25);
-        cout << left;
-        cout << _service.getScientist(foundScientists[i]).getName();
-        cout << "\t";
-        cout << _service.getScientist(foundScientists[i]).getGender();
-        cout << "\t";
-        cout << left << _service.getScientist(foundScientists[i]).getYearOfBirth();
-        cout << "\t";
-        cout << left << _service.getScientist(foundScientists[i]).getYearOfDeath();
-        cout << "\t";
-        cout << left << _service.getScientist(foundScientists[i]).getAge();
-        cout << endl;
-    }
-
-    printFrame();
-
-*/    cout << endl;
 }
 
 void ConsoleUI::searchComputers()

@@ -118,6 +118,7 @@ vector<Computer> DbManager::getComputers(){
     return computers;
 }
 //checks if scientist already exist in the database
+/*
 bool DbManager::scientistExists(const string& searchData) const
 {
     bool exists = false;
@@ -128,10 +129,7 @@ bool DbManager::scientistExists(const string& searchData) const
 
     if (checkQuery.exec())
     {
-        if (checkQuery.next())
-        {
-            exists = true;
-        }
+         exists = true;
     }
     else
     {
@@ -140,6 +138,7 @@ bool DbManager::scientistExists(const string& searchData) const
 
     return exists;
 }
+*/
 //checks if computer already exist in the database
 bool DbManager::computerExists(const string& searchData) const
 {
@@ -168,9 +167,8 @@ vector<Scientist> DbManager::searchScientist(string& searchData)
 {
     vector<Scientist> foundScientist;
     QSqlQuery query;
-    if (scientistExists(searchData))
+    //if (scientistExists(searchData))
     {
-
         query.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
         query.bindValue(":Name",QString::fromStdString(searchData));
 
@@ -184,7 +182,7 @@ vector<Scientist> DbManager::searchScientist(string& searchData)
 
         foundScientist.push_back(scientist);
     }
-    else
+    //else
     {
         qDebug() << "This scientist does not exist in this database " << query.lastError();
     }

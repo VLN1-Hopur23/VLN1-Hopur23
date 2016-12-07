@@ -23,7 +23,7 @@ public:
 
     vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
-    vector<int> searchScientists(string& searchData);
+    void getVectorFoundScientists(string& searchData);
 
     void addScientist(Scientist scientist);
 
