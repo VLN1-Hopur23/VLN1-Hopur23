@@ -1,6 +1,4 @@
 #include "scientistservice.h"
-#include <algorithm>
-#include <iostream>
 
 using namespace std;
 
@@ -78,25 +76,22 @@ vector<int> ScientistService::searchScientists(string& searchData)
     return foundScientists;
 }
 
-/*
 void ScientistService::addScientist(Scientist scientist)
 {
     bool isin = ifExist(scientist.getName());
 
     if (isin == false)
     {
-         _scientists.push_back(scientist);
-         _data.writeNewScientist(scientist);
+         _data.addScientist(scientist);
     }
 }
-*/
 
-Scientist ScientistService::getScientist(int index)
+Scientist ScientistService::getScientist(size_t index)
 {
     return _scientists[index];
 }
 
-int ScientistService::getSize() const
+size_t ScientistService::getSize() const
 {
     return _scientists.size();
 }

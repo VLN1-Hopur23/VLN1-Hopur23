@@ -72,7 +72,7 @@ void ConsoleUI::run()
                 if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
                 {
                     // TODO: with SQL
-                    // registerScientist();
+                    registerScientist();
                 }
                 else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C")
                 {
@@ -345,7 +345,6 @@ void ConsoleUI::listComputers()
 }
 */
 
-/*
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -405,7 +404,6 @@ void ConsoleUI::registerScientist()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
-*/
 
 /*
 void ConsoleUI::registerComputer()
@@ -441,7 +439,7 @@ void ConsoleUI::displayComputers()
         cout.width(2);
         cout << right << i << ". ";
         cout.fill(' ');
-        cout.width(25);
+        cout.width(40);
         cout << left;
         cout << _computers.getComputer(i).getName();
         cout << "\t";
@@ -501,7 +499,7 @@ void ConsoleUI::printHeader()
 
 void ConsoleUI::printComputerHeader()
 {
-    cout << "Nr. Computer name\t\tYear Built\tType\tBuilt" << endl;
+    cout << "Nr. Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
     cout <<"\t\t\t\t\t" << endl;
 }
 
