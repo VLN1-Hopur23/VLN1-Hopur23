@@ -26,6 +26,8 @@ private:
 
     void displayListOfScientist();
 
+ //   void displayScientists();
+
     void registerScientist();
 
     void registerComputer();
@@ -42,9 +44,9 @@ private:
 
     void editComputer();
 
-    void Edit();
+    void deleteScientist();
 
-    void Delete();
+    void deleteComputer();
 
     void printFrame();
 
