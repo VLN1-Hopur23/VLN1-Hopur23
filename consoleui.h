@@ -40,6 +40,10 @@ private:
 
     void searchComputers();
 
+    void editScientist();
+
+    void editComputer();
+
     void Edit();
 
     void Delete();

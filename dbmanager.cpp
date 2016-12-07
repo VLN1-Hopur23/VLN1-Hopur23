@@ -39,7 +39,6 @@ vector<Scientist> DbManager::getScientists()
 
         scientists.push_back(scientist);
     }
-
     return scientists;
 }
 
