@@ -1,13 +1,14 @@
 #include "dbmanager.h"
 
 using namespace std;
-//constructor connects to sqlite database
+
+// Constructor connects to sqlite database
 DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("VLN1-Hopur23.sqlite");
 
-    //validates the connection
+    // Validates the connection
     if (!db.open())
     {
         qDebug() << "Error: connection with database fail";
@@ -17,7 +18,8 @@ DbManager::DbManager()
         qDebug() << "Database: connection ok";
     }
 }
-//gets scientist and his information from database and reads into Scientist vector
+
+// Gets scientist and his information from database and reads into Scientist vector
 vector<Scientist> DbManager::getScientists()
 {
     vector<Scientist> scientists;
@@ -67,6 +69,7 @@ string DbManager::addScientist(const Scientist& scientist)
         queryAdd.bindValue(":Gender", QString::fromStdString(scientist.getGender()));
         queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
         queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
+
         if(queryAdd.exec())
         {
             error = false;
@@ -89,9 +92,10 @@ string DbManager::addScientist(const Scientist& scientist)
 
     return message;
 }
-//gets computer and his information from database and reads into Computer vector
-vector<Computer> DbManager::getComputers(){
 
+// Gets computer and his information from database and reads into Computer vector
+vector<Computer> DbManager::getComputers()
+{
     vector<Computer> computers;
 
     db.open();
@@ -114,10 +118,10 @@ vector<Computer> DbManager::getComputers(){
 
         computers.push_back(computer);
     }
-
     return computers;
 }
-//checks if scientist already exist in the database
+
+// Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
 {
     bool exists = false;
@@ -140,7 +144,8 @@ bool DbManager::scientistExists(const string& searchData) const
 
     return exists;
 }
-//checks if computer already exist in the database
+
+// Checks if computer already exist in the database
 bool DbManager::computerExists(const string& searchData) const
 {
     bool exists = false;
@@ -160,17 +165,17 @@ bool DbManager::computerExists(const string& searchData) const
     {
         qDebug() << "Error in computer exists: " << checkQuery.lastError();
     }
-
     return exists;
 }
-//gets the info on Scientist which is searced for
+
+// Gets the info on Scientist which is searced for
 vector<Scientist> DbManager::searchScientist(string& searchData)
 {
     vector<Scientist> foundScientist;
     QSqlQuery query;
+
     if (scientistExists(searchData))
     {
-
         query.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
         query.bindValue(":Name",QString::fromStdString(searchData));
 
@@ -188,17 +193,17 @@ vector<Scientist> DbManager::searchScientist(string& searchData)
     {
         qDebug() << "This scientist does not exist in this database " << query.lastError();
     }
-
     return foundScientist;
 }
-//gets the info on Computer which is searched for
+
+// Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {
     vector<Computer> foundComputer;
     QSqlQuery query;
+
     if(computerExists(searchData))
     {
-
         query.prepare("SELECT Name FROM Computers WHERE (Name) VALUES (:Name)");
         query.bindValue(":Name",QString::fromStdString(searchData));
 
@@ -210,17 +215,13 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
         bool built = query.value("Built").toBool();
 
-       Computer computer(name, Yearbuilt, type, built);
+        Computer computer(name, Yearbuilt, type, built);
 
-       foundComputer.push_back(computer);
-
+        foundComputer.push_back(computer);
     }
     else
     {
         qDebug() << "This computer does not exist in this database " << query.lastError();
     }
-
     return foundComputer;
 }
-
-
