@@ -56,13 +56,13 @@ vector<Computer> DbManager::getComputers(){
     {
         string name = query.value("Name").toString().toStdString();
 
-        int yearBuilt = query.value("yearBuilt").toUInt();
+        int Yearbuilt = query.value("Yearbuilt").toUInt();
 
         string type = query.value("Type").toString().toStdString();
 
         bool built = query.value("Built").toBool();
 
-        Computer computer(name, yearBuilt, type, built);
+        Computer computer(name, Yearbuilt, type, built);
 
         computers.push_back(computer);
     }
