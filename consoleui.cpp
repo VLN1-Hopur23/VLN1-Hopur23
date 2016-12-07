@@ -13,17 +13,17 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    bool openFileWorks= _service.load();
+    // bool openFileWorks= _service.load();
 
-    if (openFileWorks)
+    // if (openFileWorks)
     {
         while(loop == true)
         {
             cout << endl;
             cout << "Choose a command:\n";
             cout << endl;
-            cout << "register\t- Register a known character from computer science\n";
-            cout << "list\t\t- Display the list of computer scientists\n";
+            cout << "register\t- Register a known character or computer from computer science\n";
+            cout << "list\t\t- Display the list of computer scientists or computers\n";
             cout << "search\t\t- Search\n";
             cout << "edit\t\t- Edit computer scientist\n";
             cout << "delete\t\t- Delete computer scientist\n";
@@ -36,23 +36,62 @@ void ConsoleUI::run()
             // Frequent users could use one lower case letter for shortcut
             if (command == "list" || command == "List" || command == "l")
             {
-                List();
+                string lOption;
+                cout << "Do you want to display the list of scientists or computers?" << endl;
+                cin >> lOption;
+                cout << endl;
+
+                if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S")
+                {
+                    listScientists();
+                }
+                else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C")
+                {
+                    // TODO: with SQL
+                    // listComputers();
+                }
+                else
+                {
+                    cout << "Please choose one of the given options!\n";
+                }
             }
             else if (command == "register" || command == "Register" || command == "r")
             {
-                Register();
+                string rOption;
+                cout << "Do you want to register a scientist or computer?" << endl;
+                cin >> rOption;
+                cout << endl;
+
+                if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
+                {
+                    // TODO: with SQL
+                    // registerScientist();
+                }
+                else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C")
+                {
+                    // TODO: with SQL
+                    // registerComputer();
+                }
+                else
+                {
+                    cout << "Please choose one of the given options!\n";
+                }
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
-                Search();
+               // string sOption;
+
+              //  Search();
+
+
             }
             else if (command == "edit" || command == "Edit" || command == "e")
             {
-                Edit();
+               // Edit();
             }
             else if (command == "delete" || command == "Delete" || command == "d")
             {
-                Delete();
+                // Delete();
             }
             else if (command == "quit" || command == "Quit" || command == "q")
             {
@@ -64,12 +103,13 @@ void ConsoleUI::run()
             }
         }
     }
-    else
+    //else
     {
-        cout << "Error with opening file" << endl;
+      //  cout << "Error with opening file" << endl;
     }
 }
 
+/*
 void ConsoleUI::Edit()
 {
     cout << "Edit registered computer scientist character" << endl;
@@ -104,7 +144,9 @@ void ConsoleUI::Edit()
     cout << message << endl;
     cout << endl;
 }
+*/
 
+/*
 void ConsoleUI::Delete()
 {
     int index;
@@ -134,7 +176,9 @@ void ConsoleUI::Delete()
         cout << endl;
     }
 }
+*/
 
+/*
 void ConsoleUI::Search()
 {
     string searchData;
@@ -174,8 +218,10 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
+*/
 
-void ConsoleUI::List()
+/*
+void ConsoleUI::listScientists()
 {
     string sort;
 
@@ -199,8 +245,31 @@ void ConsoleUI::List()
         displayListOfScientist();
     }
 }
+*/
 
-void ConsoleUI::Register()
+/*
+void ConsoleUI::listComputers()
+{
+    string cSort;
+
+    while(cSort != "return" && cSort != "Return" && cSort != "r")
+    {
+        cout << endl;
+        cout << "Write the option how you want your list sorted\n";
+        cout << endl;
+        cout << "Name\t\t- Sort by the name\n";
+        cout << "Built\t\t- Sort by the year computers were built\n";
+        cout << "Type\t\t- Sort by type\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+
+        cin >> cSort;
+    }
+}
+*/
+
+/*
+void ConsoleUI::registerScientist()
 {
     string name;
     string gender;
@@ -259,8 +328,32 @@ void ConsoleUI::Register()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
+*/
 
-void ConsoleUI::displayListOfScientist()
+/*
+void ConsoleUI::registerComputer()
+{
+    string computerName;
+    int computerBuildYear;
+    string computerType;
+
+    cout << "Enter the name of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerName);
+
+    cout << "Enter the year the computer was built: " << endl;
+    cin >> computerBuildYear;
+
+    cout << "Enter the type of the computer: " << endl;
+    cin.ignore();
+    getline(cin,computerType);
+
+    cout << "Computer added!" << endl;
+    cout << endl;
+}
+*/
+
+void ConsoleUI::listScientists()
 {
     printFrame();
     printHeader();
@@ -284,6 +377,7 @@ void ConsoleUI::displayListOfScientist()
         cout << left << _service.getScientist(i).getAge();
         cout << endl;
     }
+
     printFrame();
 }
 

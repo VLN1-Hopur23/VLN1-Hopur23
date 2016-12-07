@@ -1,10 +1,10 @@
 #include "dataaccess.h"
 
 using namespace std;
+
 // constructor
 DataAccess::DataAccess()
 {
-
 }
 
 //reads scientist from file to vector
@@ -42,9 +42,9 @@ void DataAccess::getData(vector<Scientist>& scientists)
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
             }
-            else
+            //else
             {
-                DataOk = false;
+                //DataOk = false;
             }
         }
     }

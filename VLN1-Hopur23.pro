@@ -8,6 +8,7 @@ TARGET = VLN1-Hopur23
 CONFIG += console
 CONFIG -= app_bundle
 
+
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -15,11 +16,15 @@ SOURCES += main.cpp \
     scientist.cpp \
     scientistservice.cpp \
     dataaccess.cpp \
-    localtime.cpp
+    localtime.cpp \
+    dbmanager.cpp \
+    computer.cpp
 
 HEADERS += \
     consoleui.h \
     scientist.h \
     scientistservice.h \
     dataaccess.h \
-    localtime.h
+    localtime.h \
+    dbmanager.h \
+    computer.h
