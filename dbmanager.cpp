@@ -153,18 +153,21 @@ vector<Scientist> DbManager::searchScientist(string& searchData)
 
     if (scientistExists(searchData))
     {
-        query.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
-        query.bindValue(":Name",QString::fromStdString(searchData));
+        while (query.next())
+        {
+            query.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
+            query.bindValue(":Name",QString::fromStdString(searchData));
 
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
+            string name = query.value("Name").toString().toStdString();
+            string gender = query.value("Gender").toString().toStdString();
 
-        int yearOfBirth = query.value("Birthyear").toUInt();
-        int yearOfDeath = query.value("Deathyear").toUInt();
+            int yearOfBirth = query.value("Birthyear").toUInt();
+            int yearOfDeath = query.value("Deathyear").toUInt();
 
-        Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+            Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
 
-        foundScientist.push_back(scientist);
+            foundScientist.push_back(scientist);
+        }
     }
     else
     {

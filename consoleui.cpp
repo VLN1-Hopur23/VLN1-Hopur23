@@ -77,8 +77,6 @@ void ConsoleUI::run()
 
                 if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
                 {
-                    // TODO: with SQL
-
                      registerScientist();
                 }
                 else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
