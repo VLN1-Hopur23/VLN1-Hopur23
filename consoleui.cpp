@@ -353,8 +353,14 @@ void ConsoleUI::registerScientist()
     int yearOfDeath;
 
     cout << "Enter the name of the person:" << endl;
-    cin.ignore();
-    getline(cin,name);
+    cin >> name;
+
+    while (name.empty())
+    {
+        cout << "Enter the name of the person:" << endl;
+        cin.clear();
+        cin >> name;
+    }
 
     cout << "Enter gender (m for male, f for female):" << endl;
     cin >> gender;
@@ -399,10 +405,9 @@ void ConsoleUI::registerScientist()
     }
 
     Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
-    _service.addScientist(scientist);
-
-    cout << "Scientist added!" << endl;
+    string message = _service.addScientist(scientist);
     cout << endl;
+    cout << message << endl;
 }
 
 /*
