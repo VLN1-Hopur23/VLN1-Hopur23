@@ -13,9 +13,9 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    bool openFileWorks= _service.load();
+    // bool openFileWorks= _service.load();
 
-    if (openFileWorks)
+    // if (openFileWorks)
     {
         while(loop == true)
         {
@@ -47,7 +47,8 @@ void ConsoleUI::run()
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C")
                 {
-                    listComputers();
+                    // TODO: with SQL
+                    // listComputers();
                 }
                 else
                 {
@@ -63,11 +64,13 @@ void ConsoleUI::run()
 
                 if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S")
                 {
-                    registerScientist();
+                    // TODO: with SQL
+                    // registerScientist();
                 }
                 else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C")
                 {
-                    registerComputer();
+                    // TODO: with SQL
+                    // registerComputer();
                 }
                 else
                 {
@@ -76,18 +79,19 @@ void ConsoleUI::run()
             }
             else if (command == "search" || command == "Search" || command == "s")
             {
-                string sOption;
+               // string sOption;
+
+              //  Search();
 
 
-                Search();
             }
             else if (command == "edit" || command == "Edit" || command == "e")
             {
-                Edit();
+               // Edit();
             }
             else if (command == "delete" || command == "Delete" || command == "d")
             {
-                Delete();
+                // Delete();
             }
             else if (command == "quit" || command == "Quit" || command == "q")
             {
@@ -99,12 +103,13 @@ void ConsoleUI::run()
             }
         }
     }
-    else
+    //else
     {
-        cout << "Error with opening file" << endl;
+      //  cout << "Error with opening file" << endl;
     }
 }
 
+/*
 void ConsoleUI::Edit()
 {
     cout << "Edit registered computer scientist character" << endl;
@@ -139,7 +144,9 @@ void ConsoleUI::Edit()
     cout << message << endl;
     cout << endl;
 }
+*/
 
+/*
 void ConsoleUI::Delete()
 {
     int index;
@@ -169,7 +176,9 @@ void ConsoleUI::Delete()
         cout << endl;
     }
 }
+*/
 
+/*
 void ConsoleUI::Search()
 {
     string searchData;
@@ -209,10 +218,11 @@ void ConsoleUI::Search()
 
     cout << endl;
 }
+*/
 
+/*
 void ConsoleUI::listScientists()
 {
-
     string sort;
 
     while(sort != "return" && sort!= "Return" && sort != "r")
@@ -235,7 +245,9 @@ void ConsoleUI::listScientists()
         displayListOfScientist();
     }
 }
+*/
 
+/*
 void ConsoleUI::listComputers()
 {
     string cSort;
@@ -254,7 +266,9 @@ void ConsoleUI::listComputers()
         cin >> cSort;
     }
 }
+*/
 
+/*
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -314,7 +328,9 @@ void ConsoleUI::registerScientist()
     cout << "Scientist added!" << endl;
     cout << endl;
 }
+*/
 
+/*
 void ConsoleUI::registerComputer()
 {
     string computerName;
@@ -335,8 +351,9 @@ void ConsoleUI::registerComputer()
     cout << "Computer added!" << endl;
     cout << endl;
 }
+*/
 
-void ConsoleUI::displayListOfScientist()
+void ConsoleUI::listScientists()
 {
     printFrame();
     printHeader();
@@ -360,6 +377,7 @@ void ConsoleUI::displayListOfScientist()
         cout << left << _service.getScientist(i).getAge();
         cout << endl;
     }
+
     printFrame();
 }
 

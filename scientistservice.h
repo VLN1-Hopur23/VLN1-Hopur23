@@ -2,7 +2,8 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
-#include "dataaccess.h"
+//#include "dataaccess.h"
+#include "dbmanager.h"
 #include <vector>
 
 using namespace std;
@@ -10,7 +11,8 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
-    DataAccess _data;
+    //DataAccess _data;
+    DbManager _data;
 
 public:
 

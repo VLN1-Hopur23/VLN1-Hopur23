@@ -16,11 +16,13 @@ SOURCES += main.cpp \
     scientist.cpp \
     scientistservice.cpp \
     dataaccess.cpp \
-    localtime.cpp
+    localtime.cpp \
+    dbmanager.cpp
 
 HEADERS += \
     consoleui.h \
     scientist.h \
     scientistservice.h \
     dataaccess.h \
-    localtime.h
+    localtime.h \
+    dbmanager.h
