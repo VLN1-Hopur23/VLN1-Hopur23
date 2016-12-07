@@ -32,6 +32,10 @@ private:
 
     void registerComputer();
 
+    void listScientists();
+
+    void listComputers();
+
     void displayScientists();
 
     void displayComputers();
@@ -44,13 +48,13 @@ private:
 
     void editComputer();
 
-    void Edit();
+    void deleteScientist();
 
-    void Delete();
+    void deleteComputer();
 
     void printFrame();
 
-    void printHeader();
+    void printScientistHeader();
 
     void printComputerHeader();
 

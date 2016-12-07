@@ -2,7 +2,6 @@
 #define DBMANAGER_H
 
 #include <QtSql>
-#include <QDebug>
 #include <vector>
 #include "scientist.h"
 #include "computer.h"
@@ -17,6 +16,11 @@ public:
 
     vector<Scientist> getScientists(QString order, QString filter);
     vector<Computer> getComputers();
+    string addScientist(const Scientist& scientist);
+    bool scientistExists(const string& searchData) const;
+    bool computerExists(const string& searchData) const;
+    vector<Scientist> searchScientist(string& searchData);
+    vector<Computer> searchComputer(string& searchData);
 
 private:
 

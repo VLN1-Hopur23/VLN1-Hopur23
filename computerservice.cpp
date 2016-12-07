@@ -7,7 +7,7 @@ ComputerService::ComputerService()
 
 }
 
-Computer ComputerService::getComputer(int index)
+Computer ComputerService::getComputer(size_t index)
 {
     return _computers[index];
 }
@@ -23,7 +23,7 @@ void ComputerService::retrieveComputers()
     _computers = data.getComputers();
 }
 
-int ComputerService::getSize() const
+size_t ComputerService::getSize() const
 {
     return _computers.size();
 }

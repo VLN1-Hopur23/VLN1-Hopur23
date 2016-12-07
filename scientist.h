@@ -14,6 +14,8 @@ public:
 
     Scientist(int scientistID, string name, string gender, int yearOfBirth, int yearOfDeath);
 
+    Scientist(string name, string gender, int yearOfBirth, int yearOfDeath);
+
     int getScientistID() const;
 
     string getName() const;

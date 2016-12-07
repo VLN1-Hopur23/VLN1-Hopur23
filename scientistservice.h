@@ -5,6 +5,7 @@
 //#include "dataaccess.h"
 #include "dbmanager.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -24,11 +25,11 @@ public:
 
     vector<int> searchScientists(string& searchData);
 
-    void addScientist(Scientist scientist);
+    string addScientist(Scientist scientist);
 
-    Scientist getScientist(int index);
+    Scientist getScientist(size_t index);
 
-    int getSize() const;
+    size_t getSize() const;
 
     bool ifExist(string name);
 
