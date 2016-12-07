@@ -110,7 +110,6 @@ vector<Computer> DbManager::getComputers()
     }
     return computers;
 }
-
 // Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
 {
@@ -122,10 +121,7 @@ bool DbManager::scientistExists(const string& searchData) const
 
     if (checkQuery.exec())
     {
-        if (checkQuery.next())
-        {
-            exists = true;
-        }
+         exists = true;
     }
     else
     {
@@ -134,7 +130,6 @@ bool DbManager::scientistExists(const string& searchData) const
 
     return exists;
 }
-
 // Checks if computer already exist in the database
 bool DbManager::computerExists(const string& searchData) const
 {
