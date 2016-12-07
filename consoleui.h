@@ -52,6 +52,8 @@ private:
 
     void printHeader();
 
+    void printComputerHeader();
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
     LocalTime _time;
