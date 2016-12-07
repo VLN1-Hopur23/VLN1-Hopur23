@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     scientistservice.cpp \
     dataaccess.cpp \
     localtime.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    computer.cpp
 
 HEADERS += \
     consoleui.h \
@@ -25,4 +26,5 @@ HEADERS += \
     scientistservice.h \
     dataaccess.h \
     localtime.h \
-    dbmanager.h
+    dbmanager.h \
+    computer.h

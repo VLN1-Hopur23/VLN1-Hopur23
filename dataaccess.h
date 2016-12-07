@@ -6,11 +6,14 @@
 #include "scientist.h"
 #include <localtime.h>
 
+#include <QCoreApplication>
+#include <QSqlDatabase>
+#include <QSql>
+
 using namespace std;
 
 class DataAccess
 {
-
 public:
 
     DataAccess();
@@ -30,6 +33,10 @@ private:
     LocalTime _time;
 
     bool checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter);
+
+    QString dbName = "animals_test.sql";
+
+    QSqlDatabase db = QSqlDatabase::addDatabase(dbName);
 
 };
 
