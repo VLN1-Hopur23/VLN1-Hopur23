@@ -43,11 +43,11 @@ int Scientist::getAge() const
     }
     else
     {
-        return _Time.getYearToDay() - _yearOfBirth; // 2016 er notad sem arid i dag
+        return _Time.getYearToDay() - _yearOfBirth; // 2016 is used as the year today
     }
 }
 
-//updates year to the current year of users time
+// Updates year to the current year of users time
 int Scientist::getYearToDay() const
 {
       time_t rawtime;
@@ -56,7 +56,7 @@ int Scientist::getYearToDay() const
       time (&rawtime);
       timeinfo = localtime (&rawtime);
 
-      // get the only the year in integer form from localtime
+      // Get the only the year in integer form from localtime
       string str = asctime(timeinfo);
       int LastSpace = str.find_last_of(" ")+1;
       int StrEnd = str.size();

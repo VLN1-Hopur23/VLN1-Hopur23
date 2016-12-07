@@ -34,7 +34,6 @@ public:
 
     void setYearOfDeath(int yearOfDeath);
 
-
 private:
 
     string _name;

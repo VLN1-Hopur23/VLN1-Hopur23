@@ -2,12 +2,13 @@
 
 using namespace std;
 
-// constructor
+// Constructor
 DataAccess::DataAccess()
 {
+
 }
 
-//reads scientist from file to vector
+// Reads scientist from file to vector
 void DataAccess::getData(vector<Scientist>& scientists)
 {
     ifstream file;
@@ -26,7 +27,6 @@ void DataAccess::getData(vector<Scientist>& scientists)
     {
         while (!file.eof())
         {
-
             delimiter = "";
             getline(file, name);
             getline(file, gender);
@@ -37,7 +37,7 @@ void DataAccess::getData(vector<Scientist>& scientists)
             int yearOfBirthInt = atoi(yearOfBirth.c_str());
             int yearOfDeathInt = atoi(yearOfDeath.c_str());
 
-            if(checkValidationOfData(name, gender, yearOfBirth,yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
+            if(checkValidationOfData(name, gender, yearOfBirth, yearOfBirthInt, yearOfDeath, yearOfDeathInt, delimiter))
             {
                 Scientist person(name, gender, yearOfBirthInt, yearOfDeathInt);
                 scientists.push_back(person);
@@ -53,8 +53,9 @@ void DataAccess::getData(vector<Scientist>& scientists)
         FileOpen = false;
     }
 }
-//validates the scientists characteristic in the file
-bool DataAccess::checkValidationOfData(string name, string gender,string yearOfBirth,int yearOfBirthInt, string yearOfDeath,int yearOfDeathInt, string delimiter)
+
+// Validates the scientists characteristic in the file
+bool DataAccess::checkValidationOfData(string name, string gender, string yearOfBirth, int yearOfBirthInt, string yearOfDeath, int yearOfDeathInt, string delimiter)
 {
     bool nameBool = false;
     bool genderBool = false;
@@ -62,13 +63,13 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     bool yearOfDeathBool = false;
     bool delimiterBool = false;
 
-    gender = gender.substr(0,1); // get onlie one characther ( to skip space)
-    if(name != "" && name !="####")
+    gender = gender.substr(0,1); // Get onlie one characther (to skip space)
+
+    if(name != "" && name != "####")
     {
         nameBool = true;
     }
-
-    if(gender == "m" || gender =="f")
+    if(gender == "m" || gender == "f")
     {
         genderBool = true;
     }
@@ -82,7 +83,7 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
     }
     if(delimiter == "####")
     {
-        delimiterBool =true;
+        delimiterBool = true;
     }
     if(nameBool && genderBool && yearOfBirthBool && yearOfDeathBool && delimiterBool)
     {
@@ -93,7 +94,8 @@ bool DataAccess::checkValidationOfData(string name, string gender,string yearOfB
         return false;
     }
 }
-// writes a new scientist in the file
+
+// Writes a new scientist in the file
 void DataAccess::writeNewScientist(Scientist scientist)
 {
     ofstream file;
@@ -108,16 +110,15 @@ void DataAccess::writeNewScientist(Scientist scientist)
         file << scientist.getYearOfDeath() << endl;
         file << "####\n";
     }
-
     file.close();
 }
-//rewrites file, instrument for delete scientists
+
+// Rewrites file, instrument for delete scientists
 void DataAccess::writeData(const vector<Scientist>& scientists)
 {
     ofstream file;
 
     file.open("computerScientists.txt");
-
 
     if (file)
     {
@@ -135,6 +136,5 @@ void DataAccess::writeData(const vector<Scientist>& scientists)
             index++;
         }
     }
-
     file.close();
 }

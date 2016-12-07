@@ -3,6 +3,8 @@
 
 #include "scientistservice.h"
 #include "scientist.h"
+#include "computer.h"
+#include "computerservice.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -34,7 +36,13 @@ private:
 
     void displayComputers();
 
-    void Search();
+    void searchScientists();
+
+    void searchComputers();
+
+    void editScientist();
+
+    void editComputer();
 
     void Edit();
 
@@ -44,6 +52,8 @@ private:
 
     void printHeader();
 
+    void printComputerHeader();
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
     LocalTime _time;
@@ -51,6 +61,7 @@ private:
 private:
 
     ScientistService _service;
+    ComputerService _computers;
 };
 
 #endif // CONSOLEUI_H

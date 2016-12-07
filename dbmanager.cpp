@@ -39,7 +39,6 @@ vector<Scientist> DbManager::getScientists()
 
         scientists.push_back(scientist);
     }
-
     return scientists;
 }
 
@@ -86,5 +85,34 @@ string DbManager::addScientist(const Scientist& scientist)
         message += "Fields cannot be empty: ";
         message += emptyMessage;
     }
+
     return message;
+}
+
+vector<Computer> DbManager::getComputers(){
+
+    vector<Computer> computers;
+
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Computers");
+
+    while (query.next())
+    {
+        string name = query.value("Name").toString().toStdString();
+
+        int Yearbuilt = query.value("Yearbuilt").toUInt();
+
+        string type = query.value("Type").toString().toStdString();
+
+        bool built = query.value("Built").toBool();
+
+        Computer computer(name, Yearbuilt, type, built);
+
+        computers.push_back(computer);
+    }
+
+    return computers;
 }
