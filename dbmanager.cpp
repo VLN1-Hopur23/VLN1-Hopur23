@@ -42,6 +42,53 @@ vector<Scientist> DbManager::getScientists()
     return scientists;
 }
 
+string DbManager::addScientist(const Scientist& scientist)
+{
+    string message = "";
+    string emptyMessage = "";
+    bool error = false;
+    bool empty = false;
+
+    // Empty validation
+    if (scientist.getName().empty())
+    {
+        message += "Name ";
+    }
+    else if (scientist.getGender().empty())
+    {
+        message += "Gender ";
+    }
+    else
+    {
+        QSqlQuery queryAdd;
+        queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
+        queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
+        queryAdd.bindValue(":Gender", QString::fromStdString(scientist.getGender()));
+        queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
+        queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
+        if(queryAdd.exec())
+        {
+            error = false;
+        }
+        else
+        {
+            error = true;
+        }
+    }
+
+    if (error == true)
+    {
+        message += "Add scientist failed! ";
+    }
+    if (empty == true)
+    {
+        message += "Fields cannot be empty: ";
+        message += emptyMessage;
+    }
+
+    return message;
+}
+
 vector<Computer> DbManager::getComputers(){
 
     vector<Computer> computers;
