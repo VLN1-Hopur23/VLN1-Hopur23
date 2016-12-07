@@ -5,12 +5,18 @@ Computer::Computer()
 
 }
 
-Computer::Computer(string name, int yearBuilt, string type, bool built)
+Computer::Computer(int computerID, string name, int yearBuilt, string type, bool built)
 {
+    _computerID = computerID;
     _name = name;
     _yearBuilt = yearBuilt;
     _type = type;
     _built = built;
+}
+
+int Computer::getComputerID() const
+{
+    return _computerID;
 }
 
 string Computer::getName() const

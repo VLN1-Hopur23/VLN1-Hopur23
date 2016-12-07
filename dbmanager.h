@@ -1,7 +1,6 @@
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
-#include <QSqlDatabase>
 #include <QtSql>
 #include <QDebug>
 #include <vector>
@@ -16,7 +15,7 @@ public:
 
     DbManager();
 
-    vector<Scientist> getScientists();
+    vector<Scientist> getScientists(QString order, QString filter);
     vector<Computer> getComputers();
 
 private:

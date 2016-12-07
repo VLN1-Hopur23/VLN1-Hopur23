@@ -3,6 +3,7 @@
 
 #include "computer.h"
 #include "dbmanager.h"
+#include <algorithm>
 #include <vector>
 
 using namespace std;
@@ -13,7 +14,9 @@ public:
     ComputerService();
     Computer getComputer(int index);
     vector<Computer> getComputerVector();
+    // Fetches table of scientists from SQL database
     void retrieveComputers();
+    // Returns the size of the computer vector
     int getSize() const;
 
 private:

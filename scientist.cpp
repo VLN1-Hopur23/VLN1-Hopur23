@@ -7,12 +7,18 @@ Scientist::Scientist()
 
 }
 
-Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeath)
+Scientist::Scientist(int scientistID, string name, string gender, int yearOfBirth, int yearOfDeath)
 {
     _name = name;
     _gender = gender;
     _yearOfBirth = yearOfBirth;
     _yearOfDeath = yearOfDeath;
+    _scientistID = scientistID;
+}
+
+int Scientist::getScientistID() const
+{
+    return _scientistID;
 }
 
 string Scientist::getName() const

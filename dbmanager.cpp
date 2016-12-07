@@ -16,26 +16,37 @@ DbManager::DbManager()
         qDebug() << "Database: connection ok";
     }
 }
-
-vector<Scientist> DbManager::getScientists()
+// Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+vector<Scientist> DbManager::getScientists(QString order, QString filter)
 {
     vector<Scientist> scientists;
+    order = QString::fromStdString("Name");
+    filter = QString::fromStdString("DESC");
+
+    order = "Name";
+    filter = "DESC";
 
     db.open();
 
-    QSqlQuery query(db);
+    QSqlQuery querySort(db);
+    /*
+    querySort.prepare("SELECT * FROM Scientists ORDER BY order = :order, filter = :filter)");
+    querySort.bindValue(":order", order);
+    querySort.bindValue(":filter", filter);
+    */
+    querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
+    querySort.exec();
 
-    query.exec("SELECT * FROM Scientists");
-
-    while (query.next())
+    while (querySort.next())
     {
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
+        int scientistID = querySort.value("ScientistID").toUInt();
+        string name = querySort.value("Name").toString().toStdString();
+        string gender = querySort.value("Gender").toString().toStdString();
 
-        int yearOfBirth = query.value("Birthyear").toUInt();
-        int yearOfDeath = query.value("Deathyear").toUInt();
+        int yearOfBirth = querySort.value("Birthyear").toUInt();
+        int yearOfDeath = querySort.value("Deathyear").toUInt();
 
-        Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
         scientists.push_back(scientist);
     }
@@ -54,6 +65,8 @@ vector<Computer> DbManager::getComputers(){
 
     while (query.next())
     {
+        int computerID = query.value("ComputerID").toUInt();
+
         string name = query.value("Name").toString().toStdString();
 
         int yearBuilt = query.value("yearBuilt").toUInt();
@@ -62,7 +75,7 @@ vector<Computer> DbManager::getComputers(){
 
         bool built = query.value("Built").toBool();
 
-        Computer computer(name, yearBuilt, type, built);
+        Computer computer(computerID, name, yearBuilt, type, built);
 
         computers.push_back(computer);
     }

@@ -11,7 +11,9 @@ public:
 
     Computer();
 
-    Computer(string name, int yearBuilt, string type, bool built);
+    Computer(int computerID, string name, int yearBuilt, string type, bool built);
+
+    int getComputerID() const;
 
     string getName() const;
 
@@ -30,6 +32,8 @@ public:
     void setBuilt(bool built);
 
 private:
+
+    int _computerID;
 
     string _name;
 
