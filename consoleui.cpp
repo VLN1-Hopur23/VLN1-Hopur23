@@ -6,6 +6,7 @@ using namespace std;
 
 ConsoleUI::ConsoleUI()
 {
+
 }
 
 void ConsoleUI::run()
@@ -78,8 +79,8 @@ void ConsoleUI::run()
                 {
                     cout << "Please choose one of the given options!\n";
                 }
-
             }
+
             else if (command == "search" || command == "Search" || command == "s")
             {
                string sOption;
@@ -99,9 +100,8 @@ void ConsoleUI::run()
                {
                    cout << "Please choose one of the given options!\n";
                }
-
-
             }
+
             else if (command == "edit" || command == "Edit" || command == "e")
             {
                // Edit();
@@ -195,21 +195,20 @@ void ConsoleUI::Delete()
 }
 */
 
-
 void ConsoleUI::searchScientists()
 {
     string searchData;
 
     while (searchData != "Return" && searchData != "return" && searchData != "r")
     {
-    cout << "Please choose one of the following options:\n";
-    cout << "Name\t\t- Search by name\n";
-    cout << "Age\t\t- Search by age\n";
-    cout << "Birth\t\t- Search by birth year\n";
-    cout << "Death\t\t- Search by death year\n";
-    cout << "Return\t\t- Return to main menu\n";
+        cout << "Please choose one of the following options:\n";
+        cout << "Name\t\t- Search by name\n";
+        cout << "Age\t\t- Search by age\n";
+        cout << "Birth\t\t- Search by birth year\n";
+        cout << "Death\t\t- Search by death year\n";
+        cout << "Return\t\t- Return to main menu\n";
 
-    cin >> searchData;
+        cin >> searchData;
     }
 
 /*  cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
@@ -253,16 +252,15 @@ void ConsoleUI::searchComputers()
 
     while (searchComputerData != "return" && searchComputerData != "Return" && searchComputerData != "r")
     {
-    cout << "Please choose one of the following options:\n";
-    cout << endl;
-    cout << "Name\t\t- Search by name\n";
-    cout << "Built\t\t- Search by the year computers were built\n";
-    cout << "Type\t\t- Seatch by type\n";
-    cout << "Return\t\t- Return to main menu\n";
-    cout << endl;
+        cout << "Please choose one of the following options:\n";
+        cout << endl;
+        cout << "Name\t\t- Search by name\n";
+        cout << "Built\t\t- Search by the year computers were built\n";
+        cout << "Type\t\t- Seatch by type\n";
+        cout << "Return\t\t- Return to main menu\n";
+        cout << endl;
 
-    cin >> searchComputerData;
-
+        cin >> searchComputerData;
     }
 }
 
@@ -423,7 +421,6 @@ void ConsoleUI::displayScientists()
         cout << left << _service.getScientist(i).getAge();
         cout << endl;
     }
-
     printFrame();
 }
 

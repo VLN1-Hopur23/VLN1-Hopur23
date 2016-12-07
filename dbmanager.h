@@ -12,11 +12,13 @@ using namespace std;
 class DbManager
 {
 public:
+
     DbManager();
 
     vector<Scientist> getScientists();
 
 private:
+
     QSqlDatabase db;
 };
 

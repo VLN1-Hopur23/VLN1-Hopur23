@@ -5,7 +5,6 @@ LocalTime::LocalTime()
 
 }
 
-
 int LocalTime::getYearToDay() const
 {
     time_t rawtime;
@@ -16,8 +15,7 @@ int LocalTime::getYearToDay() const
     std::string str = asctime(timeinfo);
     int LastSpace = str.find_last_of(" ")+1;
     int StrEnd = str.size();
-   std:: string StringYearToDay = str.substr( LastSpace,StrEnd);
+    std:: string StringYearToDay = str.substr( LastSpace,StrEnd);
     int YearToDay = std::stoi (StringYearToDay);
     return YearToDay;
-
 }

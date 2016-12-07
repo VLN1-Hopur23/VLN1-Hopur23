@@ -8,6 +8,7 @@ using namespace std;
 class Computer
 {
 public:
+
     Computer();
 
     Computer(string name, int yearBuilt, string type, bool built);
