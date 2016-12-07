@@ -54,7 +54,7 @@ private:
 
     void printFrame();
 
-    void printHeader();
+    void printScientistHeader();
 
     void printComputerHeader();
 
