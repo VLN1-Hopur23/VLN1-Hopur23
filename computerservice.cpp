@@ -6,6 +6,10 @@ ComputerService::ComputerService()
 {
 
 }
+bool ComputerService::addComputer(Computer computer)
+{
+    return _data.addComputer(computer);
+}
 
 Computer ComputerService::getComputer(size_t index)
 {

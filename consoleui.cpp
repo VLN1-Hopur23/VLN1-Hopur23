@@ -554,30 +554,81 @@ void ConsoleUI::registerScientist()
     {
         cout << endl;
         cout << "Add scientist failed!";
+        cout << endl;
         exit(0);
     }
 }
 
 void ConsoleUI::registerComputer()
 {
-    string computerName;
-    int computerBuildYear;
-    string computerType;
+    string name;
+    int yearBuilt;
+    string type;
+    bool built;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerName);
+    getline(cin,name);
+
+    while (name.empty())
+    {
+        cout << "Enter the name of the computer:" << endl;
+        getline(cin, name);
+    }
+    cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
-    cin >> computerBuildYear;
+    cin >> yearBuilt;
+    cout << endl;
 
     cout << "Enter the type of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerType);
+    getline(cin, type);
 
-    cout << "Computer added!" << endl;
+    while (type.empty())
+    {
+        cout << "Enter the type of the computer:" << endl;
+        getline(cin, type);
+    }
     cout << endl;
 
+ Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+
+ bool cMessage = _computers.addComputer(computer);
+
+   if (cMessage == true)
+   {
+       cout << endl;
+       cout << "Computer added successfully!";
+       string connectChoice;
+       cout << endl;
+       cout << "Would you like to connect your computer to a scientist?" << endl;
+       cout << "Yes" << endl;
+       cout << "No" << endl;
+       cin >> connectChoice;
+       cout << endl;
+
+       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+       {
+           cout << "yay" << endl;
+           // TODO link
+       }
+       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+       {
+           exit(0);
+       }
+       else
+       {
+          cout << "Please enter a valid option!\n";
+       }
+   }
+   else
+   {
+       cout << endl;
+       cout << "Add computer failed!";
+       cout << endl;
+       exit(0);
+   }
 
 }
 

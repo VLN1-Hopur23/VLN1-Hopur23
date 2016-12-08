@@ -72,6 +72,8 @@ private:
     ComputerService _computers;
 
     Scientist _scientist;
+
+
 };
 
 #endif // CONSOLEUI_H

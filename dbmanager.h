@@ -21,7 +21,7 @@ public:
 
     bool addScientist(const Scientist& scientist) const;
     bool scientistExists(const string& searchData) const;
-//  bool addComputer(const Computer& computer) const;
+    bool addComputer(const Computer& computer) const;
 
     bool computerExists(const string& searchData) const;
 
