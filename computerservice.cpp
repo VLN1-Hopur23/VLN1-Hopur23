@@ -6,6 +6,7 @@ ComputerService::ComputerService()
 {
 
 }
+
 bool ComputerService::addComputer(Computer computer)
 {
     return _data.addComputer(computer);
@@ -27,9 +28,8 @@ bool ComputerService::retrieveComputers(string order, string filter)
     QString QSorder = "";
     QString QSfilter = "";
 
-    //filter is for ascending (ASC) or
+    // Filter is for ascending (ASC) or descending (DESC)
     if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
-
     {
         QSfilter = QString::fromStdString("ASC");
     }
@@ -78,10 +78,15 @@ size_t ComputerService::getSize() const
 void ComputerService::retrieveIntersectScientist(const string& param)
 {
     _computers = _data.intersectScientist(param);
-
 }
 
 void ComputerService:: getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);
+}
+
+void ComputerService::deleteComputer(int index)
+{
+    _data.deleteComputer(index);
+
 }

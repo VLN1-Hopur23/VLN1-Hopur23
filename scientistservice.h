@@ -11,6 +11,7 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+
     DbManager _data;
 
 public:
@@ -39,7 +40,11 @@ public:
 
     void deleteScientist(int index);
 
+
+    bool searchingByFilter(string filter, string searchData);
+
     void retrieveIntersectComputer(const string& param);
+
 };
 
 #endif // SCIENTISTSERVICE_H

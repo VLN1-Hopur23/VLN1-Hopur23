@@ -127,10 +127,47 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 */
 
-
 void ScientistService::deleteScientist(int index)
 {
     _data.deleteScientist(index);
+
+}
+
+bool ScientistService::searchingByFilter(string command, string searchData) //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
+{
+    string finalCommand;
+    string finalSearchData;
+    bool inputOkay = false;
+    if (command == "gender" || command == "Gender" || command == "g" || command == "1" || command == "01")
+    {
+        finalCommand = "Gender";
+        //searchdata must be f or m
+        if(searchData == "f" || searchData == "F")
+        {
+            finalSearchData = "f";
+            inputOkay = true;
+        }
+        else if( searchData == "m" || searchData == "M")
+        {
+            finalSearchData = "m";
+            inputOkay = true;
+        }
+    }
+    else if (command == "birth" || command == "Birth" || command == "b" || command == "2" || command == "02")
+    {
+        finalCommand = "Birthyear";
+    }
+    else if (command == "death" || command == "Death" || command == "d" || command == "3" || command == "03")
+    {
+        finalCommand = "Deathyear";
+    }
+
+    if(inputOkay)
+    {
+        _scientists = _data.filterScientist(finalCommand, finalSearchData);
+        return true;
+    }
+    return false;
 }
 
 void ScientistService::retrieveIntersectComputer(const string& param)
