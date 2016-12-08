@@ -344,7 +344,7 @@ void ConsoleUI::searchComputers()
 
     }
     // keyword is rubish or empty
-    //else if
+    else
     {
         cout << "Keyword not found in database\n";
     }
