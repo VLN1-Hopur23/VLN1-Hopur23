@@ -14,6 +14,8 @@ public:
 
     ComputerService();
 
+    bool addComputer(Computer computer);
+
     Computer getComputer(size_t index);
 
     vector<Computer> getComputerVector();

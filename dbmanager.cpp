@@ -65,7 +65,7 @@ bool DbManager::addScientist(const Scientist& scientist) const
     //return message;
 }
 
-// Deletes chosen scientist from database
+// Deletes scientist with chosen ID number from database
 void DbManager::deleteScientist(const int ID)
 {
     QSqlQuery queryDelete(db);
@@ -103,6 +103,31 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
+bool DbManager::addComputer(const Computer& computer) const
+{
+    bool cMessage = "";
+
+    QSqlQuery queryAdd;
+    queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
+    queryAdd.bindValue(":ComputerID", computer.getComputerID());
+    queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
+    queryAdd.bindValue(":Yearbuilt", computer.getYearBuilt());
+    queryAdd.bindValue(":Type", QString::fromStdString(computer.getType()));
+    queryAdd.bindValue(":Built", computer.getBuilt());
+
+    if(queryAdd.exec())
+    {
+        cMessage = "Computer added successfully! ";
+        return true;
+    }
+    else
+    {
+        cMessage = "Add computer failed! ";
+        return false;
+    }
+
+    return cMessage;
+}
 
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)

@@ -434,9 +434,7 @@ void ConsoleUI::listScientists()
 void ConsoleUI::sortScientists()
 {
     string order, filter;
-    //TO DO return
-    //while(order != "return" && order!= "Return" && order != "r")
-    //{
+
     bool loopNotReturn = true;
 
     while(loopNotReturn) //starts as true
@@ -455,12 +453,6 @@ void ConsoleUI::sortScientists()
         cin >> order;
         cout << endl;
 
-        //cout << "Write ASC for ascending order or DESC for descending order:\n";
-        //cout << endl;
-        //cin >> filter;
-                // TO DO ERROR CHECK!!
-        //_service.retrieveScientists(order, filter);
-
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
             loopNotReturn = false;
@@ -470,7 +462,7 @@ void ConsoleUI::sortScientists()
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
-                    // TO DO ERROR CHECK!!
+
             if(_service.retrieveScientists(order, filter))
             {
                 displayScientists();
@@ -481,10 +473,6 @@ void ConsoleUI::sortScientists()
                 cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
-
-            //vector<Scientist> _AllScientist = _service.getScientistVector();
-            //_AllScientist = SortVector( _AllScientist, sort);
-            //displayListOfScientist();
         }
     }
 }
@@ -677,30 +665,81 @@ void ConsoleUI::registerScientist()
     {
         cout << endl;
         cout << "Add scientist failed!";
+        cout << endl;
         exit(0);
     }
 }
 
 void ConsoleUI::registerComputer()
 {
-    string computerName;
-    int computerBuildYear;
-    string computerType;
+    string name;
+    int yearBuilt;
+    string type;
+    bool built;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerName);
+    getline(cin,name);
+
+    while (name.empty())
+    {
+        cout << "Enter the name of the computer:" << endl;
+        getline(cin, name);
+    }
+    cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
-    cin >> computerBuildYear;
+    cin >> yearBuilt;
+    cout << endl;
 
     cout << "Enter the type of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerType);
+    getline(cin, type);
 
-    cout << "Computer added!" << endl;
+    while (type.empty())
+    {
+        cout << "Enter the type of the computer:" << endl;
+        getline(cin, type);
+    }
     cout << endl;
 
+ Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+
+ bool cMessage = _computers.addComputer(computer);
+
+   if (cMessage == true)
+   {
+       cout << endl;
+       cout << "Computer added successfully!";
+       string connectChoice;
+       cout << endl;
+       cout << "Would you like to connect your computer to a scientist?" << endl;
+       cout << "Yes" << endl;
+       cout << "No" << endl;
+       cin >> connectChoice;
+       cout << endl;
+
+       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+       {
+           cout << "yay" << endl;
+           // TODO link
+       }
+       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+       {
+           exit(0);
+       }
+       else
+       {
+          cout << "Please enter a valid option!\n";
+       }
+   }
+   else
+   {
+       cout << endl;
+       cout << "Add computer failed!";
+       cout << endl;
+       exit(0);
+   }
 
 }
 
