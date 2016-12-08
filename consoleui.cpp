@@ -358,7 +358,7 @@ void ConsoleUI::searchComputers()
         cout << "name\t\t- Search by name\n";
         cout << "built\t\t- Search by the year computers were built\n";
         cout << "type\t\t- Seatch by type\n";
-        cout << "Return\t\t- Return to main menu\n";
+        cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
         cin >> searchComputerData;
