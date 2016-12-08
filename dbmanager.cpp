@@ -7,24 +7,13 @@ DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("VLN1-Hopur23.sqlite");
-
-    // Validates the connection
-    if (!db.open())
-    {
-        qDebug() << "Error: connection with database fail";
-    }
-    else
-    {
-        qDebug() << "Database: connection ok";
-    }
+    db.open();
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
-
-    db.open();
 
     QSqlQuery querySort(db);
 
@@ -148,13 +137,20 @@ bool DbManager::computerExists(const string& searchData) const
 
 */
 // Returns vector with all computers associated with the scientist/s
-vector<Computer> DbManager::intersectScientists()
+vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
 
-   /*QSqlQuery intersectQuery;
+    db.open();
 
-    //intersectQuery.prepare("SELECT * FROM Scientists WHERE INTERSECT SELECT * FROM Computers ");
+    QSqlQuery query(db);
+
+    QSqlQuery intersectQuery;
+
+    intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
+    intersectQuery.bindValue(":id", QString::fromStdString(id));
+
+    intersectQuery.exec();
 
     while (intersectQuery.next())
     {
@@ -171,7 +167,8 @@ vector<Computer> DbManager::intersectScientists()
         Computer computer(computerID, name, yearBuilt, type, built);
 
         intersectedComputers.push_back(computer);
-    }*/
+    }
+
     return intersectedComputers;
 }
 // Gets the info on Scientist which is searced for
@@ -179,7 +176,9 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
 
-    QSqlQuery query;
+    db.open();
+
+    QSqlQuery query(db);
 
     if (isdigit(searchData.at(0)))
     {
@@ -188,13 +187,11 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     }
     else
     {
-
         query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
     while (query.next())
     {
-
         int scientistID = query.value("ScientistID").toUInt();
         string name = query.value("Name").toString().toStdString();
         string gender = query.value("Gender").toString().toStdString();
@@ -206,7 +203,6 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
         foundScientist.push_back(scientist);
     }
-
     return foundScientist;
 }
 
@@ -218,12 +214,10 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
     if (isdigit(searchData.at(0)))
     {
-
         query.exec("SELECT * FROM Computers WHERE (Yearbuilt) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-
         query.exec("SELECT * FROM Computers WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
@@ -239,6 +233,5 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
         foundComputer.push_back(computer);
     }
-
     return foundComputer;
 }

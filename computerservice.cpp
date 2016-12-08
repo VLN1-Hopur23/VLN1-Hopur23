@@ -71,6 +71,12 @@ size_t ComputerService::getSize() const
     return _computers.size();
 }
 
+void ComputerService::retrieveIntersectScientist(const string& param)
+{
+    _computers = _data.intersectScientist(param);
+
+}
+
 void ComputerService:: getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);

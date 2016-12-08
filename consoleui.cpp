@@ -156,6 +156,7 @@ void ConsoleUI::run()
 
             else if (command == "quit" || command == "Quit" || command == "q" || command == "6" || command == "06")
             {
+
                 loop = false;
             }
             else
@@ -271,11 +272,11 @@ void ConsoleUI::searchScientists()
 
     _service.getVectorFoundScientists(searchData);
 
-    // if vector turns up with search results and searchData is not empty then
+    // If vector turns up with search results and searchData is not empty then
     if ((_service.getSize() != 0) && (!searchData.empty()))
     {
         displayScientists();
-        //custom menu
+        // Custom menu
         string command = "";
         cout << "If you want to change displayed scientist(s) then select the following options\n";
         cout << "01. edit\t\t- Edit scientist \n";
@@ -294,10 +295,14 @@ void ConsoleUI::searchScientists()
         }
         else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
         {
-            //linkScientist();
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
         }
     }
-    // keyword is rubbish or empty
+    // Keyword is rubbish or empty
     else
     {
         cout << "Keyword not found in database\n";
@@ -315,11 +320,11 @@ void ConsoleUI::searchComputers()
 
     _computers.getVectorFoundComputer(searchData);
 
-    // if vector turns up with search results and searchData is not empty then
+    // If vector turns up with search results and searchData is not empty then
     if ((_computers.getSize() != 0) && (!searchData.empty()))
     {
         displayComputers();
-        //custom menu
+        //Custom menu
         string command = "";
         cout << "If you want to change displayed computer(s) then select the following options\n";
         cout << "01. edit\t\t- Edit computer\n";
@@ -340,8 +345,7 @@ void ConsoleUI::searchComputers()
         {
             //linkScientist();
         }
-        // else then it returns to main menu for example when quit is chosen
-
+        // Else then it returns to main menu for example when quit is chosen
     }
     // keyword is rubish or empty
     else
@@ -371,6 +375,12 @@ void ConsoleUI::listScientists()
         cin >> order;
         cout << endl;
 
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+                // TO DO ERROR CHECK!!
+        _service.retrieveScientists(order, filter);        
+
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
             loopNotReturn = false;
@@ -388,7 +398,7 @@ void ConsoleUI::listScientists()
             else
             {
                 cout << endl;
-                cout << "Not validated input, try again!"<<endl;
+                cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
 
@@ -397,6 +407,12 @@ void ConsoleUI::listScientists()
             //displayListOfScientist();
         }
     }
+}
+
+void ConsoleUI::listIntersectScientist(const string& param)
+{
+    _computers.retrieveIntersectScientist(param);
+    displayComputers();
 }
 
 void ConsoleUI::listComputers()
@@ -435,7 +451,7 @@ void ConsoleUI::listComputers()
             else                                            // input NOT_OK -> try agian
             {
                 cout << endl;
-                cout << "Not Validated input, try again!"<<endl;
+                cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
         }
@@ -534,7 +550,6 @@ void ConsoleUI::displayComputers()
     printFrame();
     printComputerHeader();
 
-    //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
 
@@ -563,7 +578,6 @@ void ConsoleUI::displayScientists()
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
-
         cout.fill(' ');
         cout.width(2);
         cout << right << _service.getScientist(i).getScientistID() << "  ";
