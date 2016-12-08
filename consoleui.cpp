@@ -156,6 +156,7 @@ void ConsoleUI::run()
 
             else if (command == "quit" || command == "Quit" || command == "q" || command == "6" || command == "06")
             {
+
                 loop = false;
             }
             else
@@ -294,7 +295,11 @@ void ConsoleUI::searchScientists()
         }
         else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
         {
-            //linkScientist();
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
         }
     }
     // Keyword is rubbish or empty
@@ -371,6 +376,12 @@ void ConsoleUI::listScientists()
         cin >> order;
         cout << endl;
 
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+                // TO DO ERROR CHECK!!
+        _service.retrieveScientists(order, filter);        
+
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
             loopNotReturn = false;
@@ -397,6 +408,12 @@ void ConsoleUI::listScientists()
             //displayListOfScientist();
         }
     }
+}
+
+void ConsoleUI::listIntersectScientist(const string& param)
+{
+    _computers.retrieveIntersectScientist(param);
+    displayComputers();
 }
 
 void ConsoleUI::listComputers()

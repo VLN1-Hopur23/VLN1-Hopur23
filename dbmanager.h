@@ -29,7 +29,7 @@ public:
 
     vector<Computer> searchComputer(string& searchData);
 
-    vector<Computer> intersectScientists();
+    vector<Computer> intersectScientist(const string& id);
 
 private:
 
