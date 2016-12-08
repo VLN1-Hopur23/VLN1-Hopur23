@@ -63,7 +63,7 @@ void ScientistService:: getVectorFoundScientists(string& searchData)
     _scientists = _data.searchScientist(searchData);
 }
 
-string ScientistService::addScientist(Scientist scientist)
+bool ScientistService::addScientist(Scientist scientist)
 {
     return _data.addScientist(scientist);
 }
