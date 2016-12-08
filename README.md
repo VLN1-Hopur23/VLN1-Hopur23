@@ -4,34 +4,49 @@
 ###Console program with the following functionality:
 <ul>
    <li>Users can register a known person and a known computer from the history of computer science</li>
-    <li>Users can display the list of known computer scientists in an order sorted by 
+   <li>Users can display the list of known computer scientists in an order sorted by
     <ul>
       <li>name</li>
       <li>age</li>
       <li>birth year</li> 
       <li>death year</li>
-    </ul>
+      </ul>
     <li>Users can also display the list of known computers in an order sorted by
     <ul>
       <li>name</li>
       <li>year they were built</li>
       <li>type</li>
     </ul>
+ 
     <li>Users can search the list for any scientist by
-    <ul>
+      <ul>
       <li>name</li>
       <li>age</li>
       <li>birth year</li>
       <li>death year</li>
     </ul>
+    
+  
     <li>Users can also search the list for any computers by
     <ul>
       <li>name</li>
       <li>year they were built</li>
       <li>type</li>
+     </ul>
+
+    <li>Users can edit a scientist or a computer in the list by they're choice by entering the index number</li>
+    <li>Users can delete a scientist or a computer of the list by entering the index number</li>
+    <li>User has the option to return to main menu in every category</li>
 </ul>
+    
+    
 ###Extra features:
 <ul>
-   <li>Frequent users can use shortcuts by writing the first letter of commands</li>
-   <li>Users can delete a person from the list</li>
-   <li>Users can edit a person in the list</li>
+   <li>Frequent users can use shortcuts to every category by
+   <ul>
+   <li>using firts letter of commands</li>
+   <li>using given integers of commands</li>
+   </ul>
+   
+  
+   
