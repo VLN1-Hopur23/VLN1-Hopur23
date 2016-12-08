@@ -18,6 +18,7 @@ public:
     vector<Scientist> getScientists(QString QSorder, QString QSfilter);
     vector<Computer> getComputers(QString QSorder, QString QSfilter);
     string addScientist(const Scientist& scientist);
+    void deleteScientist(const int ID);
     bool scientistExists(const string& searchData) const;
     bool computerExists(const string& searchData) const;
     vector<Scientist> searchScientist(const string& searchData);

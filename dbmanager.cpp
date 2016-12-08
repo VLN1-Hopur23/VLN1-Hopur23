@@ -71,6 +71,15 @@ string DbManager::addScientist(const Scientist& scientist)
     return message;
 }
 
+// Deletes chosen scientist from database
+void DbManager::deleteScientist(const int ID)
+{
+    QSqlQuery queryDelete;
+    queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
+    queryDelete.bindValue(":ScientistID",ID);
+    queryDelete.exec();
+}
+
 // Gets computer and his information from database(SQL) and reads into Computer vector
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
 vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)

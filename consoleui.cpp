@@ -238,13 +238,13 @@ void ConsoleUI::deleteComputer()
 void ConsoleUI::deleteScientist()
 {
     int index;
-//  char confirm;
+    char confirm;
 
     cout << "Delete registered scientist" << endl;
     cout << endl;
-    cout << "Enter the index number of the scientist to delete: ";
+    cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-/*  while (cin.fail() || index > _service.getSize() || index < 0)
+    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
@@ -252,7 +252,7 @@ void ConsoleUI::deleteScientist()
         cin >> index;
     }
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+    cout << "Are you sure you want to delete " << _service.getScientist(index-1).getName() << "? (y/n): ";
     cin >> confirm;
 
     if (confirm == 'y' || confirm == 'Y')
@@ -263,8 +263,8 @@ void ConsoleUI::deleteScientist()
         cout << "Successfully deleted!" << endl;
         cout << endl;
     }
-*/
 }
+
 //search for inserted keyword in Scientist vector
 void ConsoleUI::searchScientists()
 {
@@ -344,7 +344,7 @@ void ConsoleUI::searchComputers()
 void ConsoleUI::listScientists()
 {
     string order, filter;
-
+    //TO DO return
     //while(order != "return" && order!= "Return" && order != "r")
     //{
         cout << endl;
@@ -365,13 +365,6 @@ void ConsoleUI::listScientists()
         cin >> filter;
                 // TO DO ERROR CHECK!!
         _service.retrieveScientists(order, filter);
-/*
-        vector<Scientist> _AllScientist = _service.getScientistVector();
-        _AllScientist = SortVector( _AllScientist, sort);
-
-        displayListOfScientist();
-*/
-    //}
 }
 
 void ConsoleUI::listComputers()
@@ -397,8 +390,6 @@ void ConsoleUI::listComputers()
             // TO DO ERROR CHECK!!
         _computers.retrieveComputers(order, filter);
         displayComputers();
-
-
     }
 }
 
@@ -566,8 +557,4 @@ void ConsoleUI::printComputerHeader()
     cout <<"\t\t\t\t\t" << endl;
 }
 
-vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
-{
-   return _service.sortScientists(_listOfScientist, sort);
-}
 
