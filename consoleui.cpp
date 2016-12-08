@@ -46,15 +46,15 @@ void ConsoleUI::run()
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
-                    //_service.retrieveScientists();
-                    listScientists();
+                    _service.retrieveScientists("name", "ASC");
                     displayScientists();
+                    listScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
-                    //_computers.retrieveComputers();
+                    _computers.retrieveComputers("name", "ASC");
+                    displayComputers();
                     listComputers();
-                    //displayComputers();
                 }
                 else
                 {
@@ -238,7 +238,7 @@ void ConsoleUI::deleteScientist()
     cout << endl;
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-    while (cin.fail() || index > _service.getSize() || index < 0)
+    while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
@@ -246,7 +246,7 @@ void ConsoleUI::deleteScientist()
         cin >> index;
     }
     string scientistNameToDelete;
-    for (int i = 0; i < _service.getSize(); i++)
+    for (size_t i = 0; i < _service.getSize(); i++)
     {
         if(_service.getScientist(i).getScientistID() == index)
         {
@@ -416,6 +416,47 @@ void ConsoleUI::searchComputers()
 
 void ConsoleUI::listScientists()
 {
+    string option;
+    bool exit = false;
+
+    while (exit == false)
+    {
+        cout << endl;
+        cout << "Choose option: \n";
+        cout << endl;
+        cout << "sort\t\t- Sort list\n";
+        cout << "link\t\t- Show associated\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+        cin >> option;
+
+        if (option == "sort" || option == "Sort" || option == "s" || option == "S")
+        {
+            sortScientists();
+            displayScientists();
+        }
+        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        {
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
+        }
+        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        {
+            exit = true;
+        }
+        else
+        {
+            cout << "Enter a valid option!\n";
+            cout << endl;
+        }
+    }
+}
+
+void ConsoleUI::sortScientists()
+{
     string order, filter;
 
     bool loopNotReturn = true;
@@ -473,6 +514,47 @@ void ConsoleUI::listIntersectComputer(const string& param)
 }
 
 void ConsoleUI::listComputers()
+{
+    string option;
+    bool exit = false;
+
+    while (exit == false)
+    {
+        cout << endl;
+        cout << "Choose option: \n";
+        cout << endl;
+        cout << "sort\t\t- Sort list\n";
+        cout << "link\t\t- Show associated\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+        cin >> option;
+
+        if (option == "sort" || option == "Sort" || option == "s" || option == "S")
+        {
+            sortComputers();
+            displayComputers();
+        }
+        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        {
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectComputer(param);
+        }
+        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        {
+            exit = true;
+        }
+        else
+        {
+            cout << "Enter a valid option!\n";
+            cout << endl;
+        }
+    }
+}
+
+void ConsoleUI::sortComputers()
 {
     string order, filter;
     bool loopNotReturn = true;
@@ -578,7 +660,7 @@ void ConsoleUI::registerScientist()
     bool message = _service.addScientist(scientist);
     cout << endl;
 //  cout << message << endl;
-/*
+
     if (message == true)
     {
         cout << endl;
@@ -609,7 +691,7 @@ void ConsoleUI::registerScientist()
         cout << "Add scientist failed!";
         cout << endl;
         exit(0);
-    }*/
+    }
 }
 
 void ConsoleUI::registerComputer()

@@ -107,7 +107,8 @@ bool DbManager::addComputer(const Computer& computer) const
 {
     bool cMessage = "";
 
-    QSqlQuery queryAdd;
+    QSqlQuery queryAdd(db);
+
     queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
     queryAdd.bindValue(":ComputerID", computer.getComputerID());
     queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
@@ -161,7 +162,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
     return intersectedComputers;
 }
 
-// Returns vector with all computers associated with the scientist/s
+// Returns vector with all scientists associated with the computer/s
 vector<Scientist> DbManager::intersectComputer(const string& id)
 {
     vector<Scientist> intersectedScientists;
@@ -197,8 +198,6 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
-
-    db.open();
 
     QSqlQuery query(db);
 

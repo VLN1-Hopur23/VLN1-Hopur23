@@ -34,7 +34,11 @@ private:
 
     void listScientists();
 
+    void sortScientists();
+
     void listComputers();
+
+    void sortComputers();
 
     void displayScientists();
 
@@ -72,9 +76,6 @@ private:
     ScientistService _service;
 
     ComputerService _computers;
-
-    Scientist _scientist;
-
 };
 
 #endif // CONSOLEUI_H
