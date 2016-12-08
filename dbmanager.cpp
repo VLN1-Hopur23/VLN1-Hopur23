@@ -107,7 +107,8 @@ bool DbManager::addComputer(const Computer& computer) const
 {
     bool cMessage = "";
 
-    QSqlQuery queryAdd;
+    QSqlQuery queryAdd(db);
+
     queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
     queryAdd.bindValue(":ComputerID", computer.getComputerID());
     queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
