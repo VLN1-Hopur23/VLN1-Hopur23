@@ -131,6 +131,7 @@ string ScientistService::editScientist(int index, string change, string input)
 void ScientistService::deleteScientist(int index)
 {
     _data.deleteScientist(index);
+
 }
 
 bool ScientistService::searchingByFilter(string command, string searchData) //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
@@ -170,3 +171,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     return false;
 }
 
+void ScientistService::retrieveIntersectComputer(const string& param)
+{
+    _scientists = _data.intersectComputer(param);
+}

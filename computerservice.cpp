@@ -6,6 +6,10 @@ ComputerService::ComputerService()
 {
 
 }
+bool ComputerService::addComputer(Computer computer)
+{
+    return _data.addComputer(computer);
+}
 
 Computer ComputerService::getComputer(size_t index)
 {
@@ -23,7 +27,7 @@ bool ComputerService::retrieveComputers(string order, string filter)
     QString QSorder = "";
     QString QSfilter = "";
 
-    // //////////////////////////filter is for ascending (ASC) or
+    //filter is for ascending (ASC) or
     if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
 
     {
