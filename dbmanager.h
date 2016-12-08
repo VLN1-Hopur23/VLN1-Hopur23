@@ -15,7 +15,7 @@ public:
 
     DbManager();
 
-    vector<Scientist> getScientists(QString order, QString filter);
+    vector<Scientist> getScientists(QString QSorder, QString QSfilter);
     vector<Computer> getComputers();
     string addScientist(const Scientist& scientist);
     bool scientistExists(const string& searchData) const;

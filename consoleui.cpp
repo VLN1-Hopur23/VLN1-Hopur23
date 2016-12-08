@@ -46,9 +46,9 @@ void ConsoleUI::run()
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
-                    _service.retrieveScientists();
+                    //_service.retrieveScientists();
                     listScientists();
-                  //  displayScientists();
+                    displayScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
@@ -367,28 +367,34 @@ void ConsoleUI::searchComputers()
 
 void ConsoleUI::listScientists()
 {
-    string sort;
+    string order, filter;
 
-    while(sort != "return" && sort!= "Return" && sort != "r")
-    {
+    //while(order != "return" && order!= "Return" && order != "r")
+    //{
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by name\n";
-        cout << "age\t\t- Sort by age\n";
+        //cout << "age\t\t- Sort by age\n";
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
-        cin >> sort;
+        cin >> order;
+        cout << endl;
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+                // TO DO ERROR CHECK!!
+        _service.retrieveScientists(order, filter);
 /*
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
 
         displayListOfScientist();
 */
-    }
+    //}
 }
 
 void ConsoleUI::listComputers()

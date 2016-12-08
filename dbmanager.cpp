@@ -20,24 +20,20 @@ DbManager::DbManager()
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
-vector<Scientist> DbManager::getScientists(QString order, QString filter)
+vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
-    order = QString::fromStdString("Name");
-    filter = QString::fromStdString("DESC");
-
-    order = "Name";
-    filter = "DESC";
 
     db.open();
 
     QSqlQuery querySort(db);
-    /*
-    querySort.prepare("SELECT * FROM Scientists ORDER BY order = :order, filter = :filter)");
-    querySort.bindValue(":order", order);
+
+    querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
+
+    /*querySort.bindValue(":order", order);
     querySort.bindValue(":filter", filter);
     */
-    querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
+    //querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
 
     /* Emil bull
     query.prepare("SELECT * FROM Scientists ORDER BY ':order' ':filter'");

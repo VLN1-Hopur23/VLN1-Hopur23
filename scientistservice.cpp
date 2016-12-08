@@ -96,11 +96,16 @@ vector<Scientist> ScientistService::getScientistVector()
 }
 
 // Fetches table of scientists from SQL database
-void ScientistService::retrieveScientists()
+void ScientistService::retrieveScientists(string order, string filter)
 {
-    QString name = QString::fromStdString("Name");
-    QString filter = QString::fromStdString("DESC");
-    _scientists = _data.getScientists(name, filter);
+    QString QSorder;
+    QString QSfilter = QString::fromStdString(filter);
+
+    if(order == "Name" || order == "name" || order == "n" || order == "N"){
+        QSorder = QString::fromStdString("Name");
+        _scientists = _data.getScientists(QSorder, QSfilter);
+    }
+    _scientists = _data.getScientists(QSorder, QSfilter);
 }
 
 /*
