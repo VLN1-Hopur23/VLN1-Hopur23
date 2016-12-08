@@ -118,7 +118,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     }
     return computers;
 }
-
+/* TODO DELETE IF NOT USED
 // Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
 {
@@ -162,54 +162,40 @@ bool DbManager::computerExists(const string& searchData) const
     }
     return exists;
 }
-
-// Gets the info on Scientist which is searced for
+*/
+// Gets the info on Scientist which is searched for
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
 
     QSqlQuery query;
 
-    // if (scientistExists(searchData))
+    if (isdigit(searchData.at(0)))
     {
 
-        //query.prepare("SELECT * FROM Scientists WHERE ScientistID OR Name OR Gender OR Birthyear OR Deathyear LIKE (SearchValue) VALUES (:SearchValue)");
-        //query.bindValue(":SearchValue",QString::fromStdString(searchData));
-
-        if (isdigit(searchData.at(0)))
-        {
-            cout << "first works\n";
-            query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
-        }
-        else
-        {
-            cout << "Second workds\n";
-            query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
-        }
-
-        while (query.next())
-        {
-
-            int scientistID = query.value("ScientistID").toUInt();
-            string name = query.value("Name").toString().toStdString();
-            string gender = query.value("Gender").toString().toStdString();
-
-            int yearOfBirth = query.value("Birthyear").toUInt();
-            int yearOfDeath = query.value("Deathyear").toUInt();
-
-            cout << endl;
-            cout << name;
-            cout << endl;
-
-            Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
-
-            foundScientist.push_back(scientist);
-        }
+        query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
-    // else
+    else
     {
-       // qDebug() << "This scientist does not exist in this database " << query.lastError();
+
+        query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
+
+    while (query.next())
+    {
+
+        int scientistID = query.value("ScientistID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+
+        int yearOfBirth = query.value("Birthyear").toUInt();
+        int yearOfDeath = query.value("Deathyear").toUInt();
+
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
+
+        foundScientist.push_back(scientist);
+    }
+
     return foundScientist;
 }
 
@@ -219,20 +205,26 @@ vector<Computer> DbManager::searchComputer(string& searchData)
     vector<Computer> foundComputer;
     QSqlQuery query;
 
-    if(computerExists(searchData))
+    if (isdigit(searchData.at(0)))
     {
-        query.prepare("SELECT Name FROM Computers WHERE (Name) VALUES (:Name)");
-        query.bindValue(":Name",QString::fromStdString(searchData));
 
+        query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
+    }
+    else
+    {
+
+        query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
+    }
+
+    if(query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
         string name = query.value("Name").toString().toStdString();
-
         int Yearbuilt = query.value("Yearbuilt").toUInt();
-
         string type = query.value("Type").toString().toStdString();
-
         bool built = query.value("Built").toBool();
 
-        Computer computer(name, Yearbuilt, type, built);
+        Computer computer(computerID, name, Yearbuilt, type, built);
 
         foundComputer.push_back(computer);
     }

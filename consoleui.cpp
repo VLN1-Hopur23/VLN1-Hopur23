@@ -269,75 +269,92 @@ void ConsoleUI::deleteScientist()
 void ConsoleUI::searchScientists()
 {
     string searchData;
-    string returnTomenu = "";
 
-    cout << "yes/no \t\t- Do you want to return to main menu ?\n";
-    cout << endl;
-    cin >> returnTomenu;
-    if(returnTomenu == "yes" || returnTomenu == "y" || returnTomenu == "Y")
+    cout << "Enter search keyword: ";
+    cin.ignore();
+    getline(cin, searchData);
+    cout << "Searching for " << searchData << endl;
+
+    _service.getVectorFoundScientists(searchData);
+
+    // if vector turns up with search results and searchData is not empty then
+    if ((_service.getSize() != 0) && (!searchData.empty()))
     {
-        //go back to main menu
-    }
-    else if (returnTomenu == "no" || returnTomenu == "N" || returnTomenu != "n")
-    {
-        cout << "Enter search keyword: ";
-        cin.ignore();
-        getline(cin, searchData);
-        cout << "Searching for " << searchData << endl;
+        displayScientists();
+        //custom menu
+        string command = "";
+        cout << "If you want to change displayed scientist(s) then select the following options\n";
+        cout << "01. edit\t\t- Edit scientist \n";
+        cout << "02. delete\t\t- Delete scientist\n";
+        cout << "03. link\t\t- Link scientist to a computer\n";
+        cout << "04. any other key\t- Exit program\n";
+        cin >> command;
 
-        // if vector turns up with search results and searchData is not empty then
-        if ((_service.getSize() != 0) && (!searchData.empty()))
+        if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
         {
-            displayScientists();
-            //custom menu
-            string command = "";
-            cout << "If you want to edit displayed Scientists then select the following options\n";
-            cout << "01. edit\t\t- Edit scientist or computer\n";
-            cout << "02. delete\t\t- Delete scientist or computer\n";
-            cout << "03. link\t\t- Link scientist to a computer\n";
-            cout << "04. quit\t\t- Exit program\n";
-            cin >> command;
-
-            if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
-            {
-                //editScientist();
-            }
-            else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
-            {
-                //deleteScientist();
-            }
-            else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
-            {
-                //linkScientist();
-            }
-            // else then it returns to main menu
-
+            //editScientist();
         }
-        // keyword is rubish or empty
-        else
+        else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
         {
-            cout << "Keyword not found in database\n";
+            //deleteScientist();
         }
+        else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+        {
+            //linkScientist();
+        }
+        // else then it returns to main men
 
     }
-
+    // keyword is rubbish or empty
+    else
+    {
+        cout << "Keyword not found in database\n";
+    }
 }
 
 void ConsoleUI::searchComputers()
 {
-    string searchComputerData;
+    string searchData;
 
-    while (searchComputerData != "return" && searchComputerData != "Return" && searchComputerData != "r")
+    cout << "Enter search keyword: ";
+    cin.ignore();
+    getline(cin, searchData);
+    cout << "Searching for " << searchData << endl;
+
+    _computers.getVectorFoundComputer(searchData);
+
+    // if vector turns up with search results and searchData is not empty then
+    if ((_computers.getSize() != 0) && (!searchData.empty()))
     {
-        cout << "Please choose one of the following options:\n";
-        cout << endl;
-        cout << "name\t\t- Search by name\n";
-        cout << "built\t\t- Search by the year computers were built\n";
-        cout << "type\t\t- Seatch by type\n";
-        cout << "return\t\t- Return to main menu\n";
-        cout << endl;
+        displayComputers();
+        //custom menu
+        string command = "";
+        cout << "If you want to change displayed computer(s) then select the following options\n";
+        cout << "01. edit\t\t- Edit computer\n";
+        cout << "02. delete\t\t- Delete computer\n";
+        cout << "03. link\t\t- Link computer to a scientist\n";
+        cout << "04. any other key\t- Exit program\n";
+        cin >> command;
 
-        cin >> searchComputerData;
+        if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
+        {
+            //editScientist();
+        }
+        else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
+        {
+            //deleteScientist();
+        }
+        else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+        {
+            //linkScientist();
+        }
+        // else then it returns to main menu for example when quit is chosen
+
+    }
+    // keyword is rubish or empty
+    //else if
+    {
+        cout << "Keyword not found in database\n";
     }
 }
 
