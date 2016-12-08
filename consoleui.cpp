@@ -263,60 +263,84 @@ void ConsoleUI::deleteScientist()
 void ConsoleUI::searchScientists()
 {
     string searchData;
+    string command;
+
+    cout << "Filter by: \n";
+    cout << "01. gender\t\t- Filters scientist by gender \n";
+    cout << "02. birth\t\t- Filters scientist by year of birth\n";
+    cout << "03. death\t\t- Filters scientist by year of death \n";
+    cout << "or Search by a keyword, name or any character\n";
+    cout << "04. search\t\t\n";
+    cout << "05. life\t\t- search for meaning of life\n";
+    cout << endl;
+    cin >> command;
 
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
 
-    while(searchData.empty())
-    {
-        cout << endl;
-        cout << "Keyword cannot be empty!\n";
-        cout << endl;
-        cout << "Enter search keyword: ";
-        getline(cin, searchData);
-    }
-
-    cout << endl;
-
-    cout << "Searching for " << searchData << endl;
-
-    _service.getVectorFoundScientists(searchData);
-
-    // If vector turns up with search results and searchData is not empty then
-    if ((_service.getSize() != 0) && (!searchData.empty()))
+    if(_service.searchingByFilter(command, searchData))
     {
         displayScientists();
-        // Custom menu
-        string command = "";
-        cout << "If you want to change displayed scientist(s) then select the following options\n";
-        cout << "01. edit\t\t- Edit scientist \n";
-        cout << "02. delete\t\t- Delete scientist\n";
-        cout << "03. link\t\t- Link scientist to a computer\n";
-        cout << "04. any other key\t- Exit program\n";
-        cin >> command;
-
-        if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
-        {
-            //editScientist();
-        }
-        else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
-        {
-            //deleteScientist();
-        }
-        else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
-        {
-            string param;
-            cout << "Select ID to show associated: ";
-            cin >> param;
-            cout << endl;
-            listIntersectScientist(param);
-        }
     }
-    // Keyword is rubbish or empty
+    /*
     else
     {
-        cout << "Keyword not found in database\n";
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
+
+        cout << endl;
+
+        cout << "Searching for " << searchData << endl;
+
+        _service.getVectorFoundScientists(searchData);
+
+        // If vector turns up with search results and searchData is not empty then
+        if ((_service.getSize() != 0) && (!searchData.empty()))
+        {
+            displayScientists();
+            // Custom menu
+            string command = "";
+            cout << "If you want to change displayed scientist(s) then select the following options\n";
+            cout << "01. edit\t\t- Edit scientist \n";
+            cout << "02. delete\t\t- Delete scientist\n";
+            cout << "03. link\t\t- Link scientist to a computer\n";
+            cout << "04. any other key\t- Exit program\n";
+            cin >> command;
+
+            if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
+            {
+                //editScientist();
+            }
+            else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
+            {
+                //deleteScientist();
+            }
+            else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+            {
+                string param;
+                cout << "Select ID to show associated: ";
+                cin >> param;
+                cout << endl;
+                listIntersectScientist(param);
+            }
+        }
+        // Keyword is rubbish or empty
+        else
+        {
+            cout << "Keyword not found in database\n";
+        }
+    }*/
+    else if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
+    {
+        cout << "42\n";
     }
 }
 

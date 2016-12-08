@@ -202,6 +202,7 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
     QSqlQuery query(db);
 
+
     if (isdigit(searchData.at(0)))
     {
 
@@ -227,7 +228,36 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     }
     return foundScientist;
 }
+vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
+{
+    vector<Scientist> foundScientist;
+    QString qCommand = QString::fromStdString(Command);
+    QString qSearchData = QString::fromStdString(searchData);
 
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Scientists WHERE :qCommand = \":qSearchData");
+    query.bindValue(":qCommand",qCommand);
+    query.bindValue("qSearchData",qSearchData);
+    query.exec();
+
+    while (query.next())
+    {
+        int scientistID = query.value("ScientistID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+
+        int yearOfBirth = query.value("Birthyear").toUInt();
+        int yearOfDeath = query.value("Deathyear").toUInt();
+
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
+
+        foundScientist.push_back(scientist);
+    }
+    return foundScientist;
+}
 // Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {

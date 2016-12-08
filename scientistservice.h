@@ -38,6 +38,8 @@ public:
     bool DataAccessWorks();
 
     void deleteScientist(int index);
+
+    bool searchingByFilter(string filter, string searchData);
 };
 
 #endif // SCIENTISTSERVICE_H
