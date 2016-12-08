@@ -38,6 +38,19 @@ vector<Scientist> DbManager::getScientists(QString order, QString filter)
     querySort.bindValue(":filter", filter);
     */
     querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
+
+    /* Emil bull
+    query.prepare("SELECT * FROM Scientists ORDER BY ':order' ':filter'");
+
+    #include <sstream>
+
+    stringstream q;
+    q << "SELECT * FROM Scientists ORDER BY " << "'"
+      << order << "' '" << filter << "'";
+    query.prepare(q);
+
+    */
+
     querySort.exec();
 
     while (querySort.next())
