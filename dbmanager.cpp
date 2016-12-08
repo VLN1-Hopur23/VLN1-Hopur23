@@ -103,7 +103,6 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
-<<<<<<< HEAD
 bool DbManager::addComputer(const Computer& computer) const
 {
     bool cMessage = "";
@@ -130,13 +129,10 @@ bool DbManager::addComputer(const Computer& computer) const
     return cMessage;
 }
 
-=======
-
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
->>>>>>> 07259779bec07ba2b5f942867eae55fb4f26c3e6
 
     QSqlQuery intersectQuery(db);
 
