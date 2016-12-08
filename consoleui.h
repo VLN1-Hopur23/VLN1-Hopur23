@@ -65,7 +65,7 @@ private:
     LocalTime _time;
 
 private:
-
+    //TODO skyrari nofn
     ScientistService _service;
     ComputerService _computers;
     Scientist _scientist;

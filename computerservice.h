@@ -19,6 +19,7 @@ public:
     // Returns the size of the computer vector
     size_t getSize() const;
     void retrieveIntersectScientist(const string& param);
+    void getVectorFoundComputer(string& searchData);
 
 private:
     vector<Computer> _computers;
