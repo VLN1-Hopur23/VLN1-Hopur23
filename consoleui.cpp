@@ -720,7 +720,8 @@ void ConsoleUI::registerComputer()
     string name;
     int yearBuilt;
     string type;
-    bool built = 0;
+
+    bool built = false;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -749,10 +750,11 @@ void ConsoleUI::registerComputer()
     cout << endl;
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+
     bool cMessage = _computers.addComputer(computer);
 
-   if (cMessage == true)
-   {
+    if (cMessage == true)
+    {
        cout << endl;
        cout << "Computer added successfully!";
        string connectChoice;
@@ -775,14 +777,14 @@ void ConsoleUI::registerComputer()
        {
           cout << "Please enter a valid option!\n";
        }
-   }
-   else
-   {
+    }
+    else
+    {
        cout << endl;
        cout << "Add computer failed!";
        cout << endl;
        exit(0);
-   }
+    }
 }
 
 void ConsoleUI::displayComputers()

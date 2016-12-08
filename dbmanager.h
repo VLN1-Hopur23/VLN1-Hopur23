@@ -5,7 +5,6 @@
 #include <vector>
 #include "scientist.h"
 #include "computer.h"
-#include <iostream> // Temporary
 
 using namespace std;
 
@@ -14,6 +13,8 @@ class DbManager
 public:
 
     DbManager();
+
+    ~DbManager();
 
     vector<Scientist> getScientists(QString QSorder, QString QSfilter);
 
