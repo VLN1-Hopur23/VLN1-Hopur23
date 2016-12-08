@@ -7,16 +7,6 @@ DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("VLN1-Hopur23.sqlite");
-
-    // Validates the connection
-    if (!db.open())
-    {
-        qDebug() << "Error: connection with database fail";
-    }
-    else
-    {
-        qDebug() << "Database: connection ok";
-    }
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC

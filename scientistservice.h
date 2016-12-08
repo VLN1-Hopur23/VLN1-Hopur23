@@ -2,7 +2,6 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
-//#include "dataaccess.h"
 #include "dbmanager.h"
 #include <vector>
 #include <algorithm>
