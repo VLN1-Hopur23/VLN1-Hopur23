@@ -12,14 +12,16 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+
     //DataAccess _data;
+
     DbManager _data;
 
 public:
 
     ScientistService();
 
-    void retrieveScientists(string order, string filter);
+    bool retrieveScientists(string order, string filter);
 
     vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
