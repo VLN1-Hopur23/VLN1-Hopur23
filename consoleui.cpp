@@ -218,17 +218,6 @@ void ConsoleUI::editScientist()
     cout << endl;
 */}
 
-void ConsoleUI::deleteComputer()
-{
-    int cIndex;
-//  char cConfirm;
-
-    cout << "Delete registered computer" << endl;
-    cout << endl;
-    cout << "Enter the index number of the scientist to delete: ";
-    cin >> cIndex;
-}
-
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -254,14 +243,50 @@ void ConsoleUI::deleteScientist()
             scientistNameToDelete = _service.getScientist(i).getName();
         }
     }
-
-    //cin >> confirm;
     cout << "Are you sure you want to delete " << scientistNameToDelete << "? (y/n): ";
     cin >> confirm;
 
     if (confirm == 'y' || confirm == 'Y')
     {
         _service.deleteScientist(index);
+
+        cout << endl;
+        cout << "Successfully deleted!" << endl;
+        cout << endl;
+    }
+}
+
+void ConsoleUI::deleteComputer()
+{
+    int index;
+    char confirm;
+
+    cout << "Delete registered computer" << endl;
+    cout << endl;
+    cout << "Enter the ID number of the computer to delete: ";
+    cin >> index;
+    while (cin.fail() || (unsigned int)index > _computers.getSize() || index < 0)
+    {
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> index;
+    }
+    string computerNameToDelete;
+    for (size_t i = 0; i < _computers.getSize(); i++)
+    {
+        if(_computers.getComputer(i).getComputerID() == index)
+        {
+            //cout << "Are you sure you want to remove " << _service.getScientist(i).getName() << "(y/n) ";
+            computerNameToDelete = _computers.getComputer(i).getName();
+        }
+    }
+    cout << "Are you sure you want to delete " << computerNameToDelete << "? (y/n): ";
+    cin >> confirm;
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        _computers.deleteComputer(index);
 
         cout << endl;
         cout << "Successfully deleted!" << endl;
@@ -699,7 +724,7 @@ void ConsoleUI::registerComputer()
     string name;
     int yearBuilt;
     string type;
-    bool built;
+    bool built = 0;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -727,9 +752,9 @@ void ConsoleUI::registerComputer()
     }
     cout << endl;
 
- Computer computer(_computers.getSize(), name, yearBuilt, type, built);
-
- bool cMessage = _computers.addComputer(computer);
+    //Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+    Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+    bool cMessage = _computers.addComputer(computer);
 
    if (cMessage == true)
    {
@@ -737,9 +762,7 @@ void ConsoleUI::registerComputer()
        cout << "Computer added successfully!";
        string connectChoice;
        cout << endl;
-       cout << "Would you like to connect your computer to a scientist?" << endl;
-       cout << "Yes" << endl;
-       cout << "No" << endl;
+       cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
        cin >> connectChoice;
        cout << endl;
 
@@ -750,7 +773,8 @@ void ConsoleUI::registerComputer()
        }
        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
        {
-           exit(0);
+           cout << "nay" << endl;
+           // TODO link     exit(0);
        }
        else
        {
@@ -875,5 +899,3 @@ void ConsoleUI::printComputerHeader()
     cout << endl;
     cout.fill(' ');
 }
-
-

@@ -30,6 +30,9 @@ public:
 
     void getVectorFoundComputer(string& searchData);
 
+    void deleteComputer(int index);
+
+
 private:
 
     vector<Computer> _computers;
