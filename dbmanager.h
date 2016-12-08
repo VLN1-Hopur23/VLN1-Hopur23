@@ -5,7 +5,6 @@
 #include <vector>
 #include "scientist.h"
 #include "computer.h"
-#include <iostream> // Temporary
 
 using namespace std;
 
@@ -15,14 +14,18 @@ public:
 
     DbManager();
 
+    ~DbManager();
+
     vector<Scientist> getScientists(QString QSorder, QString QSfilter);
 
     vector<Computer> getComputers(QString QSorder, QString QSfilter);
 
     bool addScientist(const Scientist& scientist) const;
+
     void deleteScientist(const int ID);
 
     bool scientistExists(const string& searchData) const;
+
     bool addComputer(const Computer& computer) const;
 
     bool computerExists(const string& searchData) const;

@@ -675,7 +675,7 @@ void ConsoleUI::registerComputer()
     string name;
     int yearBuilt;
     string type;
-    bool built;
+    bool built = false;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -703,9 +703,9 @@ void ConsoleUI::registerComputer()
     }
     cout << endl;
 
- Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+    Computer computer(_computers.getSize(), name, yearBuilt, type, built);
 
- bool cMessage = _computers.addComputer(computer);
+    bool cMessage = _computers.addComputer(computer);
 
    if (cMessage == true)
    {

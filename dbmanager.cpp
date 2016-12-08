@@ -2,12 +2,20 @@
 
 using namespace std;
 
+static const QString dbName = "VLN1-Hopur23.sqlite";
+
 // Constructor connects to sqlite database
 DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("VLN1-Hopur23.sqlite");
+    db.setDatabaseName(dbName);
     db.open();
+}
+
+DbManager::~DbManager()
+{
+    db.close();
+    db.removeDatabase(dbName);
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
@@ -105,7 +113,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer) const
 {
-    bool cMessage = "";
+    bool cMessage = false;
 
     QSqlQuery queryAdd(db);
 
