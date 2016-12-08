@@ -327,6 +327,17 @@ void ConsoleUI::searchComputers()
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
+
+    while(searchData.empty())
+    {
+        cout << endl;
+        cout << "Keyword cannot be empty!\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        getline(cin, searchData);
+    }
+
+    cout << endl;
     cout << "Searching for " << searchData << endl;
 
     _computers.getVectorFoundComputer(searchData);
