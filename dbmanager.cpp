@@ -11,11 +11,11 @@ DbManager::DbManager()
     // Validates the connection
     if (!db.open())
     {
-        qDebug() << "Error: connection with database fail"; // MÁ EKKI VERA HÉR EÐA HVAÐ???????????????? ju thetta aetti ad vera i lagi
+        qDebug() << "Error: connection with database fail";
     }
     else
     {
-        qDebug() << "Database: connection ok";              // MÁ EKKI VERA HÉR EÐA HVAÐ???????????????? thetta lika
+        qDebug() << "Database: connection ok";
     }
 }
 
@@ -72,7 +72,6 @@ vector<Scientist> DbManager::getScientists(QString order, QString filter)
 string DbManager::addScientist(const Scientist& scientist)
 {
     string message = "";
-    bool success = false;
 
     QSqlQuery queryAdd;
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
@@ -83,7 +82,6 @@ string DbManager::addScientist(const Scientist& scientist)
 
     if(queryAdd.exec())
     {
-        success = true;
         message = "Scientist added successfully! ";
     }
     else
@@ -167,29 +165,50 @@ bool DbManager::computerExists(const string& searchData) const
 }
 
 // Gets the info on Scientist which is searced for
-vector<Scientist> DbManager::searchScientist(string& searchData)
+vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
+
     QSqlQuery query;
 
-    if (scientistExists(searchData))
+    // if (scientistExists(searchData))
     {
-        query.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
-        query.bindValue(":Name",QString::fromStdString(searchData));
 
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
+        //query.prepare("SELECT * FROM Scientists WHERE ScientistID OR Name OR Gender OR Birthyear OR Deathyear LIKE (SearchValue) VALUES (:SearchValue)");
+        //query.bindValue(":SearchValue",QString::fromStdString(searchData));
 
-        int yearOfBirth = query.value("Birthyear").toUInt();
-        int yearOfDeath = query.value("Deathyear").toUInt();
+        if (isdigit(searchData.at(0)))
+        {
+            cout << "first works\n";
+            query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        }
+        else
+        {
+            cout << "Second workds\n";
+            query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        }
 
-        Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+        while (query.next())
+        {
 
-        foundScientist.push_back(scientist);
+            string name = query.value("Name").toString().toStdString();
+            string gender = query.value("Gender").toString().toStdString();
+
+            int yearOfBirth = query.value("Birthyear").toUInt();
+            int yearOfDeath = query.value("Deathyear").toUInt();
+
+            cout << endl;
+            cout << name;
+            cout << endl;
+
+            Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+
+            foundScientist.push_back(scientist);
+        }
     }
-    else
+    // else
     {
-        qDebug() << "This scientist does not exist in this database " << query.lastError();
+       // qDebug() << "This scientist does not exist in this database " << query.lastError();
     }
     return foundScientist;
 }
