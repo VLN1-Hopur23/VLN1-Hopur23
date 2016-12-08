@@ -35,6 +35,8 @@ public:
 
     vector<Scientist> intersectComputer(const string& id);
 
+    vector<Scientist> filterScientist(const string& Command, const string& searchData);
+
 private:
 
     QSqlDatabase db;
