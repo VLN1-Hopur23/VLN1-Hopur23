@@ -20,23 +20,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
     querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
 
-    /*querySort.bindValue(":order", order);
-    querySort.bindValue(":filter", filter);
-    */
-    //querySort.prepare("SELECT * FROM Scientists ORDER BY Name ASC");
-
-    /* Emil bull
-    query.prepare("SELECT * FROM Scientists ORDER BY ':order' ':filter'");
-
-    #include <sstream>
-
-    stringstream q;
-    q << "SELECT * FROM Scientists ORDER BY " << "'"
-      << order << "' '" << filter << "'";
-    query.prepare(q);
-
-    */
-
     querySort.exec();
 
     while (querySort.next())
@@ -151,6 +134,33 @@ bool DbManager::computerExists(const string& searchData) const
         qDebug() << "Error in computer exists: " << checkQuery.lastError();
     }
     return exists;
+}
+// Returns vector with all computers associated with the scientist/s
+vector<Computer> DbManager::intersectScientists()
+{
+    vector<Computer> intersectedComputers;
+
+   /*QSqlQuery intersectQuery;
+
+    //intersectQuery.prepare("SELECT * FROM Scientists WHERE INTERSECT SELECT * FROM Computers ");
+
+    while (intersectQuery.next())
+    {
+        int computerID = intersectQuery.value("ComputerID").toUInt();
+
+        string name = intersectQuery.value("Name").toString().toStdString();
+
+        int yearBuilt = intersectQuery.value("Yearbuilt").toUInt();
+
+        string type = intersectQuery.value("Type").toString().toStdString();
+
+        bool built = intersectQuery.value("Built").toBool();
+
+        Computer computer(computerID, name, yearBuilt, type, built);
+
+        intersectedComputers.push_back(computer);
+    }*/
+    return intersectedComputers;
 }
 
 // Gets the info on Scientist which is searced for
