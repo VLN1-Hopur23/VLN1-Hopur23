@@ -692,7 +692,6 @@ void ConsoleUI::registerScientist()
 
     if (message == true)
     {
-        cout << endl;
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
