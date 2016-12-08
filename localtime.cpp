@@ -11,7 +11,7 @@ int LocalTime::getYearToDay() const
     struct tm * timeinfo;
     time (&rawtime);
     timeinfo = localtime (&rawtime);
-    // get the only the year in integer form from localtime
+    // Get the only the year in integer form from localtime
     std::string str = asctime(timeinfo);
     int LastSpace = str.find_last_of(" ")+1;
     int StrEnd = str.size();
