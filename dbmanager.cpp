@@ -178,6 +178,7 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
         while (query.next())
         {
 
+            int scientistID = query.value("ScientistID").toUInt();
             string name = query.value("Name").toString().toStdString();
             string gender = query.value("Gender").toString().toStdString();
 
@@ -188,7 +189,7 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
             cout << name;
             cout << endl;
 
-            Scientist scientist(name, gender, yearOfBirth, yearOfDeath);
+            Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
             foundScientist.push_back(scientist);
         }
