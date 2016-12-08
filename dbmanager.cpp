@@ -136,7 +136,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
     return intersectedComputers;
 }
 
-// Returns vector with all computers associated with the scientist/s
+// Returns vector with all scientists associated with the computer/s
 vector<Scientist> DbManager::intersectComputer(const string& id)
 {
     vector<Scientist> intersectedScientists;
