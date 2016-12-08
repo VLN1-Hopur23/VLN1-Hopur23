@@ -263,88 +263,62 @@ void ConsoleUI::deleteScientist()
     }
 */
 }
-
+//search for inserted keyword in Scientist vector
 void ConsoleUI::searchScientists()
 {
     string searchData;
+    string returnTomenu = "";
 
-    // While loop causes cin buffer error with getline
-    //while (searchData != "Return  " && searchData != "return  " && searchData != "r  ")
+    cout << "yes/no \t\t- Do you want to return to main menu ?\n";
+    cout << endl;
+    cin >> returnTomenu;
+    if(returnTomenu == "yes" || returnTomenu == "y" || returnTomenu == "Y")
     {
-        cout << "Return\t\t- Return to main menu\n";
-        cout << endl;
+        //go back to main menu
+    }
+    else if (returnTomenu == "no" || returnTomenu == "N" || returnTomenu != "n")
+    {
         cout << "Enter search keyword: ";
         cin.ignore();
         getline(cin, searchData);
-
         cout << "Searching for " << searchData << endl;
 
         _service.getVectorFoundScientists(searchData);
-        displayScientists();
+        // if vector turns up with search results then
+        if ((_service.getSize() != 0) && (!searchData.empty()))
+        {
+            displayScientists();
+            //custom menu
+            string command = "";
+            cout << "If you want to edit displayed Scientists then select the following options\n";
+            cout << "01. edit\t\t- Edit scientist or computer\n";
+            cout << "02. delete\t\t- Delete scientist or computer\n";
+            cout << "03. link\t\t- Link scientist to a computer\n";
+            cout << "04. quit\t\t- Exit program\n";
+            cin >> command;
+
+            if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
+            {
+                //editScientist();
+            }
+            else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
+            {
+                //deleteScientist();
+            }
+            else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+            {
+                //linkScientist();
+            }
+            // else then it returns to main menu
+
+        }
+        else
+        {
+            cout << "Keyword not found in database\n";
+        }
+
     }
 
-    /*
-    while (searchData != "Return" && searchData != "return" && searchData != "r")
-    {
-        cout << "Please choose one of the following options:\n";
-        cout << "Name\t\t- Search by name\n";
-        cout << "Age\t\t- Search by age\n";
-        cout << "Birth\t\t- Search by birth year\n";
-        cout << "Death\t\t- Search by death year\n";
-        cout << "Return\t\t- Return to main menu\n";
-
-        cin >> searchData;
-
-        if (searchData == "name" || searchData == "Name" || searchData == "n" || searchData == "N")
-        {
-            cout << "Please insert the name of the object" << endl;
-            cin >> searchName;
-            searchName = "'%"+searchName+"%'";
-            cout << endl;
-            cout << searchName << endl;
-
-            _service.getVectorFoundScientists(searchData);
-            displayScientists();
-        }
-
-        if (searchData == "age" || searchData == "Age" || searchData == "a" || searchData == "A")
-        {
-            cout << "Please insert the age of the object" << endl;
-            cin >> searchName;
-            searchName = "*"+searchName+"*";
-            cout << endl;
-            cout << searchName << endl;
-
-            age = _scientist.getAge();
-
-            _service.getVectorFoundScientists(searchData);
-            displayScientists();
-        }
-        if (searchData == "birth" || searchData == "b" || searchData == "B")
-        {
-            int birth;
-            cout << "Please insert the year of birth of the scientist" << endl;
-            cin >> birth;
-
-            _service.getVectorFoundScientists(searchData);
-            displayScientists();
-        }
-        if (searchData == "death" || searchData == "d" || searchData == "D")
-        {
-            int death;
-            cout << "Please insert the year of birth of the scientist" << endl;
-            cin >> death;
-
-            _service.getVectorFoundScientists(searchData);
-            displayScientists();
-        }
-    }
-
-    // cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
-    // cin >> searchData;
-
-    cout << endl;
-    */
 }
 
 void ConsoleUI::searchComputers()
