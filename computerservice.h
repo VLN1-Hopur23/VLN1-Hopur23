@@ -15,7 +15,7 @@ public:
     Computer getComputer(size_t index);
     vector<Computer> getComputerVector();
     // Fetches table of scientists from SQL database
-    void retrieveComputers(string order, string filter);
+    bool retrieveComputers(string order, string filter);
     // Returns the size of the computer vector
     size_t getSize() const;
     void retrieveIntersectScientist();
