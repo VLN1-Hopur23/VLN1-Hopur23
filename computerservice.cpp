@@ -68,3 +68,8 @@ size_t ComputerService::getSize() const
 {
     return _computers.size();
 }
+
+void ComputerService:: getVectorFoundComputer(string& searchData)
+{
+    _computers = _data.searchComputer(searchData);
+}
