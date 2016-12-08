@@ -245,8 +245,18 @@ void ConsoleUI::deleteScientist()
         cin.ignore(256, '\n');
         cin >> index;
     }
+    string scientistNameToDelete;
+    for (int i = 0; i < _service.getSize(); i++)
+    {
+        if(_service.getScientist(i).getScientistID() == index)
+        {
+            //cout << "Are you sure you want to remove " << _service.getScientist(i).getName() << "(y/n) ";
+            scientistNameToDelete = _service.getScientist(i).getName();
+        }
+    }
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index-1).getName() << "? (y/n): ";
+    //cin >> confirm;
+    cout << "Are you sure you want to delete " << scientistNameToDelete << "? (y/n): ";
     cin >> confirm;
 
     if (confirm == 'y' || confirm == 'Y')
@@ -384,7 +394,7 @@ void ConsoleUI::listScientists()
     //{
     bool loopNotReturn = true;
 
-    while(loopNotReturn)
+    while(loopNotReturn) //starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -400,11 +410,11 @@ void ConsoleUI::listScientists()
         cin >> order;
         cout << endl;
 
-        cout << "Write ASC for ascending order or DESC for descending order:\n";
-        cout << endl;
-        cin >> filter;
+        //cout << "Write ASC for ascending order or DESC for descending order:\n";
+        //cout << endl;
+        //cin >> filter;
                 // TO DO ERROR CHECK!!
-        _service.retrieveScientists(order, filter);        
+        //_service.retrieveScientists(order, filter);
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
@@ -445,7 +455,7 @@ void ConsoleUI::listComputers()
     string order, filter;
     bool loopNotReturn = true;
 
-    while(loopNotReturn)
+    while(loopNotReturn) //starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -459,29 +469,20 @@ void ConsoleUI::listComputers()
         cin >> order;
         cout << endl;
 
-        cout << "Write ASC for ascending order or DESC for descending order:\n";
-        cout << endl;
-        cin >> filter;
-            // TO DO ERROR CHECK!!
-        _computers.retrieveComputers(order, filter);
-        displayComputers();
-
-
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
-            loopNotReturn = false;
+            loopNotReturn = false; //quit the loop and go back
         }
         else
         {
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
-                // TO DO ERROR CHECK!!
-            if(_computers.retrieveComputers(order, filter)) // if TRUE then input is OK
+            if(_computers.retrieveComputers(order, filter))
             {
                 displayComputers();
             }
-            else                                            // input NOT_OK -> try agian
+            else                                        // input NOT_OK -> try agian
             {
                 cout << endl;
                 cout << "Not a validated input, try again!"<<endl;
@@ -555,16 +556,14 @@ void ConsoleUI::registerScientist()
     bool message = _service.addScientist(scientist);
     cout << endl;
 //  cout << message << endl;
-
+/*
     if (message == true)
     {
         cout << endl;
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
-        cout << "Would you like to connect your scientist to a comptuer?" << endl;
-        cout << "Yes" << endl;
-        cout << "No" << endl;
+        cout << "Would you like to connect your scientist to a comptuer? (Yes/No)" << endl;
         cin >> connectChoice;
         cout << endl;
 
@@ -587,7 +586,7 @@ void ConsoleUI::registerScientist()
         cout << endl;
         cout << "Add scientist failed!";
         exit(0);
-    }
+    }*/
 }
 
 void ConsoleUI::registerComputer()
