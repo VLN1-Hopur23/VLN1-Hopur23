@@ -23,6 +23,7 @@ bool ComputerService::retrieveComputers(string order, string filter)
 
     QString QSorder = "";
     QString QSfilter = "";
+    // //////////////////////////filter is for ascending (ASC) or
     if(filter == "ASC" || filter == "A")
     {
         QSfilter = QString::fromStdString("ASC");
