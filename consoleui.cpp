@@ -266,7 +266,6 @@ void ConsoleUI::deleteScientist()
 
 void ConsoleUI::searchScientists()
 {
-    string searchName;
     string searchData;
 
     // While loop causes cin buffer error with getline
@@ -304,9 +303,10 @@ void ConsoleUI::searchScientists()
             cout << endl;
             cout << searchName << endl;
 
-            _service.getVectorFoundScientists(searchName);
+            _service.getVectorFoundScientists(searchData);
             displayScientists();
         }
+
         if (searchData == "age" || searchData == "Age" || searchData == "a" || searchData == "A")
         {
             cout << "Please insert the age of the object" << endl;
@@ -315,7 +315,27 @@ void ConsoleUI::searchScientists()
             cout << endl;
             cout << searchName << endl;
 
-            _service.getVectorFoundScientists(searchName);
+            age = _scientist.getAge();
+
+            _service.getVectorFoundScientists(searchData);
+            displayScientists();
+        }
+        if (searchData == "birth" || searchData == "b" || searchData == "B")
+        {
+            int birth;
+            cout << "Please insert the year of birth of the scientist" << endl;
+            cin >> birth;
+
+            _service.getVectorFoundScientists(searchData);
+            displayScientists();
+        }
+        if (searchData == "death" || searchData == "d" || searchData == "D")
+        {
+            int death;
+            cout << "Please insert the year of birth of the scientist" << endl;
+            cin >> death;
+
+            _service.getVectorFoundScientists(searchData);
             displayScientists();
         }
     }
