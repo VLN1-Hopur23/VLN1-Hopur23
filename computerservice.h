@@ -18,6 +18,7 @@ public:
     bool retrieveComputers(string order, string filter);
     // Returns the size of the computer vector
     size_t getSize() const;
+    void getVectorFoundComputer(string& searchData);
 
 private:
     vector<Computer> _computers;
