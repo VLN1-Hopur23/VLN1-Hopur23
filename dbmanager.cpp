@@ -7,24 +7,13 @@ DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("VLN1-Hopur23.sqlite");
-
-    // Validates the connection
-    if (!db.open())
-    {
-        qDebug() << "Error: connection with database fail";
-    }
-    else
-    {
-        qDebug() << "Database: connection ok";
-    }
+    db.open();
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
-
-    db.open();
 
     QSqlQuery querySort(db);
 
@@ -48,9 +37,9 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     return scientists;
 }
 
-string DbManager::addScientist(const Scientist& scientist)
+bool DbManager::addScientist(const Scientist& scientist) const
 {
-    string message = "";
+    //bool message = "";
 
     QSqlQuery queryAdd;
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
@@ -59,16 +48,21 @@ string DbManager::addScientist(const Scientist& scientist)
     queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
     queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
 
+
+
     if(queryAdd.exec())
     {
-        message = "Scientist added successfully! ";
+        //message = "Scientist added successfully! ";
+        return true;
+
     }
     else
     {
-        message = "Add scientist failed! ";
+        //message = "Add scientist failed! ";
+        return false;
     }
 
-    return message;
+    //return message;
 }
 
 // Deletes chosen scientist from database
@@ -110,6 +104,14 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     }
     return computers;
 }
+
+/*bool DbManager::addComputer(const Computer& computer) const
+
+    bool cMessage = "";
+
+*/
+
+/* TODO DELETE IF NOT USED
 
 // Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
@@ -154,14 +156,23 @@ bool DbManager::computerExists(const string& searchData) const
     }
     return exists;
 }
+<<<<<<< HEAD
+*/
 // Returns vector with all computers associated with the scientist/s
-vector<Computer> DbManager::intersectScientists()
+vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
 
-   /*QSqlQuery intersectQuery;
+    db.open();
 
-    //intersectQuery.prepare("SELECT * FROM Scientists WHERE INTERSECT SELECT * FROM Computers ");
+    QSqlQuery query(db);
+
+    QSqlQuery intersectQuery;
+
+    intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
+    intersectQuery.bindValue(":id", QString::fromStdString(id));
+
+    intersectQuery.exec();
 
     while (intersectQuery.next())
     {
@@ -178,56 +189,41 @@ vector<Computer> DbManager::intersectScientists()
         Computer computer(computerID, name, yearBuilt, type, built);
 
         intersectedComputers.push_back(computer);
-    }*/
+    }
+
     return intersectedComputers;
 }
-
 // Gets the info on Scientist which is searced for
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
 
-    QSqlQuery query;
+    db.open();
 
-    // if (scientistExists(searchData))
+    QSqlQuery query(db);
+
+    if (isdigit(searchData.at(0)))
     {
 
-        //query.prepare("SELECT * FROM Scientists WHERE ScientistID OR Name OR Gender OR Birthyear OR Deathyear LIKE (SearchValue) VALUES (:SearchValue)");
-        //query.bindValue(":SearchValue",QString::fromStdString(searchData));
-
-        if (isdigit(searchData.at(0)))
-        {
-            cout << "first works\n";
-            query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
-        }
-        else
-        {
-            cout << "Second workds\n";
-            query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
-        }
-
-        while (query.next())
-        {
-
-            int scientistID = query.value("ScientistID").toUInt();
-            string name = query.value("Name").toString().toStdString();
-            string gender = query.value("Gender").toString().toStdString();
-
-            int yearOfBirth = query.value("Birthyear").toUInt();
-            int yearOfDeath = query.value("Deathyear").toUInt();
-
-            cout << endl;
-            cout << name;
-            cout << endl;
-
-            Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
-
-            foundScientist.push_back(scientist);
-        }
+        query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
-    // else
+    else
     {
-       // qDebug() << "This scientist does not exist in this database " << query.lastError();
+        query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
+    }
+
+    while (query.next())
+    {
+        int scientistID = query.value("ScientistID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+
+        int yearOfBirth = query.value("Birthyear").toUInt();
+        int yearOfDeath = query.value("Deathyear").toUInt();
+
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
+
+        foundScientist.push_back(scientist);
     }
     return foundScientist;
 }
@@ -238,26 +234,26 @@ vector<Computer> DbManager::searchComputer(string& searchData)
     vector<Computer> foundComputer;
     QSqlQuery query;
 
-    if(computerExists(searchData))
+    if (isdigit(searchData.at(0)))
     {
-        query.prepare("SELECT Name FROM Computers WHERE (Name) VALUES (:Name)");
-        query.bindValue(":Name",QString::fromStdString(searchData));
-
-        string name = query.value("Name").toString().toStdString();
-
-        int Yearbuilt = query.value("Yearbuilt").toUInt();
-
-        string type = query.value("Type").toString().toStdString();
-
-        bool built = query.value("Built").toBool();
-
-        Computer computer(name, Yearbuilt, type, built);
-
-        foundComputer.push_back(computer);
+        query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-        qDebug() << "This computer does not exist in this database " << query.lastError();
+        query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
+    }
+
+    while(query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int Yearbuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+
+        Computer computer(computerID, name, Yearbuilt, type, built);
+
+        foundComputer.push_back(computer);
     }
     return foundComputer;
 }

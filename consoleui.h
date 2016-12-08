@@ -58,14 +58,19 @@ private:
 
     void printComputerHeader();
 
+    void listIntersectScientist(const string& param);
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
     LocalTime _time;
 
 private:
 
+    //TODO skyrari nofn
     ScientistService _service;
+
     ComputerService _computers;
+
     Scientist _scientist;
 };
 

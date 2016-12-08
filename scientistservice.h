@@ -2,7 +2,6 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
-//#include "dataaccess.h"
 #include "dbmanager.h"
 #include <vector>
 #include <algorithm>
@@ -18,11 +17,11 @@ public:
 
     ScientistService();
 
-    void retrieveScientists(string order, string filter);
+    bool retrieveScientists(string order, string filter);
 
     void getVectorFoundScientists(string& searchData);
 
-    string addScientist(Scientist scientist);
+    bool addScientist(Scientist scientist);
 
     Scientist getScientist(size_t index);
 

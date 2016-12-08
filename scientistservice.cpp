@@ -12,7 +12,7 @@ void ScientistService:: getVectorFoundScientists(string& searchData)
     _scientists = _data.searchScientist(searchData);
 }
 
-string ScientistService::addScientist(Scientist scientist)
+bool ScientistService::addScientist(Scientist scientist)
 {
     return _data.addScientist(scientist);
 }
@@ -45,35 +45,53 @@ vector<Scientist> ScientistService::getScientistVector()
 }
 
 // Fetches table of scientists from SQL database
-void ScientistService::retrieveScientists(string order, string filter)
+bool ScientistService::retrieveScientists(string order, string filter)
 {
-    QString QSorder;
-    QString QSfilter = QString::fromStdString(filter);
+    QString QSorder = "";
+    QString QSfilter = "";
+
+    if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
+    {
+        QSfilter = QString::fromStdString("ASC");
+    }
+    else if(filter == "desc" || filter == "DESC" || filter == "d" || filter == "D")
+    {
+        QSfilter = QString::fromStdString("DESC");
+    }
+    else
+    {
+        // TO DO ERROR CHECK
+    }
 
     if(order == "name" || order == "Name" || order == "n" || order == "N")
     {
         QSorder = QString::fromStdString("Name");
-        _scientists = _data.getScientists(QSorder, QSfilter);
     }
     else if(order == "gender" || order == "Gender" || order == "g" || order == "G")
     {
         QSorder = QString::fromStdString("Gender");
-        _scientists = _data.getScientists(QSorder, QSfilter);
     }
     else if(order == "birth" || order == "Birth" || order == "b" || order == "B")
     {
         QSorder = QString::fromStdString("Birthyear");
-        _scientists = _data.getScientists(QSorder, QSfilter);
     }
     else if(order == "death" || order == "Death" || order == "d" || order == "D")
     {
         QSorder = QString::fromStdString("Deathyear");
-        _scientists = _data.getScientists(QSorder, QSfilter);
     }
     else
     {
-        cout << "Please select one of the given options!" << endl;
         // TO DO ERROR CHECK!!!
+    }
+
+    if(QSfilter != "" && QSorder != "")
+    {
+        _scientists = _data.getScientists(QSorder, QSfilter);
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

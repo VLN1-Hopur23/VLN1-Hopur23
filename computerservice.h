@@ -11,16 +11,27 @@ using namespace std;
 class ComputerService
 {
 public:
+
     ComputerService();
+
     Computer getComputer(size_t index);
+
     vector<Computer> getComputerVector();
+
     // Fetches table of scientists from SQL database
-    void retrieveComputers(string order, string filter);
+    bool retrieveComputers(string order, string filter);
+
     // Returns the size of the computer vector
     size_t getSize() const;
 
+    void retrieveIntersectScientist(const string& param);
+
+    void getVectorFoundComputer(string& searchData);
+
 private:
+
     vector<Computer> _computers;
+
     DbManager _data;
 };
 
