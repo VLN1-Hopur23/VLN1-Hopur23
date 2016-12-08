@@ -268,6 +268,7 @@ void ConsoleUI::searchScientists()
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
+    cin.get();
     cout << "Searching for " << searchData << endl;
 
     _service.getVectorFoundScientists(searchData);
