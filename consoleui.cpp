@@ -519,9 +519,42 @@ void ConsoleUI::registerScientist()
 
     Scientist scientist(_service.getSize(),name, gender, yearOfBirth, yearOfDeath);
 
-    string message = _service.addScientist(scientist);
+    bool message = _service.addScientist(scientist);
     cout << endl;
-    cout << message << endl;
+//  cout << message << endl;
+
+    if (message == true)
+    {
+        cout << endl;
+        cout << "Scientist added successfully!";
+        string connectChoice;
+        cout << endl;
+        cout << "Would you like to connect your scientist to a comptuer?" << endl;
+        cout << "Yes" << endl;
+        cout << "No" << endl;
+        cin >> connectChoice;
+        cout << endl;
+
+        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+        {
+            cout << "yay" << endl;
+            // TODO link
+        }
+        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+        {
+            exit(0);
+        }
+        else
+        {
+           cout << "Please enter a valid option!\n";
+        }
+    }
+    else
+    {
+        cout << endl;
+        cout << "Add scientist failed!";
+        exit(0);
+    }
 }
 
 void ConsoleUI::registerComputer()
@@ -543,6 +576,8 @@ void ConsoleUI::registerComputer()
 
     cout << "Computer added!" << endl;
     cout << endl;
+
+
 }
 
 void ConsoleUI::displayComputers()

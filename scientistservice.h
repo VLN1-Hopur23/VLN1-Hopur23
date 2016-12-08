@@ -26,7 +26,7 @@ public:
 
     void getVectorFoundScientists(string& searchData);
 
-    string addScientist(Scientist scientist);
+    bool addScientist(Scientist scientist);
 
     Scientist getScientist(size_t index);
 

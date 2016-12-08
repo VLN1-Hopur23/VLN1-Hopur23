@@ -37,9 +37,9 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     return scientists;
 }
 
-string DbManager::addScientist(const Scientist& scientist)
+bool DbManager::addScientist(const Scientist& scientist) const
 {
-    string message = "";
+    bool message = "";
 
     QSqlQuery queryAdd;
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
@@ -48,13 +48,18 @@ string DbManager::addScientist(const Scientist& scientist)
     queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
     queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
 
+
+
     if(queryAdd.exec())
     {
         message = "Scientist added successfully! ";
+        return true;
+
     }
     else
     {
         message = "Add scientist failed! ";
+        return false;
     }
 
     return message;
@@ -90,7 +95,15 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     }
     return computers;
 }
+
+/*bool DbManager::addComputer(const Computer& computer) const
+
+    bool cMessage = "";
+
+*/
+
 /* TODO DELETE IF NOT USED
+
 // Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
 {
