@@ -39,23 +39,26 @@ void ConsoleUI::run()
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
-                cout << "01. Scientist" << endl;
-                cout << "02. Computer" << endl;
+                cout << "01. scientist" << endl;
+                cout << "02. computer" << endl;
                 cin >> lOption;
                 cout << endl;
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
-                    _service.retrieveScientists();
+                    //_service.retrieveScientists();
                     listScientists();
-                  //  displayScientists();
+                    displayScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
                     // TODO: with SQL
 
-                    _computers.retrieveComputers();
+
                     listComputers();
+
+                    //displayComputers();
+
                  //  _computers.retrieveComputers();
                  //   displayComputers();
 
@@ -232,7 +235,6 @@ void ConsoleUI::deleteComputer()
     cin >> cIndex;
 }
 
-
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -283,8 +285,7 @@ void ConsoleUI::searchScientists()
         getline(cin, searchData);
         cout << "Searching for " << searchData << endl;
 
-        _service.getVectorFoundScientists(searchData);
-        // if vector turns up with search results then
+        // if vector turns up with search results and searchData is not empty then
         if ((_service.getSize() != 0) && (!searchData.empty()))
         {
             displayScientists();
@@ -312,6 +313,7 @@ void ConsoleUI::searchScientists()
             // else then it returns to main menu
 
         }
+        // keyword is rubish or empty
         else
         {
             cout << "Keyword not found in database\n";
@@ -329,10 +331,10 @@ void ConsoleUI::searchComputers()
     {
         cout << "Please choose one of the following options:\n";
         cout << endl;
-        cout << "Name\t\t- Search by name\n";
-        cout << "Built\t\t- Search by the year computers were built\n";
-        cout << "Type\t\t- Seatch by type\n";
-        cout << "Return\t\t- Return to main menu\n";
+        cout << "name\t\t- Search by name\n";
+        cout << "built\t\t- Search by the year computers were built\n";
+        cout << "type\t\t- Seatch by type\n";
+        cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
         cin >> searchComputerData;
@@ -341,46 +343,62 @@ void ConsoleUI::searchComputers()
 
 void ConsoleUI::listScientists()
 {
-    string sort;
+    string order, filter;
 
-    while(sort != "return" && sort!= "Return" && sort != "r")
-    {
+    //while(order != "return" && order!= "Return" && order != "r")
+    //{
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by name\n";
-        cout << "age\t\t- Sort by age\n";
+        cout << "gender\t\t- Sort by gender\n";
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
+        //cout << "age\t\t- Sort by age\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
-        cin >> sort;
+        cin >> order;
+        cout << endl;
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+                // TO DO ERROR CHECK!!
+        _service.retrieveScientists(order, filter);
 /*
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
 
         displayListOfScientist();
 */
-    }
+    //}
 }
 
 void ConsoleUI::listComputers()
 {
-    string cSort;
+    string order, filter;
 
-    while(cSort != "return" && cSort != "Return" && cSort != "r")
+    while(order != "return" && order != "Return" && order != "r")
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
-        cout << "Name\t\t- Sort by the name\n";
-        cout << "Built\t\t- Sort by the year computers were built\n";
-        cout << "Type\t\t- Sort by type\n";
+        cout << "name\t\t- Sort by the name\n";
+        cout << "built\t\t- Sort by the year computers were built\n";
+        cout << "type\t\t- Sort by type\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
-        cin >> cSort;
+        cin >> order;
+        cout << endl;
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+            // TO DO ERROR CHECK!!
+        _computers.retrieveComputers(order, filter);
+        displayComputers();
+
+
     }
 }
 
@@ -476,12 +494,12 @@ void ConsoleUI::displayComputers()
     printFrame();
     printComputerHeader();
 
-    //for (size_t i = 0; i < 3; i++) //
+    //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
-        cout.fill('0');
+        cout.fill(' ');
         cout.width(2);
-        cout << right << i << ". ";
+        cout << right << _computers.getComputer(i).getComputerID() << "  ";
         cout.fill(' ');
         cout.width(40);
         cout << left;
@@ -506,9 +524,10 @@ void ConsoleUI::displayScientists()
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
-        cout.fill('0');
+
+        cout.fill(' ');
         cout.width(2);
-        cout << right << i << ". ";
+        cout << right << _service.getScientist(i).getScientistID() << "  ";
         cout.fill(' ');
         cout.width(25);
         cout << left;
@@ -537,13 +556,13 @@ void ConsoleUI::printFrame()
 
 void ConsoleUI::printScientistHeader()
 {
-    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout << "ID  Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 }
 
 void ConsoleUI::printComputerHeader()
 {
-    cout << "Nr. Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
+    cout << "ID  Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
     cout <<"\t\t\t\t\t" << endl;
 }
 

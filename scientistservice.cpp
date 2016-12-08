@@ -96,11 +96,36 @@ vector<Scientist> ScientistService::getScientistVector()
 }
 
 // Fetches table of scientists from SQL database
-void ScientistService::retrieveScientists()
+void ScientistService::retrieveScientists(string order, string filter)
 {
-    QString name = QString::fromStdString("Name");
-    QString filter = QString::fromStdString("DESC");
-    _scientists = _data.getScientists(name, filter);
+    QString QSorder;
+    QString QSfilter = QString::fromStdString(filter);
+
+    if(order == "name" || order == "Name" || order == "n" || order == "N")
+    {
+        QSorder = QString::fromStdString("Name");
+        _scientists = _data.getScientists(QSorder, QSfilter);
+    }
+    else if(order == "gender" || order == "Gender" || order == "g" || order == "G")
+    {
+        QSorder = QString::fromStdString("Gender");
+        _scientists = _data.getScientists(QSorder, QSfilter);
+    }
+    else if(order == "birth" || order == "Birth" || order == "b" || order == "B")
+    {
+        QSorder = QString::fromStdString("Birthyear");
+        _scientists = _data.getScientists(QSorder, QSfilter);
+    }
+    else if(order == "death" || order == "Death" || order == "d" || order == "D")
+    {
+        QSorder = QString::fromStdString("Deathyear");
+        _scientists = _data.getScientists(QSorder, QSfilter);
+    }
+    else
+    {
+        cout << "Please select one of the given options!" << endl;
+        // TO DO ERROR CHECK!!!
+    }
 }
 
 /*
