@@ -17,6 +17,11 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
     QSqlQuery querySort(db);
 
+    /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
+    querySort.bindValue(":order", ''); // Dálkur til að sortera eftir
+    querySort.bindValue(":filter", ''); // Gildið til að leita eftir
+    querySort.bindValue(":column", ''); // Dálkur til að leita eftir
+    */
     querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
 
     querySort.exec();
