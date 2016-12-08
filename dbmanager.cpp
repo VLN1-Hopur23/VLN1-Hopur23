@@ -88,8 +88,9 @@ string DbManager::addScientist(const Scientist& scientist)
     return message;
 }
 
-// Gets computer and his information from database and reads into Computer vector
-vector<Computer> DbManager::getComputers()
+// Gets computer and his information from database(SQL) and reads into Computer vector
+// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
+vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 {
     vector<Computer> computers;
 
@@ -97,8 +98,8 @@ vector<Computer> DbManager::getComputers()
 
     QSqlQuery query(db);
 
-    query.exec("SELECT * FROM Computers");
-
+    query.prepare("SELECT * FROM Computers ORDER BY " + QSorder + " " + QSfilter);
+    query.exec();
     while (query.next())
     {
         int computerID = query.value("ComputerID").toUInt();

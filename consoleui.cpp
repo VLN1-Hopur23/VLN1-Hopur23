@@ -54,8 +54,11 @@ void ConsoleUI::run()
                 {
                     // TODO: with SQL
 
-                    _computers.retrieveComputers();
+
                     listComputers();
+
+                    //displayComputers();
+
                  //  _computers.retrieveComputers();
                  //   displayComputers();
 
@@ -399,9 +402,9 @@ void ConsoleUI::listScientists()
 
 void ConsoleUI::listComputers()
 {
-    string cSort;
+    string order, filter;
 
-    while(cSort != "return" && cSort != "Return" && cSort != "r")
+    while(order != "return" && order != "Return" && order != "r")
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -412,7 +415,16 @@ void ConsoleUI::listComputers()
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
-        cin >> cSort;
+        cin >> order;
+        cout << endl;
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+            // TO DO ERROR CHECK!!
+        _computers.retrieveComputers(order, filter);
+        displayComputers();
+
+
     }
 }
 
@@ -511,9 +523,9 @@ void ConsoleUI::displayComputers()
     //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
-        cout.fill('0');
+        cout.fill(' ');
         cout.width(2);
-        cout << right << i << ". ";
+        cout << right << _computers.getComputer(i).getComputerID() << "  ";
         cout.fill(' ');
         cout.width(40);
         cout << left;
@@ -576,7 +588,7 @@ void ConsoleUI::printScientistHeader()
 
 void ConsoleUI::printComputerHeader()
 {
-    cout << "Nr. Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
+    cout << "ID  Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
     cout <<"\t\t\t\t\t" << endl;
 }
 
