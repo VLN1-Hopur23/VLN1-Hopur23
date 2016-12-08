@@ -22,7 +22,7 @@ Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeat
     _gender = gender;
     _yearOfBirth = yearOfBirth;
     _yearOfDeath = yearOfDeath;
-    _scientistID = 0;          //default =0
+    _scientistID = 0;          // Default = 0
 }
 
 int Scientist::getScientistID() const

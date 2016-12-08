@@ -127,7 +127,6 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 */
 
-
 void ScientistService::deleteScientist(int index)
 {
     _data.deleteScientist(index);

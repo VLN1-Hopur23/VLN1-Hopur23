@@ -3,7 +3,6 @@
 #include "consoleui.h"
 #include "scientistservice.h"
 
-
 using namespace std;
 
 int main()
