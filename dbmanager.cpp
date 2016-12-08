@@ -39,9 +39,9 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
 bool DbManager::addScientist(const Scientist& scientist) const
 {
-    bool message = "";
+    //bool message = "";
 
-    QSqlQuery queryAdd;
+    QSqlQuery queryAdd(db);
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
     queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
     queryAdd.bindValue(":Gender", QString::fromStdString(scientist.getGender()));
@@ -52,17 +52,26 @@ bool DbManager::addScientist(const Scientist& scientist) const
 
     if(queryAdd.exec())
     {
-        message = "Scientist added successfully! ";
+        //message = "Scientist added successfully! ";
         return true;
 
     }
     else
     {
-        message = "Add scientist failed! ";
+        //message = "Add scientist failed! ";
         return false;
     }
 
-    return message;
+    //return message;
+}
+
+// Deletes scientist with chosen ID number from database
+void DbManager::deleteScientist(const int ID)
+{
+    QSqlQuery queryDelete(db);
+    queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
+    queryDelete.bindValue(":ScientistID",ID);
+    queryDelete.exec();
 }
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
@@ -70,8 +79,6 @@ bool DbManager::addScientist(const Scientist& scientist) const
 vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 {
     vector<Computer> computers;
-
-    db.open();
 
     QSqlQuery query(db);
 
@@ -96,6 +103,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
+<<<<<<< HEAD
 bool DbManager::addComputer(const Computer& computer) const
 {
     bool cMessage = "";
@@ -122,64 +130,15 @@ bool DbManager::addComputer(const Computer& computer) const
     return cMessage;
 }
 
+=======
 
-/* TODO DELETE IF NOT USED
-
-// Checks if scientist already exist in the database
-bool DbManager::scientistExists(const string& searchData) const
-{
-    bool exists = false;
-
-    QSqlQuery checkQuery;
-    checkQuery.prepare("SELECT Name FROM Scientists WHERE (Name) VALUES (:Name)");
-    checkQuery.bindValue(":Name",QString::fromStdString(searchData));
-
-    if (checkQuery.exec())
-    {
-         exists = true;
-    }
-    else
-    {
-        qDebug() << "Error in scientist exists: " << checkQuery.lastError();
-    }
-
-    return exists;
-}
-
-// Checks if computer already exist in the database
-bool DbManager::computerExists(const string& searchData) const
-{
-    bool exists = false;
-
-    QSqlQuery checkQuery;
-    checkQuery.prepare("SELECT Name FROM Computers WHERE (Name) VALUES (:Name)");
-    checkQuery.bindValue(":Name",QString::fromStdString(searchData));
-
-    if (checkQuery.exec())
-    {
-        if (checkQuery.next())
-        {
-            exists = true;
-        }
-    }
-    else
-    {
-        qDebug() << "Error in computer exists: " << checkQuery.lastError();
-    }
-    return exists;
-}
-<<<<<<< HEAD
-*/
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
+>>>>>>> 07259779bec07ba2b5f942867eae55fb4f26c3e6
 
-    db.open();
-
-    QSqlQuery query(db);
-
-    QSqlQuery intersectQuery;
+    QSqlQuery intersectQuery(db);
 
     intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
     intersectQuery.bindValue(":id", QString::fromStdString(id));
@@ -205,6 +164,39 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 
     return intersectedComputers;
 }
+
+// Returns vector with all computers associated with the scientist/s
+vector<Scientist> DbManager::intersectComputer(const string& id)
+{
+    vector<Scientist> intersectedScientists;
+
+    QSqlQuery intersectQuery(db);
+
+    intersectQuery.prepare("SELECT * FROM Scientists INNER JOIN Computers_Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID INNER JOIN Computers ON Computers.ComputerID = Computers_Scientists.ComputerID WHERE Computers.ComputerID = :id");
+    intersectQuery.bindValue(":id", QString::fromStdString(id));
+
+    intersectQuery.exec();
+
+    while (intersectQuery.next())
+    {
+        int scientistID = intersectQuery.value("ScientistID").toUInt();
+
+        string name = intersectQuery.value("Name").toString().toStdString();
+
+        string gender = intersectQuery.value("Gender").toString().toStdString();
+
+        int yearOfBirth = intersectQuery.value("Birthyear").toUInt();
+
+        int yearOfDeath = intersectQuery.value("Deathyear").toUInt();
+
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
+
+        intersectedScientists.push_back(scientist);
+    }
+
+    return intersectedScientists;
+}
+
 // Gets the info on Scientist which is searced for
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
@@ -244,26 +236,26 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 vector<Computer> DbManager::searchComputer(string& searchData)
 {
     vector<Computer> foundComputer;
-    QSqlQuery query;
+    QSqlQuery query(db);
 
     if (isdigit(searchData.at(0)))
     {
-        query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Yearbuilt) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-        query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
     while(query.next())
     {
         int computerID = query.value("ComputerID").toUInt();
         string name = query.value("Name").toString().toStdString();
-        int Yearbuilt = query.value("Yearbuilt").toUInt();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
         string type = query.value("Type").toString().toStdString();
         bool built = query.value("Built").toBool();
 
-        Computer computer(computerID, name, Yearbuilt, type, built);
+        Computer computer(computerID, name, yearBuilt, type, built);
 
         foundComputer.push_back(computer);
     }

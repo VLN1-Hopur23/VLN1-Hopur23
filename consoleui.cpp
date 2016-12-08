@@ -232,21 +232,31 @@ void ConsoleUI::deleteComputer()
 void ConsoleUI::deleteScientist()
 {
     int index;
-//  char confirm;
+    char confirm;
 
     cout << "Delete registered scientist" << endl;
     cout << endl;
-    cout << "Enter the index number of the scientist to delete: ";
+    cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-/*  while (cin.fail() || index > _service.getSize() || index < 0)
+    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
     }
+    string scientistNameToDelete;
+    for (int i = 0; i < _service.getSize(); i++)
+    {
+        if(_service.getScientist(i).getScientistID() == index)
+        {
+            //cout << "Are you sure you want to remove " << _service.getScientist(i).getName() << "(y/n) ";
+            scientistNameToDelete = _service.getScientist(i).getName();
+        }
+    }
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+    //cin >> confirm;
+    cout << "Are you sure you want to delete " << scientistNameToDelete << "? (y/n): ";
     cin >> confirm;
 
     if (confirm == 'y' || confirm == 'Y')
@@ -257,7 +267,6 @@ void ConsoleUI::deleteScientist()
         cout << "Successfully deleted!" << endl;
         cout << endl;
     }
-*/
 }
 
 // Search for inserted keyword in Scientist vector
@@ -268,6 +277,18 @@ void ConsoleUI::searchScientists()
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
+
+    while(searchData.empty())
+    {
+        cout << endl;
+        cout << "Keyword cannot be empty!\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        getline(cin, searchData);
+    }
+
+    cout << endl;
+
     cout << "Searching for " << searchData << endl;
 
     _service.getVectorFoundScientists(searchData);
@@ -316,6 +337,17 @@ void ConsoleUI::searchComputers()
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
+
+    while(searchData.empty())
+    {
+        cout << endl;
+        cout << "Keyword cannot be empty!\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        getline(cin, searchData);
+    }
+
+    cout << endl;
     cout << "Searching for " << searchData << endl;
 
     _computers.getVectorFoundComputer(searchData);
@@ -343,13 +375,16 @@ void ConsoleUI::searchComputers()
         }
         else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
         {
-            //linkScientist();
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectComputer(param);
         }
         // Else then it returns to main menu for example when quit is chosen
-
     }
-    // Keyword is rubish or empty
-    //else if
+    // keyword is rubish or empty
+    else
     {
         cout << "Keyword not found in database\n";
     }
@@ -358,9 +393,10 @@ void ConsoleUI::searchComputers()
 void ConsoleUI::listScientists()
 {
     string order, filter;
+
     bool loopNotReturn = true;
 
-    while(loopNotReturn)
+    while(loopNotReturn) //starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -376,12 +412,6 @@ void ConsoleUI::listScientists()
         cin >> order;
         cout << endl;
 
-        cout << "Write ASC for ascending order or DESC for descending order:\n";
-        cout << endl;
-        cin >> filter;
-                // TO DO ERROR CHECK!!
-        _service.retrieveScientists(order, filter);        
-
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
             loopNotReturn = false;
@@ -391,7 +421,7 @@ void ConsoleUI::listScientists()
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
-                    // TO DO ERROR CHECK!!
+
             if(_service.retrieveScientists(order, filter))
             {
                 displayScientists();
@@ -402,10 +432,6 @@ void ConsoleUI::listScientists()
                 cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
-
-            //vector<Scientist> _AllScientist = _service.getScientistVector();
-            //_AllScientist = SortVector( _AllScientist, sort);
-            //displayListOfScientist();
         }
     }
 }
@@ -416,12 +442,18 @@ void ConsoleUI::listIntersectScientist(const string& param)
     displayComputers();
 }
 
+void ConsoleUI::listIntersectComputer(const string& param)
+{
+    _service.retrieveIntersectComputer(param);
+    displayScientists();
+}
+
 void ConsoleUI::listComputers()
 {
     string order, filter;
     bool loopNotReturn = true;
 
-    while(loopNotReturn)
+    while(loopNotReturn) //starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -437,19 +469,18 @@ void ConsoleUI::listComputers()
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
-            loopNotReturn = false;
+            loopNotReturn = false; //quit the loop and go back
         }
         else
         {
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
-                // TO DO ERROR CHECK!!
-            if(_computers.retrieveComputers(order, filter)) // if TRUE then input is OK
+            if(_computers.retrieveComputers(order, filter))
             {
                 displayComputers();
             }
-            else                                            // input NOT_OK -> try agian
+            else                                        // input NOT_OK -> try agian
             {
                 cout << endl;
                 cout << "Not a validated input, try again!"<<endl;
@@ -523,16 +554,14 @@ void ConsoleUI::registerScientist()
     bool message = _service.addScientist(scientist);
     cout << endl;
 //  cout << message << endl;
-
+/*
     if (message == true)
     {
         cout << endl;
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
-        cout << "Would you like to connect your scientist to a comptuer?" << endl;
-        cout << "Yes" << endl;
-        cout << "No" << endl;
+        cout << "Would you like to connect your scientist to a comptuer? (Yes/No)" << endl;
         cin >> connectChoice;
         cout << endl;
 
@@ -556,7 +585,7 @@ void ConsoleUI::registerScientist()
         cout << "Add scientist failed!";
         cout << endl;
         exit(0);
-    }
+    }*/
 }
 
 void ConsoleUI::registerComputer()
@@ -639,21 +668,42 @@ void ConsoleUI::displayComputers()
 
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
+        string type =_computers.getComputer(i).getType();
+        string typeFit1;
+        string typeFit2;
+        bool typeToLong = false;
+
+        if (type.size()>25)
+        {
+                typeFit1 =type.substr(0,25);
+
+                int LastSpace = typeFit1.find_last_of(" ");
+                int StrEnd = type.size();
+                typeFit1 =type.substr(0,LastSpace-1);
+                typeFit2 = type.substr(LastSpace+1, StrEnd);
+                typeToLong = true;
+        }
+        else
+        {
+                typeFit1 =type;
+        }
 
         cout << setw(2) << right << _computers.getComputer(i).getComputerID() << "  ";
         cout <<setw(36)<< left << _computers.getComputer(i).getName();
         cout << setw(8) << _computers.getComputer(i).getYearBuilt();
-        cout << setw(27) << _computers.getComputer(i).getType();
+        cout << setw(27) << typeFit1;
         cout << setw(2) << _computers.getComputer(i).getBuilt();
         cout << endl;
-/* -----FOR TROUBLE SHOTING
-        cout << setw(3) << right << _computers.getComputer(i).getComputerID() << " ";
-        cout <<setw(36)<< left << _computers.getComputer(i).getName().size();
-        cout << setw(8) << _computers.getComputer(i).getYearBuilt();
-        cout << setw(25) << _computers.getComputer(i).getType().size();
-        cout << setw(5) << _computers.getComputer(i).getBuilt();
-        cout << endl;
-*/
+        if(typeToLong)
+        {
+            cout << setw(4) << left << "-||-";
+            cout <<setw(36)<< left <<"-||-";
+            cout << setw(8) << "-||-";
+            cout << setw(25) << typeFit2;
+            cout << setw(5) << "-||-";
+            cout << endl;
+        }
+
     }
     printFrame();
 }
@@ -720,8 +770,4 @@ void ConsoleUI::printComputerHeader()
     cout.fill(' ');
 }
 
-vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
-{
-   return _service.sortScientists(_listOfScientist, sort);
-}
 

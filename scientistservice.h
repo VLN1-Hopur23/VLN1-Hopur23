@@ -11,9 +11,6 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
-
-    //DataAccess _data;
-
     DbManager _data;
 
 public:
@@ -21,8 +18,6 @@ public:
     ScientistService();
 
     bool retrieveScientists(string order, string filter);
-
-    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
     void getVectorFoundScientists(string& searchData);
 
@@ -43,6 +38,8 @@ public:
     bool DataAccessWorks();
 
     void deleteScientist(int index);
+
+    void retrieveIntersectComputer(const string& param);
 };
 
 #endif // SCIENTISTSERVICE_H
