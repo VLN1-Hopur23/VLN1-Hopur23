@@ -32,9 +32,9 @@
      </ul>
     <li>Users can edit a scientist or a computer in the list by they're choice by entering the index number</li>
     <li>Users can delete a scientist or a computer of the list by entering the index number</li>
-    <li>User has the option to return to main menu in every category</li>
-    <li>User is able to connect a computer scientist to more than a single computer</li>
-    <li>User is able to connect a computer to more than a single computer scientist</li>
+    <li>Users have the option to return to main menu in every category</li>
+    <li>Users are able to connect a computer scientist to more than a single computer</li>
+    <li>Users are able to connect a computer to more than a single computer scientist</li>
 </ul>  
 ###Extra features:
 <ul>
