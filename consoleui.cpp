@@ -267,7 +267,18 @@ void ConsoleUI::searchScientists()
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
-    cin.get();
+
+    while(searchData.empty())
+    {
+        cout << endl;
+        cout << "Keyword cannot be empty!\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        getline(cin, searchData);
+    }
+
+    cout << endl;
+
     cout << "Searching for " << searchData << endl;
 
     _service.getVectorFoundScientists(searchData);
