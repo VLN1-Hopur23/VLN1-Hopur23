@@ -137,3 +137,8 @@ void ScientistService::deleteScientist(int index)
     cout << "delete in scientistservice.cpp" << endl;
 }
 
+void ScientistService::retrieveIntersectComputer(const string& param)
+{
+    _scientists = _data.intersectComputer(param);
+
+}

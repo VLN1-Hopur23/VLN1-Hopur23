@@ -60,6 +60,8 @@ private:
 
     void listIntersectScientist(const string& param);
 
+    void listIntersectComputer(const string& param);
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
     LocalTime _time;
@@ -70,8 +72,6 @@ private:
     ScientistService _service;
 
     ComputerService _computers;
-
-    Scientist _scientist;
 };
 
 #endif // CONSOLEUI_H

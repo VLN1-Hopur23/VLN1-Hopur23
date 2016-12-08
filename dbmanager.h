@@ -33,6 +33,8 @@ public:
 
     vector<Computer> intersectScientist(const string& id);
 
+    vector<Scientist> intersectComputer(const string& id);
+
 private:
 
     QSqlDatabase db;

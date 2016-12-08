@@ -365,7 +365,11 @@ void ConsoleUI::searchComputers()
         }
         else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
         {
-            //linkScientist();
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectComputer(param);
         }
         // Else then it returns to main menu for example when quit is chosen
     }
@@ -438,6 +442,12 @@ void ConsoleUI::listIntersectScientist(const string& param)
 {
     _computers.retrieveIntersectScientist(param);
     displayComputers();
+}
+
+void ConsoleUI::listIntersectComputer(const string& param)
+{
+    _service.retrieveIntersectComputer(param);
+    displayScientists();
 }
 
 void ConsoleUI::listComputers()

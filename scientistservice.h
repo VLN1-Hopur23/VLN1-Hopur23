@@ -38,6 +38,8 @@ public:
     bool DataAccessWorks();
 
     void deleteScientist(int index);
+
+    void retrieveIntersectComputer(const string& param);
 };
 
 #endif // SCIENTISTSERVICE_H
