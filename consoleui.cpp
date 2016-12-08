@@ -345,10 +345,9 @@ void ConsoleUI::searchComputers()
             //linkScientist();
         }
         // Else then it returns to main menu for example when quit is chosen
-
     }
-    // Keyword is rubish or empty
-    //else if
+    // keyword is rubish or empty
+    else
     {
         cout << "Keyword not found in database\n";
     }

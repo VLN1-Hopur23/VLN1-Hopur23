@@ -156,7 +156,7 @@ bool DbManager::computerExists(const string& searchData) const
     }
     return exists;
 }
-<<<<<<< HEAD
+
 */
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
@@ -236,22 +236,22 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
     if (isdigit(searchData.at(0)))
     {
-        query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Yearbuilt) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-        query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
     while(query.next())
     {
         int computerID = query.value("ComputerID").toUInt();
         string name = query.value("Name").toString().toStdString();
-        int Yearbuilt = query.value("Yearbuilt").toUInt();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
         string type = query.value("Type").toString().toStdString();
         bool built = query.value("Built").toBool();
 
-        Computer computer(computerID, name, Yearbuilt, type, built);
+        Computer computer(computerID, name, yearBuilt, type, built);
 
         foundComputer.push_back(computer);
     }
