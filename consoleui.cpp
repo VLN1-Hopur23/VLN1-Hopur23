@@ -235,7 +235,6 @@ void ConsoleUI::deleteComputer()
     cin >> cIndex;
 }
 
-
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -378,9 +377,10 @@ void ConsoleUI::listScientists()
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by name\n";
-        //cout << "age\t\t- Sort by age\n";
+        cout << "gender\t\t- Sort by gender\n";
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
+        //cout << "age\t\t- Sort by age\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
