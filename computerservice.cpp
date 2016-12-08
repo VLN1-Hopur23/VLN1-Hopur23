@@ -22,13 +22,10 @@ bool ComputerService::retrieveComputers(string order, string filter)
 {
     QString QSorder = "";
     QString QSfilter = "";
-<<<<<<< HEAD
-    // //////////////////////////filter is for ascending (ASC) or
-    if(filter == "ASC" || filter == "A")
-=======
 
+    // //////////////////////////filter is for ascending (ASC) or
     if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
->>>>>>> f0be7464097f8cb680f7b5404fc43755392a4a31
+
     {
         QSfilter = QString::fromStdString("ASC");
     }

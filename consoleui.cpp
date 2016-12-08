@@ -551,7 +551,7 @@ void ConsoleUI::displayComputers()
         cout << setw(25) << _computers.getComputer(i).getType().size();
         cout << setw(5) << _computers.getComputer(i).getBuilt();
         cout << endl;
-        */
+*/
     }
     printFrame();
 }
@@ -597,6 +597,12 @@ void ConsoleUI::printScientistHeader()
 {
     cout << "ID Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
+
+    cout.fill('-');
+    cout.width(78);
+    cout << left << "-";
+    cout << endl;
+    cout.fill(' ');
 }
 
 void ConsoleUI::printComputerHeader()
