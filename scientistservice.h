@@ -2,7 +2,6 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientist.h"
-//#include "dataaccess.h"
 #include "dbmanager.h"
 #include <vector>
 #include <algorithm>
@@ -12,7 +11,6 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
-    //DataAccess _data;
     DbManager _data;
 
 public:
@@ -21,11 +19,9 @@ public:
 
     bool retrieveScientists(string order, string filter);
 
-    vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
-
     void getVectorFoundScientists(string& searchData);
 
-    string addScientist(Scientist scientist);
+    bool addScientist(Scientist scientist);
 
     Scientist getScientist(size_t index);
 
