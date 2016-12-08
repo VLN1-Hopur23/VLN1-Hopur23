@@ -34,3 +34,8 @@ size_t ComputerService::getSize() const
 {
     return _computers.size();
 }
+
+void ComputerService::retrieveIntersectScientist()
+{
+    _computers = _data.intersectScientist("8");
+}

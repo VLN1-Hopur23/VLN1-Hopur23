@@ -22,7 +22,7 @@ public:
     bool computerExists(const string& searchData) const;
     vector<Scientist> searchScientist(const string& searchData);
     vector<Computer> searchComputer(string& searchData);
-    vector<Computer> intersectScientists();
+    vector<Computer> intersectScientist(const QString& id);
 
 private:
 

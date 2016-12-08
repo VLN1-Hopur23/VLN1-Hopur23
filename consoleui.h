@@ -58,6 +58,8 @@ private:
 
     void printComputerHeader();
 
+    void listIntersectScientist();
+
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
     LocalTime _time;

@@ -49,6 +49,7 @@ void ConsoleUI::run()
                     //_service.retrieveScientists();
                     listScientists();
                     displayScientists();
+
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
@@ -365,6 +366,7 @@ void ConsoleUI::listScientists()
         cin >> filter;
                 // TO DO ERROR CHECK!!
         _service.retrieveScientists(order, filter);
+
 /*
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
@@ -372,6 +374,12 @@ void ConsoleUI::listScientists()
         displayListOfScientist();
 */
     //}
+}
+
+void ConsoleUI::listIntersectScientist()
+{
+    _computers.retrieveIntersectScientist();
+    displayComputers();
 }
 
 void ConsoleUI::listComputers()
