@@ -1,5 +1,5 @@
 #include "consoleui.h"
-
+#include <iomanip>
 using namespace std;
 
 // Presentation layer
@@ -272,11 +272,11 @@ void ConsoleUI::searchScientists()
 
     _service.getVectorFoundScientists(searchData);
 
-    // if vector turns up with search results and searchData is not empty then
+    // If vector turns up with search results and searchData is not empty then
     if ((_service.getSize() != 0) && (!searchData.empty()))
     {
         displayScientists();
-        //custom menu
+        // Custom menu
         string command = "";
         cout << "If you want to change displayed scientist(s) then select the following options\n";
         cout << "01. edit\t\t- Edit scientist \n";
@@ -302,7 +302,7 @@ void ConsoleUI::searchScientists()
             listIntersectScientist(param);
         }
     }
-    // keyword is rubbish or empty
+    // Keyword is rubbish or empty
     else
     {
         cout << "Keyword not found in database\n";
@@ -320,11 +320,11 @@ void ConsoleUI::searchComputers()
 
     _computers.getVectorFoundComputer(searchData);
 
-    // if vector turns up with search results and searchData is not empty then
+    // If vector turns up with search results and searchData is not empty then
     if ((_computers.getSize() != 0) && (!searchData.empty()))
     {
         displayComputers();
-        //custom menu
+        //Custom menu
         string command = "";
         cout << "If you want to change displayed computer(s) then select the following options\n";
         cout << "01. edit\t\t- Edit computer\n";
@@ -345,10 +345,10 @@ void ConsoleUI::searchComputers()
         {
             //linkScientist();
         }
-        // else then it returns to main menu for example when quit is chosen
+        // Else then it returns to main menu for example when quit is chosen
 
     }
-    // keyword is rubish or empty
+    // Keyword is rubish or empty
     //else if
     {
         cout << "Keyword not found in database\n";
@@ -399,7 +399,7 @@ void ConsoleUI::listScientists()
             else
             {
                 cout << endl;
-                cout << "Not validated input, try again!"<<endl;
+                cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
 
@@ -445,14 +445,14 @@ void ConsoleUI::listComputers()
             cout << endl;
             cin >> filter;
                 // TO DO ERROR CHECK!!
-            if(_computers.retrieveComputers(order, filter))
+            if(_computers.retrieveComputers(order, filter)) // if TRUE then input is OK
             {
                 displayComputers();
             }
-            else
+            else                                            // input NOT_OK -> try agian
             {
                 cout << endl;
-                cout << "Not Validated input, try again!"<<endl;
+                cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
         }
@@ -551,25 +551,23 @@ void ConsoleUI::displayComputers()
     printFrame();
     printComputerHeader();
 
-    //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
-        cout.fill(' ');
-        cout.width(2);
-        cout << right << _computers.getComputer(i).getComputerID() << "  ";
-        cout.fill(' ');
-        cout.width(40);
-        cout << left;
-        cout << _computers.getComputer(i).getName();
-        cout << "\t";
-        cout << _computers.getComputer(i).getYearBuilt();
-        cout << "\t";
-        cout << left << _computers.getComputer(i).getType();
-        cout << "\t";
-        cout << left << _computers.getComputer(i).getBuilt();
-        cout << "\t";
-        cout << left;
+
+        cout << setw(2) << right << _computers.getComputer(i).getComputerID() << "  ";
+        cout <<setw(36)<< left << _computers.getComputer(i).getName();
+        cout << setw(8) << _computers.getComputer(i).getYearBuilt();
+        cout << setw(27) << _computers.getComputer(i).getType();
+        cout << setw(2) << _computers.getComputer(i).getBuilt();
         cout << endl;
+/* -----FOR TROUBLE SHOTING
+        cout << setw(3) << right << _computers.getComputer(i).getComputerID() << " ";
+        cout <<setw(36)<< left << _computers.getComputer(i).getName().size();
+        cout << setw(8) << _computers.getComputer(i).getYearBuilt();
+        cout << setw(25) << _computers.getComputer(i).getType().size();
+        cout << setw(5) << _computers.getComputer(i).getBuilt();
+        cout << endl;
+*/
     }
     printFrame();
 }
@@ -581,7 +579,6 @@ void ConsoleUI::displayScientists()
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
-
         cout.fill(' ');
         cout.width(2);
         cout << right << _service.getScientist(i).getScientistID() << "  ";
@@ -605,7 +602,7 @@ void ConsoleUI::displayScientists()
 void ConsoleUI::printFrame()
 {
     cout.fill('=');
-    cout.width(63);
+    cout.width(78);
     cout << left << "=";
     cout << endl;
     cout.fill(' ');
@@ -613,14 +610,28 @@ void ConsoleUI::printFrame()
 
 void ConsoleUI::printScientistHeader()
 {
-    cout << "ID  Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout << "ID Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
+
+    cout.fill('-');
+    cout.width(78);
+    cout << left << "-";
+    cout << endl;
+    cout.fill(' ');
 }
 
 void ConsoleUI::printComputerHeader()
 {
-    cout << "ID  Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
-    cout <<"\t\t\t\t\t" << endl;
+    //cout << "ID  Computer name\t\t\t\tYear Built\tType\tBuilt" << endl;
+    //cout <<"\t\t\t\t\t" << endl;
+    cout << setw(4) << "ID" << setw(36)<<"Computer name" << setw(8) << "Year";
+    cout << setw(25) << "Type" << setw(5) << "Built" << endl;
+    cout << setw(40) <<" "<< "Built" << endl;
+    cout.fill('-');
+    cout.width(78);
+    cout << left << "-";
+    cout << endl;
+    cout.fill(' ');
 }
 
 vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
