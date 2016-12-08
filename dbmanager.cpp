@@ -65,7 +65,7 @@ bool DbManager::addScientist(const Scientist& scientist) const
     //return message;
 }
 
-// Deletes chosen scientist from database
+// Deletes scientist with chosen ID number from database
 void DbManager::deleteScientist(const int ID)
 {
     QSqlQuery queryDelete(db);

@@ -393,9 +393,7 @@ void ConsoleUI::searchComputers()
 void ConsoleUI::listScientists()
 {
     string order, filter;
-    //TO DO return
-    //while(order != "return" && order!= "Return" && order != "r")
-    //{
+
     bool loopNotReturn = true;
 
     while(loopNotReturn) //starts as true
@@ -414,12 +412,6 @@ void ConsoleUI::listScientists()
         cin >> order;
         cout << endl;
 
-        //cout << "Write ASC for ascending order or DESC for descending order:\n";
-        //cout << endl;
-        //cin >> filter;
-                // TO DO ERROR CHECK!!
-        //_service.retrieveScientists(order, filter);
-
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
             loopNotReturn = false;
@@ -429,7 +421,7 @@ void ConsoleUI::listScientists()
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
-                    // TO DO ERROR CHECK!!
+
             if(_service.retrieveScientists(order, filter))
             {
                 displayScientists();
@@ -440,10 +432,6 @@ void ConsoleUI::listScientists()
                 cout << "Not a validated input, try again!"<<endl;
                 cout << endl;
             }
-
-            //vector<Scientist> _AllScientist = _service.getScientistVector();
-            //_AllScientist = SortVector( _AllScientist, sort);
-            //displayListOfScientist();
         }
     }
 }

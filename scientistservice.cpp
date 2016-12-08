@@ -130,15 +130,10 @@ string ScientistService::editScientist(int index, string change, string input)
 
 void ScientistService::deleteScientist(int index)
 {
-    //_scientists.erase(_scientists.begin()+index);
-    //_data.writeData(_scientists);
-    //_data.deleteScientist(getScientist(index));
     _data.deleteScientist(index);
-    cout << "delete in scientistservice.cpp" << endl;
 }
 
 void ScientistService::retrieveIntersectComputer(const string& param)
 {
     _scientists = _data.intersectComputer(param);
-
 }
