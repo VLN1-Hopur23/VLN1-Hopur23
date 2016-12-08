@@ -12,7 +12,9 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+
     //DataAccess _data;
+
     DbManager _data;
 
 public:

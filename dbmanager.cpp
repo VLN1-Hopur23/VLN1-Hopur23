@@ -188,13 +188,11 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     }
     else
     {
-
         query.exec("SELECT * FROM Scientists WHERE (Name || Gender) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
     while (query.next())
     {
-
         int scientistID = query.value("ScientistID").toUInt();
         string name = query.value("Name").toString().toStdString();
         string gender = query.value("Gender").toString().toStdString();
@@ -206,7 +204,6 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
         foundScientist.push_back(scientist);
     }
-
     return foundScientist;
 }
 
@@ -218,12 +215,10 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
     if (isdigit(searchData.at(0)))
     {
-
         query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-
         query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
@@ -239,6 +234,5 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
         foundComputer.push_back(computer);
     }
-
     return foundComputer;
 }
