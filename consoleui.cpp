@@ -41,6 +41,7 @@ void ConsoleUI::run()
                 cout << "Select a table to display:" << endl;
                 cout << "01. scientist" << endl;
                 cout << "02. computer" << endl;
+                cin >> lOption;
                 cout << endl;
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
@@ -155,6 +156,7 @@ void ConsoleUI::run()
 
             else if (command == "quit" || command == "Quit" || command == "q" || command == "6" || command == "06")
             {
+
                 loop = false;
             }
             else

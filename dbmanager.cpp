@@ -7,14 +7,13 @@ DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("VLN1-Hopur23.sqlite");
+    db.open();
 }
 
 // Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
-
-    db.open();
 
     QSqlQuery querySort(db);
 
@@ -169,8 +168,6 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 
         intersectedComputers.push_back(computer);
     }
-
-    db.close();
 
     return intersectedComputers;
 }
