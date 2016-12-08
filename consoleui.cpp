@@ -39,16 +39,16 @@ void ConsoleUI::run()
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
-                cout << "01. Scientist" << endl;
-                cout << "02. Computer" << endl;
+                cout << "01. scientist" << endl;
+                cout << "02. computer" << endl;
                 cin >> lOption;
                 cout << endl;
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
-                    _service.retrieveScientists();
+                    //_service.retrieveScientists();
                     listScientists();
-                  //  displayScientists();
+                    displayScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
@@ -355,10 +355,10 @@ void ConsoleUI::searchComputers()
     {
         cout << "Please choose one of the following options:\n";
         cout << endl;
-        cout << "Name\t\t- Search by name\n";
-        cout << "Built\t\t- Search by the year computers were built\n";
-        cout << "Type\t\t- Seatch by type\n";
-        cout << "Return\t\t- Return to main menu\n";
+        cout << "name\t\t- Search by name\n";
+        cout << "built\t\t- Search by the year computers were built\n";
+        cout << "type\t\t- Seatch by type\n";
+        cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
         cin >> searchComputerData;
@@ -367,28 +367,34 @@ void ConsoleUI::searchComputers()
 
 void ConsoleUI::listScientists()
 {
-    string sort;
+    string order, filter;
 
-    while(sort != "return" && sort!= "Return" && sort != "r")
-    {
+    //while(order != "return" && order!= "Return" && order != "r")
+    //{
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by name\n";
-        cout << "age\t\t- Sort by age\n";
+        //cout << "age\t\t- Sort by age\n";
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
-        cin >> sort;
+        cin >> order;
+        cout << endl;
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+                // TO DO ERROR CHECK!!
+        _service.retrieveScientists(order, filter);
 /*
         vector<Scientist> _AllScientist = _service.getScientistVector();
         _AllScientist = SortVector( _AllScientist, sort);
 
         displayListOfScientist();
 */
-    }
+    //}
 }
 
 void ConsoleUI::listComputers()
@@ -400,9 +406,9 @@ void ConsoleUI::listComputers()
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
-        cout << "Name\t\t- Sort by the name\n";
-        cout << "Built\t\t- Sort by the year computers were built\n";
-        cout << "Type\t\t- Sort by type\n";
+        cout << "name\t\t- Sort by the name\n";
+        cout << "built\t\t- Sort by the year computers were built\n";
+        cout << "type\t\t- Sort by type\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
@@ -502,7 +508,7 @@ void ConsoleUI::displayComputers()
     printFrame();
     printComputerHeader();
 
-    //for (size_t i = 0; i < 3; i++) //
+    //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
         cout.fill('0');
