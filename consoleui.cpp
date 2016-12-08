@@ -46,15 +46,15 @@ void ConsoleUI::run()
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
                 {
-                    //_service.retrieveScientists();
-                    listScientists();
+                    _service.retrieveScientists("name", "ASC");
                     displayScientists();
+                    listScientists();
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
-                    //_computers.retrieveComputers();
+                    _computers.retrieveComputers("name", "ASC");
+                    displayComputers();
                     listComputers();
-                    //displayComputers();
                 }
                 else
                 {
@@ -238,7 +238,7 @@ void ConsoleUI::deleteScientist()
     cout << endl;
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-    while (cin.fail() || index > _service.getSize() || index < 0)
+    while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
@@ -246,7 +246,7 @@ void ConsoleUI::deleteScientist()
         cin >> index;
     }
     string scientistNameToDelete;
-    for (int i = 0; i < _service.getSize(); i++)
+    for (size_t i = 0; i < _service.getSize(); i++)
     {
         if(_service.getScientist(i).getScientistID() == index)
         {
@@ -273,60 +273,84 @@ void ConsoleUI::deleteScientist()
 void ConsoleUI::searchScientists()
 {
     string searchData;
+    string command;
+
+    cout << "Filter by: \n";
+    cout << "01. gender\t\t- Filters scientist by gender \n";
+    cout << "02. birth\t\t- Filters scientist by year of birth\n";
+    cout << "03. death\t\t- Filters scientist by year of death \n";
+    cout << "or Search by a keyword, name or any character\n";
+    cout << "04. search\t\t\n";
+    cout << "05. life\t\t- search for meaning of life\n";
+    cout << endl;
+    cin >> command;
 
     cout << "Enter search keyword: ";
     cin.ignore();
     getline(cin, searchData);
 
-    while(searchData.empty())
-    {
-        cout << endl;
-        cout << "Keyword cannot be empty!\n";
-        cout << endl;
-        cout << "Enter search keyword: ";
-        getline(cin, searchData);
-    }
-
-    cout << endl;
-
-    cout << "Searching for " << searchData << endl;
-
-    _service.getVectorFoundScientists(searchData);
-
-    // If vector turns up with search results and searchData is not empty then
-    if ((_service.getSize() != 0) && (!searchData.empty()))
+    if(_service.searchingByFilter(command, searchData))
     {
         displayScientists();
-        // Custom menu
-        string command = "";
-        cout << "If you want to change displayed scientist(s) then select the following options\n";
-        cout << "01. edit\t\t- Edit scientist \n";
-        cout << "02. delete\t\t- Delete scientist\n";
-        cout << "03. link\t\t- Link scientist to a computer\n";
-        cout << "04. any other key\t- Exit program\n";
-        cin >> command;
-
-        if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
-        {
-            //editScientist();
-        }
-        else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
-        {
-            //deleteScientist();
-        }
-        else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
-        {
-            string param;
-            cout << "Select ID to show associated: ";
-            cin >> param;
-            cout << endl;
-            listIntersectScientist(param);
-        }
     }
-    // Keyword is rubbish or empty
+    /*
     else
     {
-        cout << "Keyword not found in database\n";
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
+
+        cout << endl;
+
+        cout << "Searching for " << searchData << endl;
+
+        _service.getVectorFoundScientists(searchData);
+
+        // If vector turns up with search results and searchData is not empty then
+        if ((_service.getSize() != 0) && (!searchData.empty()))
+        {
+            displayScientists();
+            // Custom menu
+            string command = "";
+            cout << "If you want to change displayed scientist(s) then select the following options\n";
+            cout << "01. edit\t\t- Edit scientist \n";
+            cout << "02. delete\t\t- Delete scientist\n";
+            cout << "03. link\t\t- Link scientist to a computer\n";
+            cout << "04. any other key\t- Exit program\n";
+            cin >> command;
+
+            if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
+            {
+                //editScientist();
+            }
+            else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
+            {
+                //deleteScientist();
+            }
+            else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+            {
+                string param;
+                cout << "Select ID to show associated: ";
+                cin >> param;
+                cout << endl;
+                listIntersectScientist(param);
+            }
+        }
+        // Keyword is rubbish or empty
+        else
+        {
+            cout << "Keyword not found in database\n";
+        }
+    }*/
+    else if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
+    {
+        cout << "42\n";
     }
 }
 
@@ -392,6 +416,47 @@ void ConsoleUI::searchComputers()
 
 void ConsoleUI::listScientists()
 {
+    string option;
+    bool exit = false;
+
+    while (exit == false)
+    {
+        cout << endl;
+        cout << "Choose option: \n";
+        cout << endl;
+        cout << "sort\t\t- Sort list\n";
+        cout << "link\t\t- Show associated\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+        cin >> option;
+
+        if (option == "sort" || option == "Sort" || option == "s" || option == "S")
+        {
+            sortScientists();
+            displayScientists();
+        }
+        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        {
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
+        }
+        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        {
+            exit = true;
+        }
+        else
+        {
+            cout << "Enter a valid option!\n";
+            cout << endl;
+        }
+    }
+}
+
+void ConsoleUI::sortScientists()
+{
     string order, filter;
 
     bool loopNotReturn = true;
@@ -449,6 +514,47 @@ void ConsoleUI::listIntersectComputer(const string& param)
 }
 
 void ConsoleUI::listComputers()
+{
+    string option;
+    bool exit = false;
+
+    while (exit == false)
+    {
+        cout << endl;
+        cout << "Choose option: \n";
+        cout << endl;
+        cout << "sort\t\t- Sort list\n";
+        cout << "link\t\t- Show associated\n";
+        cout << "return\t\t- Return to main menu\n";
+        cout << endl;
+        cin >> option;
+
+        if (option == "sort" || option == "Sort" || option == "s" || option == "S")
+        {
+            sortComputers();
+            displayComputers();
+        }
+        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        {
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectComputer(param);
+        }
+        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        {
+            exit = true;
+        }
+        else
+        {
+            cout << "Enter a valid option!\n";
+            cout << endl;
+        }
+    }
+}
+
+void ConsoleUI::sortComputers()
 {
     string order, filter;
     bool loopNotReturn = true;
@@ -554,7 +660,7 @@ void ConsoleUI::registerScientist()
     bool message = _service.addScientist(scientist);
     cout << endl;
 //  cout << message << endl;
-/*
+
     if (message == true)
     {
         cout << endl;
@@ -583,30 +689,81 @@ void ConsoleUI::registerScientist()
     {
         cout << endl;
         cout << "Add scientist failed!";
+        cout << endl;
         exit(0);
-    }*/
+    }
 }
 
 void ConsoleUI::registerComputer()
 {
-    string computerName;
-    int computerBuildYear;
-    string computerType;
+    string name;
+    int yearBuilt;
+    string type;
+    bool built;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerName);
+    getline(cin,name);
+
+    while (name.empty())
+    {
+        cout << "Enter the name of the computer:" << endl;
+        getline(cin, name);
+    }
+    cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
-    cin >> computerBuildYear;
+    cin >> yearBuilt;
+    cout << endl;
 
     cout << "Enter the type of the computer: " << endl;
     cin.ignore();
-    getline(cin,computerType);
+    getline(cin, type);
 
-    cout << "Computer added!" << endl;
+    while (type.empty())
+    {
+        cout << "Enter the type of the computer:" << endl;
+        getline(cin, type);
+    }
     cout << endl;
 
+ Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+
+ bool cMessage = _computers.addComputer(computer);
+
+   if (cMessage == true)
+   {
+       cout << endl;
+       cout << "Computer added successfully!";
+       string connectChoice;
+       cout << endl;
+       cout << "Would you like to connect your computer to a scientist?" << endl;
+       cout << "Yes" << endl;
+       cout << "No" << endl;
+       cin >> connectChoice;
+       cout << endl;
+
+       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+       {
+           cout << "yay" << endl;
+           // TODO link
+       }
+       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+       {
+           exit(0);
+       }
+       else
+       {
+          cout << "Please enter a valid option!\n";
+       }
+   }
+   else
+   {
+       cout << endl;
+       cout << "Add computer failed!";
+       cout << endl;
+       exit(0);
+   }
 
 }
 

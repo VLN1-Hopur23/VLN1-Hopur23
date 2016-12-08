@@ -23,7 +23,7 @@ public:
     void deleteScientist(const int ID);
 
     bool scientistExists(const string& searchData) const;
-//  bool addComputer(const Computer& computer) const;
+    bool addComputer(const Computer& computer) const;
 
     bool computerExists(const string& searchData) const;
 
@@ -34,6 +34,8 @@ public:
     vector<Computer> intersectScientist(const string& id);
 
     vector<Scientist> intersectComputer(const string& id);
+
+    vector<Scientist> filterScientist(const string& Command, const string& searchData);
 
 private:
 

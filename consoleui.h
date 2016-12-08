@@ -34,7 +34,11 @@ private:
 
     void listScientists();
 
+    void sortScientists();
+
     void listComputers();
+
+    void sortComputers();
 
     void displayScientists();
 

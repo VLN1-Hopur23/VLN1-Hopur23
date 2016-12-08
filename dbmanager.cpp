@@ -108,6 +108,32 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
+bool DbManager::addComputer(const Computer& computer) const
+{
+    bool cMessage = "";
+
+    QSqlQuery queryAdd(db);
+
+    queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
+    queryAdd.bindValue(":ComputerID", computer.getComputerID());
+    queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
+    queryAdd.bindValue(":Yearbuilt", computer.getYearBuilt());
+    queryAdd.bindValue(":Type", QString::fromStdString(computer.getType()));
+    queryAdd.bindValue(":Built", computer.getBuilt());
+
+    if(queryAdd.exec())
+    {
+        cMessage = "Computer added successfully! ";
+        return true;
+    }
+    else
+    {
+        cMessage = "Add computer failed! ";
+        return false;
+    }
+
+    return cMessage;
+}
 
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
@@ -141,7 +167,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
     return intersectedComputers;
 }
 
-// Returns vector with all computers associated with the scientist/s
+// Returns vector with all scientists associated with the computer/s
 vector<Scientist> DbManager::intersectComputer(const string& id)
 {
     vector<Scientist> intersectedScientists;
@@ -178,9 +204,8 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
 
-    db.open();
-
     QSqlQuery query(db);
+
 
     if (isdigit(searchData.at(0)))
     {
@@ -207,7 +232,36 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     }
     return foundScientist;
 }
+vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
+{
+    vector<Scientist> foundScientist;
+    QString qCommand = QString::fromStdString(Command);
+    QString qSearchData = QString::fromStdString(searchData);
 
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Scientists WHERE :qCommand = \":qSearchData");
+    query.bindValue(":qCommand",qCommand);
+    query.bindValue("qSearchData",qSearchData);
+    query.exec();
+
+    while (query.next())
+    {
+        int scientistID = query.value("ScientistID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
+
+        int yearOfBirth = query.value("Birthyear").toUInt();
+        int yearOfDeath = query.value("Deathyear").toUInt();
+
+        Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
+
+        foundScientist.push_back(scientist);
+    }
+    return foundScientist;
+}
 // Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {
