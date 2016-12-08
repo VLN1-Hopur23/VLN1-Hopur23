@@ -39,8 +39,8 @@ void ConsoleUI::run()
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
-                cout << "01. scientist" << endl;
-                cout << "02. computer" << endl;
+                cout << "01. Scientists" << endl;
+                cout << "02. Computers" << endl;
                 cin >> lOption;
                 cout << endl;
 
