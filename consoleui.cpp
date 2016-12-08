@@ -276,7 +276,7 @@ void ConsoleUI::searchScientists()
         cin.ignore();
         getline(cin, searchData);
 
-        cout << "Searching for " << searchData << endl;
+        cout << "Searching for: " << searchData << endl;
 
         _service.getVectorFoundScientists(searchData);
         displayScientists();
@@ -538,9 +538,10 @@ void ConsoleUI::displayScientists()
 
     for (size_t i = 0; i < _service.getSize(); i++)
     {
-        cout.fill('0');
+
+        cout.fill(' ');
         cout.width(2);
-        cout << right << i << ". ";
+        cout << right << _service.getScientist(i).getScientistID() << "  ";
         cout.fill(' ');
         cout.width(25);
         cout << left;
@@ -569,7 +570,7 @@ void ConsoleUI::printFrame()
 
 void ConsoleUI::printScientistHeader()
 {
-    cout << "Nr. Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
+    cout << "ID  Scientist name\t\tGender\tBirth\tDeath\tAge" << endl;
     cout <<"\t\t\t\t\tYear\tYear" << endl;
 }
 
