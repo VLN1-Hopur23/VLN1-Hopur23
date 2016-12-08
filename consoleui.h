@@ -76,9 +76,6 @@ private:
     ScientistService _service;
 
     ComputerService _computers;
-
-    Scientist _scientist;
-
 };
 
 #endif // CONSOLEUI_H

@@ -198,8 +198,6 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientist;
 
-    db.open();
-
     QSqlQuery query(db);
 
     if (isdigit(searchData.at(0)))
