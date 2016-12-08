@@ -403,9 +403,11 @@ void ConsoleUI::listScientists()
 void ConsoleUI::listComputers()
 {
     string order, filter;
+    bool loopNotReturn = true;
 
-    while(order != "return" && order != "Return" && order != "r")
+    while(loopNotReturn)
     {
+
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
@@ -417,13 +419,29 @@ void ConsoleUI::listComputers()
 
         cin >> order;
         cout << endl;
-        cout << "Write ASC for ascending order or DESC for descending order:\n";
-        cout << endl;
-        cin >> filter;
-            // TO DO ERROR CHECK!!
-        _computers.retrieveComputers(order, filter);
-        displayComputers();
+        if(order == "return" || order == "Return" || order == "r")
+        {
 
+            loopNotReturn = false;
+
+        }
+        else
+        {
+            cout << "Write ASC for ascending order or DESC for descending order:\n";
+            cout << endl;
+            cin >> filter;
+                // TO DO ERROR CHECK!!
+            if(_computers.retrieveComputers(order, filter))
+            {
+                displayComputers();
+            }
+            else
+            {
+                cout << endl;
+                cout << "Not Validated input, try again!"<<endl;
+                cout << endl;
+            }
+        }
 
     }
 }
