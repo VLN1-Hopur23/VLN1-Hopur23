@@ -50,7 +50,6 @@ bool ComputerService::retrieveComputers(string order, string filter)
     }
     else
     {
-        cout << "Please select one of the given options!" << endl;
         // TO DO ERROR CHECK!!!
     }
 

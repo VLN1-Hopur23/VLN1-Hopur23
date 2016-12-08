@@ -373,7 +373,7 @@ void ConsoleUI::listScientists()
             else
             {
                 cout << endl;
-                cout << "Not Validated input, try again!"<<endl;
+                cout << "Not validated input, try again!"<<endl;
                 cout << endl;
             }
 
