@@ -18,9 +18,16 @@ vector<Computer> ComputerService::getComputerVector()
 }
 
 // Fetches table of scientists from SQL database
-void ComputerService::retrieveComputers()
+void ComputerService::retrieveComputers(string order, string filter)
 {
-    _computers = data.getComputers();
+    QString QSorder;
+    QString QSfilter = QString::fromStdString(filter);
+
+    if(order == "Name" || order == "name" || order == "n" || order =="N"){
+        QSorder = QString::fromStdString("Name");
+        _computers = _data.getComputers(QSorder, QSfilter);
+    }
+    _computers = _data.getComputers(QSorder, QSfilter);
 }
 
 size_t ComputerService::getSize() const

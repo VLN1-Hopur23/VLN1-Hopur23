@@ -18,7 +18,7 @@ public:
 
     ScientistService();
 
-    void retrieveScientists();
+    void retrieveScientists(string order, string filter);
 
     vector<Scientist> sortScientists(vector<Scientist> _listOfScientists, string sort);
 
