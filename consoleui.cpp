@@ -269,6 +269,22 @@ void ConsoleUI::searchScientists()
     string searchName;
     string searchData;
 
+    // While loop causes cin buffer error with getline
+    //while (searchData != "Return  " && searchData != "return  " && searchData != "r  ")
+    {
+        cout << "Return\t\t- Return to main menu\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        cout << "Searching for " << searchData << endl;
+
+        _service.getVectorFoundScientists(searchData);
+        displayScientists();
+    }
+
+    /*
     while (searchData != "Return" && searchData != "return" && searchData != "r")
     {
         cout << "Please choose one of the following options:\n";
@@ -280,31 +296,35 @@ void ConsoleUI::searchScientists()
 
         cin >> searchData;
 
-        if (searchData == "Name" || searchData == "n" || searchData == "N")
+        if (searchData == "name" || searchData == "Name" || searchData == "n" || searchData == "N")
         {
             cout << "Please insert the name of the object" << endl;
             cin >> searchName;
-            searchName = "\%"+searchName+"\%";
+            searchName = "'%"+searchName+"%'";
+            cout << endl;
+            cout << searchName << endl;
 
             _service.getVectorFoundScientists(searchName);
             displayScientists();
         }
-        if (searchData == "Age" || searchData == "a" || searchData == "A")
+        if (searchData == "age" || searchData == "Age" || searchData == "a" || searchData == "A")
         {
             cout << "Please insert the age of the object" << endl;
             cin >> searchName;
-            searchName = "\%"+searchName+"\%";
+            searchName = "*"+searchName+"*";
+            cout << endl;
+            cout << searchName << endl;
 
             _service.getVectorFoundScientists(searchName);
             displayScientists();
         }
-
     }
 
-    cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
-    cin >> searchData;
+    // cout << "Please write the letter/s of the scientist/s that you want to display" << endl;
+    // cin >> searchData;
 
     cout << endl;
+    */
 }
 
 void ConsoleUI::searchComputers()
@@ -378,13 +398,13 @@ void ConsoleUI::registerScientist()
     int yearOfDeath;
 
     cout << "Enter the name of the person:" << endl;
-    cin >> name;
+    cin.ignore();
+    getline(cin, name);
 
     while (name.empty())
     {
         cout << "Enter the name of the person:" << endl;
-        cin.clear();
-        cin >> name;
+        getline(cin, name);
     }
 
     cout << "Enter gender (m for male, f for female):" << endl;
