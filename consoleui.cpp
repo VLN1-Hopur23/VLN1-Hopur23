@@ -620,21 +620,42 @@ void ConsoleUI::displayComputers()
 
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
+        string type =_computers.getComputer(i).getType();
+        string typeFit1;
+        string typeFit2;
+        bool typeToLong = false;
+
+        if (type.size()>25)
+        {
+                typeFit1 =type.substr(0,25);
+
+                int LastSpace = typeFit1.find_last_of(" ");
+                int StrEnd = type.size();
+                typeFit1 =type.substr(0,LastSpace-1);
+                typeFit2 = type.substr(LastSpace+1, StrEnd);
+                typeToLong = true;
+        }
+        else
+        {
+                typeFit1 =type;
+        }
 
         cout << setw(2) << right << _computers.getComputer(i).getComputerID() << "  ";
         cout <<setw(36)<< left << _computers.getComputer(i).getName();
         cout << setw(8) << _computers.getComputer(i).getYearBuilt();
-        cout << setw(27) << _computers.getComputer(i).getType();
+        cout << setw(27) << typeFit1;
         cout << setw(2) << _computers.getComputer(i).getBuilt();
         cout << endl;
-/* -----FOR TROUBLE SHOTING
-        cout << setw(3) << right << _computers.getComputer(i).getComputerID() << " ";
-        cout <<setw(36)<< left << _computers.getComputer(i).getName().size();
-        cout << setw(8) << _computers.getComputer(i).getYearBuilt();
-        cout << setw(25) << _computers.getComputer(i).getType().size();
-        cout << setw(5) << _computers.getComputer(i).getBuilt();
-        cout << endl;
-*/
+        if(typeToLong)
+        {
+            cout << setw(4) << left << "-||-";
+            cout <<setw(36)<< left <<"-||-";
+            cout << setw(8) << "-||-";
+            cout << setw(25) << typeFit2;
+            cout << setw(5) << "-||-";
+            cout << endl;
+        }
+
     }
     printFrame();
 }
