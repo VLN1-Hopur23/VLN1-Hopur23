@@ -39,8 +39,8 @@ void ConsoleUI::run()
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
-                cout << "01. Scientist" << endl;
-                cout << "02. Computer" << endl;
+                cout << "01. scientist" << endl;
+                cout << "02. computer" << endl;
                 cin >> lOption;
                 cout << endl;
 
@@ -355,9 +355,9 @@ void ConsoleUI::searchComputers()
     {
         cout << "Please choose one of the following options:\n";
         cout << endl;
-        cout << "Name\t\t- Search by name\n";
-        cout << "Built\t\t- Search by the year computers were built\n";
-        cout << "Type\t\t- Seatch by type\n";
+        cout << "name\t\t- Search by name\n";
+        cout << "built\t\t- Search by the year computers were built\n";
+        cout << "type\t\t- Seatch by type\n";
         cout << "Return\t\t- Return to main menu\n";
         cout << endl;
 
@@ -406,9 +406,9 @@ void ConsoleUI::listComputers()
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
-        cout << "Name\t\t- Sort by the name\n";
-        cout << "Built\t\t- Sort by the year computers were built\n";
-        cout << "Type\t\t- Sort by type\n";
+        cout << "name\t\t- Sort by the name\n";
+        cout << "built\t\t- Sort by the year computers were built\n";
+        cout << "type\t\t- Sort by type\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
@@ -508,7 +508,7 @@ void ConsoleUI::displayComputers()
     printFrame();
     printComputerHeader();
 
-    //for (size_t i = 0; i < 3; i++) //
+    //for (size_t i = 0; i < 3; i++)
     for(size_t i = 0; i < _computers.getSize(); i++)
     {
         cout.fill('0');
