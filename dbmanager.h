@@ -20,9 +20,13 @@ public:
     vector<Computer> getComputers(QString QSorder, QString QSfilter);
 
     bool addScientist(const Scientist& scientist) const;
+
     void deleteScientist(const int ID);
 
+    void deleteComputer(const int ID);
+
     bool scientistExists(const string& searchData) const;
+
     bool addComputer(const Computer& computer) const;
 
     bool computerExists(const string& searchData) const;

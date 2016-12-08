@@ -17,6 +17,11 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
     QSqlQuery querySort(db);
 
+    /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
+    querySort.bindValue(":order", ''); // Dálkur til að sortera eftir
+    querySort.bindValue(":filter", ''); // Gildið til að leita eftir
+    querySort.bindValue(":column", ''); // Dálkur til að leita eftir
+    */
     querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
 
     querySort.exec();
@@ -62,6 +67,15 @@ bool DbManager::addScientist(const Scientist& scientist) const
 }
 
 // Deletes scientist with chosen ID number from database
+void DbManager::deleteComputer(const int ID)
+{
+    QSqlQuery queryDelete(db);
+    queryDelete.prepare("DELETE FROM Computers WHERE ComputerID = (:ComputerID)");
+    queryDelete.bindValue(":ComputerID",ID);
+    queryDelete.exec();
+}
+
+// Deletes computer with chosen ID number from database
 void DbManager::deleteScientist(const int ID)
 {
     QSqlQuery queryDelete(db);
@@ -69,6 +83,7 @@ void DbManager::deleteScientist(const int ID)
     queryDelete.bindValue(":ScientistID",ID);
     queryDelete.exec();
 }
+
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC

@@ -84,3 +84,9 @@ void ComputerService:: getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);
 }
+
+void ComputerService::deleteComputer(int index)
+{
+    _data.deleteComputer(index);
+
+}
