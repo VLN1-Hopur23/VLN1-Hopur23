@@ -18,7 +18,7 @@ public:
     bool retrieveComputers(string order, string filter);
     // Returns the size of the computer vector
     size_t getSize() const;
-    void retrieveIntersectScientist();
+    void retrieveIntersectScientist(const string& param);
 
 private:
     vector<Computer> _computers;

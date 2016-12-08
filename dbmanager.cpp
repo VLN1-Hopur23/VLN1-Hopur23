@@ -136,7 +136,7 @@ bool DbManager::computerExists(const string& searchData) const
     return exists;
 }
 // Returns vector with all computers associated with the scientist/s
-vector<Computer> DbManager::intersectScientist(const QString& id)
+vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
 
@@ -147,7 +147,7 @@ vector<Computer> DbManager::intersectScientist(const QString& id)
     QSqlQuery intersectQuery;
 
     intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
-    intersectQuery.bindValue(":id", id);
+    intersectQuery.bindValue(":id", QString::fromStdString(id));
 
     intersectQuery.exec();
 

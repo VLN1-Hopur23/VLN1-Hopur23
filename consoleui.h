@@ -58,7 +58,7 @@ private:
 
     void printComputerHeader();
 
-    void listIntersectScientist();
+    void listIntersectScientist(const string& param);
 
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 

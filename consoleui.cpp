@@ -38,10 +38,14 @@ void ConsoleUI::run()
             if (command == "list" || command == "List" || command == "l" || command == "2" || command == "02")
             {
                 string lOption;
+                string lOption2;
+                string param;
                 cout << "Select a table to display:" << endl;
                 cout << "01. scientist" << endl;
                 cout << "02. computer" << endl;
                 cin >> lOption;
+                cin >> lOption2;
+                cin >> param;
                 cout << endl;
 
                 if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
@@ -49,7 +53,6 @@ void ConsoleUI::run()
                     //_service.retrieveScientists();
                     listScientists();
                     displayScientists();
-
                 }
                 else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
                 {
@@ -376,9 +379,9 @@ void ConsoleUI::listScientists()
     //}
 }
 
-void ConsoleUI::listIntersectScientist()
+void ConsoleUI::listIntersectScientist(const string& param)
 {
-    _computers.retrieveIntersectScientist();
+    _computers.retrieveIntersectScientist(param);
     displayComputers();
 }
 

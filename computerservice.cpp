@@ -55,7 +55,7 @@ size_t ComputerService::getSize() const
     return _computers.size();
 }
 
-void ComputerService::retrieveIntersectScientist()
+void ComputerService::retrieveIntersectScientist(const string& param)
 {
-    _computers = _data.intersectScientist("8");
+    _computers = _data.intersectScientist(param);
 }
