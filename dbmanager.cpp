@@ -37,9 +37,9 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     return scientists;
 }
 
-string DbManager::addScientist(const Scientist& scientist)
+bool DbManager::addScientist(const Scientist& scientist) const
 {
-    string message = "";
+    //bool message = "";
 
     QSqlQuery queryAdd;
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
@@ -48,16 +48,30 @@ string DbManager::addScientist(const Scientist& scientist)
     queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
     queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
 
+
+
     if(queryAdd.exec())
     {
-        message = "Scientist added successfully! ";
+        //message = "Scientist added successfully! ";
+        return true;
+
     }
     else
     {
-        message = "Add scientist failed! ";
+        //message = "Add scientist failed! ";
+        return false;
     }
 
-    return message;
+    //return message;
+}
+
+// Deletes chosen scientist from database
+void DbManager::deleteScientist(const int ID)
+{
+    QSqlQuery queryDelete;
+    queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
+    queryDelete.bindValue(":ScientistID",ID);
+    queryDelete.exec();
 }
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
@@ -90,7 +104,15 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     }
     return computers;
 }
+
+/*bool DbManager::addComputer(const Computer& computer) const
+
+    bool cMessage = "";
+
+*/
+
 /* TODO DELETE IF NOT USED
+
 // Checks if scientist already exist in the database
 bool DbManager::scientistExists(const string& searchData) const
 {
@@ -134,7 +156,7 @@ bool DbManager::computerExists(const string& searchData) const
     }
     return exists;
 }
-<<<<<<< HEAD
+
 */
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
@@ -214,22 +236,22 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
     if (isdigit(searchData.at(0)))
     {
-        query.exec("SELECT * FROM Scientists WHERE (Yearbuilt || Built) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Yearbuilt) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
     {
-        query.exec("SELECT * FROM Scientists WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
+        query.exec("SELECT * FROM Computers WHERE (Name || Type) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
 
     while(query.next())
     {
         int computerID = query.value("ComputerID").toUInt();
         string name = query.value("Name").toString().toStdString();
-        int Yearbuilt = query.value("Yearbuilt").toUInt();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
         string type = query.value("Type").toString().toStdString();
         bool built = query.value("Built").toBool();
 
-        Computer computer(computerID, name, Yearbuilt, type, built);
+        Computer computer(computerID, name, yearBuilt, type, built);
 
         foundComputer.push_back(computer);
     }

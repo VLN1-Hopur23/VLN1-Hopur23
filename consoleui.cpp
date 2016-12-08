@@ -232,13 +232,13 @@ void ConsoleUI::deleteComputer()
 void ConsoleUI::deleteScientist()
 {
     int index;
-//  char confirm;
+    char confirm;
 
     cout << "Delete registered scientist" << endl;
     cout << endl;
-    cout << "Enter the index number of the scientist to delete: ";
+    cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-/*  while (cin.fail() || index > _service.getSize() || index < 0)
+    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
@@ -246,7 +246,7 @@ void ConsoleUI::deleteScientist()
         cin >> index;
     }
 
-    cout << "Are you sure you want to delete " << _service.getScientist(index).getName() << "? (y/n): ";
+    cout << "Are you sure you want to delete " << _service.getScientist(index-1).getName() << "? (y/n): ";
     cin >> confirm;
 
     if (confirm == 'y' || confirm == 'Y')
@@ -257,7 +257,6 @@ void ConsoleUI::deleteScientist()
         cout << "Successfully deleted!" << endl;
         cout << endl;
     }
-*/
 }
 
 // Search for inserted keyword in Scientist vector
@@ -347,10 +346,9 @@ void ConsoleUI::searchComputers()
             //linkScientist();
         }
         // Else then it returns to main menu for example when quit is chosen
-
     }
-    // Keyword is rubish or empty
-    //else if
+    // keyword is rubish or empty
+    else
     {
         cout << "Keyword not found in database\n";
     }
@@ -359,6 +357,9 @@ void ConsoleUI::searchComputers()
 void ConsoleUI::listScientists()
 {
     string order, filter;
+    //TO DO return
+    //while(order != "return" && order!= "Return" && order != "r")
+    //{
     bool loopNotReturn = true;
 
     while(loopNotReturn)
@@ -435,6 +436,14 @@ void ConsoleUI::listComputers()
 
         cin >> order;
         cout << endl;
+
+        cout << "Write ASC for ascending order or DESC for descending order:\n";
+        cout << endl;
+        cin >> filter;
+            // TO DO ERROR CHECK!!
+        _computers.retrieveComputers(order, filter);
+        displayComputers();
+
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
@@ -521,9 +530,42 @@ void ConsoleUI::registerScientist()
 
     Scientist scientist(_service.getSize(),name, gender, yearOfBirth, yearOfDeath);
 
-    string message = _service.addScientist(scientist);
+    bool message = _service.addScientist(scientist);
     cout << endl;
-    cout << message << endl;
+//  cout << message << endl;
+
+    if (message == true)
+    {
+        cout << endl;
+        cout << "Scientist added successfully!";
+        string connectChoice;
+        cout << endl;
+        cout << "Would you like to connect your scientist to a comptuer?" << endl;
+        cout << "Yes" << endl;
+        cout << "No" << endl;
+        cin >> connectChoice;
+        cout << endl;
+
+        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+        {
+            cout << "yay" << endl;
+            // TODO link
+        }
+        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+        {
+            exit(0);
+        }
+        else
+        {
+           cout << "Please enter a valid option!\n";
+        }
+    }
+    else
+    {
+        cout << endl;
+        cout << "Add scientist failed!";
+        exit(0);
+    }
 }
 
 void ConsoleUI::registerComputer()
@@ -545,6 +587,8 @@ void ConsoleUI::registerComputer()
 
     cout << "Computer added!" << endl;
     cout << endl;
+
+
 }
 
 void ConsoleUI::displayComputers()
@@ -635,8 +679,4 @@ void ConsoleUI::printComputerHeader()
     cout.fill(' ');
 }
 
-vector<Scientist> ConsoleUI::SortVector(vector<Scientist> _listOfScientist,string sort)
-{
-   return _service.sortScientists(_listOfScientist, sort);
-}
 

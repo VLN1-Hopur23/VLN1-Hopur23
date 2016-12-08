@@ -7,63 +7,12 @@ ScientistService::ScientistService()
 
 }
 
-// Operator instrument that compares names in alphabetical order
-struct ScientistComparisonNameForward
-{
-    bool operator() (Scientist i, Scientist j) {return (i.getName()<j.getName());}
-};
-
-// Operator instrument that compares year of birth in ascending order
-bool ScientistComparisonYearOfBirthForward (Scientist i, Scientist j)
-{
-    return (i.getYearOfBirth()<j.getYearOfBirth());
-}
-
-bool ScientistComparisonYearOfDeathForward (Scientist i, Scientist j)
-{
-    return (i.getYearOfDeath()<j.getYearOfDeath());
-}
-
-bool ScientistComparisonAgeForward (Scientist i, Scientist j)
-{
-    return (i.getAge()<j.getAge());
-}
-
-// Sorts scientist by aplhabetical order, by year of birth, by year of death and by age
- vector<Scientist> ScientistService::sortScientists(vector<Scientist> _listOfScientists, string sort)
-{
-    if (sort == "name" || sort == "Name" || sort == "n")
-    {
-        ScientistComparisonNameForward cmp;
-        std::sort(_scientists.begin(), _scientists.end(), cmp);
-    }
-    else if (sort == "birth" || sort == "Birth" || sort == "b")
-    {
-        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfBirthForward);
-    }
-    else if (sort == "death" || sort == "Death" || sort == "d")
-    {
-        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonYearOfDeathForward);
-    }
-    else if (sort == "age" || sort == "Age" || sort == "a")
-    {
-        std::sort(_scientists.begin(), _scientists.end(), ScientistComparisonAgeForward);
-    }
-    else
-    {
-        // Default is to sort by name
-        ScientistComparisonNameForward cmp;
-        std::sort(_scientists.begin(), _scientists.end(), cmp);
-    }
-    return _listOfScientists;
-}
-
 void ScientistService:: getVectorFoundScientists(string& searchData)
 {
     _scientists = _data.searchScientist(searchData);
 }
 
-string ScientistService::addScientist(Scientist scientist)
+bool ScientistService::addScientist(Scientist scientist)
 {
     return _data.addScientist(scientist);
 }
@@ -147,27 +96,6 @@ bool ScientistService::retrieveScientists(string order, string filter)
 }
 
 /*
-bool ScientistService::load()
-{
-    _data.getData(_scientists);
-
-    return DataAccessWorks();
-}
-*/
-
-/*
-bool ScientistService::DataAccessWorks()
-{
-    if (_data.DataOk && _data.FileOpen)
-    {
-        return true;
-    }
-
-    return false;
-}
-*/
-
-/*
 string ScientistService::editScientist(int index, string change, string input)
 {
     string message = "Invalid, ignored";
@@ -199,10 +127,13 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 */
 
-/*
+
 void ScientistService::deleteScientist(int index)
 {
-    _scientists.erase(_scientists.begin()+index);
-    _data.writeData(_scientists);
+    //_scientists.erase(_scientists.begin()+index);
+    //_data.writeData(_scientists);
+    //_data.deleteScientist(getScientist(index));
+    _data.deleteScientist(index);
+    cout << "delete in scientistservice.cpp" << endl;
 }
-*/
+
