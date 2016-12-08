@@ -11,6 +11,7 @@ using namespace std;
 class ScientistService
 {
     vector<Scientist> _scientists;
+
     DbManager _data;
 
 public:

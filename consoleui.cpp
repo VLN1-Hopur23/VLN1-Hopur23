@@ -14,9 +14,9 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-   // bool openFileWorks= _service.load();
+    // bool openFileWorks= _service.load();
 
-   // if (openFileWorks)
+    // if (openFileWorks)
     {
         while(loop == true)
         {
@@ -35,7 +35,7 @@ void ConsoleUI::run()
             cout << endl;
 
             // Frequent users could use one lower case letter for shortcut
-            if (command == "list" || command == "List" || command == "l" || command == "2" || command == "02")
+            if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
@@ -62,7 +62,7 @@ void ConsoleUI::run()
                 }
             }
 
-            else if (command == "register" || command == "Register" || command == "r" || command == "1" || command == "01")
+            else if (command == "register" || command == "Register" || command == "r" || command == "R" || command == "1" || command == "01")
             {
                 string rOption;
                 cout << "Select one of the given options to register:" << endl;
@@ -71,13 +71,12 @@ void ConsoleUI::run()
                 cin >> rOption;
                 cout << endl;
 
-                if (rOption == "Scientist" || rOption == "scientist" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
+                if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
                 {
                      registerScientist();
                 }
-                else if (rOption == "Computer" || rOption == "computer" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
+                else if (rOption == "Computer" || rOption == "computer" || rOption == "Computers" || rOption == "computers" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
                 {
-                    // TODO: with SQL
                      registerComputer();
                 }
                 else
@@ -86,7 +85,7 @@ void ConsoleUI::run()
                 }
             }
 
-            else if (command == "search" || command == "Search" || command == "s" || command == "3" || command == "03")
+            else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
             {
                string sOption;
                cout << "Select one of the given options to search:" << endl;
@@ -109,7 +108,7 @@ void ConsoleUI::run()
                }
             }
 
-            else if (command == "edit" || command == "Edit" || command == "e" || command == "4" || command == "04")
+            else if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "4" || command == "04")
             {
                 string edOption;
                 cout << "Select one of the given options to edit:" << endl;
@@ -122,7 +121,7 @@ void ConsoleUI::run()
                 {
                     editScientist();
                 }
-                else if (edOption == "Computer" || edOption == "computer" || edOption == "Computers" || edOption == "computers" || edOption == "C" || edOption == "c" || edOption == "2" || edOption == "02")
+                else if (edOption == "Computer" || edOption == "computer" || edOption == "Computers" || edOption == "computers" || edOption == "c" || edOption == "C" || edOption == "2" || edOption == "02")
                 {
                     editComputer();
                 }
@@ -132,7 +131,7 @@ void ConsoleUI::run()
                 }
             }
 
-            else if (command == "delete" || command == "Delete" || command == "d" || command == "5" || command == "05")
+            else if (command == "delete" || command == "Delete" || command == "d" || command == "D" || command == "5" || command == "05")
             {
                 cout << "Select one of the given options to delete:" << endl;
                 cout << "01. scientist" << endl;
@@ -154,7 +153,7 @@ void ConsoleUI::run()
                 }
             }
 
-            else if (command == "quit" || command == "Quit" || command == "q" || command == "6" || command == "06")
+            else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "6" || command == "06")
             {
 
                 loop = false;
@@ -193,6 +192,7 @@ void ConsoleUI::editScientist()
 
     cout << "Enter the index number of the computer scientist you want to change: ";
     cin >> index;
+
 /*    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -227,6 +227,7 @@ void ConsoleUI::deleteScientist()
     cout << endl;
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
+
     while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -234,7 +235,9 @@ void ConsoleUI::deleteScientist()
         cin.ignore(256, '\n');
         cin >> index;
     }
+
     string scientistNameToDelete;
+
     for (size_t i = 0; i < _service.getSize(); i++)
     {
         if(_service.getScientist(i).getScientistID() == index)
@@ -321,7 +324,6 @@ void ConsoleUI::searchScientists()
     /*
     else
     {
-
         while(searchData.empty())
         {
             cout << endl;
@@ -330,7 +332,6 @@ void ConsoleUI::searchScientists()
             cout << "Enter search keyword: ";
             getline(cin, searchData);
         }
-
         cout << endl;
 
         cout << "Searching for " << searchData << endl;
@@ -395,8 +396,8 @@ void ConsoleUI::searchComputers()
         cout << "Enter search keyword: ";
         getline(cin, searchData);
     }
-
     cout << endl;
+
     cout << "Searching for " << searchData << endl;
 
     _computers.getVectorFoundComputer(searchData);
@@ -414,15 +415,15 @@ void ConsoleUI::searchComputers()
         cout << "04. any other key\t- Exit program\n";
         cin >> command;
 
-        if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
+        if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "1" || command == "01")
         {
             //editScientist();
         }
-        else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
+        else if (command == "delete" || command == "Delete" || command == "d" || command == "D" || command == "2" || command == "02")
         {
             //deleteScientist();
         }
-        else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
+        else if(command == "link" || command == "Link" || command == "l" || command == "L" || command == "3" || command == "03")
         {
             string param;
             cout << "Select ID to show associated: ";
@@ -584,7 +585,7 @@ void ConsoleUI::sortComputers()
     string order, filter;
     bool loopNotReturn = true;
 
-    while(loopNotReturn) //starts as true
+    while(loopNotReturn) // Starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -600,18 +601,19 @@ void ConsoleUI::sortComputers()
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
         {
-            loopNotReturn = false; //quit the loop and go back
+            loopNotReturn = false; // Quit the loop and go back
         }
         else
         {
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
+
             if(_computers.retrieveComputers(order, filter))
             {
                 displayComputers();
             }
-            else                                        // input NOT_OK -> try agian
+            else                                        // Input NOT_OK -> try agian
             {
                 cout << endl;
                 cout << "Not a validated input, try again!"<<endl;
@@ -650,6 +652,7 @@ void ConsoleUI::registerScientist()
 
     cout << "Enter year of birth:" << endl;
     cin >> yearOfBirth;
+
     while (cin.fail())
     {
         cout << "ERROR!! Please enter a valid option!\n";
@@ -666,6 +669,7 @@ void ConsoleUI::registerScientist()
 
     cout << "Enter year of death or 0 if the person is still alive:" << endl;
     cin >> yearOfDeath;
+
     while (cin.fail())
     {
         cout << "ERROR!! Please enter a valid option!\n";
@@ -680,7 +684,7 @@ void ConsoleUI::registerScientist()
         cin >> yearOfDeath;
     }
 
-    Scientist scientist(_service.getSize(),name, gender, yearOfBirth, yearOfDeath);
+    Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
     bool message = _service.addScientist(scientist);
     cout << endl;
@@ -752,7 +756,6 @@ void ConsoleUI::registerComputer()
     }
     cout << endl;
 
-    //Computer computer(_computers.getSize(), name, yearBuilt, type, built);
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
     bool cMessage = _computers.addComputer(computer);
 
@@ -788,7 +791,6 @@ void ConsoleUI::registerComputer()
        cout << endl;
        exit(0);
    }
-
 }
 
 void ConsoleUI::displayComputers()
@@ -806,7 +808,6 @@ void ConsoleUI::displayComputers()
         if (type.size()>25)
         {
                 typeFit1 =type.substr(0,25);
-
                 int LastSpace = typeFit1.find_last_of(" ");
                 int StrEnd = type.size();
                 typeFit1 =type.substr(0,LastSpace-1);
@@ -824,6 +825,7 @@ void ConsoleUI::displayComputers()
         cout << setw(27) << typeFit1;
         cout << setw(2) << _computers.getComputer(i).getBuilt();
         cout << endl;
+
         if(typeToLong)
         {
             cout << setw(4) << left << "-||-";
@@ -833,7 +835,6 @@ void ConsoleUI::displayComputers()
             cout << setw(5) << "-||-";
             cout << endl;
         }
-
     }
     printFrame();
 }

@@ -53,20 +53,16 @@ bool DbManager::addScientist(const Scientist& scientist) const
     queryAdd.bindValue(":BirthYear", scientist.getYearOfBirth());
     queryAdd.bindValue(":DeathYear", scientist.getYearOfDeath());
 
-
-
     if(queryAdd.exec())
     {
         //message = "Scientist added successfully! ";
         return true;
-
     }
     else
     {
         //message = "Add scientist failed! ";
         return false;
     }
-
     //return message;
 }
 
@@ -99,6 +95,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
     query.prepare("SELECT * FROM Computers ORDER BY " + QSorder + " " + QSfilter);
     query.exec();
+
     while (query.next())
     {
         int computerID = query.value("ComputerID").toUInt();
@@ -141,7 +138,6 @@ bool DbManager::addComputer(const Computer& computer) const
         cMessage = "Add computer failed! ";
         return false;
     }
-
     return cMessage;
 }
 
@@ -173,7 +169,6 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 
         intersectedComputers.push_back(computer);
     }
-
     return intersectedComputers;
 }
 
@@ -205,7 +200,6 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
 
         intersectedScientists.push_back(scientist);
     }
-
     return intersectedScientists;
 }
 
@@ -219,7 +213,6 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
     if (isdigit(searchData.at(0)))
     {
-
         query.exec("SELECT * FROM Scientists WHERE (Birthyear || Deathyear) LIKE '%" + QString::fromStdString(searchData) + "%'");
     }
     else
