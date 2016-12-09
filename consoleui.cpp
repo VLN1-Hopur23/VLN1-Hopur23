@@ -497,15 +497,15 @@ void ConsoleUI::listScientists()
             sortScientists();
             displayScientists();
         }
-        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        else if (option == "link" || option == "Link" || option == "l" || option == "L")
         {
             string param;
-            cout << "Select ID to show associated: ";
+            cout << "Select scientistID to show associated computer: ";
             cin >> param;
             cout << endl;
             listIntersectScientist(param);
         }
-        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        else if (option == "return" || option == "Return" || option == "r" || option == "R")
         {
             exit = true;
         }
@@ -585,15 +585,15 @@ void ConsoleUI::listComputers()
             sortComputers();
             displayComputers();
         }
-        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        else if (option == "link" || option == "Link" || option == "l" || option == "L")
         {
             string param;
-            cout << "Select ID to show associated: ";
+            cout << "Select computerID to show associated scientist: ";
             cin >> param;
             cout << endl;
             listIntersectComputer(param);
         }
-        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        else if (option == "return" || option == "Return" || option == "r" || option == "R")
         {
             exit = true;
         }
@@ -652,14 +652,28 @@ void ConsoleUI::sortComputers()
 void ConsoleUI::listIntersectScientist(const string& param)
 {
     _computers.retrieveIntersectScientist(param);
-    displayComputers();
+    if(_computers.getSize() != 0)
+    {
+         displayComputers();
+    }
+    else
+    {
+        cout <<"There is no scientist connected to this computer\n";
+    }
 }
 
 // Finds computers that are conncected to scientists
 void ConsoleUI::listIntersectComputer(const string& param)
-{
+{  
     _service.retrieveIntersectComputer(param);
-    displayScientists();
+    if (_service.getSize() != 0)
+    {
+        displayScientists();
+    }
+    else
+    {
+        cout << "There is no computer connected to this scientist\n";
+    }
 }
 
 // Function that allows user to register a scientist that is not in database
@@ -727,8 +741,8 @@ void ConsoleUI::registerScientist()
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
     bool message = _service.addScientist(scientist);
-    cout << endl;
-//  cout << message << endl;
+        cout << endl;
+    //  cout << message << endl;
 
     if (message == true)
     {
@@ -741,8 +755,11 @@ void ConsoleUI::registerScientist()
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            cout << "yay" << endl;
-            // TODO link
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -757,7 +774,6 @@ void ConsoleUI::registerScientist()
     {
         cout << "Add scientist failed!";
         cout << endl;
-        exit(0);
     }
 }
 
@@ -810,36 +826,39 @@ void ConsoleUI::registerComputer()
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
     bool cMessage = _computers.addComputer(computer);
 
-    if (cMessage == true)
-    {
-        cout << "Computer added successfully!";
-        string connectChoice;
-        cout << endl;
-        cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
-        cin >> connectChoice;
-        cout << endl;
+   if (cMessage == true)
+   {
+       cout << endl;
+       cout << "Computer added successfully!";
+       string connectChoice;
+       cout << endl;
+       cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
+       cin >> connectChoice;
+       cout << endl;
 
-        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
-        {
-            cout << "yay" << endl;
-            // TODO link
-        }
-        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
-        {
-            cout << "nay" << endl;
-            // TODO link     exit(0);
-        }
-        else
-        {
-            cout << "Please enter a valid option!\n";
-        }
-    }
-    else
-    {
-        cout << "Add computer failed!";
-        cout << endl;
-        exit(0);
-    }
+       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+       {
+           string param;
+           cout << "Select ID to show associated: ";
+           cin >> param;
+           cout << endl;
+           listIntersectComputer(param);
+       }
+       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+       {
+           //Return to main menu
+       }
+       else
+       {
+          cout << "Please enter a valid option!\n";
+       }
+   }
+   else
+   {
+       cout << endl;
+       cout << "Add computer failed!";
+       cout << endl;
+   }
 }
 
 // Function that displays a list of scientist and its characteristics

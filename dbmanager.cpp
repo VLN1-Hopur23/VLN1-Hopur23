@@ -52,8 +52,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 //
 bool DbManager::addScientist(const Scientist& scientist) const
 {
-    //bool message = "";
-
     QSqlQuery queryAdd(db);
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
     queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
@@ -122,12 +120,9 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer) const
 {
-    bool cMessage = false;
-
     QSqlQuery queryAdd(db);
 
-    queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
-    queryAdd.bindValue(":ComputerID", computer.getComputerID());
+    queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");
     queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
     queryAdd.bindValue(":Yearbuilt", computer.getYearBuilt());
     queryAdd.bindValue(":Type", QString::fromStdString(computer.getType()));
@@ -135,15 +130,12 @@ bool DbManager::addComputer(const Computer& computer) const
 
     if(queryAdd.exec())
     {
-        cMessage = "Computer added successfully! ";
         return true;
     }
     else
     {
-        cMessage = "Add computer failed! ";
         return false;
     }
-    return cMessage;
 }
 
 // Returns vector with all computers associated with the scientist/s
