@@ -3,19 +3,43 @@
 using namespace std;
 
 static const QString dbName = "VLN1-Hopur23.sqlite";
+static const QString connName = "ThisConnection";
 
 // Constructor connects to sqlite database
 DbManager::DbManager()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(dbName);
-    db.open();
+    // contains() default argument is initialized to default connection
+    if (QSqlDatabase::contains(connName))
+    {
+        this->_db = QSqlDatabase::database(connName, false);
+    }
+    else
+    {
+        this->_db = QSqlDatabase::addDatabase("QSQLITE", connName);
+        this->_db.setDatabaseName(dbName);
+        this->_db.open();
+    }
+
+    /*
+    if (!this->_db.open())
+    {
+        qDebug() << "Error: connection with database fail";
+    }
+    else
+    {
+        qDebug() << "Database: connection ok";
+    }
+    */
 }
 
 DbManager::~DbManager()
 {
-    db.close();
-    db.removeDatabase(dbName);
+    if (this->_db.isOpen())
+    {
+        this->_db.close();
+    }
+
+    QSqlDatabase::removeDatabase(dbName);
 }
 
 // Get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
@@ -23,7 +47,7 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
 
-    QSqlQuery querySort(db);
+    QSqlQuery querySort(_db);
 
     /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
     querySort.bindValue(":order", QSorder); // Dálkur til að sortera eftir
@@ -54,7 +78,8 @@ bool DbManager::addScientist(const Scientist& scientist) const
 {
     //bool message = "";
 
-    QSqlQuery queryAdd(db);
+    QSqlQuery queryAdd(_db);
+
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
     queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
     queryAdd.bindValue(":Gender", QString::fromStdString(scientist.getGender()));
@@ -63,30 +88,27 @@ bool DbManager::addScientist(const Scientist& scientist) const
 
     if(queryAdd.exec())
     {
-        //message = "Scientist added successfully! ";
         return true;
     }
     else
     {
-        //message = "Add scientist failed! ";
         return false;
     }
-    //return message;
 }
 
 // Deletes scientist with chosen ID number from database
-void DbManager::deleteComputer(const int ID)
+void DbManager::deleteComputer(const int& ID)
 {
-    QSqlQuery queryDelete(db);
+    QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Computers WHERE ComputerID = (:ComputerID)");
     queryDelete.bindValue(":ComputerID",ID);
     queryDelete.exec();
 }
 
 // Deletes computer with chosen ID number from database
-void DbManager::deleteScientist(const int ID)
+void DbManager::deleteScientist(const int& ID)
 {
-    QSqlQuery queryDelete(db);
+    QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
     queryDelete.bindValue(":ScientistID",ID);
     queryDelete.exec();
@@ -99,7 +121,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 {
     vector<Computer> computers;
 
-    QSqlQuery query(db);
+    QSqlQuery query(_db);
 
     query.prepare("SELECT * FROM Computers ORDER BY " + QSorder + " " + QSfilter);
     query.exec();
@@ -125,12 +147,11 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer) const
 {
-    bool cMessage = false;
+    //bool cMessage = false;
 
-    QSqlQuery queryAdd(db);
+    QSqlQuery queryAdd(_db);
 
-    queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
-    queryAdd.bindValue(":ComputerID", computer.getComputerID());
+    queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");
     queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
     queryAdd.bindValue(":Yearbuilt", computer.getYearBuilt());
     queryAdd.bindValue(":Type", QString::fromStdString(computer.getType()));
@@ -138,15 +159,12 @@ bool DbManager::addComputer(const Computer& computer) const
 
     if(queryAdd.exec())
     {
-        cMessage = "Computer added successfully! ";
         return true;
     }
     else
     {
-        cMessage = "Add computer failed! ";
         return false;
     }
-    return cMessage;
 }
 
 // Returns vector with all computers associated with the scientist/s
@@ -154,7 +172,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 {
     vector<Computer> intersectedComputers;
 
-    QSqlQuery intersectQuery(db);
+    QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
     intersectQuery.bindValue(":id", QString::fromStdString(id));
@@ -185,7 +203,7 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
 {
     vector<Scientist> intersectedScientists;
 
-    QSqlQuery intersectQuery(db);
+    QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Scientists INNER JOIN Computers_Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID INNER JOIN Computers ON Computers.ComputerID = Computers_Scientists.ComputerID WHERE Computers.ComputerID = :id");
     intersectQuery.bindValue(":id", QString::fromStdString(id));
@@ -216,7 +234,7 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
     vector<Scientist> foundScientists;
 
-    QSqlQuery query(db);
+    QSqlQuery query(_db);
 
 
     if (isdigit(searchData.at(0)))
@@ -243,32 +261,45 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     }
     return foundScientists;
 }
+
+vector<Computer> DbManager::filterComputer(const string& Command, const string& searchData)
+{
+    vector<Computer> foundComputers;
+    QString qCommand = QString::fromStdString(Command);
+    QString qSearchData = QString::fromStdString(searchData);
+
+    QSqlQuery findquery(_db);
+    QString sqlCommand = "SELECT * FROM Computers WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
+    findquery.prepare(sqlCommand);
+    findquery.exec();
+
+    while (findquery.next())
+    {
+        int computerID = findquery.value("ComputerID").toUInt();
+        string name = findquery.value("Name").toString().toStdString();
+        int yearBuilt = findquery.value("Yearbuilt").toUInt();
+        string type = findquery.value("Type").toString().toStdString();
+        bool built = findquery.value("Built").toBool();
+        Computer computer(computerID, name, yearBuilt, type, built);
+        foundComputers.push_back(computer);
+    }
+    return foundComputers;
+}
+
 vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
 {
     vector<Scientist> foundScientists;
     QString qCommand = QString::fromStdString(Command);
     QString qSearchData = QString::fromStdString(searchData);
 
-    db.open();
+    QSqlQuery findquery(_db);
 
-    QSqlQuery findquery(db);
-    /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
-    querySort.bindValue(":order", QSorder); // Dálkur til að sortera eftir
-    querySort.bindValue(":filter", QSfilter); // Gildið til að leita eftir */
-    //querySort.bindValue(":column", ''); // Dálkur til að leita eftir
-
-    //findquery.prepare("SELECT * FROM Scientists WHERE Gender = 'f' "); //<-This it de shit
-    // ORDER BY Name");
-    QString sqlCommand = "SELECT * FROM Scientists WHERE " + qCommand + " = '" +qSearchData + "' ";
+    QString sqlCommand = "SELECT * FROM Scientists WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
     findquery.prepare(sqlCommand);
-    //findquery.prepare("SELECT * FROM Scientists WHERE :qCommand = \':qSearchData\'");
-    //findquery.bindValue(":qCommand",qCommand);
-    //findquery.bindValue(":qSearchData",qSearchData);
     findquery.exec();
 
     while (findquery.next())
     {
-        cout << "inside findquery in dbmangar" << endl;
         int scientistID = findquery.value("ScientistID").toUInt();
         string name = findquery.value("Name").toString().toStdString();
         string gender = findquery.value("Gender").toString().toStdString();
@@ -279,8 +310,6 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 
         foundScientists.push_back(scientist);
     }
-
-    cout << "right before we return foundSCientist inside dbmangar" << endl;
     return foundScientists;
 }
 
@@ -288,7 +317,7 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 vector<Computer> DbManager::searchComputer(string& searchData)
 {
     vector<Computer> foundComputer;
-    QSqlQuery query(db);
+    QSqlQuery query(_db);
 
     if (isdigit(searchData.at(0)))
     {
@@ -312,4 +341,104 @@ vector<Computer> DbManager::searchComputer(string& searchData)
         foundComputer.push_back(computer);
     }
     return foundComputer;
+}
+
+string DbManager::editScientistName(const int& id, const string& newName)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
+    query.bindValue(":name", QString::fromStdString(newName));
+    query.bindValue(":id", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+
+    return message;
+}
+
+string DbManager::editScientistGender(const int& id, const string& newGender)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
+    query.bindValue(":name", QString::fromStdString(newGender));
+    query.bindValue(":id", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+
+    return message;
+}
+
+string DbManager::editScientistBirthYear(const int& id, const string& newBirthYear)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
+    query.bindValue(":name", QString::fromStdString(newBirthYear));
+    query.bindValue(":id", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+
+    return message;
+}
+
+string DbManager::editScientistDeathYear(const int& id, const string& newDeathYear)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
+    query.bindValue(":name", QString::fromStdString(newDeathYear));
+    query.bindValue(":id", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+
+    return message;
 }

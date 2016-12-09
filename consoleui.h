@@ -64,13 +64,15 @@ private:
 
     void printComputerHeader();
 
-    LocalTime _time;
+    vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
+
+    void searchAllColumsByKeyword(string searchDataKeyword);
 
 private:
 
     //TODO skyrari nofn
     ScientistService _service;
-
+    LocalTime _time;
     ComputerService _computers;
 };
 
