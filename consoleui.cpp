@@ -79,7 +79,6 @@ void ConsoleUI::run()
             {
                 cout << "Please choose one of the given options!\n";
             }
-
         }
 
         else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
@@ -481,7 +480,7 @@ void ConsoleUI::sortScientists()
 
     bool loopNotReturn = true;
 
-    while(loopNotReturn) //starts as true
+    while(loopNotReturn) // Starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -491,7 +490,7 @@ void ConsoleUI::sortScientists()
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
         //cout << "age\t\t- Sort by age\n";
-        cout << "return\t\t- Return to main menu\n";
+        cout << "return\t\t- Go back\n";
         cout << endl;
 
         cin >> order;
@@ -713,13 +712,13 @@ void ConsoleUI::registerScientist()
     }
     else
     {
-        cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
         exit(0);
     }
 }
-// function that allows user to register a computer that is not in database
+
+// Function that allows user to register a computer that is not in database
 void ConsoleUI::registerComputer()
 {
     string name;
@@ -736,7 +735,6 @@ void ConsoleUI::registerComputer()
         cout << "Name is required!" << endl;
         getline(cin, name);
     }
-    cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
     cin >> yearBuilt;
@@ -769,40 +767,39 @@ void ConsoleUI::registerComputer()
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
     bool cMessage = _computers.addComputer(computer);
 
-   if (cMessage == true)
-   {
-       cout << endl;
-       cout << "Computer added successfully!";
-       string connectChoice;
-       cout << endl;
-       cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
-       cin >> connectChoice;
-       cout << endl;
+    if (cMessage == true)
+    {
+        cout << "Computer added successfully!";
+        string connectChoice;
+        cout << endl;
+        cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
+        cin >> connectChoice;
+        cout << endl;
 
-       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
-       {
-           cout << "yay" << endl;
-           // TODO link
-       }
-       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
-       {
-           cout << "nay" << endl;
-           // TODO link     exit(0);
-       }
-       else
-       {
-          cout << "Please enter a valid option!\n";
-       }
-   }
-   else
-   {
-       cout << endl;
-       cout << "Add computer failed!";
-       cout << endl;
-       exit(0);
-   }
+        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+        {
+            cout << "yay" << endl;
+            // TODO link
+        }
+        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+        {
+            cout << "nay" << endl;
+            // TODO link     exit(0);
+        }
+        else
+        {
+            cout << "Please enter a valid option!\n";
+        }
+    }
+    else
+    {
+        cout << "Add computer failed!";
+        cout << endl;
+        exit(0);
+    }
 }
-//function that displays a list of scientist and its characteristics
+
+// Function that displays a list of scientist and its characteristics
 void ConsoleUI::displayScientists()
 {
     printFrame();
@@ -830,7 +827,7 @@ void ConsoleUI::displayScientists()
     printFrame();
 }
 
-//function that displays a list of computer and its characteristics
+// Function that displays a list of computer and its characteristics
 void ConsoleUI::displayComputers()
 {
     printFrame();
