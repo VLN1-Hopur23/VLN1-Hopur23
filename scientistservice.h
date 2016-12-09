@@ -14,11 +14,11 @@ class ScientistService
 
     DbManager _data;
 
+    LocalTime _time;
+
 public:
 
     ScientistService();
-
-    bool retrieveScientists(string order, string filter);
 
     void getVectorFoundScientists(string& searchData);
 
@@ -28,18 +28,13 @@ public:
 
     size_t getSize() const;
 
-    bool ifExist(string name);
-
     vector<Scientist> getScientistVector();
 
-    bool load();
+    bool retrieveScientists(string order, string filter);
 
     string editScientist(int index, string change, string input);
 
-    bool DataAccessWorks();
-
     void deleteScientist(int index);
-
 
     bool searchingByFilter(string filter, string searchData);
 

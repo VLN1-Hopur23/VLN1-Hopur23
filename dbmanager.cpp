@@ -20,6 +20,7 @@ DbManager::DbManager()
         this->_db.open();
     }
 
+    /*
     if (!this->_db.open())
     {
         qDebug() << "Error: connection with database fail";
@@ -28,6 +29,7 @@ DbManager::DbManager()
     {
         qDebug() << "Database: connection ok";
     }
+    */
 }
 
 DbManager::~DbManager()
@@ -40,7 +42,7 @@ DbManager::~DbManager()
     QSqlDatabase::removeDatabase(dbName);
 }
 
-// Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+//get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
@@ -48,10 +50,10 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     QSqlQuery querySort(_db);
 
     /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
-    querySort.bindValue(":order", ''); // Dálkur til að sortera eftir
-    querySort.bindValue(":filter", ''); // Gildið til að leita eftir
-    querySort.bindValue(":column", ''); // Dálkur til að leita eftir
-    */
+    querySort.bindValue(":order", QSorder); // Dálkur til að sortera eftir
+    querySort.bindValue(":filter", QSfilter); // Gildið til að leita eftir */
+    //querySort.bindValue(":column", ''); // Dálkur til að leita eftir
+
     querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
 
     querySort.exec();
@@ -71,12 +73,13 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     }
     return scientists;
 }
-
+//
 bool DbManager::addScientist(const Scientist& scientist) const
 {
     //bool message = "";
 
     QSqlQuery queryAdd(_db);
+
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
     queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
     queryAdd.bindValue(":Gender", QString::fromStdString(scientist.getGender()));
@@ -85,15 +88,12 @@ bool DbManager::addScientist(const Scientist& scientist) const
 
     if(queryAdd.exec())
     {
-        //message = "Scientist added successfully! ";
         return true;
     }
     else
     {
-        //message = "Add scientist failed! ";
         return false;
     }
-    //return message;
 }
 
 // Deletes scientist with chosen ID number from database
@@ -147,12 +147,11 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer) const
 {
-    bool cMessage = false;
+    //bool cMessage = false;
 
     QSqlQuery queryAdd(_db);
 
-    queryAdd.prepare("INSERT INTO computers (ComputerID ,Name, Yearbuilt, Type, Built) VALUES (:ComputerID, :Name, :Yearbuilt, :Type, :Built)");
-    queryAdd.bindValue(":ComputerID", computer.getComputerID());
+    queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");
     queryAdd.bindValue(":Name", QString::fromStdString(computer.getName()));
     queryAdd.bindValue(":Yearbuilt", computer.getYearBuilt());
     queryAdd.bindValue(":Type", QString::fromStdString(computer.getType()));
@@ -160,15 +159,12 @@ bool DbManager::addComputer(const Computer& computer) const
 
     if(queryAdd.exec())
     {
-        cMessage = "Computer added successfully! ";
         return true;
     }
     else
     {
-        cMessage = "Add computer failed! ";
         return false;
     }
-    return cMessage;
 }
 
 // Returns vector with all computers associated with the scientist/s
@@ -236,7 +232,7 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
 // Gets the info on Scientist which is searced for
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
-    vector<Scientist> foundScientist;
+    vector<Scientist> foundScientists;
 
     QSqlQuery query(_db);
 
@@ -261,38 +257,62 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
         Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
-        foundScientist.push_back(scientist);
+        foundScientists.push_back(scientist);
     }
-    return foundScientist;
+    return foundScientists;
 }
-vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
+
+vector<Computer> DbManager::filterComputer(const string& Command, const string& searchData)
 {
-    vector<Scientist> foundScientist;
+    vector<Computer> foundComputers;
     QString qCommand = QString::fromStdString(Command);
     QString qSearchData = QString::fromStdString(searchData);
 
-    QSqlQuery query(_db);
+    QSqlQuery findquery(_db);
+    QString sqlCommand = "SELECT * FROM Computers WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
+    findquery.prepare(sqlCommand);
+    findquery.exec();
 
-    query.prepare("SELECT * FROM Scientists WHERE :qCommand = \":qSearchData");
-    query.bindValue(":qCommand",qCommand);
-    query.bindValue("qSearchData",qSearchData);
-    query.exec();
-
-    while (query.next())
+    while (findquery.next())
     {
-        int scientistID = query.value("ScientistID").toUInt();
-        string name = query.value("Name").toString().toStdString();
-        string gender = query.value("Gender").toString().toStdString();
+        int computerID = findquery.value("ComputerID").toUInt();
+        string name = findquery.value("Name").toString().toStdString();
+        int yearBuilt = findquery.value("Yearbuilt").toUInt();
+        string type = findquery.value("Type").toString().toStdString();
+        bool built = findquery.value("Built").toBool();
+        Computer computer(computerID, name, yearBuilt, type, built);
+        foundComputers.push_back(computer);
+    }
+    return foundComputers;
+}
 
-        int yearOfBirth = query.value("Birthyear").toUInt();
-        int yearOfDeath = query.value("Deathyear").toUInt();
+vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
+{
+    vector<Scientist> foundScientists;
+    QString qCommand = QString::fromStdString(Command);
+    QString qSearchData = QString::fromStdString(searchData);
+
+    QSqlQuery findquery(_db);
+
+    QString sqlCommand = "SELECT * FROM Scientists WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
+    findquery.prepare(sqlCommand);
+    findquery.exec();
+
+    while (findquery.next())
+    {
+        int scientistID = findquery.value("ScientistID").toUInt();
+        string name = findquery.value("Name").toString().toStdString();
+        string gender = findquery.value("Gender").toString().toStdString();
+        int yearOfBirth = findquery.value("Birthyear").toUInt();
+        int yearOfDeath = findquery.value("Deathyear").toUInt();
 
         Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
-        foundScientist.push_back(scientist);
+        foundScientists.push_back(scientist);
     }
-    return foundScientist;
+    return foundScientists;
 }
+
 // Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {

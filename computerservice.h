@@ -32,12 +32,17 @@ public:
 
     void deleteComputer(int index);
 
+    bool searchingComputerByFilter(string command, string searchData); //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
+
+
 
 private:
 
     vector<Computer> _computers;
 
     DbManager _data;
+
+    LocalTime _time;
 };
 
 #endif // COMPUTERSERVICE_H

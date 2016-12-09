@@ -42,7 +42,7 @@ public:
 
     vector<Scientist> filterScientist(const string& Command, const string& searchData);
 
-    string editScientist(const int& id);
+    vector<Computer> filterComputer(const string& Command, const string& searchData);
 
     // Edit:
     string editScientistName(const int& id, const string& newName);
