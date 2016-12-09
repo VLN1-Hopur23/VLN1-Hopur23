@@ -18,10 +18,8 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
-    /*
     _service.retrieveScientists("name", "ASC");
     _computers.retrieveComputers("name", "ASC");
-    */
 
     while(loop == true)
     {
@@ -224,22 +222,11 @@ void ConsoleUI::editScientist()
     cout << idString << endl;
     while(!ValidInput(typeOf(idString), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
     {
-        cout << "Input is not valid! Try again!"<<endl;
+        cout << "Input is not valid! Enter a new value" << endl;
         cin >> idString;
     }
     id = std::stoi(idString);
-    cout<<"id = "<<id<<endl;
-
-    cout << "Enter a new value: ";
-
-    while (cin.fail() || id < 0)
-    {
-        cout << "ERROR!! Please enter a valid ID!\n";
-        cin.clear();
-        cin.ignore(256, '\n');
-        cin >> id;
-    }
-
+    cout << "id = "<< id << endl;
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -311,9 +298,6 @@ void ConsoleUI::deleteScientist()
     cout << endl;
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
-
-
-
 
     while (cin.fail()  || index < 0)
     {
@@ -950,7 +934,7 @@ void ConsoleUI::registerScientist()
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            //_computers.retrieveComputers("ASC", "Name");
+            _computers.retrieveComputers("ASC", "Name");
             displayComputers();
 
             int computerID;
@@ -958,14 +942,8 @@ void ConsoleUI::registerScientist()
             cout << "Insert computerID which you want to connect to newly added scientist\n";
             cin >> computerID;
             cout << endl;
-            //if (computerID <= _computers.getSize())
-            {
-                addIntersectScientist(scientistID, computerID);
-            }
-            //else
-            {
-               // cout << "Input valid ID number\n";
-            }
+
+            addIntersectScientist(scientistID, computerID);
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -1112,15 +1090,8 @@ void ConsoleUI::registerComputer()
             cin >> scientistID;
             cout << endl;
 
-            //TODO: validation
-            //if (param2 <= _computers.getSize())
-            {
-                addIntersectComputer(scientistID, computerID);
-            }
-            //else
-            {
-               // cout << "Input valid ID number\n";
-            }
+            addIntersectComputer(scientistID, computerID);
+
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {

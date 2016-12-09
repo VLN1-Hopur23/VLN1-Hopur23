@@ -19,17 +19,6 @@ DbManager::DbManager()
         this->_db.setDatabaseName(dbName);
         this->_db.open();
     }
-
-    /*
-    if (!this->_db.open())
-    {
-        qDebug() << "Error: connection with database fail";
-    }
-    else
-    {
-        qDebug() << "Database: connection ok";
-    }
-    */
 }
 
 DbManager::~DbManager()
@@ -48,11 +37,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     vector<Scientist> scientists;
 
     QSqlQuery querySort(_db);
-
-    /*querySort.prepare("SELECT * FROM Scientists WHERE :column = \":filter\" ORDER BY :order");
-    querySort.bindValue(":order", QSorder); // Dálkur til að sortera eftir
-    querySort.bindValue(":filter", QSfilter); // Gildið til að leita eftir */
-    //querySort.bindValue(":column", ''); // Dálkur til að leita eftir
 
     querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
 
@@ -110,27 +94,6 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
 
- /*
-    int computerID = query.value("ComputerID").toUInt();
-
-    if (queryDelete.exec() && )
-    {
-        deleteConnectionComputer(ID);
-    }
-    else
-    {
-        //return
-    }
-    */
-
-}
-
-void DbManager::deleteConnectionComputer(const int ID)
-{
-    QSqlQuery queryDeleteConnection(_db);
-    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
-    queryDeleteConnection.bindValue(":ComputerID",ID);
-    queryDeleteConnection.exec();
 }
 
 // Deletes computer with chosen ID number from database
@@ -180,8 +143,6 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer, int& id) const
 {
-    //bool cMessage = false;
-
     QSqlQuery queryAdd(_db);
 
     queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");

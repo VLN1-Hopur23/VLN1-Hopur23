@@ -24,8 +24,6 @@ public:
 
     void deleteScientist(const int ID);
 
-    void deleteConnectionComputer(const int ID);
-
     void deleteComputer(const int ID);
 
     bool scientistExists(const string& searchData) const;
