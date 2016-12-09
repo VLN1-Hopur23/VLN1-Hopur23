@@ -10,8 +10,6 @@ class InputValidation
 public:
 
     InputValidation();
-
-
 };
 
 #endif // INPUTVALIDATION_H
