@@ -11,8 +11,6 @@ class InputValidation
 {
 public:
     InputValidation();
-
-    string typeOf(string what);
 };
 
 #endif // INPUTVALIDATION_H

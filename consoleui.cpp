@@ -30,6 +30,15 @@ void ConsoleUI::run()
         cout << endl;
 
         cin >> command;
+        /*cin.ignore();
+        getline(cin, command);
+        cout<<typeOf(command)<<endl;
+        while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+              cout << "Please choose a valid option!" << endl;
+              cin >> command;
+        }*/
+
         cout << endl;
 
         // Frequent users could use one lower case letter for shortcut
@@ -167,27 +176,25 @@ void ConsoleUI::run()
 
 }
 
-//TODO function that allows user to edit registered scientist
+// function that allows user to edit registered scientist from the db
 void ConsoleUI::editScientist()
 {
-    cout << "Edit registered computer scientist character" << endl;
+    cout << "Edit registered computer scientist" << endl;
     cout << endl;
 
-    string id;
+    int id;
     string change, input;
 
     cout << "Enter the ID number of the computer scientist you want to change: ";
     cin >> id;
-    cout << "Enter a new value: ";
-
-//TODO delete if not used
-/*    while (cin.fail() || index > _service.getSize() || index < 0)
+    /*while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
-    }
+    }*/
+
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -196,15 +203,16 @@ void ConsoleUI::editScientist()
         cin.clear();
         cin >> change;
     }
+
     cout << "Enter the new value: ";
     cin >> input;
 
-    string message = _service.editScientist(index, change, input);
+    string message = _service.editScientist(id, change, input);
 
     cout << endl;
     cout << message << endl;
     cout << endl;
-*/}
+}
 
 //TODO function that allows user to edit registered computer
 void ConsoleUI::editComputer()
@@ -212,11 +220,36 @@ void ConsoleUI::editComputer()
     cout << "Edit registered computer" << endl;
     cout << endl;
 
-    int cIndex;
-    string cChange, cInput;
+    int id;
+    string change, input;
 
     cout << "Enter the index number of the computer you want to change: ";
-    cin >> cIndex;
+    cin >> id;
+    while (cin.fail() || id > _computers.getSize() || id < 0)
+    {
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> id;
+    }
+
+    cout << "Enter what it is that you want to change about the computer " << endl;
+    cout << "(name/yearbuilt/type): ";
+    cin >> change;
+    while (change != "name" && change != "yearbuilt" && change != "type"){
+        cout << "ERROR!! Please enter a valid option! (name/yearbuilt/type)\n";
+        cin.clear();
+        cin >> change;
+    }
+
+    cout << "Enter the new value: ";
+    cin >> input;
+
+    string message = _computers.editComputer(id, change, input);
+
+    cout << endl;
+    cout << message << endl;
+    cout << endl;
 }
 
 // Function that allows user to delete scientist of his choosing
@@ -988,6 +1021,7 @@ void ConsoleUI::printComputerHeader()
     cout << endl;
     cout.fill(' ');
 }
+
 //typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 //includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
 string ConsoleUI::typeOf(string what)
