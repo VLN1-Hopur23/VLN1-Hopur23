@@ -455,15 +455,15 @@ void ConsoleUI::listScientists()
             sortScientists();
             displayScientists();
         }
-        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        else if (option == "link" || option == "Link" || option == "l" || option == "L")
         {
             string param;
-            cout << "Select ID to show associated: ";
+            cout << "Select scientistID to show associated computer: ";
             cin >> param;
             cout << endl;
             listIntersectScientist(param);
         }
-        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        else if (option == "return" || option == "Return" || option == "r" || option == "R")
         {
             exit = true;
         }
@@ -543,15 +543,15 @@ void ConsoleUI::listComputers()
             sortComputers();
             displayComputers();
         }
-        if (option == "link" || option == "Link" || option == "l" || option == "L")
+        else if (option == "link" || option == "Link" || option == "l" || option == "L")
         {
             string param;
-            cout << "Select ID to show associated: ";
+            cout << "Select computerID to show associated scientist: ";
             cin >> param;
             cout << endl;
             listIntersectComputer(param);
         }
-        if (option == "return" || option == "Return" || option == "r" || option == "R")
+        else if (option == "return" || option == "Return" || option == "r" || option == "R")
         {
             exit = true;
         }
@@ -609,13 +609,27 @@ void ConsoleUI::sortComputers()
 void ConsoleUI::listIntersectScientist(const string& param)
 {
     _computers.retrieveIntersectScientist(param);
-    displayComputers();
+    if(_computers.getSize() != 0)
+    {
+         displayComputers();
+    }
+    else
+    {
+        cout <<"There is no scientist connected to this computer\n";
+    }
 }
 //finds computers that are conncected to scientists
 void ConsoleUI::listIntersectComputer(const string& param)
-{
+{  
     _service.retrieveIntersectComputer(param);
-    displayScientists();
+    if (_service.getSize() != 0)
+    {
+        displayScientists();
+    }
+    else
+    {
+        cout << "There is no computer connected to this scientist\n";
+    }
 }
 // function that allows user to register a scientist that is not in database
 void ConsoleUI::registerScientist()
@@ -696,8 +710,11 @@ void ConsoleUI::registerScientist()
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            cout << "yay" << endl;
-            // TODO link
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectScientist(param);
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -713,7 +730,6 @@ void ConsoleUI::registerScientist()
         cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
-        exit(0);
     }
 }
 // function that allows user to register a computer that is not in database
@@ -765,13 +781,15 @@ void ConsoleUI::registerComputer()
 
        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
        {
-           cout << "yay" << endl;
-           // TODO link
+           string param;
+           cout << "Select ID to show associated: ";
+           cin >> param;
+           cout << endl;
+           listIntersectComputer(param);
        }
        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
        {
-           cout << "nay" << endl;
-           // TODO link     exit(0);
+           //Return to main menu
        }
        else
        {
@@ -783,7 +801,6 @@ void ConsoleUI::registerComputer()
        cout << endl;
        cout << "Add computer failed!";
        cout << endl;
-       exit(0);
    }
 }
 //function that displays a list of scientist and its characteristics
