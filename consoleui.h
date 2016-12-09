@@ -1,15 +1,17 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 
+
 #include "scientistservice.h"
 #include "scientist.h"
 #include "computer.h"
 #include "computerservice.h"
+#include "localtime.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <iomanip>
-#include <localtime.h>
+
 
 using namespace std;
 
@@ -68,12 +70,17 @@ private:
 
     void searchAllColumsByKeyword(string searchDataKeyword);
 
+
+
 private:
 
     //TODO skyrari nofn
     ScientistService _service;
     LocalTime _time;
     ComputerService _computers;
+
+    string typeOf(string what);
+    bool ValidInput(string check, string allowed);
 };
 
 #endif // CONSOLEUI_H

@@ -42,7 +42,7 @@ DbManager::~DbManager()
     QSqlDatabase::removeDatabase(dbName);
 }
 
-//get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+// Get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
@@ -113,7 +113,6 @@ void DbManager::deleteScientist(const int& ID)
     queryDelete.bindValue(":ScientistID",ID);
     queryDelete.exec();
 }
-
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
@@ -364,7 +363,6 @@ string DbManager::editScientistName(const int& id, const string& newName)
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
