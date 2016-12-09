@@ -79,6 +79,7 @@ void ConsoleUI::run()
             {
                 cout << "Please choose one of the given options!\n";
             }
+
         }
 
         else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
@@ -703,7 +704,7 @@ void ConsoleUI::registerScientist()
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
-            exit(0);
+            //Return to main menu
         }
         else
         {

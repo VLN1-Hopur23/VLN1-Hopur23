@@ -18,7 +18,7 @@ DbManager::~DbManager()
     db.removeDatabase(dbName);
 }
 
-// Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+//get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
@@ -49,7 +49,7 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     }
     return scientists;
 }
-
+//
 bool DbManager::addScientist(const Scientist& scientist) const
 {
     //bool message = "";
