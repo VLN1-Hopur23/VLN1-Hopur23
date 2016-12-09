@@ -162,18 +162,7 @@ void ConsoleUI::run()
 
 }
 
-void ConsoleUI::editComputer()
-{
-    cout << "Edit registered computer" << endl;
-    cout << endl;
-
-    int cIndex;
-    string cChange, cInput;
-
-    cout << "Enter the index number of the computer you want to change: ";
-    cin >> cIndex;
-}
-
+//TODO function that allows user to edit registered scientist
 void ConsoleUI::editScientist()
 {
     cout << "Edit registered computer scientist character" << endl;
@@ -184,7 +173,7 @@ void ConsoleUI::editScientist()
 
     cout << "Enter the index number of the computer scientist you want to change: ";
     cin >> index;
-
+//TODO delete if not used
 /*    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -209,7 +198,19 @@ void ConsoleUI::editScientist()
     cout << message << endl;
     cout << endl;
 */}
+//TODO function that allows user to edit registered computer
+void ConsoleUI::editComputer()
+{
+    cout << "Edit registered computer" << endl;
+    cout << endl;
 
+    int cIndex;
+    string cChange, cInput;
+
+    cout << "Enter the index number of the computer you want to change: ";
+    cin >> cIndex;
+}
+//function that allows user to delete scientist of his choosing
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -250,7 +251,7 @@ void ConsoleUI::deleteScientist()
         cout << endl;
     }
 }
-
+//function that allows user to delete computer of his choosing
 void ConsoleUI::deleteComputer()
 {
     int index;
@@ -289,7 +290,7 @@ void ConsoleUI::deleteComputer()
     }
 }
 
-// Search for inserted keyword in Scientist vector
+// Search for inserted keyword and by filters in Scientist vector
 void ConsoleUI::searchScientists()
 {
     string searchData;
@@ -360,18 +361,19 @@ void ConsoleUI::searchScientists()
                 listIntersectScientist(param);
             }
         }
-        // Keyword is rubbish or empty
-        else
-        {
-            cout << "Keyword not found in database\n";
-        }
+
+    // Keyword is rubbish or empty
+    else
+    {
+        cout << "Keyword not found in database\n";
+    }
     }*/
     else if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
     {
         cout << "42\n";
     }
 }
-
+// Search for inserted keyword and by filters in Scientist vector
 void ConsoleUI::searchComputers()
 {
     string searchData;
@@ -431,7 +433,7 @@ void ConsoleUI::searchComputers()
         cout << "Keyword not found in database\n";
     }
 }
-
+//displays list of scientist and allows user also reverts to sort option
 void ConsoleUI::listScientists()
 {
     string option;
@@ -472,7 +474,7 @@ void ConsoleUI::listScientists()
         }
     }
 }
-
+//sorts the list of scientist
 void ConsoleUI::sortScientists()
 {
     string order, filter;
@@ -519,18 +521,7 @@ void ConsoleUI::sortScientists()
     }
 }
 
-void ConsoleUI::listIntersectScientist(const string& param)
-{
-    _computers.retrieveIntersectScientist(param);
-    displayComputers();
-}
-
-void ConsoleUI::listIntersectComputer(const string& param)
-{
-    _service.retrieveIntersectComputer(param);
-    displayScientists();
-}
-
+//displays list of computer and allows user also reverts to sort option
 void ConsoleUI::listComputers()
 {
     string option;
@@ -571,7 +562,7 @@ void ConsoleUI::listComputers()
         }
     }
 }
-
+//sorts the list of computers
 void ConsoleUI::sortComputers()
 {
     string order, filter;
@@ -614,7 +605,19 @@ void ConsoleUI::sortComputers()
         }
     }
 }
-
+//finds scientist that are connected to computers
+void ConsoleUI::listIntersectScientist(const string& param)
+{
+    _computers.retrieveIntersectScientist(param);
+    displayComputers();
+}
+//finds computers that are conncected to scientists
+void ConsoleUI::listIntersectComputer(const string& param)
+{
+    _service.retrieveIntersectComputer(param);
+    displayScientists();
+}
+// function that allows user to register a scientist that is not in database
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -714,14 +717,13 @@ void ConsoleUI::registerScientist()
         exit(0);
     }
 }
-
+// function that allows user to register a computer that is not in database
 void ConsoleUI::registerComputer()
 {
     string name;
     int yearBuilt;
     string type;
-
-    bool built = false;
+    bool built = 0;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -750,11 +752,10 @@ void ConsoleUI::registerComputer()
     cout << endl;
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
-
     bool cMessage = _computers.addComputer(computer);
 
-    if (cMessage == true)
-    {
+   if (cMessage == true)
+   {
        cout << endl;
        cout << "Computer added successfully!";
        string connectChoice;
@@ -777,16 +778,44 @@ void ConsoleUI::registerComputer()
        {
           cout << "Please enter a valid option!\n";
        }
-    }
-    else
-    {
+   }
+   else
+   {
        cout << endl;
        cout << "Add computer failed!";
        cout << endl;
        exit(0);
+   }
+}
+//function that displays a list of scientist and its characteristics
+void ConsoleUI::displayScientists()
+{
+    printFrame();
+    printScientistHeader();
+
+    for (size_t i = 0; i < _service.getSize(); i++)
+    {
+        cout.fill(' ');
+        cout.width(2);
+        cout << right << _service.getScientist(i).getScientistID() << "  ";
+        cout.fill(' ');
+        cout.width(25);
+        cout << left;
+        cout << _service.getScientist(i).getName();
+        cout << "\t";
+        cout << _service.getScientist(i).getGender();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfBirth();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfDeath();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getAge();
+        cout << endl;
     }
+    printFrame();
 }
 
+//function that displays a list of computer and its characteristics
 void ConsoleUI::displayComputers()
 {
     printFrame();
@@ -829,33 +858,6 @@ void ConsoleUI::displayComputers()
             cout << setw(5) << "-||-";
             cout << endl;
         }
-    }
-    printFrame();
-}
-
-void ConsoleUI::displayScientists()
-{
-    printFrame();
-    printScientistHeader();
-
-    for (size_t i = 0; i < _service.getSize(); i++)
-    {
-        cout.fill(' ');
-        cout.width(2);
-        cout << right << _service.getScientist(i).getScientistID() << "  ";
-        cout.fill(' ');
-        cout.width(25);
-        cout << left;
-        cout << _service.getScientist(i).getName();
-        cout << "\t";
-        cout << _service.getScientist(i).getGender();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getYearOfBirth();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getYearOfDeath();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getAge();
-        cout << endl;
     }
     printFrame();
 }
