@@ -69,30 +69,7 @@ void ConsoleUI::run()
 
             if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
             {
-                string lOption;
-                cout << "Select a table to display:" << endl;
-                cout << "01. Scientists" << endl;
-                cout << "02. Computers" << endl;
-                cin >> lOption;
-                cout << endl;
-
-                if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
-                {
-                    _service.retrieveScientists("name", "ASC");
-                    displayScientists();
-                    listScientists();
-                }
-                else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
-                {
-                    _computers.retrieveComputers("name", "ASC");
-                    displayComputers();
-                    listComputers();
-                }
-                else
-                {
-                    cout << "Please choose one of the given options!\n";
-                }
-
+                registerScientist();
             }
             else if (rOption == "Computer" || rOption == "computer" || rOption == "Computers" || rOption == "computers" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
             {
@@ -102,6 +79,7 @@ void ConsoleUI::run()
             {
                 cout << "Please choose one of the given options!\n";
             }
+
         }
 
         else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
