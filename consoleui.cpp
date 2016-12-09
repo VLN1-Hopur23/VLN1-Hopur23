@@ -699,8 +699,8 @@ void ConsoleUI::registerScientist()
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
     bool message = _service.addScientist(scientist);
-    cout << endl;
-//  cout << message << endl;
+        cout << endl;
+    //  cout << message << endl;
 
     if (message == true)
     {
