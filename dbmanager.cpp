@@ -52,8 +52,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 //
 bool DbManager::addScientist(const Scientist& scientist) const
 {
-    //bool message = "";
-
     QSqlQuery queryAdd(db);
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
     queryAdd.bindValue(":Name", QString::fromStdString(scientist.getName()));
@@ -63,15 +61,12 @@ bool DbManager::addScientist(const Scientist& scientist) const
 
     if(queryAdd.exec())
     {
-        //message = "Scientist added successfully! ";
         return true;
     }
     else
     {
-        //message = "Add scientist failed! ";
         return false;
     }
-    //return message;
 }
 
 // Deletes scientist with chosen ID number from database
@@ -125,8 +120,6 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
 bool DbManager::addComputer(const Computer& computer) const
 {
-    //bool cMessage = false;
-
     QSqlQuery queryAdd(db);
 
     queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");
@@ -137,15 +130,12 @@ bool DbManager::addComputer(const Computer& computer) const
 
     if(queryAdd.exec())
     {
-        //cMessage = "Computer added successfully! ";
         return true;
     }
     else
     {
-        //cMessage = "Add computer failed! ";
         return false;
     }
-    //return cMessage;
 }
 
 // Returns vector with all computers associated with the scientist/s
