@@ -98,21 +98,54 @@ bool DbManager::addScientist(const Scientist& scientist, int& id) const
 }
 
 // Deletes scientist with chosen ID number from database
-void DbManager::deleteComputer(const int& ID)
+void DbManager::deleteComputer(const int ID)
 {
     QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Computers WHERE ComputerID = (:ComputerID)");
     queryDelete.bindValue(":ComputerID",ID);
     queryDelete.exec();
+
+    QSqlQuery queryDeleteConnection(_db);
+    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
+    queryDeleteConnection.bindValue(":ComputerID",ID);
+    queryDeleteConnection.exec();
+
+ /*
+    int computerID = query.value("ComputerID").toUInt();
+
+    if (queryDelete.exec() && )
+    {
+        deleteConnectionComputer(ID);
+    }
+    else
+    {
+        //return
+    }
+    */
+
+}
+
+void DbManager::deleteConnectionComputer(const int ID)
+{
+    QSqlQuery queryDeleteConnection(_db);
+    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
+    queryDeleteConnection.bindValue(":ComputerID",ID);
+    queryDeleteConnection.exec();
 }
 
 // Deletes computer with chosen ID number from database
-void DbManager::deleteScientist(const int& ID)
+void DbManager::deleteScientist(const int ID)
 {
     QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
     queryDelete.bindValue(":ScientistID",ID);
     queryDelete.exec();
+
+    QSqlQuery queryDeleteConnection(_db);
+    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ScientistID = (:ScientistID)");
+    queryDeleteConnection.bindValue(":ScientistID",ID);
+    queryDeleteConnection.exec();
+
 }
 
 // Gets computer and his information from database(SQL) and reads into Computer vector

@@ -18,6 +18,11 @@ void ConsoleUI::run()
     string command;
     bool loop = true;
 
+    /*
+    _service.retrieveScientists("name", "ASC");
+    _computers.retrieveComputers("name", "ASC");
+    */
+
     while(loop == true)
     {
         cout << endl;
@@ -213,6 +218,7 @@ void ConsoleUI::editScientist()
     string change, input,idString;
 
     cout << "Enter the ID number of the computer scientist you want to change: ";
+
     cin >> idString;
 
 
@@ -235,13 +241,14 @@ void ConsoleUI::editScientist()
 
    /*while (cin.fail() || index > _service.getSize() || index < 0)
 
+
     {
         cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
-    }*/
-
+    }
+    */
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -313,7 +320,9 @@ void ConsoleUI::deleteScientist()
     cin >> index;
 
 
-    while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
+
+
+    while (cin.fail()  || index < 0)
     {
         cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
@@ -356,13 +365,17 @@ void ConsoleUI::deleteComputer()
     cout << "Enter the ID number of the computer to delete: ";
     cin >> index;
 
-    while (cin.fail() || (unsigned int)index > _computers.getSize() || index < 0)
+
+
+    while (cin.fail()  || index < 0)
     {
         cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
     }
+
+
     string computerNameToDelete;
     for (size_t i = 0; i < _computers.getSize(); i++)
     {
@@ -944,7 +957,7 @@ void ConsoleUI::registerScientist()
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            _computers.retrieveComputers("ASC", "Name");
+            //_computers.retrieveComputers("ASC", "Name");
             displayComputers();
 
             int computerID;
@@ -952,7 +965,7 @@ void ConsoleUI::registerScientist()
             cout << "Insert computerID which you want to connect to newly added scientist\n";
             cin >> computerID;
             cout << endl;
-            //if (param2 <= _computers.getSize())
+            //if (computerID <= _computers.getSize())
             {
                 addIntersectScientist(scientistID, computerID);
             }
