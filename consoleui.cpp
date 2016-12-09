@@ -701,7 +701,7 @@ void ConsoleUI::registerScientist()
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
-            exit(0);
+            //Return to main menu
         }
         else
         {
