@@ -53,6 +53,15 @@ public:
 
     string editScientistDeathYear(const int& id, const string& newDeathYear);
 
+    string editComputerName(const int& id, const string& newName);
+
+    string editComputerYearBuilt(const int& id, const string& newName);
+
+    string editComputerType(const int& id, const string& newName);
+
+
+
+
 private:
 
     QSqlDatabase _db;

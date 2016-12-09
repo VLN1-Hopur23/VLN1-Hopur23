@@ -134,3 +134,22 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
     }
     return false;
 }
+
+// Edit function takes input from the user and fetches data from the dbmanagar
+string ComputerService::editComputer(int index, string change, string input)
+{
+    string message = "Invalid, ignored";
+    if (change == "name")
+    {
+        message = _data.editComputerName(index, input);
+    }
+    else if (change == "yearbuilt")
+    {
+        message = _data.editComputerYearBuilt(index, input);
+    }
+    else if (change == "type")
+    {
+        message = _data.editComputerType(index, input);
+    }
+    return message;
+}

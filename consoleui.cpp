@@ -172,27 +172,25 @@ void ConsoleUI::run()
 
 }
 
-//TODO function that allows user to edit registered scientist
+// function that allows user to edit registered scientist from the db
 void ConsoleUI::editScientist()
 {
-    cout << "Edit registered computer scientist character" << endl;
+    cout << "Edit registered computer scientist" << endl;
     cout << endl;
 
-    string id;
+    int id;
     string change, input;
 
     cout << "Enter the ID number of the computer scientist you want to change: ";
     cin >> id;
-    cout << "Enter a new value: ";
-
-//TODO delete if not used
-/*    while (cin.fail() || index > _service.getSize() || index < 0)
+    /*while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
-    }
+    }*/
+
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -201,15 +199,16 @@ void ConsoleUI::editScientist()
         cin.clear();
         cin >> change;
     }
+
     cout << "Enter the new value: ";
     cin >> input;
 
-    string message = _service.editScientist(index, change, input);
+    string message = _service.editScientist(id, change, input);
 
     cout << endl;
     cout << message << endl;
     cout << endl;
-*/}
+}
 
 //TODO function that allows user to edit registered computer
 void ConsoleUI::editComputer()
@@ -217,11 +216,36 @@ void ConsoleUI::editComputer()
     cout << "Edit registered computer" << endl;
     cout << endl;
 
-    int cIndex;
-    string cChange, cInput;
+    int id;
+    string change, input;
 
     cout << "Enter the index number of the computer you want to change: ";
-    cin >> cIndex;
+    cin >> id;
+    while (cin.fail() || id > _computers.getSize() || id < 0)
+    {
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> id;
+    }
+
+    cout << "Enter what it is that you want to change about the computer " << endl;
+    cout << "(name/yearbuilt/type): ";
+    cin >> change;
+    while (change != "name" && change != "yearbuilt" && change != "type"){
+        cout << "ERROR!! Please enter a valid option! (name/yearbuilt/type)\n";
+        cin.clear();
+        cin >> change;
+    }
+
+    cout << "Enter the new value: ";
+    cin >> input;
+
+    string message = _computers.editComputer(id, change, input);
+
+    cout << endl;
+    cout << message << endl;
+    cout << endl;
 }
 
 // Function that allows user to delete scientist of his choosing
@@ -1016,4 +1040,146 @@ void ConsoleUI::printComputerHeader()
     cout << left << "-";
     cout << endl;
     cout.fill(' ');
+}
+
+//typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
+//includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+string ConsoleUI::typeOf(string what)
+{
+    int whatSize = what.size();
+    while(what.substr(whatSize-1,whatSize) ==" ")
+    {
+        what = what.substr(0,whatSize-1);
+        whatSize = what.size();
+    }
+    int* whatArrayInt = new int[whatSize] {};
+    bool* whatIsInt= new bool[whatSize] {false};
+    bool* whatIsAlphabet = new bool[whatSize] {false};
+    bool* whatIsAlowedChar = new bool[whatSize] {false};
+    bool* whatNotValidated = new bool[whatSize] {false};
+
+    for(int i =0; i<whatSize; i++)
+    {
+
+        whatArrayInt[i] = (int)what.substr(i,i+1)[0]; //[0] gives first character in string array that is char
+
+    }
+    for(int i = 0; i<whatSize; i++)
+    {
+        if(whatArrayInt[i] >=48 && whatArrayInt[i] <=57) //48 ='0' ...57 ='9'
+        {
+            whatIsInt[i]=true;
+        }
+        else if((whatArrayInt[i] >=65 && whatArrayInt[i] <= 90) || (whatArrayInt[i] >=97 && whatArrayInt[i] <=122) || (whatArrayInt[i] ==32) )//65 = 'A', 90='Z', 97='a',122='z',32 =SPACE
+        {
+            whatIsAlphabet[i] = true;
+        }
+        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
+        {
+           whatIsAlowedChar[i] =true;
+        }
+        else
+        {
+            whatNotValidated[i] = true;
+        }
+    }
+    bool ThereAreSomeCharNotValidated = false;
+    bool ThereAreSomeInt = false;
+    bool ThereAreSomeAlphabet = false;
+    bool ThereAreSomeAlowedChar = false;
+    for(int i =0; i<whatSize; i++)
+    {
+        if(whatIsInt[i])
+        {
+            ThereAreSomeInt = true;
+        }
+        else if(whatIsAlphabet[i])
+        {
+            ThereAreSomeAlphabet = true;
+
+        }
+        else if(whatIsAlowedChar[i])
+        {
+            ThereAreSomeAlowedChar =true;
+        }
+        else
+        {
+            ThereAreSomeCharNotValidated =true;
+        }
+    }
+    if(ThereAreSomeCharNotValidated)
+    {
+        return "NV"; //has: Not Validated input
+    }
+    else if(ThereAreSomeAlphabet && ThereAreSomeAlowedChar && ThereAreSomeInt)
+    {
+        return "ACI"; //has onlie: Alphabet, char, int
+    }
+    else if(ThereAreSomeAlowedChar && ThereAreSomeAlphabet)
+    {
+        return "AC"; //has onlie: Alphabet, char
+    }
+    else if(ThereAreSomeAlowedChar && ThereAreSomeInt)
+    {
+        return "CI"; //has onlie: char , int
+    }
+    else if(ThereAreSomeAlphabet && ThereAreSomeInt)
+    {
+        return "AI"; // has onlie: Alphabet, int
+    }
+    else if(ThereAreSomeAlphabet)
+    {
+        return "A"; // has onlie: Alphabet
+    }
+    else if(ThereAreSomeAlowedChar)
+    {
+        return "C"; // has onlie: char
+    }
+    else if(ThereAreSomeInt)
+    {
+        return "I"; // has onlie: int
+
+    }
+    else
+    {
+        return "error in localtime::typeOf(string what)";
+    }
+}
+// check can be "AI",AC",ACI","CI","I","C","A","NV" see ConsoleUI::typeOf() for mor info
+// allowed can be "A_AC.._I" see above
+// checks if input is allowed
+
+bool ConsoleUI::ValidInput(string check, string allowed)
+{
+    if( check == "NV")
+    {
+        return false;
+    }
+
+    int count_ =0;
+    int* whereAre= new int[6]{};
+    int allowedSize = allowed.size();
+    string oneAllowedIntax;
+    whereAre[count_]=-1;
+    count_++;
+    for(int i =0; i<allowedSize; i++)
+    {
+        if(allowed[i]=='_')
+        {
+            whereAre[count_]=i;
+            count_++;
+        }
+    }
+    whereAre[count_]=allowedSize;
+
+    for (int i =0; i<count_;i++)
+    {
+        oneAllowedIntax = allowed.substr(whereAre[i]+1, whereAre[i+1]-whereAre[i]-1);
+       if (check == oneAllowedIntax )
+        {
+            return true;
+        }
+    }
+    return false;
+
 }
