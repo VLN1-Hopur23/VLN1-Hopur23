@@ -146,6 +146,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
         {
             finalSearchData = "f";
             inputOkay = true;
+            cout << "inside the gender f command" << endl;
         }
         else if( searchData == "m" || searchData == "M")
         {
@@ -156,13 +157,24 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     else if (command == "birth" || command == "Birth" || command == "b" || command == "2" || command == "02")
     {
         finalCommand = "Birthyear";
+        // TO DO check if int or not
+        int intSearchData = stoi(searchData);
+        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
+        {
+            finalSearchData = intSearchData;
+        }
     }
     else if (command == "death" || command == "Death" || command == "d" || command == "3" || command == "03")
     {
         finalCommand = "Deathyear";
+        int intSearchData = stoi(searchData);
+        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
+        {
+            finalSearchData = intSearchData;
+        }
     }
 
-    if(inputOkay)
+    if(inputOkay) //Returns true if input is accepted
     {
         _scientists = _data.filterScientist(finalCommand, finalSearchData);
         return true;

@@ -14,6 +14,8 @@ class ScientistService
 
     DbManager _data;
 
+    LocalTime _time;
+
 public:
 
     ScientistService();
