@@ -1167,11 +1167,11 @@ void ConsoleUI::displayComputers()
 
         if(typeToLong)
         {
-            cout << setw(4) << left << "-||-";
-            cout <<setw(36)<< left <<"-||-";
-            cout << setw(8) << "-||-";
+            cout << setw(4) << left << " ";
+            cout <<setw(36)<< left <<" ";
+            cout << setw(8) << " ";
             cout << setw(25) << typeFit2;
-            cout << setw(5) << "-||-";
+            cout << setw(5) << " ";
             cout << endl;
         }
     }
