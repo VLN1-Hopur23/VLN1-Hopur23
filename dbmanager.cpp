@@ -57,7 +57,7 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     }
     return scientists;
 }
-//
+
 bool DbManager::addScientist(const Scientist& scientist, int& id) const
 {
     //bool message = "";
@@ -93,7 +93,6 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
-
 }
 
 // Deletes computer with chosen ID number from database
@@ -108,7 +107,6 @@ void DbManager::deleteScientist(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ScientistID = (:ScientistID)");
     queryDeleteConnection.bindValue(":ScientistID",ID);
     queryDeleteConnection.exec();
-
 }
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
@@ -230,7 +228,6 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
     vector<Scientist> foundScientists;
 
     QSqlQuery query(_db);
-
 
     if (isdigit(searchData.at(0)))
     {
@@ -515,6 +512,7 @@ bool DbManager::addIntersect(const int& scientistID, const int& computerID)
     queryAdd.prepare("INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES (:computerID, :scientistID)");
     queryAdd.bindValue(":computerID", computerID);
     queryAdd.bindValue(":scientistID", scientistID);
+
     if(queryAdd.exec())
     {
         return true;
@@ -548,6 +546,5 @@ bool DbManager::addIntersect(const int& scientistID, const int& computerID)
 
         foundComputer.push_back(computer);
     }
-
     return foundComputer;
 }

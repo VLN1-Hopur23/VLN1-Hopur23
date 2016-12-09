@@ -1,7 +1,6 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 
-
 #include "scientistservice.h"
 #include "scientist.h"
 #include "computer.h"
@@ -11,7 +10,6 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-
 
 using namespace std;
 
@@ -66,7 +64,7 @@ private:
 
     void printComputerHeader();
 
-    vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
+    vector<Scientist> SortVector(vector<Scientist> _listOfScientist, string sort);
 
     void searchAllColumsByKeyword(string searchDataKeyword);
 
@@ -76,12 +74,14 @@ private:
 
 private:
 
-    //TODO skyrari nofn
     ScientistService _service;
+
     LocalTime _time;
+
     ComputerService _computers;
 
     string typeOf(string what);
+
     bool ValidInput(string check, string allowed);
 };
 

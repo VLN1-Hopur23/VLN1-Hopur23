@@ -32,7 +32,8 @@ public:
 
     void deleteComputer(int index);
 
-    bool searchingComputerByFilter(string command, string searchData); //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
+    // Function called in consoleUI, returns 1/true if the input is correct and 0/false otherwise
+    bool searchingComputerByFilter(string command, string searchData);
 
     bool addIntersectScientist(const int& scientistID, const int& computerID);
 

@@ -114,7 +114,6 @@ string ScientistService::editScientist(int index, string change, string input)
     return message;
 }
 
-
 // Fetches deleteScientist function in dbmanager
 void ScientistService::deleteScientist(int index)
 {
@@ -127,6 +126,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) // F
     string finalCommand;
     string finalSearchData;
     bool inputOkay = false;
+
     if (command == "gender" || command == "Gender" || command == "g" || command == "1" || command == "01")
     {
         finalCommand = "Gender";
@@ -147,8 +147,8 @@ bool ScientistService::searchingByFilter(string command, string searchData) // F
     else if (command == "birth" || command == "Birth" || command == "b" || command == "2" || command == "02")
     {
         finalCommand = "Birthyear";
-        // TO DO check if int or not
         int intSearchData = stoi(searchData);
+
         if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
         {
             finalSearchData = intSearchData;
@@ -158,6 +158,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) // F
     {
         finalCommand = "Deathyear";
         int intSearchData = stoi(searchData);
+
         if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
         {
             finalSearchData = intSearchData;

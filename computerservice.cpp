@@ -95,7 +95,8 @@ void ComputerService::getVectorFoundComputer(string& searchData)
 
 bool ComputerService::searchComputersByPeriod(int yearFrom, int yearTo)
 {
-    if(yearFrom < _time.getYearToDay() && yearFrom < yearTo){
+    if(yearFrom < _time.getYearToDay() && yearFrom < yearTo)
+    {
         _computers = _data.searchComputerPeriod(yearFrom, yearTo);
         return true;
     }
@@ -112,6 +113,7 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
     string finalCommand;
     string finalSearchData;
     bool inputOkay = false;
+
     if (command == "Name" || command == "name" || command == "n") //|| command == "1" || command == "01")
     {
         cout << "inside Name in searching by filter in Computer Service" << endl;
@@ -128,6 +130,7 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
         finalCommand = "Yearbuilt";
         // TO DO check if int or not
         int intSearchData = stoi(searchData);
+
         if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
         {
             finalSearchData = intSearchData;
@@ -137,7 +140,7 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
 
     if(inputOkay) //Returns true if input is accepted
     {
-         _computers = _data.filterComputer(finalCommand, finalSearchData);
+        _computers = _data.filterComputer(finalCommand, finalSearchData);
         return true;
     }
     return false;
@@ -164,6 +167,5 @@ string ComputerService::editComputer(int index, string change, string input)
     {
         message = _data.editComputerType(index, input);
     }
-
     return message;
 }
