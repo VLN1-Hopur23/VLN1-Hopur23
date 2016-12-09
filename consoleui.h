@@ -72,6 +72,8 @@ private:
 
     void addIntersectScientist(const int& param1, const int& param2);
 
+    void addIntersectComputer(const int& scientistID, const int& computerID);
+
 private:
 
     //TODO skyrari nofn

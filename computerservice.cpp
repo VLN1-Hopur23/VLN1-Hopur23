@@ -7,9 +7,9 @@ ComputerService::ComputerService()
 
 }
 
-bool ComputerService::addComputer(Computer computer)
+bool ComputerService::addComputer(Computer computer, int& id)
 {
-    return _data.addComputer(computer);
+    return _data.addComputer(computer, id);
 }
 
 // Get functions
@@ -105,7 +105,6 @@ bool ComputerService::searchComputersByPeriod(int yearFrom, int yearTo)
 void ComputerService::deleteComputer(int index)
 {
     _data.deleteComputer(index);
-
 }
 
 bool ComputerService::searchingComputerByFilter(string command, string searchData)
@@ -146,7 +145,7 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
 
 bool ComputerService::addIntersectScientist(const int& scientistID, const int& computerID)
 {
-    return _data.addIntersectScientist(scientistID, computerID);
+    return _data.addIntersect(scientistID, computerID);
 }
 
 // Edit function takes input from the user and fetches data from the dbmanagar
