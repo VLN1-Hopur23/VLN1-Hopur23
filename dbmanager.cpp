@@ -74,7 +74,7 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
     return scientists;
 }
 //
-bool DbManager::addScientist(const Scientist& scientist) const
+bool DbManager::addScientist(const Scientist& scientist, int& id) const
 {
     //bool message = "";
 
@@ -88,6 +88,7 @@ bool DbManager::addScientist(const Scientist& scientist) const
 
     if(queryAdd.exec())
     {
+        id = queryAdd.lastInsertId().toInt();
         return true;
     }
     else
@@ -544,4 +545,47 @@ string DbManager::editComputerType(const int& id, const string& newType)
         message = "Unkown error occurred";
     }
     return message;
+}
+
+bool DbManager::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    QSqlQuery queryAdd(_db);
+    queryAdd.prepare("INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES (:computerID, :scientistID)");
+    queryAdd.bindValue(":computerID", computerID);
+    queryAdd.bindValue(":scientistID", scientistID);
+    if(queryAdd.exec())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+ vector<Computer> DbManager::searchComputerPeriod(int yearFrom, int yearTo)
+{
+    QSqlQuery query(_db);
+    vector<Computer> foundComputer;
+
+    query.prepare("SELECT * FROM Computers WHERE Yearbuilt BETWEEN (:YearFrom) AND (:YearTo)");
+    query.bindValue(":YearFrom", yearFrom);
+    query.bindValue(":YearTo", yearTo);
+
+    query.exec();
+
+    while(query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+
+        Computer computer(computerID, name, yearBuilt, type, built);
+
+        foundComputer.push_back(computer);
+    }
+
+    return foundComputer;
 }

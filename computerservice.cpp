@@ -88,9 +88,18 @@ void ComputerService::retrieveIntersectScientist(const string& param)
 }
 
 // Connects the search function in console to dbmanager
-void ComputerService:: getVectorFoundComputer(string& searchData)
+void ComputerService::getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);
+}
+
+bool ComputerService::searchComputersByPeriod(int yearFrom, int yearTo)
+{
+    if(yearFrom < _time.getYearToDay() && yearFrom < yearTo){
+        _computers = _data.searchComputerPeriod(yearFrom, yearTo);
+        return true;
+    }
+    return false;
 }
 
 void ComputerService::deleteComputer(int index)
@@ -135,6 +144,11 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
     return false;
 }
 
+bool ComputerService::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    return _data.addIntersectScientist(scientistID, computerID);
+}
+
 // Edit function takes input from the user and fetches data from the dbmanagar
 string ComputerService::editComputer(int index, string change, string input)
 {
@@ -151,5 +165,6 @@ string ComputerService::editComputer(int index, string change, string input)
     {
         message = _data.editComputerType(index, input);
     }
+
     return message;
 }

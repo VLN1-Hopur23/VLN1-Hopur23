@@ -15,9 +15,9 @@ void ScientistService:: getVectorFoundScientists(string& searchData)
 }
 
 // Connects to register function in console to add scientist function in dbmanager
-bool ScientistService::addScientist(Scientist scientist)
+bool ScientistService::addScientist(Scientist scientist, int& id)
 {
-    return _data.addScientist(scientist);
+    return _data.addScientist(scientist, id);
 }
 
 // Used in display scientist in console, vector for scientist
