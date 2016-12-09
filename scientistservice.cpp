@@ -2,41 +2,34 @@
 
 using namespace std;
 
+// Constructor
 ScientistService::ScientistService()
 {
 
 }
 
+// Connects search function in console to search function in dbmanager
 void ScientistService:: getVectorFoundScientists(string& searchData)
 {
     _scientists = _data.searchScientist(searchData);
 }
 
+// Connects to register function in console to add scientist function in dbmanager
 bool ScientistService::addScientist(Scientist scientist)
 {
     return _data.addScientist(scientist);
 }
 
+// Used in display scientist in console, vector for scientist
 Scientist ScientistService::getScientist(size_t index)
 {
     return _scientists[index];
 }
 
+// Gets size of vector
 size_t ScientistService::getSize() const
 {
     return _scientists.size();
-}
-
-bool ScientistService::ifExist(string name)
-{
-   for (size_t i = 0; i < _scientists.size(); i++)
-   {
-       if (_scientists[i].getName() == name)
-       {
-           return true;
-       }
-   }
-   return false;
 }
 
 vector<Scientist> ScientistService::getScientistVector()
@@ -44,7 +37,7 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
-// Fetches table of scientists from SQL database
+// Fetches table of scientists from dbmanager
 bool ScientistService::retrieveScientists(string order, string filter)
 {
     QString QSorder = "";
@@ -127,13 +120,14 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 */
 
+// Fetches deleteScientist function in dbmanager
 void ScientistService::deleteScientist(int index)
 {
     _data.deleteScientist(index);
-
 }
 
-bool ScientistService::searchingByFilter(string command, string searchData) //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
+// Fetches appropriate filter from dbmanager for search function in console
+bool ScientistService::searchingByFilter(string command, string searchData) // Function that we call in consoleUI, returns 1/true if input is right but 0/false otherwise
 {
     string finalCommand;
     string finalSearchData;
@@ -141,11 +135,13 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     if (command == "gender" || command == "Gender" || command == "g" || command == "1" || command == "01")
     {
         finalCommand = "Gender";
-        //searchdata must be f or m
+
+        // Searchdata must be f or m
         if(searchData == "f" || searchData == "F")
         {
             finalSearchData = "f";
             inputOkay = true;
+            cout << "inside the gender f command" << endl;
         }
         else if( searchData == "m" || searchData == "M")
         {
@@ -156,13 +152,24 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     else if (command == "birth" || command == "Birth" || command == "b" || command == "2" || command == "02")
     {
         finalCommand = "Birthyear";
+        // TO DO check if int or not
+        int intSearchData = stoi(searchData);
+        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
+        {
+            finalSearchData = intSearchData;
+        }
     }
     else if (command == "death" || command == "Death" || command == "d" || command == "3" || command == "03")
     {
         finalCommand = "Deathyear";
+        int intSearchData = stoi(searchData);
+        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
+        {
+            finalSearchData = intSearchData;
+        }
     }
 
-    if(inputOkay)
+    if(inputOkay) // Returns true if input is accepted
     {
         _scientists = _data.filterScientist(finalCommand, finalSearchData);
         return true;
@@ -170,6 +177,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     return false;
 }
 
+// Connects link function in console to dbmanager
 void ScientistService::retrieveIntersectComputer(const string& param)
 {
     _scientists = _data.intersectComputer(param);

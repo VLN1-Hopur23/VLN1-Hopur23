@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Constructors
 Scientist::Scientist()
 {
 
@@ -16,15 +17,7 @@ Scientist::Scientist(int scientistID, string name, string gender, int yearOfBirt
     _scientistID = scientistID;
 }
 
-Scientist::Scientist(string name, string gender, int yearOfBirth, int yearOfDeath)
-{
-    _name = name;
-    _gender = gender;
-    _yearOfBirth = yearOfBirth;
-    _yearOfDeath = yearOfDeath;
-    _scientistID = 0;          // Default = 0
-}
-
+// Get functions
 int Scientist::getScientistID() const
 {
     return _scientistID;
@@ -81,6 +74,7 @@ int Scientist::getYearToDay() const
       return YearToDay;
 }
 
+// Set functions
 void Scientist::setName(string name)
 {
     _name = name;

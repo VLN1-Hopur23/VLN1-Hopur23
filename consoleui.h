@@ -28,11 +28,17 @@ public:
 
 private:
 
-    void displayListOfScientist();
+    void editScientist();
 
-    void registerScientist();
+    void editComputer();
 
-    void registerComputer();
+    void deleteScientist();
+
+    void deleteComputer();
+
+    void searchScientists();
+
+    void searchComputers();
 
     void listScientists();
 
@@ -42,21 +48,17 @@ private:
 
     void sortComputers();
 
+    void listIntersectScientist(const string& param);
+
+    void listIntersectComputer(const string& param);
+
+    void registerScientist();
+
+    void registerComputer();
+
     void displayScientists();
 
     void displayComputers();
-
-    void searchScientists();
-
-    void searchComputers();
-
-    void editScientist();
-
-    void editComputer();
-
-    void deleteScientist();
-
-    void deleteComputer();
 
     void printFrame();
 
@@ -64,13 +66,9 @@ private:
 
     void printComputerHeader();
 
-    void listIntersectScientist(const string& param);
-
-    void listIntersectComputer(const string& param);
-
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
-    LocalTime _time;
+    void searchAllColumsByKeyword(string searchDataKeyword);
 
 
 
@@ -78,7 +76,7 @@ private:
 
     //TODO skyrari nofn
     ScientistService _service;
-
+    LocalTime _time;
     ComputerService _computers;
 
     string typeOf(string what);
