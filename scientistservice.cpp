@@ -15,9 +15,9 @@ void ScientistService:: getVectorFoundScientists(string& searchData)
 }
 
 // Connects to register function in console to add scientist function in dbmanager
-bool ScientistService::addScientist(Scientist scientist)
+bool ScientistService::addScientist(Scientist scientist, int& id)
 {
-    return _data.addScientist(scientist);
+    return _data.addScientist(scientist, id);
 }
 
 // Used in display scientist in console, vector for scientist
@@ -88,37 +88,32 @@ bool ScientistService::retrieveScientists(string order, string filter)
     }
 }
 
-/*
+// Edit function takes input from the user and fetches data from the dbmanagar
 string ScientistService::editScientist(int index, string change, string input)
 {
     string message = "Invalid, ignored";
-    if(index > _scientists.size()){
+    /*if(index > _scientists.size()){
         message = "Index out of range";
-    }
+    }*/
     if (change == "name")
     {
-        message = "Name changed successfully";
-        _scientists[index].setName(input); 
+        message = _data.editScientistName(index, input);
     }
     else if (change == "gender")
     {
-        message = "Gender changed successfully";
-        _scientists[index].setGender(input);
+        message = _data.editScientistGender(index, input);
     }
     else if (change == "birth")
     {
-        message = "Birth year changed successfully";
-        _scientists[index].setYearOfBirth(stoi(input, 0));
+        message = _data.editScientistBirthYear(index, input);
     }
     else if (change == "death")
     {
-        message = "Death year changed successfully";
-        _scientists[index].setYearOfDeath(stoi(input, 0));
+        message = _data.editScientistDeathYear(index, input);
     }
-    _data.writeData(_scientists);
     return message;
 }
-*/
+
 
 // Fetches deleteScientist function in dbmanager
 void ScientistService::deleteScientist(int index)

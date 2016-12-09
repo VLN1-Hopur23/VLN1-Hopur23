@@ -1,5 +1,7 @@
 #include "consoleui.h"
 #include <iomanip>
+#define CLEARSCREEN() printf("\033[H\033[J") //Clears screen
+
 using namespace std;
 
 //Presentation layer
@@ -26,9 +28,9 @@ void ConsoleUI::run()
         cout << "03. search\t\t- Search scientist or computer\n";
         cout << "04. edit\t\t- Edit scientist or computer\n";
         cout << "05. delete\t\t- Delete scientist or computer\n";
-        cout << "06. quit\t\t- Exit program\n";
+        cout << "06. clear\t\t- Clear screen\n";
+        cout << "07. quit\t\t- Exit program\n";
         cout << endl;
-
         cin>>command;
         while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
         {
@@ -40,7 +42,6 @@ void ConsoleUI::run()
         // Frequent users could use one lower case letter for shortcut
         if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
         {
-
             string lOption;
             cout << "Select a table to display:" << endl;
             cout << "01. Scientists" << endl;
@@ -85,7 +86,6 @@ void ConsoleUI::run()
                 cin>>rOption;
             }
             cout << endl;
-
 
             if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
             {
@@ -184,7 +184,12 @@ void ConsoleUI::run()
             }
         }
 
-        else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "6" || command == "06")
+        else if (command == "clear" || command == "Clear" || command == "c" || command == "C" || command == "6" || command == "06")
+        {
+            CLEARSCREEN();
+        }
+
+        else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "7" || command == "07")
         {
 
             loop = false;
@@ -197,32 +202,46 @@ void ConsoleUI::run()
 
 }
 
-//TODO function that allows user to edit registered scientist
+// function that allows user to edit registered scientist from the db
 void ConsoleUI::editScientist()
 {
-    cout << "Edit registered computer scientist character" << endl;
+    cout << "Edit registered computer scientist" << endl;
     cout << endl;
 
-    string id;
-    string change, input;
+    int id;
+
+    string change, input,idString;
 
     cout << "Enter the ID number of the computer scientist you want to change: ";
-    cin >> id;
-    while(!ValidInput(typeOf(id), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+    cin >> idString;
+
+
+    cout<<idString<<endl;
+    while(!ValidInput(typeOf(idString), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
     {
-        cout<<"Input is not valid! Try again!"<<endl;
-        cin>>id;
+        cout << "Input is not valid! Try again!"<<endl;
+        cin >> idString;
     }
+    id = std::stoi(idString);
+    cout<<"id = "<<id<<endl;
+
+
+
+
     cout << "Enter a new value: ";
 
 //TODO delete if not used
 /*    while (cin.fail() || index > _service.getSize() || index < 0)
+
+   /*while (cin.fail() || index > _service.getSize() || index < 0)
+
     {
         cout << "ERROR!! Please enter a valid index!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
-    }
+    }*/
+
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -231,15 +250,16 @@ void ConsoleUI::editScientist()
         cin.clear();
         cin >> change;
     }
+
     cout << "Enter the new value: ";
     cin >> input;
 
-    string message = _service.editScientist(index, change, input);
+    string message = _service.editScientist(id, change, input);
 
     cout << endl;
     cout << message << endl;
     cout << endl;
-*/}
+}
 
 //TODO function that allows user to edit registered computer
 void ConsoleUI::editComputer()
@@ -247,12 +267,37 @@ void ConsoleUI::editComputer()
     cout << "Edit registered computer" << endl;
     cout << endl;
 
-    int cIndex;
-    string cChange, cInput;
+    int id;
+    string change, input;
 
     cout << "Enter the index number of the computer you want to change: ";
-    cin >> cIndex;
 
+    cin >> id;
+    while (cin.fail() || id > _computers.getSize() || id < 0)
+    {
+        cout << "ERROR!! Please enter a valid index!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> id;
+    }
+
+    cout << "Enter what it is that you want to change about the computer " << endl;
+    cout << "(name/yearbuilt/type): ";
+    cin >> change;
+    while (change != "name" && change != "yearbuilt" && change != "type"){
+        cout << "ERROR!! Please enter a valid option! (name/yearbuilt/type)\n";
+        cin.clear();
+        cin >> change;
+    }
+
+    cout << "Enter the new value: ";
+    cin >> input;
+
+    string message = _computers.editComputer(id, change, input);
+
+    cout << endl;
+    cout << message << endl;
+    cout << endl;
 }
 
 // Function that allows user to delete scientist of his choosing
@@ -418,7 +463,7 @@ void ConsoleUI::searchScientists()
 
             if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
             {
-                //editScientist();
+                editScientist();
             }
             else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
             {
@@ -466,21 +511,20 @@ void ConsoleUI::searchComputers()
         cin>>command;
     }
 
-    cout << "Enter search keyword: ";
-    cin.ignore();
-    getline(cin, searchData);
-
-    while(searchData.empty())
-    {
-        cout << endl;
-        cout << "Keyword cannot be empty!\n";
-        cout << endl;
-        cout << "Enter search keyword: ";
-        getline(cin, searchData);
-    }
-
     if(command == "search" || command == "s" || command == "04" || command == "4")
     {
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
         searchAllColumsByKeyword(searchData);
     }
     else if(command == "life" || command == "l" || command == "05" || command == "5")
@@ -489,17 +533,39 @@ void ConsoleUI::searchComputers()
     }
     else if(command == "built" || command == "b" || command == "02" || command == "2")
     {
-        //SQL command that shows yearbuilt from maybe 1500 to 2000
-        if(_computers.searchingComputerByFilter(command, searchData))
+        cout << "Enter what year you want to search from: ";
+        int yearFrom, yearTo;
+        cin >> yearFrom;
+        cout << "Enter what year you want to search to: ";
+        cin >> yearTo;
+
+        if(_computers.searchComputersByPeriod(yearFrom,yearTo))
         {
+            cout << "Listing computers from "<< yearFrom << " - " << yearTo << endl;
             displayComputers();
         }
     }
-    else if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
-    {
-        //Then we display the computers that matched the criteria
-        displayComputers();
+    else{
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
+
+        if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
+        {
+            //Then we display the computers that matched the criteria
+            displayComputers();
+        }
     }
+
 }
 
 void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
@@ -784,7 +850,7 @@ void ConsoleUI::listIntersectScientist(const string& param)
 
 // Finds computers that are conncected to scientists
 void ConsoleUI::listIntersectComputer(const string& param)
-{  
+{
     _service.retrieveIntersectComputer(param);
     if (_service.getSize() != 0)
     {
@@ -860,7 +926,9 @@ void ConsoleUI::registerScientist()
 
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
-    bool message = _service.addScientist(scientist);
+    int scientistID;
+
+    bool message = _service.addScientist(scientist, scientistID);
         //cout << endl;
     //  cout << message << endl;
 
@@ -870,17 +938,30 @@ void ConsoleUI::registerScientist()
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
+        cout << "The ID is: " << scientistID << endl;
+        cout << endl;
         cout << "Would you like to connect your scientist to a comptuer? (Yes/No)" << endl;
         cin >> connectChoice;
         cout << endl;
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            string param;
-            cout << "Select ID to show associated: ";
-            cin >> param;
+            _computers.retrieveComputers("ASC", "Name");
+            displayComputers();
+
+            int computerID;
+
+            cout << "Insert computerID which you want to connect to newly added scientist\n";
+            cin >> computerID;
             cout << endl;
-            listIntersectScientist(param);
+            //if (param2 <= _computers.getSize())
+            {
+                addIntersectScientist(scientistID, computerID);
+            }
+            //else
+            {
+               // cout << "Input valid ID number\n";
+            }
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -896,6 +977,20 @@ void ConsoleUI::registerScientist()
         cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
+    }
+}
+
+// adds a connection from newly added scientist to a already listed computer
+void ConsoleUI::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    bool addedsuccessfully = _computers.addIntersectScientist(scientistID, computerID);
+    if(addedsuccessfully)
+    {
+         cout << "Connection was added successfully\n";
+    }
+    else
+    {
+        cout <<"Connection was not added successfully\n";
     }
 }
 
@@ -1117,6 +1212,7 @@ void ConsoleUI::printComputerHeader()
     cout << endl;
     cout.fill(' ');
 }
+
 //typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 //includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
 string ConsoleUI::typeOf(string what)

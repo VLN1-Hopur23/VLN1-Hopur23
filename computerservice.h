@@ -34,7 +34,11 @@ public:
 
     bool searchingComputerByFilter(string command, string searchData); //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
 
+    bool addIntersectScientist(const int& scientistID, const int& computerID);
 
+    string editComputer(int index, string change, string input);
+
+    bool searchComputersByPeriod(int yearFrom, int yearTo);
 
 private:
 
