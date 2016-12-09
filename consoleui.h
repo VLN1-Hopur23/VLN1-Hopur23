@@ -70,7 +70,7 @@ private:
 
     void searchAllColumsByKeyword(string searchDataKeyword);
 
-
+    void addIntersectScientist(const int& param1, const int& param2);
 
 private:
 

@@ -22,7 +22,7 @@ public:
 
     void getVectorFoundScientists(string& searchData);
 
-    bool addScientist(Scientist scientist);
+    bool addScientist(Scientist scientist, int& id);
 
     Scientist getScientist(size_t index);
 
@@ -39,6 +39,8 @@ public:
     bool searchingByFilter(string filter, string searchData);
 
     void retrieveIntersectComputer(const string& param);
+
+    int getLastInsertRowID();
 
 };
 

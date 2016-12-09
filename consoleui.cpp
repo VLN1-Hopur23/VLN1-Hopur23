@@ -396,7 +396,7 @@ void ConsoleUI::searchScientists()
 
             if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
             {
-                //editScientist();
+                editScientist();
             }
             else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
             {
@@ -434,21 +434,20 @@ void ConsoleUI::searchComputers()
     cout << endl;
     cin >> command;
 
-    cout << "Enter search keyword: ";
-    cin.ignore();
-    getline(cin, searchData);
-
-    while(searchData.empty())
-    {
-        cout << endl;
-        cout << "Keyword cannot be empty!\n";
-        cout << endl;
-        cout << "Enter search keyword: ";
-        getline(cin, searchData);
-    }
-
     if(command == "search" || command == "s" || command == "04" || command == "4")
     {
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
         searchAllColumsByKeyword(searchData);
     }
     else if(command == "life" || command == "l" || command == "05" || command == "5")
@@ -457,17 +456,39 @@ void ConsoleUI::searchComputers()
     }
     else if(command == "built" || command == "b" || command == "02" || command == "2")
     {
-        //SQL command that shows yearbuilt from maybe 1500 to 2000
-        if(_computers.searchingComputerByFilter(command, searchData))
+        cout << "Enter what year you want to search from: ";
+        int yearFrom, yearTo;
+        cin >> yearFrom;
+        cout << "Enter what year you want to search to: ";
+        cin >> yearTo;
+
+        if(_computers.searchComputersByPeriod(yearFrom,yearTo))
         {
+            cout << "Listing computers from "<< yearFrom << " - " << yearTo << endl;
             displayComputers();
         }
     }
-    else if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
-    {
-        //Then we display the computers that matched the criteria
-        displayComputers();
+    else{
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
+
+        if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
+        {
+            //Then we display the computers that matched the criteria
+            displayComputers();
+        }
     }
+
 }
 
 void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
@@ -783,7 +804,9 @@ void ConsoleUI::registerScientist()
 
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
-    bool message = _service.addScientist(scientist);
+    int scientistID;
+
+    bool message = _service.addScientist(scientist, scientistID);
         //cout << endl;
     //  cout << message << endl;
 
@@ -793,17 +816,30 @@ void ConsoleUI::registerScientist()
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
+        cout << "The ID is: " << scientistID << endl;
+        cout << endl;
         cout << "Would you like to connect your scientist to a comptuer? (Yes/No)" << endl;
         cin >> connectChoice;
         cout << endl;
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            string param;
-            cout << "Select ID to show associated: ";
-            cin >> param;
+            _computers.retrieveComputers("ASC", "Name");
+            displayComputers();
+
+            int computerID;
+
+            cout << "Insert computerID which you want to connect to newly added scientist\n";
+            cin >> computerID;
             cout << endl;
-            listIntersectScientist(param);
+            //if (param2 <= _computers.getSize())
+            {
+                addIntersectScientist(scientistID, computerID);
+            }
+            //else
+            {
+               // cout << "Input valid ID number\n";
+            }
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -819,6 +855,20 @@ void ConsoleUI::registerScientist()
         cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
+    }
+}
+
+// adds a connection from newly added scientist to a already listed computer
+void ConsoleUI::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    bool addedsuccessfully = _computers.addIntersectScientist(scientistID, computerID);
+    if(addedsuccessfully)
+    {
+         cout << "Connection was added successfully\n";
+    }
+    else
+    {
+        cout <<"Connection was not added successfully\n";
     }
 }
 
