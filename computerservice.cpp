@@ -134,3 +134,8 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
     }
     return false;
 }
+
+bool ComputerService::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    return _data.addIntersectScientist(scientistID, computerID);
+}

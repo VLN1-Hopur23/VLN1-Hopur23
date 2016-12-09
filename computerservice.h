@@ -34,7 +34,7 @@ public:
 
     bool searchingComputerByFilter(string command, string searchData); //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
 
-
+    bool addIntersectScientist(const int& scientistID, const int& computerID);
 
 private:
 

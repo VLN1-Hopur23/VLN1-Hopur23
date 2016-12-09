@@ -20,7 +20,7 @@ public:
 
     vector<Computer> getComputers(QString QSorder, QString QSfilter);
 
-    bool addScientist(const Scientist& scientist) const;
+    bool addScientist(const Scientist& scientist, int& id) const;
 
     void deleteScientist(const int& ID);
 
@@ -52,6 +52,8 @@ public:
     string editScientistBirthYear(const int& id, const string& newBirthYear);
 
     string editScientistDeathYear(const int& id, const string& newDeathYear);
+
+    bool addIntersectScientist(const int& param1, const int& param2);
 
 private:
 

@@ -763,7 +763,9 @@ void ConsoleUI::registerScientist()
 
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
-    bool message = _service.addScientist(scientist);
+    int scientistID;
+
+    bool message = _service.addScientist(scientist, scientistID);
         //cout << endl;
     //  cout << message << endl;
 
@@ -773,17 +775,30 @@ void ConsoleUI::registerScientist()
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
+        cout << "The ID is: " << scientistID << endl;
+        cout << endl;
         cout << "Would you like to connect your scientist to a comptuer? (Yes/No)" << endl;
         cin >> connectChoice;
         cout << endl;
 
         if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
         {
-            string param;
-            cout << "Select ID to show associated: ";
-            cin >> param;
+            _computers.retrieveComputers("ASC", "Name");
+            displayComputers();
+
+            int computerID;
+
+            cout << "Insert computerID which you want to connect to newly added scientist\n";
+            cin >> computerID;
             cout << endl;
-            listIntersectScientist(param);
+            //if (param2 <= _computers.getSize())
+            {
+                addIntersectScientist(scientistID, computerID);
+            }
+            //else
+            {
+               // cout << "Input valid ID number\n";
+            }
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
@@ -799,6 +814,20 @@ void ConsoleUI::registerScientist()
         cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
+    }
+}
+
+// adds a connection from newly added scientist to a already listed computer
+void ConsoleUI::addIntersectScientist(const int& scientistID, const int& computerID)
+{
+    bool addedsuccessfully = _computers.addIntersectScientist(scientistID, computerID);
+    if(addedsuccessfully)
+    {
+         cout << "Connection was added successfully\n";
+    }
+    else
+    {
+        cout <<"Connection was not added successfully\n";
     }
 }
 
