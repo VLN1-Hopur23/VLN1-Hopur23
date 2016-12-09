@@ -764,11 +764,12 @@ void ConsoleUI::registerScientist()
     Scientist scientist(_service.getSize(), name, gender, yearOfBirth, yearOfDeath);
 
     bool message = _service.addScientist(scientist);
-        cout << endl;
+        //cout << endl;
     //  cout << message << endl;
 
     if (message == true)
     {
+        cout << endl;
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
@@ -795,6 +796,7 @@ void ConsoleUI::registerScientist()
     }
     else
     {
+        cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
     }
@@ -807,6 +809,7 @@ void ConsoleUI::registerComputer()
     int yearBuilt;
     string type;
     bool built = 0;
+    string ynBuilt;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -845,46 +848,67 @@ void ConsoleUI::registerComputer()
         getline(cin, type);
     }
 
-    cout << "Enter 1 if the computer was successfully built and 0 otherwise: " << endl;
-    cin >> built;
-    cout << endl;
+    cout << "Was the computer successfully built? (y/n): " << endl;
+    cin >> ynBuilt;
+
+    bool inputOK = false;
+
+    while(!inputOK)
+    {
+        if (ynBuilt == "Yes" || ynBuilt == "yes" || ynBuilt == "Y" || ynBuilt == "y")
+        {
+            built = 1;
+            inputOK = true;
+        }
+        else if (ynBuilt == "No" || ynBuilt == "no" || ynBuilt == "N" || ynBuilt == "n")
+        {
+            built = 0;
+            inputOK = true;
+        }
+        else
+        {
+            cout << "Please enter either yes or no!" << endl;
+            cin >> ynBuilt;
+            inputOK = false;
+        }
+    }
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
     bool cMessage = _computers.addComputer(computer);
 
-   if (cMessage == true)
-   {
-       cout << endl;
-       cout << "Computer added successfully!";
-       string connectChoice;
-       cout << endl;
-       cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
-       cin >> connectChoice;
-       cout << endl;
+    if (cMessage == true)
+    {
+        cout << endl;
+        cout << "Computer added successfully!";
+        string connectChoice;
+        cout << endl;
+        cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
+        cin >> connectChoice;
+        cout << endl;
 
-       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
-       {
-           string param;
-           cout << "Select ID to show associated: ";
-           cin >> param;
-           cout << endl;
-           listIntersectComputer(param);
-       }
-       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
-       {
-           //Return to main menu
-       }
-       else
-       {
-          cout << "Please enter a valid option!\n";
-       }
-   }
-   else
-   {
-       cout << endl;
-       cout << "Add computer failed!";
-       cout << endl;
-   }
+        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+        {
+            string param;
+            cout << "Select ID to show associated: ";
+            cin >> param;
+            cout << endl;
+            listIntersectComputer(param);
+        }
+        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+        {
+            //Return to main menu
+        }
+        else
+        {
+            cout << "Please enter a valid option!\n";
+        }
+    }
+    else
+    {
+        cout << endl;
+        cout << "Add computer failed!";
+        cout << endl;
+    }
 }
 
 // Function that displays a list of scientist and its characteristics
@@ -930,16 +954,16 @@ void ConsoleUI::displayComputers()
 
         if (type.size()>25)
         {
-                typeFit1 =type.substr(0,25);
-                int LastSpace = typeFit1.find_last_of(" ");
-                int StrEnd = type.size();
-                typeFit1 =type.substr(0,LastSpace-1);
-                typeFit2 = type.substr(LastSpace+1, StrEnd);
-                typeToLong = true;
+            typeFit1 =type.substr(0,25);
+            int LastSpace = typeFit1.find_last_of(" ");
+            int StrEnd = type.size();
+            typeFit1 =type.substr(0,LastSpace-1);
+            typeFit2 = type.substr(LastSpace+1, StrEnd);
+            typeToLong = true;
         }
         else
         {
-                typeFit1 =type;
+            typeFit1 =type;
         }
 
         cout << setw(2) << right << _computers.getComputer(i).getComputerID() << "  ";
