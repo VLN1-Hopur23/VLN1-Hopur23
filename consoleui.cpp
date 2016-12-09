@@ -29,13 +29,10 @@ void ConsoleUI::run()
         cout << "06. quit\t\t- Exit program\n";
         cout << endl;
 
-
         cin>>command;
-        cout<<" .. "<<endl;
-        cout<<"typeOf = "<<typeOf(command)<<endl;
         while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
         {
-            cout<<"Input is not valid!"<<endl;
+            cout<<"Input is not valid! Try again!"<<endl;
             cin>>command;
         }
         cout << endl;
@@ -44,12 +41,17 @@ void ConsoleUI::run()
         if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
         {
 
-            // ValidInput(typeOf(command), "A_AC_AI_ACI_I"); // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
             string lOption;
             cout << "Select a table to display:" << endl;
             cout << "01. Scientists" << endl;
             cout << "02. Computers" << endl;
             cin >> lOption;
+            while(!ValidInput(typeOf(lOption), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>lOption;
+            }
+
             cout << endl;
 
             if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
@@ -77,6 +79,11 @@ void ConsoleUI::run()
             cout << "01. scientist" << endl;
             cout << "02. computer" << endl;
             cin >> rOption;
+            while(!ValidInput(typeOf(rOption), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>rOption;
+            }
             cout << endl;
 
 
@@ -101,6 +108,11 @@ void ConsoleUI::run()
            cout << "01. scientists" << endl;
            cout << "02. computers" << endl;
            cin >> sOption;
+           while(!ValidInput(typeOf(sOption), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+           {
+               cout<<"Input is not valid! Try again!"<<endl;
+               cin>>sOption;
+           }
            cout << endl;
 
            if (sOption == "Scientist" || sOption == "scientist" || sOption == "Scientists" || sOption == "scientists" || sOption == "S" || sOption == "s" || sOption == "1" || sOption == "01")
@@ -124,6 +136,11 @@ void ConsoleUI::run()
             cout << "01. scientists" << endl;
             cout << "02. computers" << endl;
             cin >> edOption;
+            while(!ValidInput(typeOf(edOption), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>edOption;
+            }
             cout << endl;
 
             if (edOption ==  "Scientist" || edOption == "scientist" || edOption == "Scientists" || edOption == "scientists" || edOption == "s" || edOption == "S" || edOption == "1" || edOption == "01")
@@ -147,6 +164,11 @@ void ConsoleUI::run()
             cout << "02. computer" << endl;
             string deOption;
             cin >> deOption;
+            while(!ValidInput(typeOf(deOption), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>deOption;
+            }
 
             if (deOption == "Scientist" || deOption == "scientist" || deOption == "Scientists" || deOption == "scientists" || deOption == "S" || deOption == "s" || deOption == "1" || deOption == "01")
             {
@@ -186,6 +208,11 @@ void ConsoleUI::editScientist()
 
     cout << "Enter the ID number of the computer scientist you want to change: ";
     cin >> id;
+    while(!ValidInput(typeOf(id), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+    {
+        cout<<"Input is not valid! Try again!"<<endl;
+        cin>>id;
+    }
     cout << "Enter a new value: ";
 
 //TODO delete if not used
@@ -225,6 +252,7 @@ void ConsoleUI::editComputer()
 
     cout << "Enter the index number of the computer you want to change: ";
     cin >> cIndex;
+
 }
 
 // Function that allows user to delete scientist of his choosing
@@ -237,6 +265,7 @@ void ConsoleUI::deleteScientist()
     cout << endl;
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
+
 
     while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
@@ -259,6 +288,7 @@ void ConsoleUI::deleteScientist()
     cout << "Are you sure you want to delete " << scientistNameToDelete << "? (y/n): ";
     cin >> confirm;
 
+
     if (confirm == 'y' || confirm == 'Y')
     {
         _service.deleteScientist(index);
@@ -279,6 +309,7 @@ void ConsoleUI::deleteComputer()
     cout << endl;
     cout << "Enter the ID number of the computer to delete: ";
     cin >> index;
+
     while (cin.fail() || (unsigned int)index > _computers.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -297,6 +328,7 @@ void ConsoleUI::deleteComputer()
     }
     cout << "Are you sure you want to delete " << computerNameToDelete << "? (y/n): ";
     cin >> confirm;
+
 
     if (confirm == 'y' || confirm == 'Y')
     {
@@ -323,6 +355,11 @@ void ConsoleUI::searchScientists()
     cout << "05. life\t\t- search for meaning of life\n";
     cout << endl;
     cin >> command;
+    while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+    {
+        cout<<"Input is not valid! Try again!"<<endl;
+        cin >> command;
+    }
 
     cout << "Enter search keyword: ";
     cin.ignore();
@@ -373,6 +410,11 @@ void ConsoleUI::searchScientists()
             cout << "03. link\t\t- Link scientist to a computer\n";
             cout << "04. any other key\t- Exit program\n";
             cin >> command;
+            while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>command;
+            }
 
             if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
             {
@@ -387,6 +429,11 @@ void ConsoleUI::searchScientists()
                 string param;
                 cout << "Select ID to show associated: ";
                 cin >> param;
+                while(!ValidInput(typeOf(param), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+                {
+                    cout<<"Input is not valid! Try again!"<<endl;
+                    cin>>param;
+                }
                 cout << endl;
                 listIntersectScientist(param);
             }
@@ -413,6 +460,11 @@ void ConsoleUI::searchComputers()
     cout << "05. life\t\t- search for meaning of life\n";
     cout << endl;
     cin >> command;
+    while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+    {
+        cout<<"Input is not valid! Try again!"<<endl;
+        cin>>command;
+    }
 
     cout << "Enter search keyword: ";
     cin.ignore();
@@ -469,6 +521,11 @@ void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
         cout << "03. link\t\t- Link computer to a scientist\n";
         cout << "04. any other key\t- Exit program\n";
         cin >> command;
+        while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid! Try again!"<<endl;
+            cin>>command;
+        }
 
         if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "1" || command == "01")
         {
@@ -483,6 +540,11 @@ void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
             string param;
             cout << "Select ID to show associated: ";
             cin >> param;
+            while(!ValidInput(typeOf(param), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>param;
+            }
             cout << endl;
             listIntersectComputer(param);
         }
@@ -511,6 +573,11 @@ void ConsoleUI::listScientists()
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
         cin >> option;
+        while(!ValidInput(typeOf(option), "A")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid! Try again!"<<endl;
+            cin>>option;
+        }
 
         if (option == "sort" || option == "Sort" || option == "s" || option == "S")
         {
@@ -522,6 +589,11 @@ void ConsoleUI::listScientists()
             string param;
             cout << "Select scientistID to show associated computer: ";
             cin >> param;
+            while(!ValidInput(typeOf(param), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>param;
+            }
             cout << endl;
             listIntersectScientist(param);
         }
@@ -558,6 +630,11 @@ void ConsoleUI::sortScientists()
         cout << endl;
 
         cin >> order;
+        while(!ValidInput(typeOf(order), "A")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid! Try again!"<<endl;
+            cin>>order;
+        }
         cout << endl;
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
@@ -569,6 +646,11 @@ void ConsoleUI::sortScientists()
             cout << "Write ASC for ascending order or DESC for descending order:\n";
             cout << endl;
             cin >> filter;
+            while(!ValidInput(typeOf(filter), "A")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>filter;
+            }
 
             if(_service.retrieveScientists(order, filter))
             {
@@ -600,6 +682,11 @@ void ConsoleUI::listComputers()
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
         cin >> option;
+        while(!ValidInput(typeOf(option), "A")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid! Try again!"<<endl;
+            cin>>option;
+        }
 
         if (option == "sort" || option == "Sort" || option == "s" || option == "S")
         {
@@ -611,6 +698,11 @@ void ConsoleUI::listComputers()
             string param;
             cout << "Select computerID to show associated scientist: ";
             cin >> param;
+            while(!ValidInput(typeOf(param), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+            {
+                cout<<"Input is not valid! Try again!"<<endl;
+                cin>>param;
+            }
             cout << endl;
             listIntersectComputer(param);
         }
@@ -645,6 +737,11 @@ void ConsoleUI::sortComputers()
         cout << endl;
 
         cin >> order;
+        while(!ValidInput(typeOf(order), "A")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid! Try again!"<<endl;
+            cin>>order;
+        }
         cout << endl;
 
         if(order == "return" || order == "Return" || order == "r" || order == "R")
