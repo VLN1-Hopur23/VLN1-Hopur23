@@ -28,7 +28,7 @@
     <li>Users can also search the list for any computers by
     <ul>
       <li>name</li>
-      <li>year time period</li>
+      <li>time period</li>
       <li>type</li>
      </ul>
     <li>Users can edit a scientist or a computer in the list by they're choice by entering the index number</li>
