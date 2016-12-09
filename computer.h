@@ -11,7 +11,7 @@ public:
 
     Computer();
 
-    Computer(string name, int yearBuilt, string type, bool built);
+    //Computer(string name, int yearBuilt, string type, bool built);
 
     Computer(int computerID, string name, int yearBuilt, string type, bool built);
 

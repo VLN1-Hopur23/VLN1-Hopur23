@@ -4,7 +4,7 @@ Computer::Computer()
 {
 
 }
-
+/*
 Computer::Computer(string name, int yearBuilt, string type, bool built)
 {
     _name = name;
@@ -12,7 +12,7 @@ Computer::Computer(string name, int yearBuilt, string type, bool built)
     _type = type;
     _built = built;
 }
-
+*/
 Computer::Computer(int computerID, string name, int yearBuilt, string type, bool built)
 {
     _computerID = computerID;

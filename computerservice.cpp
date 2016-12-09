@@ -11,7 +11,7 @@ bool ComputerService::addComputer(Computer computer)
 {
     return _data.addComputer(computer);
 }
-
+//get functions
 Computer ComputerService::getComputer(size_t index)
 {
     return _computers[index];
@@ -69,17 +69,17 @@ bool ComputerService::retrieveComputers(string order, string filter)
         return false;
     }
 }
-
+//get size for computer vector
 size_t ComputerService::getSize() const
 {
     return _computers.size();
 }
-
+//connects the link function in console to dbmanager
 void ComputerService::retrieveIntersectScientist(const string& param)
 {
     _computers = _data.intersectScientist(param);
 }
-
+//connects the search function in console to dbmanager
 void ComputerService:: getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);
