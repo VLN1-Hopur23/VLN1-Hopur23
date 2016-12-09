@@ -5,49 +5,54 @@ InputValidation::InputValidation()
 {
 
 }
+
 string InputValidation::typeOf(string what)
 {
     int whatSize = what.size();
-    while(what.substr(whatSize-1,whatSize) ==" ")
+
+    while(what.substr(whatSize-1, whatSize) == " ")
     {
-        what = what.substr(0,whatSize-1);
+        what = what.substr(0, whatSize-1);
         whatSize = what.size();
     }
+
     int whatArrayInt[whatSize] = {};
     bool whatIsInt[whatSize] = {false};
     bool whatIsAlphabet[whatSize] = {false};
     bool whatIsAlowedChar[whatSize] = {false};
     bool whatNotValidated[whatSize] = {false};
 
-    for(int i =0; i<whatSize; i++)
+    for(int i = 0; i < whatSize; i++)
     {
-        whatArrayInt[i] = int(what.substr(i,i+1));
-
+        whatArrayInt[i] = int(what.substr(i, i+1));
     }
-    for(int i = 0; i<whatSize; i++)
+
+    for(int i = 0; i < whatSize; i++)
     {
-        if(whatArrayInt[i] >=48 && whatArrayInt[i] <=57) //48 ='0' ...57 ='9'
+        if(whatArrayInt[i] >= 48 && whatArrayInt[i] <= 57) //48 ='0' ...57 ='9'
         {
-            whatIsInt[i]=true;
+            whatIsInt[i] = true;
         }
-        else if((whatArrayInt[i] >=65 && whatArrayInt[i] <= 90) || (whatArrayInt[i] >=97 && whatArrayInt[i] <=122) || (whatArrayInt[i] ==32) )//65 = 'A', 90='Z', 97='a',122='z',32 =SPACE
+        else if((whatArrayInt[i] >= 65 && whatArrayInt[i] <= 90) || (whatArrayInt[i] >= 97 && whatArrayInt[i] <= 122) || (whatArrayInt[i] == 32) )//65 = 'A', 90='Z', 97='a',122='z',32 =SPACE
         {
             whatIsAlphabet[i] = true;
         }
         else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
         {
-           whatIsAlowedChar[i] =true;
+           whatIsAlowedChar[i] = true;
         }
         else
         {
             whatNotValidated[i] = true;
         }
     }
+
     bool ThereAreSomeCharNotValidated = false;
     bool ThereAreSomeInt = false;
     bool ThereAreSomeAlphabet = false;
     bool ThereAreSomeAlowedChar = false;
-    for(int i =0; i<whatSize; i++)
+
+    for(int i = 0; i < whatSize; i++)
     {
         if(whatIsInt[i])
         {
@@ -67,6 +72,7 @@ string InputValidation::typeOf(string what)
             ThereAreSomeCharNotValidated =true;
         }
     }
+
     if(ThereAreSomeCharNotValidated)
     {
         return "NV"; //has: Not Validated input
@@ -98,13 +104,9 @@ string InputValidation::typeOf(string what)
     else if(ThereAreSomeInt)
     {
         return "I"; // has onlie: int
-
     }
     else
     {
         return "error in localtime::typeOf(string what)";
     }
-
-
-
 }

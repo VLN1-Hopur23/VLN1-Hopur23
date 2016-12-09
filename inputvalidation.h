@@ -3,13 +3,12 @@
 
 #include <string>
 
-
 using namespace std;
-
 
 class InputValidation
 {
 public:
+
     InputValidation();
 
     string typeOf(string what);

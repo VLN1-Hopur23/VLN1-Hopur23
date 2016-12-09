@@ -114,7 +114,6 @@ void DbManager::deleteScientist(const int& ID)
     queryDelete.exec();
 }
 
-
 // Gets computer and his information from database(SQL) and reads into Computer vector
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
 vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
@@ -364,7 +363,6 @@ string DbManager::editScientistName(const int& id, const string& newName)
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
