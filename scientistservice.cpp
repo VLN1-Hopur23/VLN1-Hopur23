@@ -177,3 +177,8 @@ void ScientistService::retrieveIntersectComputer(const string& param)
 {
     _scientists = _data.intersectComputer(param);
 }
+
+bool ScientistService::addIntersectComputer(const int& scientistID, const int& computerID)
+{
+    return _data.addIntersect(scientistID, computerID);
+}

@@ -145,7 +145,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
-bool DbManager::addComputer(const Computer& computer) const
+bool DbManager::addComputer(const Computer& computer, int& id) const
 {
     //bool cMessage = false;
 
@@ -159,6 +159,7 @@ bool DbManager::addComputer(const Computer& computer) const
 
     if(queryAdd.exec())
     {
+        id = queryAdd.lastInsertId().toInt();
         return true;
     }
     else
@@ -514,7 +515,7 @@ string DbManager::editComputerType(const int& id, const string& newType)
     return message;
 }
 
-bool DbManager::addIntersectScientist(const int& scientistID, const int& computerID)
+bool DbManager::addIntersect(const int& scientistID, const int& computerID)
 {
     QSqlQuery queryAdd(_db);
     queryAdd.prepare("INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES (:computerID, :scientistID)");
