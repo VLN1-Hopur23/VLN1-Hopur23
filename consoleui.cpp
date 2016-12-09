@@ -1,5 +1,7 @@
 #include "consoleui.h"
 #include <iomanip>
+#define CLEARSCREEN() printf("\033[H\033[J") //Clears screen
+
 using namespace std;
 
 //Presentation layer
@@ -26,18 +28,16 @@ void ConsoleUI::run()
         cout << "03. search\t\t- Search scientist or computer\n";
         cout << "04. edit\t\t- Edit scientist or computer\n";
         cout << "05. delete\t\t- Delete scientist or computer\n";
-        cout << "06. quit\t\t- Exit program\n";
+        cout << "06. clear\t\t- Clear screen\n";
+        cout << "07. quit\t\t- Exit program\n";
         cout << endl;
 
-        cin>>command;
-
+        cin >> command;
         cout << endl;
 
         // Frequent users could use one lower case letter for shortcut
         if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
         {
-
-            // ValidInput(typeOf(command), "A_AC_AI_ACI_I"); // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
             string lOption;
             cout << "Select a table to display:" << endl;
             cout << "01. Scientists" << endl;
@@ -154,7 +154,12 @@ void ConsoleUI::run()
             }
         }
 
-        else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "6" || command == "06")
+        else if (command == "clear" || command == "Clear" || command == "c" || command == "C" || command == "6" || command == "06")
+        {
+            CLEARSCREEN();
+        }
+
+        else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "7" || command == "07")
         {
 
             loop = false;
@@ -724,7 +729,7 @@ void ConsoleUI::listIntersectScientist(const string& param)
 
 // Finds computers that are conncected to scientists
 void ConsoleUI::listIntersectComputer(const string& param)
-{  
+{
     _service.retrieveIntersectComputer(param);
     if (_service.getSize() != 0)
     {
