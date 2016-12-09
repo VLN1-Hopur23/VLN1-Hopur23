@@ -317,11 +317,14 @@ void ConsoleUI::searchScientists()
     cin.ignore();
     getline(cin, searchData);
 
-    if(_service.searchingByFilter(command, searchData))
+    if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
+        {
+            cout << "42\n";
+        }
+    else if(_service.searchingByFilter(command, searchData))
     {
         displayScientists();
     }
-    /*
     else
     {
         while(searchData.empty())
@@ -373,10 +376,6 @@ void ConsoleUI::searchScientists()
         {
             cout << "Keyword not found in database\n";
         }
-    }*/
-    else if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
-    {
-        cout << "42\n";
     }
 }
 
