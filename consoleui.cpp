@@ -39,8 +39,8 @@ void ConsoleUI::run()
             {
                 string lOption;
                 cout << "Select a table to display:" << endl;
-                cout << "01. scientist" << endl;
-                cout << "02. computer" << endl;
+                cout << "01. Scientists" << endl;
+                cout << "02. Computers" << endl;
                 cin >> lOption;
                 cout << endl;
 
@@ -691,7 +691,6 @@ void ConsoleUI::registerScientist()
 
     if (message == true)
     {
-        cout << endl;
         cout << "Scientist added successfully!";
         string connectChoice;
         cout << endl;
@@ -727,7 +726,8 @@ void ConsoleUI::registerComputer()
     string name;
     int yearBuilt;
     string type;
-    bool built = 0;
+
+    bool built = false;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -756,10 +756,11 @@ void ConsoleUI::registerComputer()
     cout << endl;
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
+
     bool cMessage = _computers.addComputer(computer);
 
-   if (cMessage == true)
-   {
+    if (cMessage == true)
+    {
        cout << endl;
        cout << "Computer added successfully!";
        string connectChoice;
@@ -782,14 +783,14 @@ void ConsoleUI::registerComputer()
        {
           cout << "Please enter a valid option!\n";
        }
-   }
-   else
-   {
+    }
+    else
+    {
        cout << endl;
        cout << "Add computer failed!";
        cout << endl;
        exit(0);
-   }
+    }
 }
 
 void ConsoleUI::displayComputers()
