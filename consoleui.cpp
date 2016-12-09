@@ -35,8 +35,8 @@ void ConsoleUI::run()
         {
             string lOption;
             cout << "Select a table to display:" << endl;
-            cout << "01. scientist" << endl;
-            cout << "02. computer" << endl;
+            cout << "01. Scientists" << endl;
+            cout << "02. Computers" << endl;
             cin >> lOption;
             cout << endl;
 
@@ -211,7 +211,7 @@ void ConsoleUI::editComputer()
     cout << "Enter the index number of the computer you want to change: ";
     cin >> cIndex;
 }
-//function that allows user to delete scientist of his choosing
+// Function that allows user to delete scientist of his choosing
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -605,7 +605,8 @@ void ConsoleUI::sortComputers()
         }
     }
 }
-//finds scientist that are connected to computers
+
+// Finds scientist that are connected to computers
 void ConsoleUI::listIntersectScientist(const string& param)
 {
     _computers.retrieveIntersectScientist(param);
@@ -618,7 +619,8 @@ void ConsoleUI::listIntersectScientist(const string& param)
         cout <<"There is no scientist connected to this computer\n";
     }
 }
-//finds computers that are conncected to scientists
+
+// Finds computers that are conncected to scientists
 void ConsoleUI::listIntersectComputer(const string& param)
 {  
     _service.retrieveIntersectComputer(param);
@@ -631,7 +633,8 @@ void ConsoleUI::listIntersectComputer(const string& param)
         cout << "There is no computer connected to this scientist\n";
     }
 }
-// function that allows user to register a scientist that is not in database
+
+// Function that allows user to register a scientist that is not in database
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -645,7 +648,7 @@ void ConsoleUI::registerScientist()
 
     while (name.empty())
     {
-        cout << "Enter the name of the person:" << endl;
+        cout << "The name is required!" << endl;
         getline(cin, name);
     }
 
@@ -746,14 +749,27 @@ void ConsoleUI::registerComputer()
 
     while (name.empty())
     {
-        cout << "Enter the name of the computer:" << endl;
+        cout << "Name is required!" << endl;
         getline(cin, name);
     }
     cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
     cin >> yearBuilt;
-    cout << endl;
+
+    while (cin.fail())
+    {
+        cout << "ERROR!! Please enter a valid option!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> yearBuilt;
+    }
+    while (yearBuilt > _time.getYearToDay() || yearBuilt < 0)
+    {
+        cout << "ERROR!! Please enter a valid option!\n";
+        cin.clear();
+        cin >> yearBuilt;
+    }
 
     cout << "Enter the type of the computer: " << endl;
     cin.ignore();
@@ -761,7 +777,7 @@ void ConsoleUI::registerComputer()
 
     while (type.empty())
     {
-        cout << "Enter the type of the computer:" << endl;
+        cout << "Type is required!" << endl;
         getline(cin, type);
     }
     cout << endl;
