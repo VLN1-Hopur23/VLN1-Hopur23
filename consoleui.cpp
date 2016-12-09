@@ -31,7 +31,7 @@ void ConsoleUI::run()
         cout << "03. search\t\t- Search scientist or computer\n";
         cout << "04. edit\t\t- Edit scientist or computer\n";
         cout << "05. delete\t\t- Delete scientist or computer\n";
-        cout << "06. clear\t\t- Clear screen\n";
+        cout << "06. clear\t\t- Clear screen for Unix - If you're on Windows, tough luck!\n";
         cout << "07. quit\t\t- Exit program\n";
         cout << endl;
         cin>>command;
@@ -1166,7 +1166,7 @@ void ConsoleUI::displayComputers()
         }
 
         cout << setw(2) << right << _computers.getComputer(i).getComputerID() << "  ";
-        cout <<setw(36)<< left << _computers.getComputer(i).getName();
+        cout << setw(36)<< left << _computers.getComputer(i).getName();
         cout << setw(8) << _computers.getComputer(i).getYearBuilt();
         cout << setw(27) << typeFit1;
         cout << setw(2) << _computers.getComputer(i).getBuilt();
