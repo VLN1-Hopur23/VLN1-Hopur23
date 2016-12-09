@@ -22,9 +22,11 @@ public:
 
     bool addScientist(const Scientist& scientist) const;
 
-    void deleteScientist(const int& ID);
+    void deleteScientist(const int ID);
 
-    void deleteComputer(const int& ID);
+    void deleteConnectionComputer(const int ID);
+
+    void deleteComputer(const int ID);
 
     bool scientistExists(const string& searchData) const;
 

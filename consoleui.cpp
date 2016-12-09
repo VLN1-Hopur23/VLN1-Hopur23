@@ -255,6 +255,7 @@ void ConsoleUI::deleteScientist()
     cout << "Enter the ID number of the scientist to delete: ";
     cin >> index;
 
+    /*
     while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -262,6 +263,7 @@ void ConsoleUI::deleteScientist()
         cin.ignore(256, '\n');
         cin >> index;
     }
+    */
 
     string scientistNameToDelete;
 
