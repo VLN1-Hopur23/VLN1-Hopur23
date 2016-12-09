@@ -18,7 +18,7 @@ DbManager::~DbManager()
     db.removeDatabase(dbName);
 }
 
-//get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
+// Get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
@@ -283,6 +283,7 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
     cout << "right before we return foundSCientist inside dbmangar" << endl;
     return foundScientists;
 }
+
 // Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {

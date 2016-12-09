@@ -11,7 +11,8 @@ bool ComputerService::addComputer(Computer computer)
 {
     return _data.addComputer(computer);
 }
-//get functions
+
+// Get functions
 Computer ComputerService::getComputer(size_t index)
 {
     return _computers[index];
@@ -46,13 +47,17 @@ bool ComputerService::retrieveComputers(string order, string filter)
     {
         QSorder = QString::fromStdString("Name");
     }
-    else if(order == "built" || order == "Built" || order == "b" || order =="B")
+    else if(order == "year" || order == "Year" || order == "y" || order =="Y")
     {
         QSorder = QString::fromStdString("Yearbuilt");
     }
     else if(order == "type" || order == "Type" || order == "t" || order =="T")
     {
         QSorder = QString::fromStdString("Type");
+    }
+    else if(order == "built" || order == "Built" || order == "b" || order == "B")
+    {
+        QSorder = QString::fromStdString("Built");
     }
     else
     {
@@ -69,17 +74,20 @@ bool ComputerService::retrieveComputers(string order, string filter)
         return false;
     }
 }
-//get size for computer vector
+
+// Get size for computer vector
 size_t ComputerService::getSize() const
 {
     return _computers.size();
 }
-//connects the link function in console to dbmanager
+
+// Connects the link function in console to dbmanager
 void ComputerService::retrieveIntersectScientist(const string& param)
 {
     _computers = _data.intersectScientist(param);
 }
-//connects the search function in console to dbmanager
+
+// Connects the search function in console to dbmanager
 void ComputerService:: getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);

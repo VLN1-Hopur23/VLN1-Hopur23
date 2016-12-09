@@ -3,12 +3,14 @@
 using namespace std;
 
 //Presentation layer
-//constructor
+
+// Constructor
 ConsoleUI::ConsoleUI()
 {
 
 }
-//runs command options and fetches the appropriate function for the operation
+
+// Runs command options and fetches the appropriate function for the operation
 void ConsoleUI::run()
 {
     string command;
@@ -198,6 +200,7 @@ void ConsoleUI::editScientist()
     cout << message << endl;
     cout << endl;
 */}
+
 //TODO function that allows user to edit registered computer
 void ConsoleUI::editComputer()
 {
@@ -210,6 +213,7 @@ void ConsoleUI::editComputer()
     cout << "Enter the index number of the computer you want to change: ";
     cin >> cIndex;
 }
+
 // Function that allows user to delete scientist of his choosing
 void ConsoleUI::deleteScientist()
 {
@@ -251,7 +255,8 @@ void ConsoleUI::deleteScientist()
         cout << endl;
     }
 }
-//function that allows user to delete computer of his choosing
+
+// Function that allows user to delete computer of his choosing
 void ConsoleUI::deleteComputer()
 {
     int index;
@@ -372,6 +377,7 @@ void ConsoleUI::searchScientists()
         }
     }
 }
+
 // Search for inserted keyword and by filters in Scientist vector
 void ConsoleUI::searchComputers()
 {
@@ -432,7 +438,8 @@ void ConsoleUI::searchComputers()
         cout << "Keyword not found in database\n";
     }
 }
-//displays list of scientist and allows user also reverts to sort option
+
+// Displays list of scientist and allows user also reverts to sort option
 void ConsoleUI::listScientists()
 {
     string option;
@@ -473,7 +480,8 @@ void ConsoleUI::listScientists()
         }
     }
 }
-//sorts the list of scientist
+
+// Sorts the list of scientist
 void ConsoleUI::sortScientists()
 {
     string order, filter;
@@ -520,7 +528,7 @@ void ConsoleUI::sortScientists()
     }
 }
 
-//displays list of computer and allows user also reverts to sort option
+// Displays list of computer and allows user also reverts to sort option
 void ConsoleUI::listComputers()
 {
     string option;
@@ -561,7 +569,8 @@ void ConsoleUI::listComputers()
         }
     }
 }
-//sorts the list of computers
+
+// Sorts the list of computers
 void ConsoleUI::sortComputers()
 {
     string order, filter;
@@ -573,8 +582,9 @@ void ConsoleUI::sortComputers()
         cout << "Write the option how you want your list sorted\n";
         cout << endl;
         cout << "name\t\t- Sort by the name\n";
-        cout << "built\t\t- Sort by the year computers were built\n";
+        cout << "year\t\t- Sort by the year computers were built\n";
         cout << "type\t\t- Sort by type\n";
+        cout << "built\t\t- Sort by whether the computer was built or not\n";
         cout << "return\t\t- Return to main menu\n";
         cout << endl;
 
@@ -762,6 +772,9 @@ void ConsoleUI::registerComputer()
         cout << "Type is required!" << endl;
         getline(cin, type);
     }
+
+    cout << "Enter 1 if the computer was successfully built and 0 otherwise: " << endl;
+    cin >> built;
     cout << endl;
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
