@@ -1086,7 +1086,7 @@ void ConsoleUI::registerComputer()
 
             int scientistID;
 
-            cout << "Insert computerID which you want to connect to newly added scientist\n";
+            cout << "Insert scientist ID which you want to connect to newly added computer\n";
             cin >> scientistID;
             cout << endl;
 
