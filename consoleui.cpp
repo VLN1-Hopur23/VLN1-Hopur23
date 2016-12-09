@@ -204,7 +204,6 @@ void ConsoleUI::run()
             cout << "Please choose one of the given options!\n";
         }
     }
-
 }
 
 // function that allows user to edit registered scientist from the db
@@ -222,7 +221,7 @@ void ConsoleUI::editScientist()
     cin >> idString;
 
 
-    cout<<idString<<endl;
+    cout << idString << endl;
     while(!ValidInput(typeOf(idString), "I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
     {
         cout << "Input is not valid! Try again!"<<endl;
@@ -231,24 +230,16 @@ void ConsoleUI::editScientist()
     id = std::stoi(idString);
     cout<<"id = "<<id<<endl;
 
-
-
-
     cout << "Enter a new value: ";
 
-//TODO delete if not used
-/*    while (cin.fail() || index > _service.getSize() || index < 0)
-
-   while (cin.fail() || index > _service.getSize() || index < 0)
-
-
+    while (cin.fail() || id < 0)
     {
         cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
-        cin >> index;
+        cin >> id;
     }
-    */
+
     cout << "Enter what it is that you want to change about the computer scientist" << endl;
     cout << "(name/gender/birth/death): ";
     cin >> change;
@@ -259,7 +250,8 @@ void ConsoleUI::editScientist()
     }
 
     cout << "Enter the new value: ";
-    cin >> input;
+    cin.ignore();
+    getline(cin, input);
 
     string message = _service.editScientist(id, change, input);
 
@@ -281,7 +273,7 @@ void ConsoleUI::editComputer()
     cout << "Enter the ID number of the computer you want to change: ";
 
     cin >> id;
-    while (cin.fail() || (unsigned)id > _computers.getSize() || id < 0)
+    while (cin.fail() || id < 0)
     {
         cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
@@ -299,7 +291,8 @@ void ConsoleUI::editComputer()
     }
 
     cout << "Enter the new value: ";
-    cin >> input;
+    cin.ignore();
+    getline(cin, input);
 
     string message = _computers.editComputer(id, change, input);
 
