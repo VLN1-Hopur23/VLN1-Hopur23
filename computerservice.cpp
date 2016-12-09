@@ -88,9 +88,18 @@ void ComputerService::retrieveIntersectScientist(const string& param)
 }
 
 // Connects the search function in console to dbmanager
-void ComputerService:: getVectorFoundComputer(string& searchData)
+void ComputerService::getVectorFoundComputer(string& searchData)
 {
     _computers = _data.searchComputer(searchData);
+}
+
+bool ComputerService::searchComputersByPeriod(int yearFrom, int yearTo)
+{
+    if(yearFrom < _time.getYearToDay() && yearFrom < yearTo){
+        _computers = _data.searchComputerPeriod(yearFrom, yearTo);
+        return true;
+    }
+    return false;
 }
 
 void ComputerService::deleteComputer(int index)

@@ -72,7 +72,6 @@ void ConsoleUI::run()
             cin >> rOption;
             cout << endl;
 
-
             if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
             {
                 registerScientist();
@@ -393,7 +392,7 @@ void ConsoleUI::searchScientists()
 
             if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
             {
-                //editScientist();
+                editScientist();
             }
             else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
             {
@@ -431,21 +430,20 @@ void ConsoleUI::searchComputers()
     cout << endl;
     cin >> command;
 
-    cout << "Enter search keyword: ";
-    cin.ignore();
-    getline(cin, searchData);
-
-    while(searchData.empty())
-    {
-        cout << endl;
-        cout << "Keyword cannot be empty!\n";
-        cout << endl;
-        cout << "Enter search keyword: ";
-        getline(cin, searchData);
-    }
-
     if(command == "search" || command == "s" || command == "04" || command == "4")
     {
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
         searchAllColumsByKeyword(searchData);
     }
     else if(command == "life" || command == "l" || command == "05" || command == "5")
@@ -454,17 +452,39 @@ void ConsoleUI::searchComputers()
     }
     else if(command == "built" || command == "b" || command == "02" || command == "2")
     {
-        //SQL command that shows yearbuilt from maybe 1500 to 2000
-        if(_computers.searchingComputerByFilter(command, searchData))
+        cout << "Enter what year you want to search from: ";
+        int yearFrom, yearTo;
+        cin >> yearFrom;
+        cout << "Enter what year you want to search to: ";
+        cin >> yearTo;
+
+        if(_computers.searchComputersByPeriod(yearFrom,yearTo))
         {
+            cout << "Listing computers from "<< yearFrom << " - " << yearTo << endl;
             displayComputers();
         }
     }
-    else if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
-    {
-        //Then we display the computers that matched the criteria
-        displayComputers();
+    else{
+        cout << "Enter search keyword: ";
+        cin.ignore();
+        getline(cin, searchData);
+
+        while(searchData.empty())
+        {
+            cout << endl;
+            cout << "Keyword cannot be empty!\n";
+            cout << endl;
+            cout << "Enter search keyword: ";
+            getline(cin, searchData);
+        }
+
+        if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
+        {
+            //Then we display the computers that matched the criteria
+            displayComputers();
+        }
     }
+
 }
 
 void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)

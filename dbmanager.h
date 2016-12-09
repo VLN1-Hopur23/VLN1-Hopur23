@@ -36,6 +36,8 @@ public:
 
     vector<Computer> searchComputer(string& searchData);
 
+    vector<Computer> searchComputerPeriod(int yearFrom, int yearTo);
+
     vector<Computer> intersectScientist(const string& id);
 
     vector<Scientist> intersectComputer(const string& id);
