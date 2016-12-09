@@ -22,9 +22,9 @@ public:
 
     bool addScientist(const Scientist& scientist) const;
 
-    void deleteScientist(const int ID);
+    void deleteScientist(const int& ID);
 
-    void deleteComputer(const int ID);
+    void deleteComputer(const int& ID);
 
     bool scientistExists(const string& searchData) const;
 
@@ -42,9 +42,21 @@ public:
 
     vector<Scientist> filterScientist(const string& Command, const string& searchData);
 
+    string editScientist(const int& id);
+
+    // Edit:
+    string editScientistName(const int& id, const string& newName);
+
+    string editScientistGender(const int& id, const string& newGender);
+
+    string editScientistBirthYear(const int& id, const string& newBirthYear);
+
+    string editScientistDeathYear(const int& id, const string& newDeathYear);
+
 private:
 
-    QSqlDatabase db;
+    QSqlDatabase _db;
+
 };
 
 #endif // DBMANAGER_H

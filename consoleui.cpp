@@ -187,11 +187,12 @@ void ConsoleUI::editScientist()
     cout << "Edit registered computer scientist character" << endl;
     cout << endl;
 
-    int index;
+    string id;
     string change, input;
 
-    cout << "Enter the index number of the computer scientist you want to change: ";
-    cin >> index;
+    cout << "Enter the ID number of the computer scientist you want to change: ";
+    cin >> id;
+    cout << "Enter a new value: ";
 
 /*    while (cin.fail() || index > _service.getSize() || index < 0)
     {
