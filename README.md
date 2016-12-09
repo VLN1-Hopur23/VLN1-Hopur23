@@ -14,8 +14,9 @@
     <li>Users can also display the list of known computers in an order sorted by
     <ul>
       <li>name</li>
-      <li>year they were built</li>
+      <li>year they were built or designed</li>
       <li>type</li>
+      <li>whether they were built successfully or not</li>
     </ul> 
     <li>Users can search the list for any scientist by
       <ul>
@@ -27,7 +28,7 @@
     <li>Users can also search the list for any computers by
     <ul>
       <li>name</li>
-      <li>year they were built</li>
+      <li>time period</li>
       <li>type</li>
      </ul>
     <li>Users can edit a scientist or a computer in the list by they're choice by entering the index number</li>
