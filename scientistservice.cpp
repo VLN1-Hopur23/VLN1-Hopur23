@@ -1,42 +1,30 @@
 #include "scientistservice.h"
 
 using namespace std;
-
+//constructor
 ScientistService::ScientistService()
 {
 
 }
-
+//connects search function in console to search function in dbmanager
 void ScientistService:: getVectorFoundScientists(string& searchData)
 {
     _scientists = _data.searchScientist(searchData);
 }
-
+//connects to register function in console to add scientist function in dbmanager
 bool ScientistService::addScientist(Scientist scientist)
 {
     return _data.addScientist(scientist);
 }
-
+//used in display scientist in console, vector for scientist
 Scientist ScientistService::getScientist(size_t index)
 {
     return _scientists[index];
 }
-
+//gets size of vector
 size_t ScientistService::getSize() const
 {
     return _scientists.size();
-}
-
-bool ScientistService::ifExist(string name)
-{
-   for (size_t i = 0; i < _scientists.size(); i++)
-   {
-       if (_scientists[i].getName() == name)
-       {
-           return true;
-       }
-   }
-   return false;
 }
 
 vector<Scientist> ScientistService::getScientistVector()
@@ -44,7 +32,7 @@ vector<Scientist> ScientistService::getScientistVector()
     return _scientists;
 }
 
-// Fetches table of scientists from SQL database
+// Fetches table of scientists from dbmanager
 bool ScientistService::retrieveScientists(string order, string filter)
 {
     QString QSorder = "";
@@ -126,13 +114,13 @@ string ScientistService::editScientist(int index, string change, string input)
     return message;
 }
 */
-
+//fetches deleteScientist function in dbmanager
 void ScientistService::deleteScientist(int index)
 {
     _data.deleteScientist(index);
 
 }
-
+//fetches appropriate filter from dbmanager for search function in console
 bool ScientistService::searchingByFilter(string command, string searchData) //fall sem er kallad a i consoleUI, skilar 1/true ef input er rett annars 0/false
 {
     string finalCommand;
@@ -181,7 +169,7 @@ bool ScientistService::searchingByFilter(string command, string searchData) //fa
     }
     return false;
 }
-
+//connects link function in console to dbmanager
 void ScientistService::retrieveIntersectComputer(const string& param)
 {
     _scientists = _data.intersectComputer(param);

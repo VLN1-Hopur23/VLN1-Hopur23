@@ -2,186 +2,167 @@
 #include <iomanip>
 using namespace std;
 
-// Presentation layer
-
+//Presentation layer
+//constructor
 ConsoleUI::ConsoleUI()
 {
 
 }
-
+//runs command options and fetches the appropriate function for the operation
 void ConsoleUI::run()
 {
     string command;
     bool loop = true;
 
-    // bool openFileWorks= _service.load();
-
-    // if (openFileWorks)
+    while(loop == true)
     {
-        while(loop == true)
+        cout << endl;
+        cout << "Choose a command:\n";
+        cout << endl;
+        cout << "01. register\t\t- Register a known character or computer\n";
+        cout << "02. list\t\t- Display the list of computer scientists or computers\n";
+        cout << "03. search\t\t- Search scientist or computer\n";
+        cout << "04. edit\t\t- Edit scientist or computer\n";
+        cout << "05. delete\t\t- Delete scientist or computer\n";
+        cout << "06. quit\t\t- Exit program\n";
+        cout << endl;
+
+        cin >> command;
+        cout << endl;
+
+        // Frequent users could use one lower case letter for shortcut
+        if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
         {
-            cout << endl;
-            cout << "Choose a command:\n";
-            cout << endl;
-            cout << "01. register\t\t- Register a known character or computer\n";
-            cout << "02. list\t\t- Display the list of computer scientists or computers\n";
-            cout << "03. search\t\t- Search scientist or computer\n";
-            cout << "04. edit\t\t- Edit scientist or computer\n";
-            cout << "05. delete\t\t- Delete scientist or computer\n";
-            cout << "06. quit\t\t- Exit program\n";
+            string lOption;
+            cout << "Select a table to display:" << endl;
+            cout << "01. Scientists" << endl;
+            cout << "02. Computers" << endl;
+            cin >> lOption;
             cout << endl;
 
-            cin >> command;
-            cout << endl;
-
-            // Frequent users could use one lower case letter for shortcut
-            if (command == "list" || command == "List" || command == "l" || command == "L" || command == "2" || command == "02")
+            if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
             {
-                string lOption;
-                cout << "Select a table to display:" << endl;
-                cout << "01. Scientists" << endl;
-                cout << "02. Computers" << endl;
-                cin >> lOption;
-                cout << endl;
-
-                if (lOption == "scientist" || lOption == "Scientist" || lOption == "scientists" || lOption == "Scientists" || lOption == "s" || lOption == "S" || lOption == "1" || lOption == "01")
-                {
-                    _service.retrieveScientists("name", "ASC");
-                    displayScientists();
-                    listScientists();
-                }
-                else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
-                {
-                    _computers.retrieveComputers("name", "ASC");
-                    displayComputers();
-                    listComputers();
-                }
-                else
-                {
-                    cout << "Please choose one of the given options!\n";
-                }
+                _service.retrieveScientists("name", "ASC");
+                displayScientists();
+                listScientists();
             }
-
-            else if (command == "register" || command == "Register" || command == "r" || command == "R" || command == "1" || command == "01")
+            else if (lOption == "computer" || lOption == "Computer" || lOption == "computers" || lOption == "Computers" || lOption == "c" || lOption == "C" || lOption == "2" || lOption == "02")
             {
-                string rOption;
-                cout << "Select one of the given options to register:" << endl;
-                cout << "01. scientist" << endl;
-                cout << "02. computer" << endl;
-                cin >> rOption;
-                cout << endl;
-
-                if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
-                {
-                     registerScientist();
-                }
-                else if (rOption == "Computer" || rOption == "computer" || rOption == "Computers" || rOption == "computers" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
-                {
-                     registerComputer();
-                }
-                else
-                {
-                    cout << "Please choose one of the given options!\n";
-                }
-            }
-
-            else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
-            {
-               string sOption;
-               cout << "Select one of the given options to search:" << endl;
-               cout << "01. scientists" << endl;
-               cout << "02. computers" << endl;
-               cin >> sOption;
-               cout << endl;
-
-               if (sOption == "Scientist" || sOption == "scientist" || sOption == "Scientists" || sOption == "scientists" || sOption == "S" || sOption == "s" || sOption == "1" || sOption == "01")
-               {
-                   searchScientists();
-               }
-               else if (sOption == "Computer" || sOption == "computer" || sOption == "Computers" || sOption == "computers" || sOption == "C" || sOption == "c" || sOption == "2" || sOption == "02")
-               {
-                   searchComputers();
-               }
-               else
-               {
-                   cout << "Please choose one of the given options!\n";
-               }
-            }
-
-            else if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "4" || command == "04")
-            {
-                string edOption;
-                cout << "Select one of the given options to edit:" << endl;
-                cout << "01. scientists" << endl;
-                cout << "02. computers" << endl;
-                cin >> edOption;
-                cout << endl;
-
-                if (edOption ==  "Scientist" || edOption == "scientist" || edOption == "Scientists" || edOption == "scientists" || edOption == "s" || edOption == "S" || edOption == "1" || edOption == "01")
-                {
-                    editScientist();
-                }
-                else if (edOption == "Computer" || edOption == "computer" || edOption == "Computers" || edOption == "computers" || edOption == "c" || edOption == "C" || edOption == "2" || edOption == "02")
-                {
-                    editComputer();
-                }
-                else
-                {
-                    cout << "Please choose one of the following options!\n";
-                }
-            }
-
-            else if (command == "delete" || command == "Delete" || command == "d" || command == "D" || command == "5" || command == "05")
-            {
-                cout << "Select one of the given options to delete:" << endl;
-                cout << "01. scientist" << endl;
-                cout << "02. computer" << endl;
-                string deOption;
-                cin >> deOption;
-
-                if (deOption == "Scientist" || deOption == "scientist" || deOption == "Scientists" || deOption == "scientists" || deOption == "S" || deOption == "s" || deOption == "1" || deOption == "01")
-                {
-                    deleteScientist();
-                }
-                else if (deOption == "Computer" || deOption == "computer" || deOption == "Computers" || deOption == "computers" || deOption == "C" || deOption == "c" || deOption == "2" || deOption == "02")
-                {
-                    deleteComputer();
-                }
-                else
-                {
-                    cout << "Please choose one of the following options!\n";
-                }
-            }
-
-            else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "6" || command == "06")
-            {
-
-                loop = false;
+                _computers.retrieveComputers("name", "ASC");
+                displayComputers();
+                listComputers();
             }
             else
             {
                 cout << "Please choose one of the given options!\n";
             }
         }
+
+        else if (command == "register" || command == "Register" || command == "r" || command == "R" || command == "1" || command == "01")
+        {
+            string rOption;
+            cout << "Select one of the given options to register:" << endl;
+            cout << "01. scientist" << endl;
+            cout << "02. computer" << endl;
+            cin >> rOption;
+            cout << endl;
+
+            if (rOption == "Scientist" || rOption == "scientist" || rOption == "Scientists" || rOption == "scientists" || rOption == "s" || rOption == "S" || rOption == "1" || rOption == "01")
+            {
+                registerScientist();
+            }
+            else if (rOption == "Computer" || rOption == "computer" || rOption == "Computers" || rOption == "computers" || rOption == "c" || rOption == "C" || rOption == "2" || rOption == "02")
+            {
+                 registerComputer();
+            }
+            else
+            {
+                cout << "Please choose one of the given options!\n";
+            }
+        }
+
+        else if (command == "search" || command == "Search" || command == "s" || command == "S" || command == "3" || command == "03")
+        {
+           string sOption;
+           cout << "Select one of the given options to search:" << endl;
+           cout << "01. scientists" << endl;
+           cout << "02. computers" << endl;
+           cin >> sOption;
+           cout << endl;
+
+           if (sOption == "Scientist" || sOption == "scientist" || sOption == "Scientists" || sOption == "scientists" || sOption == "S" || sOption == "s" || sOption == "1" || sOption == "01")
+           {
+               searchScientists();
+           }
+           else if (sOption == "Computer" || sOption == "computer" || sOption == "Computers" || sOption == "computers" || sOption == "C" || sOption == "c" || sOption == "2" || sOption == "02")
+           {
+               searchComputers();
+           }
+           else
+           {
+               cout << "Please choose one of the given options!\n";
+           }
+        }
+
+        else if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "4" || command == "04")
+        {
+            string edOption;
+            cout << "Select one of the given options to edit:" << endl;
+            cout << "01. scientists" << endl;
+            cout << "02. computers" << endl;
+            cin >> edOption;
+            cout << endl;
+
+            if (edOption ==  "Scientist" || edOption == "scientist" || edOption == "Scientists" || edOption == "scientists" || edOption == "s" || edOption == "S" || edOption == "1" || edOption == "01")
+            {
+                editScientist();
+            }
+            else if (edOption == "Computer" || edOption == "computer" || edOption == "Computers" || edOption == "computers" || edOption == "c" || edOption == "C" || edOption == "2" || edOption == "02")
+            {
+                editComputer();
+            }
+            else
+            {
+                cout << "Please choose one of the following options!\n";
+            }
+        }
+
+        else if (command == "delete" || command == "Delete" || command == "d" || command == "D" || command == "5" || command == "05")
+        {
+            cout << "Select one of the given options to delete:" << endl;
+            cout << "01. scientist" << endl;
+            cout << "02. computer" << endl;
+            string deOption;
+            cin >> deOption;
+
+            if (deOption == "Scientist" || deOption == "scientist" || deOption == "Scientists" || deOption == "scientists" || deOption == "S" || deOption == "s" || deOption == "1" || deOption == "01")
+            {
+                deleteScientist();
+            }
+            else if (deOption == "Computer" || deOption == "computer" || deOption == "Computers" || deOption == "computers" || deOption == "C" || deOption == "c" || deOption == "2" || deOption == "02")
+            {
+                deleteComputer();
+            }
+            else
+            {
+                cout << "Please choose one of the following options!\n";
+            }
+        }
+
+        else if (command == "quit" || command == "Quit" || command == "q" || command == "Q" || command == "6" || command == "06")
+        {
+
+            loop = false;
+        }
+        else
+        {
+            cout << "Please choose one of the given options!\n";
+        }
     }
-    //else
-    {
-      //  cout << "Error with opening file" << endl;
-    }
+
 }
 
-void ConsoleUI::editComputer()
-{
-    cout << "Edit registered computer" << endl;
-    cout << endl;
-
-    int cIndex;
-    string cChange, cInput;
-
-    cout << "Enter the index number of the computer you want to change: ";
-    cin >> cIndex;
-}
-
+//TODO function that allows user to edit registered scientist
 void ConsoleUI::editScientist()
 {
     cout << "Edit registered computer scientist character" << endl;
@@ -192,7 +173,7 @@ void ConsoleUI::editScientist()
 
     cout << "Enter the index number of the computer scientist you want to change: ";
     cin >> index;
-
+//TODO delete if not used
 /*    while (cin.fail() || index > _service.getSize() || index < 0)
     {
         cout << "ERROR!! Please enter a valid index!\n";
@@ -217,7 +198,19 @@ void ConsoleUI::editScientist()
     cout << message << endl;
     cout << endl;
 */}
+//TODO function that allows user to edit registered computer
+void ConsoleUI::editComputer()
+{
+    cout << "Edit registered computer" << endl;
+    cout << endl;
 
+    int cIndex;
+    string cChange, cInput;
+
+    cout << "Enter the index number of the computer you want to change: ";
+    cin >> cIndex;
+}
+// Function that allows user to delete scientist of his choosing
 void ConsoleUI::deleteScientist()
 {
     int index;
@@ -258,7 +251,7 @@ void ConsoleUI::deleteScientist()
         cout << endl;
     }
 }
-
+//function that allows user to delete computer of his choosing
 void ConsoleUI::deleteComputer()
 {
     int index;
@@ -297,7 +290,7 @@ void ConsoleUI::deleteComputer()
     }
 }
 
-// Search for inserted keyword in Scientist vector
+// Search for inserted keyword and by filters in Scientist vector
 void ConsoleUI::searchScientists()
 {
     string searchData;
@@ -380,6 +373,7 @@ void ConsoleUI::searchScientists()
                 listIntersectScientist(param);
             }
         }
+
         // Keyword is rubbish or empty
         else
         {
@@ -387,7 +381,7 @@ void ConsoleUI::searchScientists()
         }
     }
 }
-
+// Search for inserted keyword and by filters in Scientist vector
 void ConsoleUI::searchComputers()
 {
     string searchData;
@@ -481,7 +475,7 @@ void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
         cout << "Keyword not found in database\n";
     }
 }
-
+//displays list of scientist and allows user also reverts to sort option
 void ConsoleUI::listScientists()
 {
     string option;
@@ -522,14 +516,14 @@ void ConsoleUI::listScientists()
         }
     }
 }
-
+//sorts the list of scientist
 void ConsoleUI::sortScientists()
 {
     string order, filter;
 
     bool loopNotReturn = true;
 
-    while(loopNotReturn) //starts as true
+    while(loopNotReturn) // Starts as true
     {
         cout << endl;
         cout << "Write the option how you want your list sorted\n";
@@ -539,7 +533,7 @@ void ConsoleUI::sortScientists()
         cout << "birth\t\t- Sort by year of birth\n";
         cout << "death\t\t- Sort by year of death\n";
         //cout << "age\t\t- Sort by age\n";
-        cout << "return\t\t- Return to main menu\n";
+        cout << "return\t\t- Go back\n";
         cout << endl;
 
         cin >> order;
@@ -569,18 +563,7 @@ void ConsoleUI::sortScientists()
     }
 }
 
-void ConsoleUI::listIntersectScientist(const string& param)
-{
-    _computers.retrieveIntersectScientist(param);
-    displayComputers();
-}
-
-void ConsoleUI::listIntersectComputer(const string& param)
-{
-    _service.retrieveIntersectComputer(param);
-    displayScientists();
-}
-
+//displays list of computer and allows user also reverts to sort option
 void ConsoleUI::listComputers()
 {
     string option;
@@ -621,7 +604,7 @@ void ConsoleUI::listComputers()
         }
     }
 }
-
+//sorts the list of computers
 void ConsoleUI::sortComputers()
 {
     string order, filter;
@@ -665,6 +648,21 @@ void ConsoleUI::sortComputers()
     }
 }
 
+// Finds scientist that are connected to computers
+void ConsoleUI::listIntersectScientist(const string& param)
+{
+    _computers.retrieveIntersectScientist(param);
+    displayComputers();
+}
+
+// Finds computers that are conncected to scientists
+void ConsoleUI::listIntersectComputer(const string& param)
+{
+    _service.retrieveIntersectComputer(param);
+    displayScientists();
+}
+
+// Function that allows user to register a scientist that is not in database
 void ConsoleUI::registerScientist()
 {
     string name;
@@ -678,7 +676,7 @@ void ConsoleUI::registerScientist()
 
     while (name.empty())
     {
-        cout << "Enter the name of the person:" << endl;
+        cout << "The name is required!" << endl;
         getline(cin, name);
     }
 
@@ -748,7 +746,7 @@ void ConsoleUI::registerScientist()
         }
         else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
         {
-            exit(0);
+            //Return to main menu
         }
         else
         {
@@ -757,20 +755,19 @@ void ConsoleUI::registerScientist()
     }
     else
     {
-        cout << endl;
         cout << "Add scientist failed!";
         cout << endl;
         exit(0);
     }
 }
 
+// Function that allows user to register a computer that is not in database
 void ConsoleUI::registerComputer()
 {
     string name;
     int yearBuilt;
     string type;
-
-    bool built = false;
+    bool built = 0;
 
     cout << "Enter the name of the computer: " << endl;
     cin.ignore();
@@ -778,14 +775,26 @@ void ConsoleUI::registerComputer()
 
     while (name.empty())
     {
-        cout << "Enter the name of the computer:" << endl;
+        cout << "Name is required!" << endl;
         getline(cin, name);
     }
-    cout << endl;
 
     cout << "Enter the year the computer was built: " << endl;
     cin >> yearBuilt;
-    cout << endl;
+
+    while (cin.fail())
+    {
+        cout << "ERROR!! Please enter a valid option!\n";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> yearBuilt;
+    }
+    while (yearBuilt > _time.getYearToDay() || yearBuilt < 0)
+    {
+        cout << "ERROR!! Please enter a valid option!\n";
+        cin.clear();
+        cin >> yearBuilt;
+    }
 
     cout << "Enter the type of the computer: " << endl;
     cin.ignore();
@@ -793,49 +802,75 @@ void ConsoleUI::registerComputer()
 
     while (type.empty())
     {
-        cout << "Enter the type of the computer:" << endl;
+        cout << "Type is required!" << endl;
         getline(cin, type);
     }
     cout << endl;
 
     Computer computer(_computers.getSize(), name, yearBuilt, type, built);
-
     bool cMessage = _computers.addComputer(computer);
 
     if (cMessage == true)
     {
-       cout << endl;
-       cout << "Computer added successfully!";
-       string connectChoice;
-       cout << endl;
-       cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
-       cin >> connectChoice;
-       cout << endl;
+        cout << "Computer added successfully!";
+        string connectChoice;
+        cout << endl;
+        cout << "Would you like to connect your computer to a scientist? (y/n)" << endl;
+        cin >> connectChoice;
+        cout << endl;
 
-       if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
-       {
-           cout << "yay" << endl;
-           // TODO link
-       }
-       else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
-       {
-           cout << "nay" << endl;
-           // TODO link     exit(0);
-       }
-       else
-       {
-          cout << "Please enter a valid option!\n";
-       }
+        if (connectChoice == "Yes" || connectChoice == "yes" || connectChoice == "Y" || connectChoice == "y")
+        {
+            cout << "yay" << endl;
+            // TODO link
+        }
+        else if (connectChoice == "No" || connectChoice == "no" || connectChoice == "N" || connectChoice == "n")
+        {
+            cout << "nay" << endl;
+            // TODO link     exit(0);
+        }
+        else
+        {
+            cout << "Please enter a valid option!\n";
+        }
     }
     else
     {
-       cout << endl;
-       cout << "Add computer failed!";
-       cout << endl;
-       exit(0);
+        cout << "Add computer failed!";
+        cout << endl;
+        exit(0);
     }
 }
 
+// Function that displays a list of scientist and its characteristics
+void ConsoleUI::displayScientists()
+{
+    printFrame();
+    printScientistHeader();
+
+    for (size_t i = 0; i < _service.getSize(); i++)
+    {
+        cout.fill(' ');
+        cout.width(2);
+        cout << right << _service.getScientist(i).getScientistID() << "  ";
+        cout.fill(' ');
+        cout.width(25);
+        cout << left;
+        cout << _service.getScientist(i).getName();
+        cout << "\t";
+        cout << _service.getScientist(i).getGender();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfBirth();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getYearOfDeath();
+        cout << "\t";
+        cout << left << _service.getScientist(i).getAge();
+        cout << endl;
+    }
+    printFrame();
+}
+
+// Function that displays a list of computer and its characteristics
 void ConsoleUI::displayComputers()
 {
     printFrame();
@@ -878,33 +913,6 @@ void ConsoleUI::displayComputers()
             cout << setw(5) << "-||-";
             cout << endl;
         }
-    }
-    printFrame();
-}
-
-void ConsoleUI::displayScientists()
-{
-    printFrame();
-    printScientistHeader();
-
-    for (size_t i = 0; i < _service.getSize(); i++)
-    {
-        cout.fill(' ');
-        cout.width(2);
-        cout << right << _service.getScientist(i).getScientistID() << "  ";
-        cout.fill(' ');
-        cout.width(25);
-        cout << left;
-        cout << _service.getScientist(i).getName();
-        cout << "\t";
-        cout << _service.getScientist(i).getGender();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getYearOfBirth();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getYearOfDeath();
-        cout << "\t";
-        cout << left << _service.getScientist(i).getAge();
-        cout << endl;
     }
     printFrame();
 }
