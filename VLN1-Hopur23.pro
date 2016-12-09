@@ -18,8 +18,7 @@ SOURCES += main.cpp \
     localtime.cpp \
     dbmanager.cpp \
     computer.cpp \
-    computerservice.cpp \
-    inputvalidation.cpp
+    computerservice.cpp
 
 HEADERS += \
     consoleui.h \
@@ -28,5 +27,4 @@ HEADERS += \
     localtime.h \
     dbmanager.h \
     computer.h \
-    computerservice.h \
-    inputvalidation.h
+    computerservice.h
