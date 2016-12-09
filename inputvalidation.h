@@ -11,7 +11,7 @@ public:
 
     InputValidation();
 
-    string typeOf(string what);
+
 };
 
 #endif // INPUTVALIDATION_H

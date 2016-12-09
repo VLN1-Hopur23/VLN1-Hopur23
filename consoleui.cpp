@@ -29,7 +29,15 @@ void ConsoleUI::run()
         cout << "06. quit\t\t- Exit program\n";
         cout << endl;
 
-        cin >> command;
+
+        cin>>command;
+        cout<<" .. "<<endl;
+        cout<<"typeOf = "<<typeOf(command)<<endl;
+        while(!ValidInput(typeOf(command), "A_I")) // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I" includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
+        {
+            cout<<"Input is not valid!"<<endl;
+            cin>>command;
+        }
         cout << endl;
 
         // Frequent users could use one lower case letter for shortcut
