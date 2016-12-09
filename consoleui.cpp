@@ -185,7 +185,7 @@ void ConsoleUI::editScientist()
     cin >> id;
     /*while (cin.fail() || index > _service.getSize() || index < 0)
     {
-        cout << "ERROR!! Please enter a valid index!\n";
+        cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
@@ -219,11 +219,11 @@ void ConsoleUI::editComputer()
     int id;
     string change, input;
 
-    cout << "Enter the index number of the computer you want to change: ";
+    cout << "Enter the ID number of the computer you want to change: ";
     cin >> id;
     while (cin.fail() || (unsigned)id > _computers.getSize() || id < 0)
     {
-        cout << "ERROR!! Please enter a valid index!\n";
+        cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> id;
@@ -261,7 +261,7 @@ void ConsoleUI::deleteScientist()
 
     while (cin.fail() || (unsigned int)index > _service.getSize() || index < 0)
     {
-        cout << "ERROR!! Please enter a valid index!\n";
+        cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
@@ -302,7 +302,7 @@ void ConsoleUI::deleteComputer()
     cin >> index;
     while (cin.fail() || (unsigned int)index > _computers.getSize() || index < 0)
     {
-        cout << "ERROR!! Please enter a valid index!\n";
+        cout << "ERROR!! Please enter a valid ID!\n";
         cin.clear();
         cin.ignore(256, '\n');
         cin >> index;
@@ -338,10 +338,9 @@ void ConsoleUI::searchScientists()
     cout << "Filter by: \n";
     cout << "01. gender\t\t- Filters scientist by gender \n";
     cout << "02. birth\t\t- Filters scientist by year of birth\n";
-    cout << "03. death\t\t- Filters scientist by year of death \n";
-    cout << "or Search by a keyword, name or any character\n";
-    cout << "04. search\t\t\n";
-    cout << "05. life\t\t- search for meaning of life\n";
+    cout << "03. death\t\t- Filters scientist by year of death\n";
+    cout << "04. search\t\t- Search by a keyword, name or any character\n";
+    cout << "05. life\t\t- Search for meaning of life\n";
     cout << endl;
     cin >> command;
 
@@ -392,7 +391,7 @@ void ConsoleUI::searchScientists()
             cout << "01. edit\t\t- Edit scientist \n";
             cout << "02. delete\t\t- Delete scientist\n";
             cout << "03. link\t\t- Link scientist to a computer\n";
-            cout << "04. any other key\t- Exit program\n";
+            cout << "04. any other key\t- Return to main menu\n";
             cin >> command;
 
             if (command == "edit" || command == "Edit" || command == "e" || command == "1" || command == "01")
@@ -431,7 +430,7 @@ void ConsoleUI::searchComputers()
     cout << "01. name\t\t- Filters computer by name \n";
     cout << "02. built\t\t- Filters computer by year built\n";
     cout << "04. search\t\t- Search by a keyword in all the database\n";
-    cout << "05. life\t\t- search for meaning of life\n";
+    cout << "05. life\t\t- Search for meaning of life\n";
     cout << endl;
     cin >> command;
 
@@ -509,7 +508,7 @@ void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
         cout << "01. edit\t\t- Edit computer\n";
         cout << "02. delete\t\t- Delete computer\n";
         cout << "03. link\t\t- Link computer to a scientist\n";
-        cout << "04. any other key\t- Exit program\n";
+        cout << "04. any other key\t- Return to main menu\n";
         cin >> command;
 
         if (command == "edit" || command == "Edit" || command == "e" || command == "E" || command == "1" || command == "01")
@@ -1140,7 +1139,6 @@ string ConsoleUI::typeOf(string what)
 
     for(int i =0; i<whatSize; i++)
     {
-
         whatArrayInt[i] = (int)what.substr(i,i+1)[0]; //[0] gives first character in string array that is char
 
     }
@@ -1261,5 +1259,4 @@ bool ConsoleUI::ValidInput(string check, string allowed)
         }
     }
     return false;
-
 }
