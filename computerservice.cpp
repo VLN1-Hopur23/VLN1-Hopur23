@@ -90,3 +90,39 @@ void ComputerService::deleteComputer(int index)
     _data.deleteComputer(index);
 
 }
+
+bool ComputerService::searchingComputerByFilter(string command, string searchData)
+{
+    string finalCommand;
+    string finalSearchData;
+    bool inputOkay = false;
+    if (command == "Name" || command == "name" || command == "n") //|| command == "1" || command == "01")
+    {
+        cout << "inside Name in searching by filter in Computer Service" << endl;
+        finalCommand = "Name";
+        //searchdata can be characters and number but not weird symbols
+        //if(true)//use class from JS to error check input
+        //{
+            finalSearchData = searchData;
+            inputOkay = true;
+        //}
+    }
+    else if (command == "Year" || command == "year" || command == "y") // || command == "2" || command == "02")
+    {
+        finalCommand = "Yearbuilt";
+        // TO DO check if int or not
+        int intSearchData = stoi(searchData);
+        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
+        {
+            finalSearchData = intSearchData;
+            inputOkay = true;
+        }
+    }
+
+    if(inputOkay) //Returns true if input is accepted
+    {
+         _computers = _data.filterComputer(finalCommand, finalSearchData);
+        return true;
+    }
+    return false;
+}

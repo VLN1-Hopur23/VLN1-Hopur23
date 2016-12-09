@@ -317,6 +317,15 @@ void ConsoleUI::searchScientists()
     cin.ignore();
     getline(cin, searchData);
 
+    while(searchData.empty())
+    {
+        cout << endl;
+        cout << "Keyword cannot be empty!\n";
+        cout << endl;
+        cout << "Enter search keyword: ";
+        getline(cin, searchData);
+    }
+
     if (command == "life" || command == "Life" || command == "l" || command == "5" || command == "05")
         {
             cout << "42\n";
@@ -360,7 +369,7 @@ void ConsoleUI::searchScientists()
             }
             else if (command == "delete" || command == "Delete" || command == "d" || command == "2" || command == "02")
             {
-                //deleteScientist();
+                deleteScientist();
             }
             else if(command == "link" || command == "Link" || command == "l" || command == "3" || command == "03")
             {
@@ -382,6 +391,15 @@ void ConsoleUI::searchScientists()
 void ConsoleUI::searchComputers()
 {
     string searchData;
+    string command;
+
+    cout << "Filter by: \n";
+    cout << "01. name\t\t- Filters computer by name \n";
+    cout << "02. built\t\t- Filters computer by year built\n";
+    cout << "04. search\t\t- Search by a keyword in all the database\n";
+    cout << "05. life\t\t- search for meaning of life\n";
+    cout << endl;
+    cin >> command;
 
     cout << "Enter search keyword: ";
     cin.ignore();
@@ -395,14 +413,39 @@ void ConsoleUI::searchComputers()
         cout << "Enter search keyword: ";
         getline(cin, searchData);
     }
-    cout << endl;
 
-    cout << "Searching for " << searchData << endl;
+    if(command == "search" || command == "s" || command == "04" || command == "4")
+    {
+        searchAllColumsByKeyword(searchData);
+    }
+    else if(command == "life" || command == "l" || command == "05" || command == "5")
+    {
+        cout << "42\n";
+    }
+    else if(command == "built" || command == "b" || command == "02" || command == "2")
+    {
+        //SQL command that shows yearbuilt from maybe 1500 to 2000
+        if(_computers.searchingComputerByFilter(command, searchData))
+        {
+            displayComputers();
+        }
+    }
+    else if (_computers.searchingComputerByFilter(command, searchData)) //If input if okay it returns true
+    {
+        //Then we display the computers that matched the criteria
+        displayComputers();
+    }
+}
 
-    _computers.getVectorFoundComputer(searchData);
+void ConsoleUI::searchAllColumsByKeyword(string searchDataKeyword)
+{
+    cout << "Searching for " << searchDataKeyword << endl;
+
+    _computers.getVectorFoundComputer(searchDataKeyword);
+
 
     // If vector turns up with search results and searchData is not empty then
-    if ((_computers.getSize() != 0) && (!searchData.empty()))
+    if ((_computers.getSize() != 0) && (!searchDataKeyword.empty()))
     {
         displayComputers();
         //Custom menu
@@ -420,7 +463,7 @@ void ConsoleUI::searchComputers()
         }
         else if (command == "delete" || command == "Delete" || command == "d" || command == "D" || command == "2" || command == "02")
         {
-            //deleteScientist();
+            deleteScientist();
         }
         else if(command == "link" || command == "Link" || command == "l" || command == "L" || command == "3" || command == "03")
         {
@@ -432,7 +475,7 @@ void ConsoleUI::searchComputers()
         }
         // Else then it returns to main menu for example when quit is chosen
     }
-    // keyword is rubish or empty
+    // keyword is rubbish or empty
     else
     {
         cout << "Keyword not found in database\n";

@@ -68,6 +68,8 @@ private:
 
     vector<Scientist> SortVector(vector<Scientist> _listOfScientist,string sort);
 
+    void searchAllColumsByKeyword(string searchDataKeyword);
+
     LocalTime _time;
 
 private:
