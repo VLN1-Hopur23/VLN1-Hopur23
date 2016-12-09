@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS Computers_Scientists(
        Computer_ScientistID INTEGER NOT NULL PRIMARY KEY,      
        ComputerID INTEGER NOT NULL,
        ScientistID INTEGER NOT NULL,    
-       FOREIGN KEY (ComputerID) REFERENCES Computers(ComputerID),
-       FOREIGN KEY (ScientistID) REFERENCES Scientists(ScientistID)
+       FOREIGN KEY (ComputerID) REFERENCES Computers(ComputerID) ON DELETE CASCADE,
+       FOREIGN KEY (ScientistID) REFERENCES Scientists(ScientistID) ON DELETE CASCADE,
        UNIQUE (ComputerID, ScientistID)
 );
 */

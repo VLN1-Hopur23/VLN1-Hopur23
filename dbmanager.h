@@ -67,6 +67,9 @@ private:
 
     QSqlDatabase _db;
 
+    QString dbName;
+
+    QString connName;
 };
 
 #endif // DBMANAGER_H

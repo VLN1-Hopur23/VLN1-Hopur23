@@ -2,12 +2,12 @@
 
 using namespace std;
 
-static const QString dbName = "VLN1-Hopur23.sqlite";
-static const QString connName = "ThisConnection";
-
 // Constructor connects to sqlite database
 DbManager::DbManager()
 {
+    this->dbName = "VLN1-Hopur23.sqlite";
+    this->connName = "ThisConnection";
+
     // contains() default argument is initialized to default connection
     if (QSqlDatabase::contains(connName))
     {
