@@ -14,7 +14,7 @@ public:
 
     ComputerService();
 
-    bool addComputer(Computer computer);
+    bool addComputer(Computer computer, int& id);
 
     Computer getComputer(size_t index);
 

@@ -42,6 +42,7 @@ public:
 
     int getLastInsertRowID();
 
+    bool addIntersectComputer(const int& scientistID, const int& computerID);
 };
 
 #endif // SCIENTISTSERVICE_H
