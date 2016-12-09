@@ -348,9 +348,9 @@ string DbManager::editScientistName(const int& id, const string& newName)
     QSqlQuery query(_db);
     string message;
 
-    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
-    query.bindValue(":name", QString::fromStdString(newName));
-    query.bindValue(":id", id);
+    query.prepare("UPDATE Scientists SET Name=:Name WHERE ScientistID=:ScientistID");
+    query.bindValue(":Name", QString::fromStdString(newName));
+    query.bindValue(":ScientistID", id);
 
     if (query.exec())
     {
@@ -372,9 +372,9 @@ string DbManager::editScientistGender(const int& id, const string& newGender)
     QSqlQuery query(_db);
     string message;
 
-    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
-    query.bindValue(":name", QString::fromStdString(newGender));
-    query.bindValue(":id", id);
+    query.prepare("UPDATE Scientists SET Gender=:Gender WHERE ScientistID=:ScientistID");
+    query.bindValue(":Gender", QString::fromStdString(newGender));
+    query.bindValue(":ScientistID", id);
 
     if (query.exec())
     {
@@ -397,9 +397,33 @@ string DbManager::editScientistBirthYear(const int& id, const string& newBirthYe
     QSqlQuery query(_db);
     string message;
 
-    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
-    query.bindValue(":name", QString::fromStdString(newBirthYear));
-    query.bindValue(":id", id);
+    query.prepare("UPDATE Scientists SET Birthyear=:Birthyear WHERE ScientistID=:ScientistID");
+    query.bindValue(":Birthyear", QString::fromStdString(newBirthYear));
+    query.bindValue(":ScientistID", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+    return message;
+}
+
+string DbManager::editScientistDeathYear(const int& id, const string& newDeathYear)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Scientists SET Deathyear=:Deathyear WHERE ScientistID=:ScientistID");
+    query.bindValue(":Deathyear", QString::fromStdString(newDeathYear));
+    query.bindValue(":ScientistID", id);
 
     if (query.exec())
     {
@@ -417,14 +441,14 @@ string DbManager::editScientistBirthYear(const int& id, const string& newBirthYe
     return message;
 }
 
-string DbManager::editScientistDeathYear(const int& id, const string& newDeathYear)
+string DbManager::editComputerName(const int& id, const string& newName)
 {
     QSqlQuery query(_db);
     string message;
 
-    query.prepare("UPDATE Scientists SET Name=:name WHERE id=:id ");
-    query.bindValue(":name", QString::fromStdString(newDeathYear));
-    query.bindValue(":id", id);
+    query.prepare("UPDATE Computers SET Name=:Name WHERE ComputerID=:ComputerID");
+    query.bindValue(":Name", QString::fromStdString(newName));
+    query.bindValue(":ComputerID", id);
 
     if (query.exec())
     {
@@ -438,7 +462,55 @@ string DbManager::editScientistDeathYear(const int& id, const string& newDeathYe
     {
         message = "Unkown error occurred";
     }
+    return message;
+}
 
+
+string DbManager::editComputerYearBuilt(const int& id, const string& newYearBuilt)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Computers SET Yearbuilt=:Yearbuilt WHERE ComputerID=:ComputerID");
+    query.bindValue(":Yearbuilt", QString::fromStdString(newYearBuilt));
+    query.bindValue(":ComputerID", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+    return message;
+}
+
+string DbManager::editComputerType(const int& id, const string& newType)
+{
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Computers SET Type=:Type WHERE ComputerID=:ComputerID");
+    query.bindValue(":Type", QString::fromStdString(newType));
+    query.bindValue(":ComputerID", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
     return message;
 }
 
@@ -456,4 +528,31 @@ bool DbManager::addIntersectScientist(const int& scientistID, const int& compute
     {
         return false;
     }
+}
+
+ vector<Computer> DbManager::searchComputerPeriod(int yearFrom, int yearTo)
+{
+    QSqlQuery query(_db);
+    vector<Computer> foundComputer;
+
+    query.prepare("SELECT * FROM Computers WHERE Yearbuilt BETWEEN (:YearFrom) AND (:YearTo)");
+    query.bindValue(":YearFrom", yearFrom);
+    query.bindValue(":YearTo", yearTo);
+
+    query.exec();
+
+    while(query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+
+        Computer computer(computerID, name, yearBuilt, type, built);
+
+        foundComputer.push_back(computer);
+    }
+
+    return foundComputer;
 }

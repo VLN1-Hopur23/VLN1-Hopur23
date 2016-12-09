@@ -36,6 +36,8 @@ public:
 
     vector<Computer> searchComputer(string& searchData);
 
+    vector<Computer> searchComputerPeriod(int yearFrom, int yearTo);
+
     vector<Computer> intersectScientist(const string& id);
 
     vector<Scientist> intersectComputer(const string& id);
@@ -43,6 +45,8 @@ public:
     vector<Scientist> filterScientist(const string& Command, const string& searchData);
 
     vector<Computer> filterComputer(const string& Command, const string& searchData);
+
+    bool addIntersectScientist(const int& param1, const int& param2);
 
     // Edit:
     string editScientistName(const int& id, const string& newName);
@@ -53,7 +57,11 @@ public:
 
     string editScientistDeathYear(const int& id, const string& newDeathYear);
 
-    bool addIntersectScientist(const int& param1, const int& param2);
+    string editComputerName(const int& id, const string& newName);
+
+    string editComputerYearBuilt(const int& id, const string& newName);
+
+    string editComputerType(const int& id, const string& newName);
 
 private:
 

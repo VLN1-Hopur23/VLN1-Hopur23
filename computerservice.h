@@ -36,6 +36,10 @@ public:
 
     bool addIntersectScientist(const int& scientistID, const int& computerID);
 
+    string editComputer(int index, string change, string input);
+
+    bool searchComputersByPeriod(int yearFrom, int yearTo);
+
 private:
 
     vector<Computer> _computers;
