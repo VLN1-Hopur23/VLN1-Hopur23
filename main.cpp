@@ -1,15 +1,11 @@
-//#include <QCoreApplication>
-#include <iostream>
-#include "consoleui.h"
-#include "scientistservice.h"
+#include "mainwindow.h"
+#include <QApplication>
 
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    ConsoleUI ui;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-    ui.run();
-
-    return 0;
+    return a.exec();
 }
