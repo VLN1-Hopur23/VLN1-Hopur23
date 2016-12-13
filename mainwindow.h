@@ -3,9 +3,11 @@
 #include "scientistservice.h"
 
 #include <QMainWindow>
+#include "addstudentdialog.h"
 #include <QLabel>
 
 using namespace std;
+
 
 namespace Ui {
 class MainWindow;
@@ -21,8 +23,10 @@ public:
 
 
 
+
 private slots:
     void on_button_add_scientist_clicked();
+
 
 
 
@@ -32,6 +36,7 @@ private:
 
     Ui::MainWindow *ui;
 
+
     ScientistService _service;
 
     QString currentScientistSortColumn;
@@ -40,6 +45,7 @@ private:
 
     vector <Scientist> currentScientist;
     vector <Scientist> currentlyDisplayedScientist;
+
 
 };
 
