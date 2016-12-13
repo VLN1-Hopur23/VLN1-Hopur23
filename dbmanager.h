@@ -63,6 +63,8 @@ public:
 
     string editComputerType(const int& id, const string& newName);
 
+    string stringToLower(string str);
+
 private:
 
     QSqlDatabase _db;

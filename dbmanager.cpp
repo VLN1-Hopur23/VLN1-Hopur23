@@ -506,6 +506,18 @@ string DbManager::editComputerType(const int& id, const string& newType)
     return message;
 }
 
+string DbManager::stringToLower(string str)
+{
+    string result = "";
+
+    for(unsigned int i = 0; i < str.length(); ++i)
+    {
+        result += tolower(str[i]);
+    }
+
+    return result;
+}
+
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
 {
     QSqlQuery queryAdd(_db);
@@ -548,3 +560,5 @@ bool DbManager::addIntersect(const int& scientistID, const int& computerID)
     }
     return foundComputer;
 }
+
+

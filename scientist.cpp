@@ -1,4 +1,7 @@
 #include "scientist.h"
+#include <algorithm>
+#include <QMessageBox>
+#include <dbmanager.h>
 
 using namespace std;
 
@@ -94,3 +97,28 @@ void Scientist::setYearOfDeath(int yearOfDeath)
 {
     _yearOfDeath = yearOfDeath;
 }
+/*
+bool Scientist::contains(string str)
+{
+    if(str == "")
+        {
+            return true;
+        }
+
+        string searchStringToLower = DbManager::stringToLower(str);
+
+        if(DbManager::stringToLower(this->toString()).find(searchStringToLower) != string::npos)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+}
+string Scientist::toString()
+{
+    return _name + " " + _gender + " "; //+ _yearOfBirth+ " " + _yearOfDeath;
+}
+*/
