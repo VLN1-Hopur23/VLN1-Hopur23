@@ -38,10 +38,6 @@ bool ComputerService::retrieveComputers(string order, string filter)
     {
         QSfilter = QString::fromStdString("DESC");
     }
-    else
-    {
-        // TO DO ERROR CHECK
-    }
 
     if(order == "name" || order == "Name" || order == "n" || order =="N")
     {
@@ -58,10 +54,6 @@ bool ComputerService::retrieveComputers(string order, string filter)
     else if(order == "built" || order == "Built" || order == "b" || order == "B")
     {
         QSorder = QString::fromStdString("Built");
-    }
-    else
-    {
-        // TO DO ERROR CHECK!!!
     }
 
     if(QSfilter != "" && QSorder != "")
@@ -114,21 +106,18 @@ bool ComputerService::searchingComputerByFilter(string command, string searchDat
     string finalSearchData;
     bool inputOkay = false;
 
-    if (command == "Name" || command == "name" || command == "n") //|| command == "1" || command == "01")
+    if (command == "Name" || command == "name" || command == "n")
     {
         cout << "inside Name in searching by filter in Computer Service" << endl;
         finalCommand = "Name";
-        //searchdata can be characters and number but not weird symbols
-        //if(true)//use class from JS to error check input
-        //{
-            finalSearchData = searchData;
-            inputOkay = true;
-        //}
+
+        // Searchdata can be characters and number but not weird symbols
+        finalSearchData = searchData;
+        inputOkay = true;
     }
-    else if (command == "Year" || command == "year" || command == "y") // || command == "2" || command == "02")
+    else if (command == "Year" || command == "year" || command == "y")
     {
         finalCommand = "Yearbuilt";
-        // TO DO check if int or not
         int intSearchData = stoi(searchData);
 
         if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
