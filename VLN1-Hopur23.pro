@@ -15,23 +15,27 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    scientist.cpp \
-    scientistservice.cpp \
-    localtime.cpp \
-    computer.cpp \
-    computerservice.cpp \
-    dbmanager.cpp \
-    ui/addstudentdialog.cpp
+    ui/addstudentdialog.cpp \
+    Models/computer.cpp \
+    Models/scientist.cpp \
+    Repositories/dbmanager.cpp \
+    Services/computerservice.cpp \
+    Services/localtime.cpp \
+    Services/scientistservice.cpp
 
 HEADERS  += mainwindow.h \
-    scientist.h \
-    scientistservice.h \
-    localtime.h \
-    computer.h \
-    computerservice.h \
-    dbmanager.h \
-    ui/addstudentdialog.h
+    ui/addstudentdialog.h \
+    Models/computer.h \
+    Models/scientist.h \
+    Repositories/dbmanager.h \
+    Services/computerservice.h \
+    Services/localtime.h \
+    Services/scientistservice.h
 
 FORMS    += mainwindow.ui \
     ui/addstudentdialog.ui
-INCLUDEPATH += ui
+INCLUDEPATH += ui \
+    Models \
+    Repositories \
+    Services
+
