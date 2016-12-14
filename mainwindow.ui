@@ -27,7 +27,7 @@
     <normaloff>:/icons/images/science.jpg</normaloff>:/icons/images/science.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="currentIndex">
@@ -137,8 +137,14 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -146,7 +152,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
