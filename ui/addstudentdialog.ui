@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>417</height>
+    <width>463</width>
+    <height>504</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,16 +68,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_error_add_scientist_gender">
+      <widget class="QRadioButton" name="button_radio_add_scientist_male">
        <property name="text">
-        <string/>
+        <string>Male</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QRadioButton" name="button_radio_add_scientist_femail">
        <property name="text">
@@ -86,9 +82,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="button_radio_add_scientist_male">
+      <widget class="QLabel" name="label_error_add_scientist_gender">
        <property name="text">
-        <string>Male</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -125,6 +121,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QRadioButton" name="button_radio_add_scientist_still_alive">
+       <property name="text">
+        <string>Still alive</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label_error_add_scientist_year_of_death">
        <property name="text">
         <string/>
@@ -137,18 +143,22 @@
     <widget class="QLineEdit" name="input_add_scientist_year_of_death"/>
    </item>
    <item>
-    <widget class="QPushButton" name="button_add_scientist_save">
-     <property name="text">
-      <string>SAVE SCIENTIST</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="button_add_scientist_cancel">
-     <property name="text">
-      <string>CANCEL</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QPushButton" name="button_add_scientist_save">
+       <property name="text">
+        <string>SAVE SCIENTIST</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_add_scientist_cancel">
+       <property name="text">
+        <string>CANCEL</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

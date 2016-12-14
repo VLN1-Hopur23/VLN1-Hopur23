@@ -8,7 +8,7 @@ DbManager::DbManager()
     this->dbName = "VLN1-Hopur23.sqlite";
     this->connName = "ThisConnection";
 
-    // contains() default argument is initialized to default connection
+    // Contains() default argument is initialized to default connection
     if (QSqlDatabase::contains(connName))
     {
         this->_db = QSqlDatabase::database(connName, false);
@@ -60,8 +60,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
 bool DbManager::addScientist(const Scientist& scientist, int& id) const
 {
-    //bool message = "";
-
     QSqlQuery queryAdd(_db);
 
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
