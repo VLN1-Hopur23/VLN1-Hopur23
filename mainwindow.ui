@@ -75,6 +75,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="button_delete_scientist">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete selected scientist</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_add_scientist">
           <property name="text">
            <string>Add new scientist</string>
@@ -158,7 +168,7 @@
   <action name="action_add_Scientist">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/images/add_scientists.png</normaloff>:/icons/images/add_scientists.png</iconset>
+     <normaloff>:/icons/images/add_scientist.png</normaloff>:/icons/images/add_scientist.png</iconset>
    </property>
    <property name="text">
     <string>Add Scientist</string>
@@ -171,6 +181,15 @@
    </property>
    <property name="text">
     <string>Add Computer</string>
+   </property>
+  </action>
+  <action name="actionRemove_scientist">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
+   </property>
+   <property name="text">
+    <string>remove_scientist</string>
    </property>
   </action>
  </widget>
