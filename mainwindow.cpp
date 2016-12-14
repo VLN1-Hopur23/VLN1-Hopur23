@@ -151,5 +151,13 @@ void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
     vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
     displayAllScientists(scientists);
 }
+//shortcut to add scientist with icon
+void MainWindow::on_action_add_Scientist_triggered()
+{
+    on_button_add_scientist_clicked();
+}
 
-
+void MainWindow::on_action_add_Computer_triggered()
+{
+    on_button_add_computer_clicked();
+}
