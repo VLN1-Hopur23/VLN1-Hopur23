@@ -3,7 +3,11 @@
 
 ###Console program with the following functionality:
 <ul>
-   <li>Users can register a known person and a known computer from the history of computer science</li>
+   <li>Users can register a known person and a known computer from the history of computer science
+   <ul>
+      <li>User can connect the registered person to any known computer/s</li>
+      <li>User can connect the registered computer to any known scientist/s</li>
+      </ul>
    <li>Users can display the list of known computer scientists in an order sorted by
     <ul>
       <li>name</li>
