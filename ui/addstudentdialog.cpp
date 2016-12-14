@@ -19,7 +19,7 @@ AddStudentDialog::~AddStudentDialog()
 
 void AddStudentDialog::on_button_add_scientist_save_clicked()
 {
-   QString error = "<span style='color: red'>Not validated input<\span>";
+   QString error = "<span style='color: red'>Not validated input<\\span>";
    QString name = ui->input_add_scientist_name->text();
    QString yearBorn = ui->input_add_scientist_year_born->text();
    QString yearOfDeath = ui->input_add_scientist_year_of_death->text();

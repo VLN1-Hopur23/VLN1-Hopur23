@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>496</height>
+    <width>613</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,17 +44,17 @@
          <widget class="QTableWidget" name="table_s">
           <column>
            <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
             <string>Name</string>
            </property>
           </column>
           <column>
            <property name="text">
             <string>Gender</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year of birth</string>
            </property>
           </column>
           <column>
@@ -126,7 +126,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>472</width>
+     <width>613</width>
      <height>26</height>
     </rect>
    </property>

@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "scientistservice.h"
 
+#include "scientistservice.h"
 #include <QMainWindow>
 #include "addstudentdialog.h"
 #include <QLabel>
+#include <vector>
 
 using namespace std;
 
@@ -26,10 +27,12 @@ private slots:
 
     void on_button_add_scientist_clicked();
 
+    void on_input_keyword_s_textChanged(const QString &arg1);
+
 private:
 
     void getAllScientist();
-    void displayAllScientists();
+    void displayAllScientists(const vector<Scientist>& scientists);
 
     Ui::MainWindow *ui;
 
@@ -40,7 +43,6 @@ private:
 
     QLabel* statusBarMessage;
 
-    vector <Scientist> currentScientist;
     vector <Scientist> currentlyDisplayedScientist;
 };
 
