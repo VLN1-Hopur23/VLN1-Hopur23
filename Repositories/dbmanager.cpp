@@ -35,6 +35,11 @@ DbManager::~DbManager()
 // Get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
 vector<Scientist> DbManager::getScientists()
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Scientist> scientists;
 
     QSqlQuery querySort(_db);
@@ -60,8 +65,13 @@ vector<Scientist> DbManager::getScientists()
     return scientists;
 }
 
-bool DbManager::addScientist(const Scientist& scientist, int& id) const
+bool DbManager::addScientist(const Scientist& scientist, int& id)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery queryAdd(_db);
 
     queryAdd.prepare("INSERT INTO scientists (Name, Gender, BirthYear, DeathYear) VALUES (:Name, :Gender, :BirthYear, :DeathYear)");
@@ -84,6 +94,11 @@ bool DbManager::addScientist(const Scientist& scientist, int& id) const
 // Deletes scientist with chosen ID number from database and his previous connection to computer
 void DbManager::deleteComputer(const int ID)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Computers WHERE ComputerID = (:ComputerID)");
     queryDelete.bindValue(":ComputerID",ID);
@@ -106,6 +121,11 @@ void DbManager::deleteConnection(const int ID)
 // Deletes computer with chosen ID number from database and his previous connection to scientist
 void DbManager::deleteScientist(const int ID)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery queryDelete(_db);
     queryDelete.prepare("DELETE FROM Scientists WHERE ScientistID = (:ScientistID)");
     queryDelete.bindValue(":ScientistID",ID);
@@ -121,6 +141,11 @@ void DbManager::deleteScientist(const int ID)
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
 vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Computer> computers;
 
     QSqlQuery query(_db);
@@ -147,8 +172,13 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
     return computers;
 }
 
-bool DbManager::addComputer(const Computer& computer, int& id) const
+bool DbManager::addComputer(const Computer& computer, int& id)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery queryAdd(_db);
 
     queryAdd.prepare("INSERT INTO computers (Name, Yearbuilt, Type, Built) VALUES (:Name, :Yearbuilt, :Type, :Built)");
@@ -171,6 +201,11 @@ bool DbManager::addComputer(const Computer& computer, int& id) const
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const string& id)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Computer> intersectedComputers;
 
     QSqlQuery intersectQuery(_db);
@@ -202,6 +237,11 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 // Returns vector with all scientists associated with the computer/s
 vector<Scientist> DbManager::intersectComputer(const string& id)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Scientist> intersectedScientists;
 
     QSqlQuery intersectQuery(_db);
@@ -233,6 +273,11 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
 // Gets the info on Scientist which is searced for
 vector<Scientist> DbManager::searchScientist(const string& searchData)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Scientist> foundScientists;
 
     QSqlQuery query(_db);
@@ -264,6 +309,11 @@ vector<Scientist> DbManager::searchScientist(const string& searchData)
 
 vector<Computer> DbManager::filterComputer(const string& Command, const string& searchData)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Computer> foundComputers;
     QString qCommand = QString::fromStdString(Command);
     QString qSearchData = QString::fromStdString(searchData);
@@ -288,6 +338,11 @@ vector<Computer> DbManager::filterComputer(const string& Command, const string& 
 
 vector<Scientist> DbManager::filterScientist(const string& Command, const string& searchData)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Scientist> foundScientists;
     QString qCommand = QString::fromStdString(Command);
     QString qSearchData = QString::fromStdString(searchData);
@@ -316,6 +371,11 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 // Gets the info on Computer which is searched for
 vector<Computer> DbManager::searchComputer(string& searchData)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     vector<Computer> foundComputer;
     QSqlQuery query(_db);
 
@@ -345,6 +405,11 @@ vector<Computer> DbManager::searchComputer(string& searchData)
 
 string DbManager::editScientistName(const int& id, const string& newName)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -369,6 +434,11 @@ string DbManager::editScientistName(const int& id, const string& newName)
 
 string DbManager::editScientistGender(const int& id, const string& newGender)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -394,6 +464,11 @@ string DbManager::editScientistGender(const int& id, const string& newGender)
 
 string DbManager::editScientistBirthYear(const int& id, const string& newBirthYear)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -418,6 +493,11 @@ string DbManager::editScientistBirthYear(const int& id, const string& newBirthYe
 
 string DbManager::editScientistDeathYear(const int& id, const string& newDeathYear)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -443,6 +523,11 @@ string DbManager::editScientistDeathYear(const int& id, const string& newDeathYe
 
 string DbManager::editComputerName(const int& id, const string& newName)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -468,6 +553,11 @@ string DbManager::editComputerName(const int& id, const string& newName)
 
 string DbManager::editComputerYearBuilt(const int& id, const string& newYearBuilt)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -492,6 +582,11 @@ string DbManager::editComputerYearBuilt(const int& id, const string& newYearBuil
 
 string DbManager::editComputerType(const int& id, const string& newType)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery query(_db);
     string message;
 
@@ -528,6 +623,11 @@ string DbManager::stringToLower(string str)
 
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
 {
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
     QSqlQuery queryAdd(_db);
     queryAdd.prepare("INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES (:computerID, :scientistID)");
     queryAdd.bindValue(":computerID", computerID);
@@ -545,6 +645,11 @@ bool DbManager::addIntersect(const int& scientistID, const int& computerID)
 
  vector<Computer> DbManager::searchComputerPeriod(int yearFrom, int yearTo)
 {
+    if (!_db.isOpen())
+    {
+     _db.open();
+    }
+
     QSqlQuery query(_db);
     vector<Computer> foundComputer;
 
