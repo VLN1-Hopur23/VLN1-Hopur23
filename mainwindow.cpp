@@ -112,7 +112,7 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
 }
 
 
-void MainWindow::on_input_keyword_s_textChanged(const QString &arg1)
+void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
 {
     string userInput = ui->input_keyword_s->text().toStdString();
 
