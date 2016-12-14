@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     localtime.cpp \
     computer.cpp \
     computerservice.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    ui/addstudentdialog.cpp
 
 HEADERS  += mainwindow.h \
     scientist.h \
@@ -28,6 +29,9 @@ HEADERS  += mainwindow.h \
     localtime.h \
     computer.h \
     computerservice.h \
-    dbmanager.h
+    dbmanager.h \
+    ui/addstudentdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    ui/addstudentdialog.ui
+INCLUDEPATH += ui

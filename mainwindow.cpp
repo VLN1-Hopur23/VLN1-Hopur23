@@ -41,9 +41,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::on_button_add_scientist_clicked()
 {
-
+    AddStudentDialog addstudentdialog;
+    int addStudentReturnValue = addstudentdialog.exec();
 }
 
 void MainWindow::getAllScientist()
@@ -78,4 +80,5 @@ void MainWindow::displayAllScientists()
     }
 
     ui->table_s->setRowCount(currentlyDisplayedScientist.size());
+
 }
