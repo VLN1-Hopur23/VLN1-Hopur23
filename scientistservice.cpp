@@ -121,56 +121,19 @@ void ScientistService::deleteScientist(int index)
 }
 
 // Fetches appropriate filter from dbmanager for search function in console
-bool ScientistService::searchingByFilter(string command, string searchData) // Function that we call in consoleUI, returns 1/true if input is right but 0/false otherwise
+vector<Scientist> ScientistService::searchingByFilter(string command, string searchData) // Function that we call in consoleUI, returns 1/true if input is right but 0/false otherwise
 {
-    string finalCommand;
-    string finalSearchData;
-    bool inputOkay = false;
-
-    if (command == "gender" || command == "Gender" || command == "g" || command == "1" || command == "01")
+    if (searchData == "")
     {
-        finalCommand = "Gender";
-
-        // Searchdata must be f or m
-        if(searchData == "f" || searchData == "F")
-        {
-            finalSearchData = "f";
-            inputOkay = true;
-            cout << "inside the gender f command" << endl;
-        }
-        else if( searchData == "m" || searchData == "M")
-        {
-            finalSearchData = "m";
-            inputOkay = true;
-        }
+        retrieveScientists("Name", "ASC");
+        return getScientistVector();
     }
-    else if (command == "birth" || command == "Birth" || command == "b" || command == "2" || command == "02")
+    else
     {
-        finalCommand = "Birthyear";
-        int intSearchData = stoi(searchData);
+        _scientists = _data.filterScientist(command, searchData);
 
-        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
-        {
-            finalSearchData = intSearchData;
-        }
+        return _scientists;
     }
-    else if (command == "death" || command == "Death" || command == "d" || command == "3" || command == "03")
-    {
-        finalCommand = "Deathyear";
-        int intSearchData = stoi(searchData);
-
-        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
-        {
-            finalSearchData = intSearchData;
-        }
-    }
-
-    if(inputOkay) // Returns true if input is accepted
-    {
-        _scientists = _data.filterScientist(finalCommand, finalSearchData);
-        return true;
-    }
-    return false;
 }
 
 // Connects link function in console to dbmanager

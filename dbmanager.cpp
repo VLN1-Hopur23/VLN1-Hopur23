@@ -261,7 +261,7 @@ vector<Computer> DbManager::filterComputer(const string& Command, const string& 
     QString qSearchData = QString::fromStdString(searchData);
 
     QSqlQuery findquery(_db);
-    QString sqlCommand = "SELECT * FROM Computers WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
+    QString sqlCommand = "SELECT * FROM Computers WHERE " + qCommand + " LIKE '" +qSearchData + "%' ";
     findquery.prepare(sqlCommand);
     findquery.exec();
 
@@ -286,7 +286,7 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 
     QSqlQuery findquery(_db);
 
-    QString sqlCommand = "SELECT * FROM Scientists WHERE " + qCommand + " LIKE '" +qSearchData + "' ";
+    QString sqlCommand = "SELECT * FROM Scientists WHERE " + qCommand + " LIKE '" +qSearchData + "%' ";
     findquery.prepare(sqlCommand);
     findquery.exec();
 

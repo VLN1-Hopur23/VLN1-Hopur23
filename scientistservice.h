@@ -36,7 +36,7 @@ public:
 
     void deleteScientist(int index);
 
-    bool searchingByFilter(string filter, string searchData);
+    vector<Scientist> searchingByFilter(string filter, string searchData);
 
     void retrieveIntersectComputer(const string& param);
 

@@ -34,13 +34,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_c->addItem("Built");
 
     ui->input_keyword_c->setPlaceholderText("search computers...");
+
+    getAllScientist();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_button_add_scientist_clicked()
 {
@@ -50,35 +51,35 @@ void MainWindow::on_button_add_scientist_clicked()
 
 void MainWindow::getAllScientist()
 {
-    currentScientist = _service.getScientistVector();
-    displayAllScientists();
+    _service.retrieveScientists("Name", "ASC");
+    vector <Scientist> scientists = _service.getScientistVector();
+    displayAllScientists(scientists);
 }
 
-void MainWindow::displayAllScientists()
+
+void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 {
     ui->table_s->clearContents();
-    ui->table_s->setRowCount(_service.getSize());
+    ui->table_s->setRowCount(scientists.size());
 
-    //currentlyDisplayedScientist.clear();
-
-    for(unsigned int row = 0; row < currentScientist.size(); row++)
+    for(unsigned int row = 0; row < scientists.size(); row++)
     {
-        Scientist currentScientist = _service.getScientist(row);
+        Scientist currentScientist = scientists[row];
 
-        string searchString = ui->input_keyword_s->text().toStdString();
-        //if(currentScientist.contains(searchString))
-        {
-            ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
-            ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
-            ui->table_s->setItem(row,2,new QTableWidgetItem(currentScientist.getYearOfBirth()));
-            ui->table_s->setItem(row,3,new QTableWidgetItem(currentScientist.getYearOfDeath()));
-            //ui->table_s->addItem(QString::fromStdString(currentScientist.toString()));
-
-            currentlyDisplayedScientist.push_back(currentScientist);
-        }
-        //currentlyDisplayedScientist = _service;
+        ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
+        ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
+        ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
+        ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
     }
 
-    ui->table_s->setRowCount(currentlyDisplayedScientist.size());
+    currentlyDisplayedScientist = scientists;
+}
 
+
+void MainWindow::on_input_keyword_s_textChanged(const QString &arg1)
+{
+    string userInput = ui->input_keyword_s->text().toStdString();
+
+    vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
+    displayAllScientists(scientists);
 }
