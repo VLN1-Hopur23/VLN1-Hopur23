@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "scientistservice.h"
+#include "computerservice.h"
 #include <QMainWindow>
 #include "addstudentdialog.h"
 #include "addcomputerdialog.h"
@@ -35,11 +36,14 @@ private slots:
 private:
 
     void getAllScientist();
+    void getAllComputers();
     void displayAllScientists(const vector<Scientist>& scientists);
+    void displayAllComputers(const vector<Computer>& computers);
 
     Ui::MainWindow *ui;
 
     ScientistService _service;
+    ComputerService _computerservice;
 
     QString currentScientistSortColumn;
     QString currentComputerSortColumn;
@@ -47,6 +51,7 @@ private:
     QLabel* statusBarMessage;
 
     vector <Scientist> currentlyDisplayedScientist;
+    vector <Computer> currentlyDisplayedComputers;
 };
 
 #endif // MAINWINDOW_H
