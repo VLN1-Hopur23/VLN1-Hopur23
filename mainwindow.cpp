@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QStatusBar>
 //#include ""
 //#include ""
 
@@ -11,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QStatusBar *statusBar = this->statusBar();
+    ui->statusBar->showMessage("Scientist successfully added", 4000);
 
     currentScientistSortColumn = "Name";
 
@@ -46,6 +50,20 @@ void MainWindow::on_button_add_scientist_clicked()
 {
     AddStudentDialog addstudentdialog;
     int addStudentReturnValue = addstudentdialog.exec();
+
+    if(addStudentReturnValue == 1)
+    {
+        ui->statusBar->showMessage("Scientist successfully added", 4000);
+
+    }
+    else if(addStudentReturnValue == 0)
+    {
+        ui->statusBar->showMessage("Scientist added was canceled", 4000);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Something went wery wery wrong", 4000);
+    }
 }
 
 void MainWindow::getAllScientist()

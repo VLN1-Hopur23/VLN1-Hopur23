@@ -4,6 +4,7 @@
 #include <QtCore>
 
 
+
 AddStudentDialog::AddStudentDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddStudentDialog)
@@ -18,9 +19,8 @@ AddStudentDialog::~AddStudentDialog()
 
 void AddStudentDialog::on_button_add_scientist_save_clicked()
 {
-   QString error = "Not validated input";  //"<span style='color: red'>Not validated input<\span>";
+   QString error = "<span style='color: red'>Not validated input<\span>";
    QString name = ui->input_add_scientist_name->text();
-   //QString gender = ui->input_add_scientist_gender->text();
    QString yearBorn = ui->input_add_scientist_year_born->text();
    QString yearOfDeath = ui->input_add_scientist_year_of_death->text();
 
@@ -46,12 +46,17 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
        ui->label_error_add_scientist_gender->setText(error);
        InputIsNotValid = true;
    }
-   if(yearBorn.isEmpty() || !(ValidInput(typeOf(yearBorn.toStdString()),"I")) || yearOfBirthInt>_time.getYearToDay() || yearOfBirthInt<0)
+   if(yearBorn.isEmpty() || !(ValidInput(typeOf(yearBorn.toStdString()),"I")) || yearOfBirthInt>_time.getYearToDay() || yearOfBirthInt<0 )
    {
        ui->label_error_add_scientist_year_born->setText(error);
        InputIsNotValid = true;
    }
-   if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0)
+   if(ui->button_radio_add_scientist_still_alive->isChecked())
+   {
+       yearOfDeathInt =0;
+       ui->input_add_scientist_year_of_death->setText("");
+   }
+   else if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0 || yearOfBirthInt>yearOfDeathInt)
    {
        ui->label_error_add_scientist_year_of_death->setText(error);
        InputIsNotValid = true;
@@ -85,13 +90,20 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
        ui->input_add_scientist_year_born->setText("");
        ui->input_add_scientist_year_of_death->setText("");
 
-       this->done(0);//0 means successful
-       //ui->statusBar->showMessage("Scientist successfully added",4000);
+       this->done(1);//1 means successful
+
+
+
    }
    else
    {
-       this->done(-1);
+       this->done(-1); // -1 means something went wrong
    }
+}
+
+void AddStudentDialog::on_button_add_scientist_cancel_clicked()
+{
+    this->done(0); // 0 means canceled
 }
 
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
@@ -239,5 +251,7 @@ bool AddStudentDialog::ValidInput(string check, string allowed)
     }
     return false;
 }
+
+
 
 
