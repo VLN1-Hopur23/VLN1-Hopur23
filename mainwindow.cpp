@@ -94,7 +94,7 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 }
 
 
-void MainWindow::on_input_keyword_s_textChanged(const QString &arg1)
+void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
 {
     string userInput = ui->input_keyword_s->text().toStdString();
 
