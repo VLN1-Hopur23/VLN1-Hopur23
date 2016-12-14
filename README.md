@@ -41,6 +41,12 @@
     <li>Users are able to connect a computer scientist to more than a single computer</li>
     <li>Users are able to connect a computer to more than a single computer scientist</li>
 </ul>  
+
+###Added features:
+<ul>
+   <li>amazing adds</li>
+</ul>
+
 ###Extra features:
 <ul>
    <li>Frequent users can use shortcuts to every category by
