@@ -67,6 +67,27 @@ void MainWindow::on_button_add_scientist_clicked()
     }
 }
 
+void MainWindow::on_button_add_computer_clicked()
+{
+    AddComputerDialog addcomputerdialog;
+    int addComputerReturnValue = addcomputerdialog.exec();
+
+    if(addComputerReturnValue == 1)
+    {
+        ui->statusBar->showMessage("Computer successfully added", 4000);
+
+    }
+    else if(addComputerReturnValue == 0)
+    {
+        ui->statusBar->showMessage("Computer added was canceled", 4000);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Something went wery wery wrong", 4000);
+    }
+
+}
+
 void MainWindow::getAllScientist()
 {
     _service.retrieveScientists("Name", "ASC");
@@ -94,10 +115,12 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 }
 
 
-void MainWindow::on_input_keyword_s_textChanged(const QString &arg1)
+void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
 {
     string userInput = ui->input_keyword_s->text().toStdString();
 
     vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
     displayAllScientists(scientists);
 }
+
+

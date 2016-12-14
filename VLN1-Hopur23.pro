@@ -16,6 +16,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     ui/addstudentdialog.cpp \
+    ui/addcomputerdialog.cpp \
     Models/computer.cpp \
     Models/scientist.cpp \
     Repositories/dbmanager.cpp \
@@ -26,6 +27,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     ui/addstudentdialog.h \
+    ui/addcomputerdialog.h \
     Models/computer.h \
     Models/scientist.h \
     Repositories/dbmanager.h \
@@ -35,7 +37,8 @@ HEADERS  += mainwindow.h \
     Services/connectionservice.h
 
 FORMS    += mainwindow.ui \
-    ui/addstudentdialog.ui
+    ui/addstudentdialog.ui \
+    ui/addcomputerdialog.ui
 INCLUDEPATH += ui \
     Models \
     Repositories \
