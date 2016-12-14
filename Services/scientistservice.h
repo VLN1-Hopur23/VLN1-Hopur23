@@ -30,7 +30,7 @@ public:
 
     vector<Scientist> getScientistVector();
 
-    bool retrieveScientists(string order, string filter);
+    void retrieveScientists();
 
     string editScientist(int index, string change, string input);
 

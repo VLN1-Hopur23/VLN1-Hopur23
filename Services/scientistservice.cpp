@@ -38,54 +38,9 @@ vector<Scientist> ScientistService::getScientistVector()
 }
 
 // Fetches table of scientists from dbmanager
-bool ScientistService::retrieveScientists(string order, string filter)
+void ScientistService::retrieveScientists()
 {
-    QString QSorder = "";
-    QString QSfilter = "";
-
-    if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
-    {
-        QSfilter = QString::fromStdString("ASC");
-    }
-    else if(filter == "desc" || filter == "DESC" || filter == "d" || filter == "D")
-    {
-        QSfilter = QString::fromStdString("DESC");
-    }
-    else
-    {
-        // TO DO ERROR CHECK
-    }
-
-    if(order == "name" || order == "Name" || order == "n" || order == "N")
-    {
-        QSorder = QString::fromStdString("Name");
-    }
-    else if(order == "gender" || order == "Gender" || order == "g" || order == "G")
-    {
-        QSorder = QString::fromStdString("Gender");
-    }
-    else if(order == "birth" || order == "Birth" || order == "b" || order == "B")
-    {
-        QSorder = QString::fromStdString("Birthyear");
-    }
-    else if(order == "death" || order == "Death" || order == "d" || order == "D")
-    {
-        QSorder = QString::fromStdString("Deathyear");
-    }
-    else
-    {
-        // TO DO ERROR CHECK!!!
-    }
-
-    if(QSfilter != "" && QSorder != "")
-    {
-        _scientists = _data.getScientists(QSorder, QSfilter);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    _scientists = _data.getScientists();
 }
 
 // Edit function takes input from the user and fetches data from the dbmanagar
@@ -125,7 +80,7 @@ vector<Scientist> ScientistService::searchingByFilter(string command, string sea
 {
     if (searchData == "")
     {
-        retrieveScientists("Name", "ASC");
+        retrieveScientists();
         return getScientistVector();
     }
     else

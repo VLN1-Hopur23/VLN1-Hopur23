@@ -31,7 +31,7 @@
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_scientists">
        <attribute name="title">
@@ -46,6 +46,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="table_s">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
           <column>
            <property name="text">
             <string>Name</string>
@@ -90,6 +93,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="table_c">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
           <column>
            <property name="text">
             <string>Name</string>
@@ -131,7 +137,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
