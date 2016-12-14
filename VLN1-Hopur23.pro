@@ -41,3 +41,6 @@ INCLUDEPATH += ui \
     Repositories \
     Services
 
+RESOURCES += \
+    resources.qrc
+
