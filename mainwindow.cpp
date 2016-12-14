@@ -66,6 +66,25 @@ void MainWindow::on_button_add_scientist_clicked()
     }
 }
 
+void MainWindow::on_button_add_computer_clicked()
+{
+    AddComputerDialog addcomputerdialog;
+    int addComputerReturnValue = addcomputerdialog.exec();
+
+    if(addComputerReturnValue ==1)
+    {
+        ui->statusBar->showMessage("Computer successfully added", 4000);
+    }
+    else if(addComputerReturnValue == 0)
+    {
+        ui->statusBar->showMessage("Computer added was canceled", 4000);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Computer went wery wery wrong", 4000);
+    }
+}
+
 void MainWindow::getAllScientist()
 {
     currentScientist = _service.getScientistVector();
@@ -100,3 +119,5 @@ void MainWindow::displayAllScientists()
     ui->table_s->setRowCount(currentlyDisplayedScientist.size());
 
 }
+
+

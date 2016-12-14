@@ -4,6 +4,7 @@
 
 #include <QMainWindow>
 #include "addstudentdialog.h"
+#include "addcomputerdialog.h"
 #include <QLabel>
 
 using namespace std;
@@ -29,6 +30,8 @@ private slots:
 
 
 
+
+    void on_button_add_computer_clicked();
 
 private:
     void getAllScientist();
