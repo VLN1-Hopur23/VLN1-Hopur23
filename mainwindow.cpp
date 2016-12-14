@@ -65,11 +65,13 @@ void MainWindow::on_button_add_scientist_clicked()
     {
         ui->statusBar->showMessage("Something went wery wery wrong", 4000);
     }
+
+    getAllScientist();
 }
 
 void MainWindow::getAllScientist()
 {
-    _service.retrieveScientists("Name", "ASC");
+    _service.retrieveScientists();
     vector <Scientist> scientists = _service.getScientistVector();
     displayAllScientists(scientists);
 }

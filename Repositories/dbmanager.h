@@ -16,7 +16,7 @@ public:
 
     ~DbManager();
 
-    vector<Scientist> getScientists(QString QSorder, QString QSfilter);
+    vector<Scientist> getScientists();
 
     vector<Computer> getComputers(QString QSorder, QString QSfilter);
 

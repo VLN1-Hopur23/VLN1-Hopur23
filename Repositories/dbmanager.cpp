@@ -32,13 +32,13 @@ DbManager::~DbManager()
 }
 
 // Get scientist for display - Optional order, Name, Gender, BirthYear, DeathYear. Optional filter DESC and ASC
-vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
+vector<Scientist> DbManager::getScientists()
 {
     vector<Scientist> scientists;
 
     QSqlQuery querySort(_db);
 
-    querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
+    querySort.prepare("SELECT * FROM Scientists");
 
     querySort.exec();
 
