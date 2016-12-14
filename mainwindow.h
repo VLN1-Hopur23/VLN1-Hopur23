@@ -5,6 +5,7 @@
 #include "computerservice.h"
 #include <QMainWindow>
 #include "addstudentdialog.h"
+#include "addcomputerdialog.h"
 #include <QLabel>
 #include <vector>
 
@@ -29,6 +30,8 @@ private slots:
     void on_button_add_scientist_clicked();
 
     void on_input_keyword_s_textChanged(const QString &arg1);
+
+    void on_button_add_computer_clicked();
 
 private:
 

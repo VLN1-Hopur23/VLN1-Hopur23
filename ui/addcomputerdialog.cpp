@@ -1,114 +1,93 @@
-#include "addstudentdialog.h"
-#include "ui_addstudentdialog.h"
-#include <QtGui>
-#include <QtCore>
+#include "addcomputerdialog.h"
+#include "ui_addcomputerdialog.h"
 
-
-
-AddStudentDialog::AddStudentDialog(QWidget *parent) :
+AddComputerDialog::AddComputerDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AddStudentDialog)
+    ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
 }
 
-AddStudentDialog::~AddStudentDialog()
+AddComputerDialog::~AddComputerDialog()
 {
     delete ui;
 }
 
-void AddStudentDialog::on_button_add_scientist_save_clicked()
+void AddComputerDialog::on_button_add_computer_add_computer_clicked()
 {
-   QString error = "<span style='color: red'>Not validated input<\span>";
-   QString name = ui->input_add_scientist_name->text();
-   QString yearBorn = ui->input_add_scientist_year_born->text();
-   QString yearOfDeath = ui->input_add_scientist_year_of_death->text();
+    QString error = "<span style='color:red'>Not validated input<\span>";
+    QString name = ui->input_add_computer_name->text();
+    QString buildingYear = ui->input_add_computer_building_year->text();
+    QString typeOfComputer = ui->input_add_computer_type_of->text();
 
-   bool InputIsNotValid = false;
+    bool InputIsNotValid = false;
+    bool built =0;
 
-   int yearOfBirthInt = yearBorn.toInt();
-   int yearOfDeathInt = yearOfDeath.toInt();
+    int buildingYearInt = buildingYear.toInt();
 
-   ui->label_error_add_scientist_name->setText("");
-   ui->label_error_add_scientist_gender->setText("");
-   ui->label_error_add_scientist_year_born->setText("");
-   ui->label_error_add_scientist_year_of_death->setText("");
+    ui->label_error_add_computer_building_year->setText("");
+    ui->label_error_add_computer_built->setText("");
+    ui->label_error_add_computer_name->setText("");
+    ui->label_error_add_computer_type_of->setText("");
 
+    if(name.isEmpty() || !(ValidInput(typeOf(name.toStdString()),"ACI_AC_AI_A")) )
+    {
+        ui->label_error_add_computer_name->setText(error);
+        InputIsNotValid = true;
+    }
+    if(buildingYear.isEmpty() || !(ValidInput(typeOf(buildingYear.toStdString()),"I")) || buildingYearInt> _time.getYearToDay())
+    {
+        ui->label_error_add_computer_building_year->setText(error);
+        InputIsNotValid = true;
+    }
+    if(typeOfComputer.isEmpty() || !(ValidInput(typeOf(typeOfComputer.toStdString()),"ACI_AC_AI_A")))
+    {
+        ui->label_error_add_computer_type_of->setText(error);
+        InputIsNotValid = true;
+    }
+    if(!ui->button_radio_add_computer_yes->isChecked() && !ui->button_radio_add_computer_no->isChecked())
+    {
+        ui->label_error_add_computer_built->setText(error);
+        InputIsNotValid = true;
+    }
+    else if(ui->button_radio_add_computer_yes)
+    {
+        built = 1; // true (default is 0 false)
+    }
 
+    if(InputIsNotValid)
+    {
+        return;
+    }
+    string nameString = name.toStdString();
+    string typeOfComputerString = typeOfComputer.toStdString();
+    Computer computer(_computers.getSize(), nameString, buildingYearInt, typeOfComputerString, built);
+    int computerID;
+    bool success = _computers.addComputer(computer, computerID);
 
-   if(name.isEmpty() || !(ValidInput(typeOf(name.toStdString()),"ACI_AC_AI_A")))
-   {
-      ui->label_error_add_scientist_name->setText(error);
-       InputIsNotValid = true;
-   }
-   if(!ui->button_radio_add_scientist_femail->isChecked() && !ui->button_radio_add_scientist_male->isChecked())
-   {
-       ui->label_error_add_scientist_gender->setText(error);
-       InputIsNotValid = true;
-   }
-   if(yearBorn.isEmpty() || !(ValidInput(typeOf(yearBorn.toStdString()),"I")) || yearOfBirthInt>_time.getYearToDay() || yearOfBirthInt<0 )
-   {
-       ui->label_error_add_scientist_year_born->setText(error);
-       InputIsNotValid = true;
-   }
-   if(ui->button_radio_add_scientist_still_alive->isChecked())
-   {
-       yearOfDeathInt =0;
-       ui->input_add_scientist_year_of_death->setText("");
-   }
-   else if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0 || yearOfBirthInt>yearOfDeathInt)
-   {
-       ui->label_error_add_scientist_year_of_death->setText(error);
-       InputIsNotValid = true;
-   }
-   if(InputIsNotValid)
-   {
-       return;
-   }
+    if(success)
+    {
+        ui->input_add_computer_building_year->setText("");
+        ui->input_add_computer_name->setText("");
+        ui->input_add_computer_type_of->setText("");
 
-
-   string gender;
-   if(ui->button_radio_add_scientist_femail->isChecked())
-   {
-       gender = "f";
-   }
-   else
-   {
-       gender ="m";
-   }
-
-   string nameString = name.toStdString();
-   Scientist scientist(_service.getSize(), nameString, gender, yearOfBirthInt, yearOfDeathInt);
-
-   int scientistID;
-
-   bool success = _service.addScientist(scientist, scientistID);
-
-   if (success)
-   {
-       ui->input_add_scientist_name->setText("");
-       ui->input_add_scientist_year_born->setText("");
-       ui->input_add_scientist_year_of_death->setText("");
-
-       this->done(1);//1 means successful
-
-
-
-   }
-   else
-   {
-       this->done(-1); // -1 means something went wrong
-   }
+        this->done(1);  // 1 means successful
+    }
+    else
+    {
+        this->done(-1); //-1 means something went wrong
+    }
 }
 
-void AddStudentDialog::on_button_add_scientist_cancel_clicked()
+void AddComputerDialog::on_button_add_computer_cancel_clicked()
 {
-    this->done(0); // 0 means canceled
+    this->done(0);// 0 means cancel add computer
 }
+
 
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 // includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
-string AddStudentDialog::typeOf(string what)
+string AddComputerDialog::typeOf(string what)
 {
     int whatSize = what.size();
 
@@ -217,7 +196,7 @@ string AddStudentDialog::typeOf(string what)
 // Allowed can be "A_AC.._I" see above
 // Checks if input is allowed
 
-bool AddStudentDialog::ValidInput(string check, string allowed)
+bool AddComputerDialog::ValidInput(string check, string allowed)
 {
     if( check == "NV")
     {
