@@ -1,7 +1,7 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
-###Console program with the following functionality:
+###Digit application with the following functionality:
 <ul>
    <li>Users can register a known person and a known computer from the history of computer science
    <ul>
