@@ -37,20 +37,15 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
 
-    qDebug() << "1" << endl;
     QSqlQuery querySort(_db);
 
-    qDebug() << QSorder << " - " << QSfilter << endl;
     querySort.prepare("SELECT * FROM Scientists");
 
-    qDebug() << "3" << endl;
     querySort.exec();
 
-    qDebug() << querySort.isActive() << endl;
     while (querySort.next())
     {
 
-        qDebug() << "5" << endl;
         int scientistID = querySort.value("ScientistID").toUInt();
         string name = querySort.value("Name").toString().toStdString();
         string gender = querySort.value("Gender").toString().toStdString();
@@ -62,7 +57,6 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
         scientists.push_back(scientist);
     }
 
-    qDebug() << "6" << endl;
     return scientists;
 }
 
