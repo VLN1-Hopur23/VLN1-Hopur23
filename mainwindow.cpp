@@ -57,7 +57,7 @@ void MainWindow::on_button_add_scientist_clicked()
     {
         ui->statusBar->showMessage("Scientist successfully added", 4000);
 
-    }
+     }
     else if(addStudentReturnValue == 0)
     {
         ui->statusBar->showMessage("Scientist added was canceled", 4000);
@@ -88,7 +88,7 @@ void MainWindow::on_button_add_computer_clicked()
     {
         ui->statusBar->showMessage("Something went wery wery wrong", 4000);
     }
-
+    getAllComputers();
 }
 
 void MainWindow::getAllScientist()

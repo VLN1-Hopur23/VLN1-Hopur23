@@ -44,9 +44,12 @@
 
 ###Added features:
 <ul>
-   <li>amazing adds</li>
+   <li>Add picture of scientist</li>
+   <li>Add picture of computer</li>
+   <li>Text updated</li>
+   <li>Design updated</li>
+   <li>Users can delete connection between scientists and computers</li>
 </ul>
-
 ###Extra features:
 <ul>
    <li>Frequent users can use shortcuts to every category by

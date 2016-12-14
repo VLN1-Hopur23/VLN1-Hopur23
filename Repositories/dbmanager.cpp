@@ -91,7 +91,7 @@ bool DbManager::addScientist(const Scientist& scientist, int& id)
     }
 }
 
-// Deletes scientist with chosen ID number from database
+// Deletes scientist with chosen ID number from database and his previous connection to computer
 void DbManager::deleteComputer(const int ID)
 {
     if (!_db.isOpen())
@@ -109,8 +109,16 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
 }
+//Deletes connection link between scientist and computer
+void DbManager::deleteConnection(const int ID)
+{
+    QSqlQuery queryDeleteConnection(_db);
+    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE Computer_ScientistID = (:Computer_ScientistID)");
+    queryDeleteConnection.bindValue(":Computer_ScientistID",ID);
+    queryDeleteConnection.exec();
+}
 
-// Deletes computer with chosen ID number from database
+// Deletes computer with chosen ID number from database and his previous connection to scientist
 void DbManager::deleteScientist(const int ID)
 {
     if (!_db.isOpen())

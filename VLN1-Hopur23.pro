@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     Repositories/dbmanager.cpp \
     Services/computerservice.cpp \
     Services/localtime.cpp \
-    Services/scientistservice.cpp
+    Services/scientistservice.cpp \
+    Services/connectionservice.cpp
 
 HEADERS  += mainwindow.h \
     ui/addstudentdialog.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     Repositories/dbmanager.h \
     Services/computerservice.h \
     Services/localtime.h \
-    Services/scientistservice.h
+    Services/scientistservice.h \
+    Services/connectionservice.h
 
 FORMS    += mainwindow.ui \
     ui/addstudentdialog.ui \
@@ -41,4 +43,7 @@ INCLUDEPATH += ui \
     Models \
     Repositories \
     Services
+
+RESOURCES += \
+    resources.qrc
 
