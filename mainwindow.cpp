@@ -90,7 +90,6 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
         ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
     }
 
-<<<<<<< HEAD
     currentlyDisplayedScientist = scientists;
 }
 
@@ -101,7 +100,4 @@ void MainWindow::on_input_keyword_s_textChanged(const QString &arg1)
 
     vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
     displayAllScientists(scientists);
-=======
-    ui->table_s->setRowCount(currentlyDisplayedScientist.size());
->>>>>>> e40c00521b23cd2bf993da0691eb172a29041d4f
 }

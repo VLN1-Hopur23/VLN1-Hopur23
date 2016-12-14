@@ -24,14 +24,10 @@ public:
     ~MainWindow();
 
 private slots:
-<<<<<<< HEAD
+
     void on_button_add_scientist_clicked();
 
     void on_input_keyword_s_textChanged(const QString &arg1);
-=======
-
-    void on_button_add_scientist_clicked();
->>>>>>> e40c00521b23cd2bf993da0691eb172a29041d4f
 
 private:
 
@@ -40,11 +36,6 @@ private:
 
     Ui::MainWindow *ui;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e40c00521b23cd2bf993da0691eb172a29041d4f
     ScientistService _service;
 
     QString currentScientistSortColumn;
