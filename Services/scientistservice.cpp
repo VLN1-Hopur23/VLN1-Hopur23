@@ -51,10 +51,6 @@ bool ScientistService::retrieveScientists(string order, string filter)
     {
         QSfilter = QString::fromStdString("DESC");
     }
-    else
-    {
-        // TO DO ERROR CHECK
-    }
 
     if(order == "name" || order == "Name" || order == "n" || order == "N")
     {
@@ -72,10 +68,6 @@ bool ScientistService::retrieveScientists(string order, string filter)
     {
         QSorder = QString::fromStdString("Deathyear");
     }
-    else
-    {
-        // TO DO ERROR CHECK!!!
-    }
 
     if(QSfilter != "" && QSorder != "")
     {
@@ -92,9 +84,7 @@ bool ScientistService::retrieveScientists(string order, string filter)
 string ScientistService::editScientist(int index, string change, string input)
 {
     string message = "Invalid, ignored";
-    /*if(index > _scientists.size()){
-        message = "Index out of range";
-    }*/
+
     if (change == "name")
     {
         message = _data.editScientistName(index, input);

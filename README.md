@@ -1,9 +1,13 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
-###Console program with the following functionality:
+###Digit application with the following functionality:
 <ul>
-   <li>Users can register a known person and a known computer from the history of computer science</li>
+   <li>Users can register a known person and a known computer from the history of computer science
+   <ul>
+      <li>User can connect the registered person to any known computer/s</li>
+      <li>User can connect the registered computer to any known scientist/s</li>
+      </ul>
    <li>Users can display the list of known computer scientists in an order sorted by
     <ul>
       <li>name</li>
@@ -31,8 +35,8 @@
       <li>time period</li>
       <li>type</li>
      </ul>
-    <li>Users can edit a scientist or a computer in the list by they're choice by entering the index number</li>
-    <li>Users can delete a scientist or a computer of the list by entering the index number</li>
+    <li>Users can edit a scientist or a computer in the list by they're choice by entering the ID number</li>
+    <li>Users can delete a scientist or a computer of the list by entering the ID number</li>
     <li>Users have the option to return to main menu in every category</li>
     <li>Users are able to connect a computer scientist to more than a single computer</li>
     <li>Users are able to connect a computer to more than a single computer scientist</li>

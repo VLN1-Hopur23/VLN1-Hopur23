@@ -8,9 +8,9 @@
 
 using namespace std;
 
-
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -18,24 +18,20 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
-
-
 private slots:
+
     void on_button_add_scientist_clicked();
 
-
-
-
 private:
+
     void getAllScientist();
     void displayAllScientists();
 
     Ui::MainWindow *ui;
-
 
     ScientistService _service;
 
@@ -46,8 +42,6 @@ private:
 
     vector <Scientist> currentScientist;
     vector <Scientist> currentlyDisplayedScientist;
-
-
 };
 
 #endif // MAINWINDOW_H
