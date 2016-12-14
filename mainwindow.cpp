@@ -23,6 +23,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Death");
 
     ui->input_keyword_s->setPlaceholderText("search scientists...");
+
+    currentComputerSortColumn = "Name";
+
+    ui->statusBar->addPermanentWidget(statusBarMessage,1);
+
+    ui->input_dropdown_sort_c->addItem("Name");
+    ui->input_dropdown_sort_c->addItem("Year built");
+    ui->input_dropdown_sort_c->addItem("Type");
+    ui->input_dropdown_sort_c->addItem("Built");
+
+    ui->input_keyword_c->setPlaceholderText("search computers...");
 }
 
 MainWindow::~MainWindow()

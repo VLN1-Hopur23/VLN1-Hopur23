@@ -35,6 +35,7 @@ private:
     ScientistService _service;
 
     QString currentScientistSortColumn;
+    QString currentComputerSortColumn;
 
     QLabel* statusBarMessage;
 
