@@ -33,6 +33,7 @@ private slots:
 private:
 
     void getAllScientist();
+    void getAllComputers();
     void displayAllScientists(const vector<Scientist>& scientists);
     void displayAllComputers(const vector<Computer>& computers);
 

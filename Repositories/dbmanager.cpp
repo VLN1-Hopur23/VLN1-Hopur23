@@ -1,4 +1,5 @@
 #include "dbmanager.h"
+#include <QDebug>
 
 using namespace std;
 
@@ -36,18 +37,23 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 {
     vector<Scientist> scientists;
 
+    qDebug() << "1" << endl;
     QSqlQuery querySort(_db);
 
-    querySort.prepare("SELECT * FROM Scientists ORDER BY " + QSorder + " " + QSfilter);
+    qDebug() << QSorder << " - " << QSfilter << endl;
+    querySort.prepare("SELECT * FROM Scientists");
 
+    qDebug() << "3" << endl;
     querySort.exec();
 
+    qDebug() << querySort.isActive() << endl;
     while (querySort.next())
     {
+
+        qDebug() << "5" << endl;
         int scientistID = querySort.value("ScientistID").toUInt();
         string name = querySort.value("Name").toString().toStdString();
         string gender = querySort.value("Gender").toString().toStdString();
-
         int yearOfBirth = querySort.value("Birthyear").toUInt();
         int yearOfDeath = querySort.value("Deathyear").toUInt();
 
@@ -55,6 +61,8 @@ vector<Scientist> DbManager::getScientists(QString QSorder, QString QSfilter)
 
         scientists.push_back(scientist);
     }
+
+    qDebug() << "6" << endl;
     return scientists;
 }
 
@@ -290,12 +298,12 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 
     while (findquery.next())
     {
+
         int scientistID = findquery.value("ScientistID").toUInt();
         string name = findquery.value("Name").toString().toStdString();
         string gender = findquery.value("Gender").toString().toStdString();
         int yearOfBirth = findquery.value("Birthyear").toUInt();
         int yearOfDeath = findquery.value("Deathyear").toUInt();
-
         Scientist scientist(scientistID, name, gender, yearOfBirth, yearOfDeath);
 
         foundScientists.push_back(scientist);
