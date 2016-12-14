@@ -88,7 +88,7 @@ void MainWindow::on_button_add_computer_clicked()
     {
         ui->statusBar->showMessage("Something went wery wery wrong", 4000);
     }
-
+    getAllComputers();
 }
 
 void MainWindow::getAllScientist()
