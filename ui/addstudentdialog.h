@@ -26,6 +26,8 @@ private slots:
 
     void on_button_add_scientist_save_clicked();
 
+    void on_button_add_scientist_cancel_clicked();
+
 private:
     Ui::AddStudentDialog *ui;
     ScientistService _service;
