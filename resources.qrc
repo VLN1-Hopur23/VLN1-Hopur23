@@ -4,6 +4,7 @@
         <file>images/add_computer.png</file>
         <file>images/add_scientist.png</file>
         <file>images/remove_scientist.png</file>
+        <file>images/remove_computer.png</file>
     </qresource>
     <qresource prefix="/db"/>
 </RCC>

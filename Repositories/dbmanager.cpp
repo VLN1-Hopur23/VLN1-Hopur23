@@ -50,7 +50,6 @@ vector<Scientist> DbManager::getScientists()
 
     while (querySort.next())
     {
-
         int scientistID = querySort.value("ScientistID").toUInt();
         string name = querySort.value("Name").toString().toStdString();
         string gender = querySort.value("Gender").toString().toStdString();
@@ -61,8 +60,36 @@ vector<Scientist> DbManager::getScientists()
 
         scientists.push_back(scientist);
     }
-
     return scientists;
+}
+
+// Gets computer and his information from database(SQL) and reads into Computer vector
+// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
+vector<Computer> DbManager::getComputers()
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    vector<Computer> computers;
+
+    QSqlQuery query(_db);
+
+    query.prepare("SELECT * FROM Computers");
+    query.exec();
+
+    while (query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+        Computer computer(computerID, name, yearBuilt, type, built);
+        computers.push_back(computer);
+    }
+    return computers;
 }
 
 bool DbManager::addScientist(const Scientist& scientist, int& id)
@@ -118,7 +145,8 @@ bool DbManager::deleteComputer(const int ID)
         return false;
     }
 }
-//Deletes connection link between scientist and computer
+
+// Deletes connection link between scientist and computer
 void DbManager::deleteConnection(const int ID)
 {
     QSqlQuery queryDeleteConnection(_db);
@@ -153,41 +181,6 @@ bool DbManager::deleteScientist(const int ID)
     {
         return false;
     }
-}
-
-// Gets computer and his information from database(SQL) and reads into Computer vector
-// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
-vector<Computer> DbManager::getComputers()
-{
-    if (!_db.isOpen())
-    {
-        _db.open();
-    }
-
-    vector<Computer> computers;
-
-    QSqlQuery query(_db);
-
-    query.prepare("SELECT * FROM Computers");
-    query.exec();
-
-    while (query.next())
-    {
-        int computerID = query.value("ComputerID").toUInt();
-
-        string name = query.value("Name").toString().toStdString();
-
-        int yearBuilt = query.value("Yearbuilt").toUInt();
-
-        string type = query.value("Type").toString().toStdString();
-
-        bool built = query.value("Built").toBool();
-
-        Computer computer(computerID, name, yearBuilt, type, built);
-
-        computers.push_back(computer);
-    }
-    return computers;
 }
 
 bool DbManager::addComputer(const Computer& computer, int& id)
@@ -373,7 +366,6 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 
     while (findquery.next())
     {
-
         int scientistID = findquery.value("ScientistID").toUInt();
         string name = findquery.value("Name").toString().toStdString();
         string gender = findquery.value("Gender").toString().toStdString();
@@ -476,7 +468,6 @@ string DbManager::editScientistGender(const int& id, const string& newGender)
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
@@ -535,7 +526,6 @@ string DbManager::editScientistDeathYear(const int& id, const string& newDeathYe
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
@@ -635,7 +625,6 @@ string DbManager::stringToLower(string str)
     {
         result += tolower(str[i]);
     }
-
     return result;
 }
 
