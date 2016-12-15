@@ -40,6 +40,7 @@ private slots:
 
     void on_action_add_Computer_triggered();
 
+
     //When user clickes a row in the table
     void on_table_s_clicked(const QModelIndex &index);
     void on_table_c_clicked(const QModelIndex &index);
@@ -51,6 +52,12 @@ private slots:
     void on_action_remove_scientist_triggered();
 
     void on_action_remove_computer_triggered();
+
+    void on_table_c_customContextMenuRequested(const QPoint &pos);
+
+    void on_table_s_customContextMenuRequested(const QPoint &pos);
+
+    void on_action_details_triggered();
 
 private:
 

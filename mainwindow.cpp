@@ -1,10 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QStatusBar>
-//#include ""
-//#include ""
 
 #include <QMessageBox>
+#include <QMenu>
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -185,13 +184,15 @@ void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
 }
+//custommenu for scientist table
+
 
 //delete scientist button
 void MainWindow::on_table_s_clicked(const QModelIndex &index)
 {
    ui->button_delete_scientist->setEnabled(true);
 }
-
+//delete scientist with button on main window
 void MainWindow::on_button_delete_scientist_clicked()
 {
     int currentlySelectedScientistIndex = ui->table_s->currentIndex().row();
@@ -211,17 +212,18 @@ void MainWindow::on_button_delete_scientist_clicked()
         ui ->statusBar->showMessage("scientist not successfully removed",4000);
     }
 }
-
+//shortcut icon for delete scientist
 void MainWindow::on_action_remove_scientist_triggered()
 {
     on_button_delete_scientist_clicked();
 }
-//delete computer button
+
 void MainWindow::on_table_c_clicked(const QModelIndex &index)
 {
    ui->button_delete_computer->setEnabled(true);
 }
 
+//delete computer with button on main window
 void MainWindow::on_button_delete_computer_clicked()
 {
     int currentlySelectedComptuerIndex = ui->table_c->currentIndex().row();
@@ -241,8 +243,36 @@ void MainWindow::on_button_delete_computer_clicked()
         ui ->statusBar->showMessage("Computer not successfully removed",4000);
     }
 }
-
+//shortcut icon for delete computer
 void MainWindow::on_action_remove_computer_triggered()
 {
     on_button_delete_computer_clicked();
 }
+
+void MainWindow::on_action_details_triggered()
+{
+    //TODO DETAILS CONNECTION
+}
+void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
+{
+    qDebug() << "Right clicked menu requested on table";
+
+    //ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
+
+    QTableWidgetItem* computer = ui->table_c->itemAt(pos);
+
+    QMenu* menu =new QMenu(this);
+    menu->addAction(ui->action_remove_computer);
+    menu->addAction(ui->action_details);
+    menu->popup(ui->table_c->viewport()->mapFromGlobal(pos));
+
+}
+
+void MainWindow::on_table_s_customContextMenuRequested(const QPoint &pos)
+{
+    qDebug() << "Right clicked menu requested on table";
+
+}
+
+
+
