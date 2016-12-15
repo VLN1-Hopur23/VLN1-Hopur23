@@ -65,6 +65,10 @@ private slots:
     void on_action_details_triggered();
 
 
+    void on_table_c_cellDoubleClicked(int row, int column);
+
+    void on_table_c_cellChanged(int row, int column);
+
 private:
 
     void getAllScientist();
@@ -90,7 +94,8 @@ private:
     vector <Scientist> currentlyDisplayedScientist;
     vector <Computer> currentlyDisplayedComputers;
 
-    bool isDoubleClicked = false;
+    bool isDoubleClickedScientist = false;
+    bool isDoubleClickedComputer = false;
 };
 
 #endif // MAINWINDOW_H

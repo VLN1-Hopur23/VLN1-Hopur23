@@ -65,6 +65,8 @@ public:
 
     string editComputerType(const int& id, const string& newName);
 
+    string editComputeBuilt(const int& id, bool newWasBuilt);
+
     string stringToLower(string str);
 
 private:
