@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include "addstudentdialog.h"
 #include "addcomputerdialog.h"
+#include "localtime.h"
 #include <QLabel>
 #include <vector>
 
@@ -37,23 +38,34 @@ private slots:
 
     void on_action_add_Computer_triggered();
 
+    void on_table_s_cellChanged(int row, int column);
+
+    void on_table_s_cellDoubleClicked(int row, int column);
+
+
 private:
 
     void getAllScientist();
     void getAllComputers();
     void displayAllScientists(const vector<Scientist>& scientists);
     void displayAllComputers(const vector<Computer>& computers);
+    string typeOf(string what);
+    bool ValidInput(string check, string allowed);
 
     Ui::MainWindow *ui;
 
     ScientistService _service;
     ComputerService _computerservice;
+    LocalTime _time;
+
 
     QString currentScientistSortColumn;
     QString currentComputerSortColumn;
 
     vector <Scientist> currentlyDisplayedScientist;
     vector <Computer> currentlyDisplayedComputers;
+
+    bool isDoubleClicked = false;
 };
 
 #endif // MAINWINDOW_H
