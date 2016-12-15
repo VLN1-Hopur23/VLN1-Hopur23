@@ -476,9 +476,6 @@ void MainWindow::on_action_remove_computer_triggered()
 {
     on_button_delete_computer_clicked();
 }
-
-
-
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 // includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
 string MainWindow::typeOf(string what)
@@ -513,7 +510,7 @@ string MainWindow::typeOf(string what)
         {
             whatIsAlphabet[i] = true;
         }
-        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
+        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 || whatArrayInt[i] == 45 ) // 46='.', 44 = ',', 45 = '-'
         {
            whatIsAlowedChar[i] =true;
         }

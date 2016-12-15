@@ -178,7 +178,9 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-     <height>21</height>
+
+     <height>22</height>
+
     </rect>
    </property>
    <property name="defaultUp">
@@ -200,6 +202,7 @@
    <addaction name="action_add_Computer"/>
    <addaction name="action_remove_scientist"/>
    <addaction name="action_remove_computer"/>
+   <addaction name="action_details"/>
   </widget>
   <action name="action_add_Scientist">
    <property name="checkable">
@@ -231,10 +234,10 @@
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
    </property>
    <property name="text">
-    <string>Remove Scientist</string>
+    <string>Delete Scientist</string>
    </property>
    <property name="toolTip">
-    <string>Remove Scientist</string>
+    <string>Delete Scientist</string>
    </property>
   </action>
   <action name="action_remove_computer">
@@ -243,7 +246,10 @@
      <normaloff>:/icons/images/remove_computer.png</normaloff>:/icons/images/remove_computer.png</iconset>
    </property>
    <property name="text">
-    <string>Remove computer</string>
+    <string>Delete Computer</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete Computer</string>
    </property>
   </action>
   <action name="action_details">
