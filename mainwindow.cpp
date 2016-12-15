@@ -564,8 +564,13 @@ void MainWindow::on_table_s_customContextMenuRequested(const QPoint &pos)
 {
     qDebug() << "Right clicked menu requested on table";
 
+    QTableWidgetItem* scientist = ui->table_s->itemAt(pos);
+
+    QMenu* menu =new QMenu(this);
+    menu->addAction(ui->action_remove_scientist);
+    menu->addAction(ui->action_details);
+    menu->popup(ui->table_s->viewport()->mapFromGlobal(pos));
+
 }
-
-
 
 
