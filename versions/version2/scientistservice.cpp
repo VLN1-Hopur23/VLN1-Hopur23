@@ -121,18 +121,18 @@ void ScientistService::deleteScientist(int index)
 }
 
 // Fetches appropriate filter from dbmanager for search function in console
-vector<Scientist> ScientistService::searchingByFilter(string command, string searchData) // Function that we call in consoleUI, returns 1/true if input is right but 0/false otherwise
+bool ScientistService::searchingByFilter(string command, string searchData) // Function that we call in consoleUI, returns 1/true if input is right but 0/false otherwise
 {
     if (searchData == "")
     {
         retrieveScientists("Name", "ASC");
-        return getScientistVector();
+        return false;
     }
     else
     {
         _scientists = _data.filterScientist(command, searchData);
 
-        return _scientists;
+        return true;
     }
 }
 

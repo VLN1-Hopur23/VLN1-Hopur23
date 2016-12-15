@@ -2,6 +2,8 @@
 #define DETAILS_H
 
 #include <QDialog>
+#include <QPixmap>
+#include <QFileDialog>
 #include "scientist.h"
 #include "computer.h"
 
@@ -23,6 +25,7 @@ public:
 
 private slots:
     void on_label_name_linkActivated();
+    void on_button_browse_image_clicked();
 
 private:
     Ui::Details *ui;

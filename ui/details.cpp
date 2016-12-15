@@ -40,3 +40,21 @@ void Details::on_label_name_linkActivated()
 {
     ui->label_name->setText(QString::fromStdString(_scientist.getName()));
 }
+
+void Details::on_button_browse_image_clicked()
+{
+    string filePath = QFileDialog::getOpenFileName(
+                this,
+                "Search for image",
+                "",
+                "Image files(*.png *.jpg)"
+                ).toStdString();
+    if(filePath.length())
+    {
+        // user select som file
+    }
+    else
+    {
+        //didnt select file
+    }
+}

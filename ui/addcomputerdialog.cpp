@@ -35,22 +35,26 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
         ui->label_error_add_computer_name->setText(error);
         InputIsNotValid = true;
     }
+
     if(buildingYear.isEmpty() || !(ValidInput(typeOf(buildingYear.toStdString()),"I")) || buildingYearInt> _time.getYearToDay())
     {
         ui->label_error_add_computer_building_year->setText(error);
         InputIsNotValid = true;
+
     }
+
     if(typeOfComputer.isEmpty() || !(ValidInput(typeOf(typeOfComputer.toStdString()),"ACI_AC_AI_A")))
     {
         ui->label_error_add_computer_type_of->setText(error);
         InputIsNotValid = true;
     }
+
     if(!ui->button_radio_add_computer_yes->isChecked() && !ui->button_radio_add_computer_no->isChecked())
     {
         ui->label_error_add_computer_built->setText(error);
         InputIsNotValid = true;
     }
-    else if(ui->button_radio_add_computer_yes)
+    else if(ui->button_radio_add_computer_no)
     {
         built = 1; // true (default is 0 false)
     }
