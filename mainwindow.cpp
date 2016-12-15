@@ -173,10 +173,17 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
-    //if (_service.deleteScientist(currentlySelectedScientistIndex))
+    int scientistID = currentlySelectedScientist.getScientistID();
+
+    _service.deleteScientist(scientistID);
+
+    ui ->statusBar->showMessage("scientist successfully removed",4000);
+
+
+    //if (_service.deleteScientist(currentlySelectedScientistIndex) != 0)
     {
         ui -> input_keyword_s->setText("");
-        //displayAllScientists();
+        displayAllScientists(currentlyDisplayedScientist);
 
         ui->button_delete_scientist->setEnabled(false);
 
