@@ -203,15 +203,21 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     int scientistID = currentlySelectedScientist.getScientistID();
 
-    if (_service.deleteScientist(scientistID))
-    {
-        ui -> input_keyword_s->setText("");
-        getAllScientist();
-        ui->button_delete_scientist->setEnabled(false);
-    }
-    else
-    {
-        ui ->statusBar->showMessage("scientist not successfully removed",4000);
+
+   QMessageBox::StandardButton sure;
+   sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
+   if(sure == QMessageBox::Yes)
+   {
+        if (_service.deleteScientist(scientistID))
+        {
+            ui -> input_keyword_s->setText("");
+            getAllScientist();
+            ui->button_delete_scientist->setEnabled(false);
+        }
+        else
+        {
+            ui ->statusBar->showMessage("scientist not successfully removed",4000);
+        }
     }
 }
 
@@ -229,14 +235,19 @@ void MainWindow::on_button_delete_computer_clicked()
 
     int computerID = currentlySelectedComputer.getComputerID();
 
-    if (_computerservice.deleteComputer(computerID))
+    QMessageBox::StandardButton sure;
+    sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known computer?", QMessageBox::No|QMessageBox::Yes);
+    if(sure == QMessageBox::Yes)
     {
-        ui->input_keyword_c->setText("");
-        getAllComputers();
-        ui->button_delete_computer->setEnabled(false);
-    }
-    else
-    {
-        ui ->statusBar->showMessage("Computer not successfully removed",4000);
+        if (_computerservice.deleteComputer(computerID))
+        {
+            ui->input_keyword_c->setText("");
+            getAllComputers();
+            ui->button_delete_computer->setEnabled(false);
+        }
+        else
+        {
+            ui->statusBar->showMessage("Computer not successfully removed",4000);
+        }
     }
 }
