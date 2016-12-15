@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Death");
     connect( this->ui->input_dropdown_sort_s, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_s_textChanged()) );
 
-    ui->input_keyword_s->setPlaceholderText("search scientists...");
+    ui->input_keyword_s->setPlaceholderText("Search scientists...");
 
     currentComputerSortColumn = "Name";
 
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_c->addItem("Type");
     ui->input_dropdown_sort_c->addItem("Built");
 
-    ui->input_keyword_c->setPlaceholderText("search computers...");
+    ui->input_keyword_c->setPlaceholderText("Search computers...");
 
     getAllScientist();
     getAllComputers();
@@ -186,7 +186,7 @@ void MainWindow::on_action_add_Computer_triggered()
     on_button_add_computer_clicked();
 }
 
-//delete scientist button
+// Delete scientist button
 void MainWindow::on_table_s_clicked(const QModelIndex &index)
 {
    ui->button_delete_scientist->setEnabled(true);
@@ -200,11 +200,10 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     int scientistID = currentlySelectedScientist.getScientistID();
 
-
-   QMessageBox::StandardButton sure;
-   sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
-   if(sure == QMessageBox::Yes)
-   {
+    QMessageBox::StandardButton sure;
+    sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
+    if(sure == QMessageBox::Yes)
+    {
         if (_service.deleteScientist(scientistID))
         {
             ui -> input_keyword_s->setText("");
@@ -222,7 +221,8 @@ void MainWindow::on_action_remove_scientist_triggered()
 {
     on_button_delete_scientist_clicked();
 }
-//delete computer button
+
+// Delete computer button
 void MainWindow::on_table_c_clicked(const QModelIndex &index)
 {
    ui->button_delete_computer->setEnabled(true);
