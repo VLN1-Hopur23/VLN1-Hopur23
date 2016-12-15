@@ -21,7 +21,9 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     QString typeOfComputer = ui->input_add_computer_type_of->text();
 
     bool InputIsNotValid = false;
+
     bool built = 0;
+
 
     int buildingYearInt = buildingYear.toInt();
 
@@ -52,7 +54,7 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     }
     else if(ui->button_radio_add_computer_yes)
     {
-        built = 1; // true (default is 0 false)
+        built = true; // true (default is 0 false)
     }
 
     if(InputIsNotValid)
