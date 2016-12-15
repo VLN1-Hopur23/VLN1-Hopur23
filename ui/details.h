@@ -22,7 +22,6 @@ public:
     void ComputerDetails();
 
 private slots:
-    void on_label_name_linkActivated();
 
 private:
     Ui::Details *ui;
