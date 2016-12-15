@@ -78,6 +78,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="button_delete_scientist">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete selected scientist</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_add_scientist">
           <property name="text">
            <string>Add new scientist</string>
@@ -99,6 +109,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="table_c">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
@@ -125,6 +138,16 @@
             <string>Built</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_delete_computer">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete Selected Computer</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -192,6 +215,15 @@
    </property>
    <property name="text">
     <string>Add Computer</string>
+   </property>
+  </action>
+  <action name="actionRemove_scientist">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
+   </property>
+   <property name="text">
+    <string>remove_scientist</string>
    </property>
   </action>
  </widget>

@@ -49,7 +49,7 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
     }
     if(ui->button_radio_add_scientist_still_alive->isChecked())
     {
-        yearOfDeathInt =0;
+        yearOfDeathInt = 0;
         ui->input_add_scientist_year_of_death->setText("");
     }
     else if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0 || yearOfBirthInt>yearOfDeathInt)
@@ -70,7 +70,7 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
     }
     else
     {
-        gender ="m";
+        gender = "m";
     }
 
     string nameString = name.toStdString();
@@ -86,7 +86,7 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
         ui->input_add_scientist_year_born->setText("");
         ui->input_add_scientist_year_of_death->setText("");
 
-        this->done(1);//1 means successful
+        this->done(1);// 1 means successful
     }
     else
     {

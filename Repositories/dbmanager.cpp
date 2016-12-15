@@ -63,6 +63,35 @@ vector<Scientist> DbManager::getScientists()
     return scientists;
 }
 
+// Gets computer and his information from database(SQL) and reads into Computer vector
+// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
+vector<Computer> DbManager::getComputers()
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    vector<Computer> computers;
+
+    QSqlQuery query(_db);
+
+    query.prepare("SELECT * FROM Computers");
+    query.exec();
+
+    while (query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+        Computer computer(computerID, name, yearBuilt, type, built);
+        computers.push_back(computer);
+    }
+    return computers;
+}
+
 bool DbManager::addScientist(const Scientist& scientist, int& id)
 {
     if (!_db.isOpen())
@@ -90,7 +119,7 @@ bool DbManager::addScientist(const Scientist& scientist, int& id)
 }
 
 // Deletes scientist with chosen ID number from database and his previous connection to computer
-void DbManager::deleteComputer(const int ID)
+bool DbManager::deleteComputer(const int ID)
 {
     if (!_db.isOpen())
     {
@@ -106,6 +135,15 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
+
+    if(queryDelete.exec())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // Deletes connection link between scientist and computer
@@ -118,7 +156,7 @@ void DbManager::deleteConnection(const int ID)
 }
 
 // Deletes computer with chosen ID number from database and his previous connection to scientist
-void DbManager::deleteScientist(const int ID)
+bool DbManager::deleteScientist(const int ID)
 {
     if (!_db.isOpen())
     {
@@ -134,41 +172,15 @@ void DbManager::deleteScientist(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ScientistID = (:ScientistID)");
     queryDeleteConnection.bindValue(":ScientistID",ID);
     queryDeleteConnection.exec();
-}
 
-// Gets computer and his information from database(SQL) and reads into Computer vector
-// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
-vector<Computer> DbManager::getComputers()
-{
-    if (!_db.isOpen())
+    if(queryDelete.exec())
     {
-        _db.open();
+        return true;
     }
-
-    vector<Computer> computers;
-
-    QSqlQuery query(_db);
-
-    query.prepare("SELECT * FROM Computers");
-    query.exec();
-
-    while (query.next())
+    else
     {
-        int computerID = query.value("ComputerID").toUInt();
-
-        string name = query.value("Name").toString().toStdString();
-
-        int yearBuilt = query.value("Yearbuilt").toUInt();
-
-        string type = query.value("Type").toString().toStdString();
-
-        bool built = query.value("Built").toBool();
-
-        Computer computer(computerID, name, yearBuilt, type, built);
-
-        computers.push_back(computer);
+        return false;
     }
-    return computers;
 }
 
 bool DbManager::addComputer(const Computer& computer, int& id)

@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Gender");
     ui->input_dropdown_sort_s->addItem("Birth");
     ui->input_dropdown_sort_s->addItem("Death");
+    connect( this->ui->input_dropdown_sort_s, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_s_textChanged()) );
 
     ui->input_keyword_s->setPlaceholderText("search scientists...");
 
@@ -34,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
-    ui->statusBar->showMessage("Booga! Booga!", 2000);
+    //ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -136,8 +137,31 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
 void MainWindow::on_input_keyword_s_textChanged()
 {
     string userInput = ui->input_keyword_s->text().toStdString();
+    vector<Scientist> scientists;
 
-    vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
+    switch(this->ui->input_dropdown_sort_s->currentIndex())
+    {
+        case 0:
+        {
+            scientists = _service.searchingByFilter("Name", userInput);
+            break;
+        }
+        case 1:
+        {
+            scientists = _service.searchingByFilter("Gender", userInput);
+            break;
+        }
+        case 2:
+        {
+            scientists = _service.searchingByFilter("Birthyear", userInput);
+            break;
+        }
+        case 3:
+        {
+            scientists = _service.searchingByFilter("Deathyear", userInput);
+            break;
+        }
+    }
     displayAllScientists(scientists);
 }
 
@@ -160,4 +184,56 @@ void MainWindow::on_action_add_Scientist_triggered()
 void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
+}
+
+//delete scientist button
+void MainWindow::on_table_s_clicked(const QModelIndex &index)
+{
+   ui->button_delete_scientist->setEnabled(true);
+}
+
+void MainWindow::on_button_delete_scientist_clicked()
+{
+    int currentlySelectedScientistIndex = ui->table_s->currentIndex().row();
+
+    Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
+
+    int scientistID = currentlySelectedScientist.getScientistID();
+
+    if (_service.deleteScientist(scientistID))
+    {
+        ui -> input_keyword_s->setText("");
+        getAllScientist();
+        ui->button_delete_scientist->setEnabled(false);
+    }
+    else
+    {
+        ui ->statusBar->showMessage("scientist not successfully removed",4000);
+    }
+}
+
+//delete computer button
+void MainWindow::on_table_c_clicked(const QModelIndex &index)
+{
+   ui->button_delete_computer->setEnabled(true);
+}
+
+void MainWindow::on_button_delete_computer_clicked()
+{
+    int currentlySelectedComptuerIndex = ui->table_c->currentIndex().row();
+
+    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComptuerIndex);
+
+    int computerID = currentlySelectedComputer.getComputerID();
+
+    if (_computerservice.deleteComputer(computerID))
+    {
+        ui->input_keyword_c->setText("");
+        getAllComputers();
+        ui->button_delete_computer->setEnabled(false);
+    }
+    else
+    {
+        ui ->statusBar->showMessage("Computer not successfully removed",4000);
+    }
 }

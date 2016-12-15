@@ -10,7 +10,7 @@ using namespace std;
 
 namespace Ui
 {
-class AddComputerDialog;
+    class AddComputerDialog;
 }
 
 class AddComputerDialog : public QDialog

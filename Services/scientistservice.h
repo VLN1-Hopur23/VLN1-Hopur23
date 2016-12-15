@@ -34,9 +34,9 @@ public:
 
     string editScientist(int index, string change, string input);
 
-    void deleteScientist(int index);
+    bool deleteScientist(int index);
 
-    vector<Scientist> searchingByFilter(string filter, string searchData);
+    vector<Scientist> searchingByFilter(string command, string searchData);
 
     void retrieveIntersectComputer(const string& param);
 
