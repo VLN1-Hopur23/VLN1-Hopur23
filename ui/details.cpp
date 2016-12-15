@@ -36,6 +36,10 @@ void Details::ScientistDetails()
     {
         ui->third_detail->setText(QString::fromStdString("<b>Year Of Death:</b> ") + QString::number(_scientist.getYearOfDeath()));
     }
+    else
+    {
+        ui->third_detail->setText("<b>Alive and well (I think)</b>");
+    }
 
     ui->fourth_detail->setText(QString::fromStdString("<b>Age:</b> ") + QString::number(_scientist.getAge()));
 }
