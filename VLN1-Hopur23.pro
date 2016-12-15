@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     Services/computerservice.cpp \
     Services/localtime.cpp \
     Services/scientistservice.cpp \
-    Services/connectionservice.cpp
+    Services/connectionservice.cpp \
+    ui/connectiondialog.cpp
 
 HEADERS  += mainwindow.h \
     ui/addstudentdialog.h \
@@ -34,11 +35,13 @@ HEADERS  += mainwindow.h \
     Services/computerservice.h \
     Services/localtime.h \
     Services/scientistservice.h \
-    Services/connectionservice.h
+    Services/connectionservice.h \
+    ui/connectiondialog.h
 
 FORMS    += mainwindow.ui \
     ui/addstudentdialog.ui \
-    ui/addcomputerdialog.ui
+    ui/addcomputerdialog.ui \
+    ui/connectiondialog.ui
 INCLUDEPATH += ui \
     Models \
     Repositories \
