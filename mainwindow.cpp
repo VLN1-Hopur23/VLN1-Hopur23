@@ -70,6 +70,9 @@ void MainWindow::on_button_add_computer_clicked()
     AddComputerDialog addcomputerdialog;
     int addComputerReturnValue = addcomputerdialog.exec();
 
+    ui->statusBar->showMessage("humm",4000);
+
+
     if(addComputerReturnValue == 1)
     {
         ui->statusBar->showMessage("Computer successfully added", 4000);
@@ -94,7 +97,7 @@ void MainWindow::getAllScientist()
 
 void MainWindow::getAllComputers()
 {
-    _computerservice.retrieveComputers("Name", "ASC");
+    _computerservice.retrieveComputers();
     vector <Computer> computers = _computerservice.getComputerVector();
     displayAllComputers(computers);
 }
@@ -135,7 +138,7 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
     currentlyDisplayedComputers = computers;
 }
 
-//To search the list
+//To search the list for scientist
 void MainWindow::on_input_keyword_s_textChanged()
 {
     string userInput = ui->input_keyword_s->text().toStdString();
@@ -168,12 +171,21 @@ void MainWindow::on_input_keyword_s_textChanged()
     displayAllScientists(scientists);
 }
 
+//To search the list for computer
+void MainWindow::on_input_keyword_c_textChanged()
+{
+    string userInput = ui->input_keyword_c->text().toStdString();
+
+    vector<Computer> computers = _computerservice.searchingComputerByFilter("Name", userInput);
+    displayAllComputers(computers);
+}
 //shortcut to add scientist with icon
 void MainWindow::on_action_add_Scientist_triggered()
 {
     on_button_add_scientist_clicked();
 }
 
+//shortcut to add computer with icon
 void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();

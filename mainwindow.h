@@ -31,6 +31,8 @@ private slots:
 
     void on_input_keyword_s_textChanged();
 
+    void on_input_keyword_c_textChanged();
+
     void on_button_add_computer_clicked();
 
     void on_action_add_Scientist_triggered();

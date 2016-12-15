@@ -139,7 +139,7 @@ void DbManager::deleteScientist(const int ID)
 
 // Gets computer and his information from database(SQL) and reads into Computer vector
 // Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
-vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
+vector<Computer> DbManager::getComputers()
 {
     if (!_db.isOpen())
     {
@@ -150,7 +150,7 @@ vector<Computer> DbManager::getComputers(QString QSorder, QString QSfilter)
 
     QSqlQuery query(_db);
 
-    query.prepare("SELECT * FROM Computers ORDER BY " + QSorder + " " + QSfilter);
+    query.prepare("SELECT * FROM Computers");
     query.exec();
 
     while (query.next())

@@ -24,47 +24,9 @@ vector<Computer> ComputerService::getComputerVector()
 }
 
 // Fetches table of computers from SQL database
-bool ComputerService::retrieveComputers(string order, string filter)
+void ComputerService::retrieveComputers()
 {
-    QString QSorder = "";
-    QString QSfilter = "";
-
-    // Filter is for ascending (ASC) or descending (DESC)
-    if(filter == "asc" || filter == "ASC" || filter == "a" || filter == "A")
-    {
-        QSfilter = QString::fromStdString("ASC");
-    }
-    else if(filter == "desc" || filter == "DESC" || filter == "d" || filter == "D")
-    {
-        QSfilter = QString::fromStdString("DESC");
-    }
-
-    if(order == "name" || order == "Name" || order == "n" || order =="N")
-    {
-        QSorder = QString::fromStdString("Name");
-    }
-    else if(order == "year" || order == "Year" || order == "y" || order =="Y")
-    {
-        QSorder = QString::fromStdString("Yearbuilt");
-    }
-    else if(order == "type" || order == "Type" || order == "t" || order =="T")
-    {
-        QSorder = QString::fromStdString("Type");
-    }
-    else if(order == "built" || order == "Built" || order == "b" || order == "B")
-    {
-        QSorder = QString::fromStdString("Built");
-    }
-
-    if(QSfilter != "" && QSorder != "")
-    {
-        _computers = _data.getComputers(QSorder, QSfilter);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    _computers = _data.getComputers();
 }
 
 // Get size for computer vector
@@ -100,39 +62,17 @@ void ComputerService::deleteComputer(int index)
     _data.deleteComputer(index);
 }
 
-bool ComputerService::searchingComputerByFilter(string command, string searchData)
+vector<Computer> ComputerService::searchingComputerByFilter(string command, string searchData)
 {
-    string finalCommand;
-    string finalSearchData;
-    bool inputOkay = false;
-
-    if (command == "Name" || command == "name" || command == "n")
+    if (searchData == "")
     {
-        cout << "inside Name in searching by filter in Computer Service" << endl;
-        finalCommand = "Name";
-
-        // Searchdata can be characters and number but not weird symbols
-        finalSearchData = searchData;
-        inputOkay = true;
+        retrieveComputers();
+        return getComputerVector();
     }
-    else if (command == "Year" || command == "year" || command == "y")
+    else
     {
-        finalCommand = "Yearbuilt";
-        int intSearchData = stoi(searchData);
-
-        if(intSearchData <= _time.getYearToDay() && intSearchData >= 0)
-        {
-            finalSearchData = intSearchData;
-            inputOkay = true;
-        }
+        return _data.filterComputer(command, searchData);
     }
-
-    if(inputOkay) //Returns true if input is accepted
-    {
-        _computers = _data.filterComputer(finalCommand, finalSearchData);
-        return true;
-    }
-    return false;
 }
 
 bool ComputerService::addIntersectScientist(const int& scientistID, const int& computerID)
