@@ -150,9 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-
-     <height>26</height>
-
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -171,6 +169,7 @@
    </attribute>
    <addaction name="action_add_Scientist"/>
    <addaction name="action_add_Computer"/>
+   <addaction name="action_remove_scientist"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_add_Scientist">
@@ -200,7 +199,7 @@
     <string>Add Computer</string>
    </property>
   </action>
-  <action name="actionRemove_scientist">
+  <action name="action_remove_scientist">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>

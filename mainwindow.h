@@ -43,6 +43,8 @@ private slots:
 
     void on_button_delete_scientist_clicked();
 
+    void on_action_remove_scientist_triggered();
+
 private:
 
     void getAllScientist();

@@ -216,3 +216,8 @@ void MainWindow::on_button_delete_scientist_clicked()
         ui ->statusBar->showMessage("scientist not successfully removed",4000);
     }
 }
+
+void MainWindow::on_action_remove_scientist_triggered()
+{
+    on_button_delete_scientist_clicked();
+}
