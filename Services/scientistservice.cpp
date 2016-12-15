@@ -70,9 +70,9 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 
 // Fetches deleteScientist function in dbmanager
-void ScientistService::deleteScientist(int index)
+bool ScientistService::deleteScientist(int index)
 {
-    _data.deleteScientist(index);
+    return _data.deleteScientist(index);
 }
 
 // Fetches appropriate filter from dbmanager for search function in console

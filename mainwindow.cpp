@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
-    ui->statusBar->showMessage("Booga! Booga!", 2000);
+    //ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -181,21 +181,15 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     int scientistID = currentlySelectedScientist.getScientistID();
 
-    _service.deleteScientist(scientistID);
-
-    ui ->statusBar->showMessage("scientist successfully removed",4000);
-
-
-    //if (_service.deleteScientist(currentlySelectedScientistIndex) != 0)
+    if (_service.deleteScientist(scientistID))
     {
         ui -> input_keyword_s->setText("");
         displayAllScientists(currentlyDisplayedScientist);
 
         ui->button_delete_scientist->setEnabled(false);
-
     }
-    //else
+    else
     {
-        //TODO display some error
+        ui ->statusBar->showMessage("scientist not successfully removed",4000);
     }
 }
