@@ -184,8 +184,8 @@ void MainWindow::on_button_delete_scientist_clicked()
     if (_service.deleteScientist(scientistID))
     {
         ui -> input_keyword_s->setText("");
-        displayAllScientists(currentlyDisplayedScientist);
-
+        //displayAllScientists(currentlyDisplayedScientist);
+        getAllScientist();
         ui->button_delete_scientist->setEnabled(false);
     }
     else
