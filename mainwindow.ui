@@ -52,6 +52,9 @@
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Name</string>
@@ -75,9 +78,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="button_delete_scientist">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete selected scientist</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_add_scientist">
           <property name="text">
-           <string>Add new scientist</string>
+           <string>Add a new scientist</string>
           </property>
          </widget>
         </item>
@@ -96,9 +109,15 @@
         </item>
         <item>
          <widget class="QTableWidget" name="table_c">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Name</string>
@@ -122,9 +141,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="button_delete_computer">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete selected computer</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_add_computer">
           <property name="text">
-           <string>Add new computer</string>
+           <string>Add a new computer</string>
           </property>
          </widget>
         </item>
@@ -140,9 +169,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-
      <height>26</height>
-
     </rect>
    </property>
    <property name="defaultUp">
@@ -161,6 +188,8 @@
    </attribute>
    <addaction name="action_add_Scientist"/>
    <addaction name="action_add_Computer"/>
+   <addaction name="action_remove_scientist"/>
+   <addaction name="action_remove_computer"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_add_Scientist">
@@ -188,6 +217,27 @@
    </property>
    <property name="text">
     <string>Add Computer</string>
+   </property>
+  </action>
+  <action name="action_remove_scientist">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Scientist</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Scientist</string>
+   </property>
+  </action>
+  <action name="action_remove_computer">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/remove_computer.png</normaloff>:/icons/images/remove_computer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove computer</string>
    </property>
   </action>
  </widget>

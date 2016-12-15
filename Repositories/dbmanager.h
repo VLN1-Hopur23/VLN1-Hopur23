@@ -18,39 +18,37 @@ public:
 
     vector<Scientist> getScientists();
 
-    vector<Computer> getComputers(QString QSorder, QString QSfilter);
+    vector<Computer> getComputers();
 
+    // Add:
     bool addScientist(const Scientist& scientist, int& id);
-
-    bool addComputer(const Computer& computer, int& id) const;
-
-    void deleteScientist(const int ID);
-
-    void deleteComputer(const int ID);
-
-    void deleteConnection(const int ID);
 
     bool addComputer(const Computer& computer, int& id);
 
-    bool scientistExists(const string& searchData) const;
+    bool addIntersect(const int& param1, const int& param2);
 
-    bool computerExists(const string& searchData) const;
+    // Delete:
+    bool deleteScientist(const int ID);
 
+    bool deleteComputer(const int ID);
+
+    void deleteConnection(const int ID);
+
+    // Connection:
+    vector<Computer> intersectScientist(const string& id);
+
+    vector<Scientist> intersectComputer(const string& id);
+
+    // Search:
     vector<Scientist> searchScientist(const string& searchData);
 
     vector<Computer> searchComputer(string& searchData);
 
     vector<Computer> searchComputerPeriod(int yearFrom, int yearTo);
 
-    vector<Computer> intersectScientist(const string& id);
-
-    vector<Scientist> intersectComputer(const string& id);
-
     vector<Scientist> filterScientist(const string& Command, const string& searchData);
 
     vector<Computer> filterComputer(const string& Command, const string& searchData);
-
-    bool addIntersect(const int& param1, const int& param2);
 
     // Edit:
     string editScientistName(const int& id, const string& newName);

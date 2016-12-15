@@ -21,7 +21,7 @@ public:
     vector<Computer> getComputerVector();
 
     // Fetches table of scientists from SQL database
-    bool retrieveComputers(string order, string filter);
+    void retrieveComputers();
 
     // Returns the size of the computer vector
     size_t getSize() const;
@@ -30,10 +30,10 @@ public:
 
     void getVectorFoundComputer(string& searchData);
 
-    void deleteComputer(int index);
+    bool deleteComputer(int index);
 
-    // Function called in consoleUI, returns 1/true if the input is correct and 0/false otherwise
-    bool searchingComputerByFilter(string command, string searchData);
+    //Searching computer list
+    vector<Computer> searchingComputerByFilter(string command, string searchData);
 
     bool addIntersectScientist(const int& scientistID, const int& computerID);
 

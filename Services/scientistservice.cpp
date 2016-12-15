@@ -47,9 +47,7 @@ void ScientistService::retrieveScientists()
 string ScientistService::editScientist(int index, string change, string input)
 {
     string message = "Invalid, ignored";
-    /*if(index > _scientists.size()){
-        message = "Index out of range";
-    }*/
+
     if (change == "name")
     {
         message = _data.editScientistName(index, input);
@@ -70,9 +68,9 @@ string ScientistService::editScientist(int index, string change, string input)
 }
 
 // Fetches deleteScientist function in dbmanager
-void ScientistService::deleteScientist(int index)
+bool ScientistService::deleteScientist(int index)
 {
-    _data.deleteScientist(index);
+    return _data.deleteScientist(index);
 }
 
 // Fetches appropriate filter from dbmanager for search function in console
@@ -86,7 +84,6 @@ vector<Scientist> ScientistService::searchingByFilter(string command, string sea
     else
     {
         _scientists = _data.filterScientist(command, searchData);
-
         return _scientists;
     }
 }

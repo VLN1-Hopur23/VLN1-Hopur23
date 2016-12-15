@@ -21,7 +21,9 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     QString typeOfComputer = ui->input_add_computer_type_of->text();
 
     bool InputIsNotValid = false;
-    bool built =false;
+
+    bool built = 0;
+
 
     int buildingYearInt = buildingYear.toInt();
 
@@ -59,6 +61,7 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     {
         return;
     }
+
     string nameString = name.toStdString();
     string typeOfComputerString = typeOfComputer.toStdString();
     Computer computer(_computers.getSize(), nameString, buildingYearInt, typeOfComputerString, built);
@@ -75,7 +78,7 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     }
     else
     {
-        this->done(-1); //-1 means something went wrong
+        this->done(-1); // -1 means something went wrong
     }
 }
 
@@ -83,7 +86,6 @@ void AddComputerDialog::on_button_add_computer_cancel_clicked()
 {
     this->done(0);// 0 means cancel add computer
 }
-
 
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 // includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
@@ -105,17 +107,16 @@ string AddComputerDialog::typeOf(string what)
 
     for(int i = 0; i < whatSize; i++)
     {
-        whatArrayInt[i] = (int)what.substr(i, i+1)[0]; //[0] gives first character in string array that is char
-
+        whatArrayInt[i] = (int)what.substr(i, i+1)[0]; // [0] gives first character in string array that is char
     }
 
     for(int i = 0; i < whatSize; i++)
     {
-        if(whatArrayInt[i] >= 48 && whatArrayInt[i] <= 57) //48 ='0' ...57 ='9'
+        if(whatArrayInt[i] >= 48 && whatArrayInt[i] <= 57) // 48 ='0' ...57 ='9'
         {
             whatIsInt[i] = true;
         }
-        else if((whatArrayInt[i] >= 65 && whatArrayInt[i] <= 90) || (whatArrayInt[i] >= 97 && whatArrayInt[i] <= 122) || (whatArrayInt[i] == 32) )//65 = 'A', 90='Z', 97='a',122='z',32 =SPACE
+        else if((whatArrayInt[i] >= 65 && whatArrayInt[i] <= 90) || (whatArrayInt[i] >= 97 && whatArrayInt[i] <= 122) || (whatArrayInt[i] == 32) ) // 65 = 'A', 90='Z', 97='a',122='z',32 =SPACE
         {
             whatIsAlphabet[i] = true;
         }
@@ -143,7 +144,6 @@ string AddComputerDialog::typeOf(string what)
         else if(whatIsAlphabet[i])
         {
             ThereAreSomeAlphabet = true;
-
         }
         else if(whatIsAlowedChar[i])
         {
@@ -157,35 +157,35 @@ string AddComputerDialog::typeOf(string what)
 
     if(ThereAreSomeCharNotValidated)
     {
-        return "NV"; //has: Not Validated input
+        return "NV"; // has: Not Validated input
     }
     else if(ThereAreSomeAlphabet && ThereAreSomeAlowedChar && ThereAreSomeInt)
     {
-        return "ACI"; //has onlie: Alphabet, char, int
+        return "ACI"; // has only: Alphabet, char, int
     }
     else if(ThereAreSomeAlowedChar && ThereAreSomeAlphabet)
     {
-        return "AC"; //has onlie: Alphabet, char
+        return "AC"; // has only: Alphabet, char
     }
     else if(ThereAreSomeAlowedChar && ThereAreSomeInt)
     {
-        return "CI"; //has onlie: char , int
+        return "CI"; // has only: char , int
     }
     else if(ThereAreSomeAlphabet && ThereAreSomeInt)
     {
-        return "AI"; // has onlie: Alphabet, int
+        return "AI"; // has only: Alphabet, int
     }
     else if(ThereAreSomeAlphabet)
     {
-        return "A"; // has onlie: Alphabet
+        return "A"; // has only: Alphabet
     }
     else if(ThereAreSomeAlowedChar)
     {
-        return "C"; // has onlie: char
+        return "C"; // has only: char
     }
     else if(ThereAreSomeInt)
     {
-        return "I"; // has onlie: int
+        return "I"; // has only: int
     }
     else
     {
