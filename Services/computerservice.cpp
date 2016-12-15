@@ -84,6 +84,7 @@ bool ComputerService::addIntersectScientist(const int& scientistID, const int& c
 string ComputerService::editComputer(int index, string change, string input)
 {
     string message = "Invalid, ignored";
+
     if (change == "name")
     {
         message = _data.editComputerName(index, input);

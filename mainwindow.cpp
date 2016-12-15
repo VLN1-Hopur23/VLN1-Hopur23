@@ -51,8 +51,7 @@ void MainWindow::on_button_add_scientist_clicked()
     if(addStudentReturnValue == 1)
     {
         ui->statusBar->showMessage("Scientist successfully added", 4000);
-
-     }
+    }
     else if(addStudentReturnValue == 0)
     {
         ui->statusBar->showMessage("Scientist added was canceled", 4000);
@@ -70,7 +69,6 @@ void MainWindow::on_button_add_computer_clicked()
     int addComputerReturnValue = addcomputerdialog.exec();
 
     ui->statusBar->showMessage("humm",4000);
-
 
     if(addComputerReturnValue == 1)
     {
@@ -132,11 +130,10 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
         ui->table_c->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
         ui->table_c->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
     }
-
     currentlyDisplayedComputers = computers;
 }
 
-//To search the list for scientist
+// To search the list for scientist
 void MainWindow::on_input_keyword_s_textChanged()
 {
     string userInput = ui->input_keyword_s->text().toStdString();
@@ -168,7 +165,7 @@ void MainWindow::on_input_keyword_s_textChanged()
     displayAllScientists(scientists);
 }
 
-//To search the list for computer
+// To search the list for computers
 void MainWindow::on_input_keyword_c_textChanged()
 {
     string userInput = ui->input_keyword_c->text().toStdString();
@@ -177,13 +174,13 @@ void MainWindow::on_input_keyword_c_textChanged()
     displayAllComputers(computers);
 }
 
-//shortcut to add scientist with icon
+// Shortcut to add scientist with icon
 void MainWindow::on_action_add_Scientist_triggered()
 {
     on_button_add_scientist_clicked();
 }
 
-//shortcut to add computer with icon
+// Shortcut to add computer with icon
 void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
@@ -221,6 +218,10 @@ void MainWindow::on_button_delete_scientist_clicked()
     }
 }
 
+void MainWindow::on_action_remove_scientist_triggered()
+{
+    on_button_delete_scientist_clicked();
+}
 //delete computer button
 void MainWindow::on_table_c_clicked(const QModelIndex &index)
 {
@@ -250,4 +251,9 @@ void MainWindow::on_button_delete_computer_clicked()
             ui->statusBar->showMessage("Computer not successfully removed",4000);
         }
     }
+}
+
+void MainWindow::on_action_remove_computer_triggered()
+{
+    on_button_delete_computer_clicked();
 }

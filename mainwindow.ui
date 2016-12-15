@@ -52,6 +52,9 @@
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Name</string>
@@ -112,6 +115,9 @@
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Name</string>
@@ -182,6 +188,8 @@
    </attribute>
    <addaction name="action_add_Scientist"/>
    <addaction name="action_add_Computer"/>
+   <addaction name="action_remove_scientist"/>
+   <addaction name="action_remove_computer"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_add_Scientist">
@@ -211,13 +219,22 @@
     <string>Add Computer</string>
    </property>
   </action>
-  <action name="actionRemove_scientist">
+  <action name="action_remove_scientist">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
    </property>
    <property name="text">
     <string>remove_scientist</string>
+   </property>
+  </action>
+  <action name="action_remove_computer">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/remove_computer.png</normaloff>:/icons/images/remove_computer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove computer</string>
    </property>
   </action>
  </widget>

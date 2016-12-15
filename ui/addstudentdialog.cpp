@@ -3,8 +3,6 @@
 #include <QtGui>
 #include <QtCore>
 
-
-
 AddStudentDialog::AddStudentDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddStudentDialog)
@@ -19,83 +17,81 @@ AddStudentDialog::~AddStudentDialog()
 
 void AddStudentDialog::on_button_add_scientist_save_clicked()
 {
-   QString error = "<span style='color: red'>Not validated input<\\span>";
-   QString name = ui->input_add_scientist_name->text();
-   QString yearBorn = ui->input_add_scientist_year_born->text();
-   QString yearOfDeath = ui->input_add_scientist_year_of_death->text();
+    QString error = "<span style='color: red'>Not validated input<\\span>";
+    QString name = ui->input_add_scientist_name->text();
+    QString yearBorn = ui->input_add_scientist_year_born->text();
+    QString yearOfDeath = ui->input_add_scientist_year_of_death->text();
 
-   bool InputIsNotValid = false;
+    bool InputIsNotValid = false;
 
-   int yearOfBirthInt = yearBorn.toInt();
-   int yearOfDeathInt = yearOfDeath.toInt();
+    int yearOfBirthInt = yearBorn.toInt();
+    int yearOfDeathInt = yearOfDeath.toInt();
 
-   ui->label_error_add_scientist_name->setText("");
-   ui->label_error_add_scientist_gender->setText("");
-   ui->label_error_add_scientist_year_born->setText("");
-   ui->label_error_add_scientist_year_of_death->setText("");
+    ui->label_error_add_scientist_name->setText("");
+    ui->label_error_add_scientist_gender->setText("");
+    ui->label_error_add_scientist_year_born->setText("");
+    ui->label_error_add_scientist_year_of_death->setText("");
 
+    if(name.isEmpty() || !(ValidInput(typeOf(name.toStdString()),"ACI_AC_AI_A")))
+    {
+        ui->label_error_add_scientist_name->setText(error);
+        InputIsNotValid = true;
+    }
+    if(!ui->button_radio_add_scientist_femail->isChecked() && !ui->button_radio_add_scientist_male->isChecked())
+    {
+        ui->label_error_add_scientist_gender->setText(error);
+        InputIsNotValid = true;
+    }
+    if(yearBorn.isEmpty() || !(ValidInput(typeOf(yearBorn.toStdString()),"I")) || yearOfBirthInt>_time.getYearToDay() || yearOfBirthInt<0 )
+    {
+        ui->label_error_add_scientist_year_born->setText(error);
+        InputIsNotValid = true;
+    }
+    if(ui->button_radio_add_scientist_still_alive->isChecked())
+    {
+        yearOfDeathInt = 0;
+        ui->input_add_scientist_year_of_death->setText("");
+    }
+    else if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0 || yearOfBirthInt>yearOfDeathInt)
+    {
+        ui->label_error_add_scientist_year_of_death->setText(error);
+        InputIsNotValid = true;
+    }
+    if(InputIsNotValid)
+    {
+        return;
+    }
 
+    string gender;
 
-   if(name.isEmpty() || !(ValidInput(typeOf(name.toStdString()),"ACI_AC_AI_A")))
-   {
-      ui->label_error_add_scientist_name->setText(error);
-       InputIsNotValid = true;
-   }
-   if(!ui->button_radio_add_scientist_femail->isChecked() && !ui->button_radio_add_scientist_male->isChecked())
-   {
-       ui->label_error_add_scientist_gender->setText(error);
-       InputIsNotValid = true;
-   }
-   if(yearBorn.isEmpty() || !(ValidInput(typeOf(yearBorn.toStdString()),"I")) || yearOfBirthInt>_time.getYearToDay() || yearOfBirthInt<0 )
-   {
-       ui->label_error_add_scientist_year_born->setText(error);
-       InputIsNotValid = true;
-   }
-   if(ui->button_radio_add_scientist_still_alive->isChecked())
-   {
-       yearOfDeathInt =0;
-       ui->input_add_scientist_year_of_death->setText("");
-   }
-   else if(yearOfDeath.isEmpty() || !(ValidInput(typeOf(yearOfDeath.toStdString()),"I")) || yearOfDeathInt>_time.getYearToDay() || yearOfDeathInt<0 || yearOfBirthInt>yearOfDeathInt)
-   {
-       ui->label_error_add_scientist_year_of_death->setText(error);
-       InputIsNotValid = true;
-   }
-   if(InputIsNotValid)
-   {
-       return;
-   }
+    if(ui->button_radio_add_scientist_femail->isChecked())
+    {
+        gender = "f";
+    }
+    else
+    {
+        gender = "m";
+    }
 
+    string nameString = name.toStdString();
+    Scientist scientist(_service.getSize(), nameString, gender, yearOfBirthInt, yearOfDeathInt);
 
-   string gender;
-   if(ui->button_radio_add_scientist_femail->isChecked())
-   {
-       gender = "f";
-   }
-   else
-   {
-       gender ="m";
-   }
+    int scientistID;
 
-   string nameString = name.toStdString();
-   Scientist scientist(_service.getSize(), nameString, gender, yearOfBirthInt, yearOfDeathInt);
+    bool success = _service.addScientist(scientist, scientistID);
 
-   int scientistID;
+    if (success)
+    {
+        ui->input_add_scientist_name->setText("");
+        ui->input_add_scientist_year_born->setText("");
+        ui->input_add_scientist_year_of_death->setText("");
 
-   bool success = _service.addScientist(scientist, scientistID);
-
-   if (success)
-   {
-       ui->input_add_scientist_name->setText("");
-       ui->input_add_scientist_year_born->setText("");
-       ui->input_add_scientist_year_of_death->setText("");
-
-       this->done(1);//1 means successful
-   }
-   else
-   {
-       this->done(-1); // -1 means something went wrong
-   }
+        this->done(1);// 1 means successful
+    }
+    else
+    {
+        this->done(-1); // -1 means something went wrong
+    }
 }
 
 void AddStudentDialog::on_button_add_scientist_cancel_clicked()
@@ -123,13 +119,12 @@ string AddStudentDialog::typeOf(string what)
 
     for(int i = 0; i < whatSize; i++)
     {
-        whatArrayInt[i] = (int)what.substr(i, i+1)[0]; //[0] gives first character in string array that is char
-
+        whatArrayInt[i] = (int)what.substr(i, i+1)[0]; // [0] gives first character in string array that is char
     }
 
     for(int i = 0; i < whatSize; i++)
     {
-        if(whatArrayInt[i] >= 48 && whatArrayInt[i] <= 57) //48 ='0' ...57 ='9'
+        if(whatArrayInt[i] >= 48 && whatArrayInt[i] <= 57) // 48 ='0' ...57 ='9'
         {
             whatIsInt[i] = true;
         }
@@ -137,9 +132,9 @@ string AddStudentDialog::typeOf(string what)
         {
             whatIsAlphabet[i] = true;
         }
-        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
+        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46 = '.', 44 = ',',
         {
-           whatIsAlowedChar[i] =true;
+           whatIsAlowedChar[i] = true;
         }
         else
         {
@@ -161,7 +156,6 @@ string AddStudentDialog::typeOf(string what)
         else if(whatIsAlphabet[i])
         {
             ThereAreSomeAlphabet = true;
-
         }
         else if(whatIsAlowedChar[i])
         {
@@ -175,35 +169,35 @@ string AddStudentDialog::typeOf(string what)
 
     if(ThereAreSomeCharNotValidated)
     {
-        return "NV"; //has: Not Validated input
+        return "NV"; // has: Not Validated input
     }
     else if(ThereAreSomeAlphabet && ThereAreSomeAlowedChar && ThereAreSomeInt)
     {
-        return "ACI"; //has onlie: Alphabet, char, int
+        return "ACI"; // has only: Alphabet, char, int
     }
     else if(ThereAreSomeAlowedChar && ThereAreSomeAlphabet)
     {
-        return "AC"; //has onlie: Alphabet, char
+        return "AC"; // has only: Alphabet, char
     }
     else if(ThereAreSomeAlowedChar && ThereAreSomeInt)
     {
-        return "CI"; //has onlie: char , int
+        return "CI"; // has only: char , int
     }
     else if(ThereAreSomeAlphabet && ThereAreSomeInt)
     {
-        return "AI"; // has onlie: Alphabet, int
+        return "AI"; // has only: Alphabet, int
     }
     else if(ThereAreSomeAlphabet)
     {
-        return "A"; // has onlie: Alphabet
+        return "A"; // has only: Alphabet
     }
     else if(ThereAreSomeAlowedChar)
     {
-        return "C"; // has onlie: char
+        return "C"; // has only: char
     }
     else if(ThereAreSomeInt)
     {
-        return "I"; // has onlie: int
+        return "I"; // has only: int
     }
     else
     {

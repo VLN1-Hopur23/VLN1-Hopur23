@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
 
     explicit MainWindow(QWidget *parent = 0);
+
     ~MainWindow();
 
 private slots:
@@ -47,11 +48,18 @@ private slots:
     void on_button_delete_scientist_clicked();
     void on_button_delete_computer_clicked();
 
+    void on_action_remove_scientist_triggered();
+
+    void on_action_remove_computer_triggered();
+
 private:
 
     void getAllScientist();
+
     void getAllComputers();
+
     void displayAllScientists(const vector<Scientist>& scientists);
+
     void displayAllComputers(const vector<Computer>& computers);
 
     Ui::MainWindow *ui;
