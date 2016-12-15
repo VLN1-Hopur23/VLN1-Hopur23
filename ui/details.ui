@@ -65,6 +65,58 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="first_detail">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>First Detail</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="second_detail">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Secon Detail</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="third_detail">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>150</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Third Detail</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="fourth_detail">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fourth Detail</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
