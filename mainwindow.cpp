@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Gender");
     ui->input_dropdown_sort_s->addItem("Birth");
     ui->input_dropdown_sort_s->addItem("Death");
+    connect( this->ui->input_dropdown_sort_s, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_s_textChanged()) );
 
     ui->input_keyword_s->setPlaceholderText("search scientists...");
 
@@ -72,7 +73,6 @@ void MainWindow::on_button_add_computer_clicked()
     if(addComputerReturnValue == 1)
     {
         ui->statusBar->showMessage("Computer successfully added", 4000);
-
     }
     else if(addComputerReturnValue == 0)
     {
@@ -99,7 +99,6 @@ void MainWindow::getAllComputers()
     displayAllComputers(computers);
 }
 
-
 void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 {
     ui->table_s->clearContents();
@@ -116,7 +115,6 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
     }
 
     currentlyDisplayedScientist = scientists;
-
 }
 
 void MainWindow::displayAllComputers(const vector<Computer>& computers)
@@ -138,11 +136,35 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
 }
 
 //To search the list
-void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
+void MainWindow::on_input_keyword_s_textChanged()
 {
     string userInput = ui->input_keyword_s->text().toStdString();
+    vector<Scientist> scientists;
 
-    vector<Scientist> scientists = _service.searchingByFilter("Name", userInput);
+    switch(this->ui->input_dropdown_sort_s->currentIndex())
+    {
+        case 0:
+        {
+            scientists = _service.searchingByFilter("Name", userInput);
+            break;
+        }
+        case 1:
+        {
+            scientists = _service.searchingByFilter("Gender", userInput);
+            break;
+        }
+        case 2:
+        {
+            scientists = _service.searchingByFilter("Birthyear", userInput);
+            break;
+        }
+        case 3:
+        {
+            scientists = _service.searchingByFilter("Deathyear", userInput);
+            break;
+        }
+    }
+
     displayAllScientists(scientists);
 }
 
@@ -155,4 +177,9 @@ void MainWindow::on_action_add_Scientist_triggered()
 void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
+}
+
+void MainWindow::on_Filter_select_triggered()
+{
+    ui->statusBar->showMessage(QString::number(this->ui->input_dropdown_sort_s->currentIndex()));
 }
