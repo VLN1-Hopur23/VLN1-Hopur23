@@ -75,10 +75,12 @@ void MainWindow::on_button_add_computer_clicked()
     AddComputerDialog addcomputerdialog;
     int addComputerReturnValue = addcomputerdialog.exec();
 
+    ui->statusBar->showMessage("humm",4000);
+
+
     if(addComputerReturnValue == 1)
     {
         ui->statusBar->showMessage("Computer successfully added", 4000);
-
     }
     else if(addComputerReturnValue == 0)
     {
