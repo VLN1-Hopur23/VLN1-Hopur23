@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QStatusBar>
-//#include ""
-//#include ""
 
 #include <QMessageBox>
 using namespace std;
@@ -13,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //From scientist tabs
     currentScientistSortColumn = "Name";
 
     ui->input_dropdown_sort_s->addItem("Name");
@@ -23,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->input_keyword_s->setPlaceholderText("Search scientists...");
 
+    //From computer tabs
     currentComputerSortColumn = "Name";
 
     ui->input_dropdown_sort_c->addItem("Name");
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
-    //ui->statusBar->showMessage("Booga! Booga!", 2000);
+    ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +44,59 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Gets all colums from table scientists from database
+void MainWindow::getAllScientist()
+{
+    _service.retrieveScientists();
+    vector <Scientist> scientists = _service.getScientistVector();
+    displayAllScientists(scientists);
+}
+
+// Gets all colums from table computers from database
+void MainWindow::getAllComputers()
+{
+    _computerservice.retrieveComputers();
+    vector <Computer> computers = _computerservice.getComputerVector();
+    displayAllComputers(computers);
+}
+
+//Displays table with all scientist
+void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
+{
+    ui->table_s->clearContents();
+    ui->table_s->setRowCount(scientists.size());
+
+    for(unsigned int row = 0; row < scientists.size(); row++)
+    {
+        Scientist currentScientist = scientists[row];
+
+        ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
+        ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
+        ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
+        ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
+    }
+    currentlyDisplayedScientist = scientists;
+}
+
+//Displays table with all computers
+void MainWindow::displayAllComputers(const vector<Computer>& computers)
+{
+    ui->table_c->clearContents();
+    ui->table_c->setRowCount(computers.size());
+
+    for(unsigned int row = 0; row < computers.size(); row++)
+    {
+        Computer currentComputer = computers[row];
+
+        ui->table_c->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentComputer.getName())));
+        ui->table_c->setItem(row,1,new QTableWidgetItem(QString::number(currentComputer.getYearBuilt())));
+        ui->table_c->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
+        ui->table_c->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
+    }
+    currentlyDisplayedComputers = computers;
+}
+
+// To Add scientist to database
 void MainWindow::on_button_add_scientist_clicked()
 {
     AddStudentDialog addstudentdialog;
@@ -64,6 +117,7 @@ void MainWindow::on_button_add_scientist_clicked()
     getAllScientist();
 }
 
+// To Add comptuer to database
 void MainWindow::on_button_add_computer_clicked()
 {
     AddComputerDialog addcomputerdialog;
@@ -84,54 +138,6 @@ void MainWindow::on_button_add_computer_clicked()
         ui->statusBar->showMessage("Something went wery wery wrong", 4000);
     }
     getAllComputers();
-}
-
-void MainWindow::getAllScientist()
-{
-    _service.retrieveScientists();
-    vector <Scientist> scientists = _service.getScientistVector();
-    displayAllScientists(scientists);
-}
-
-void MainWindow::getAllComputers()
-{
-    _computerservice.retrieveComputers();
-    vector <Computer> computers = _computerservice.getComputerVector();
-    displayAllComputers(computers);
-}
-
-void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
-{
-    ui->table_s->clearContents();
-    ui->table_s->setRowCount(scientists.size());
-
-    for(unsigned int row = 0; row < scientists.size(); row++)
-    {
-        Scientist currentScientist = scientists[row];
-
-        ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
-        ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
-        ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
-        ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
-    }
-    currentlyDisplayedScientist = scientists;
-}
-
-void MainWindow::displayAllComputers(const vector<Computer>& computers)
-{
-    ui->table_c->clearContents();
-    ui->table_c->setRowCount(computers.size());
-
-    for(unsigned int row = 0; row < computers.size(); row++)
-    {
-        Computer currentComputer = computers[row];
-
-        ui->table_c->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentComputer.getName())));
-        ui->table_c->setItem(row,1,new QTableWidgetItem(QString::number(currentComputer.getYearBuilt())));
-        ui->table_c->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
-        ui->table_c->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
-    }
-    currentlyDisplayedComputers = computers;
 }
 
 // To search the list for scientist
@@ -224,7 +230,7 @@ void MainWindow::on_button_delete_scientist_clicked()
     int scientistID = currentlySelectedScientist.getScientistID();
 
     QMessageBox::StandardButton sure;
-    sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
+    sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
     if(sure == QMessageBox::Yes)
     {
         if (_service.deleteScientist(scientistID))
@@ -260,7 +266,7 @@ void MainWindow::on_button_delete_computer_clicked()
     int computerID = currentlySelectedComputer.getComputerID();
 
     QMessageBox::StandardButton sure;
-    sure = QMessageBox::question(this, "Test", "Are you sure you want to delete a known computer?", QMessageBox::No|QMessageBox::Yes);
+    sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known computer?", QMessageBox::No|QMessageBox::Yes);
     if(sure == QMessageBox::Yes)
     {
         if (_computerservice.deleteComputer(computerID))
