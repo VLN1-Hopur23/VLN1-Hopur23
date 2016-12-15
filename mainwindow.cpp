@@ -3,6 +3,7 @@
 #include <QStatusBar>
 
 #include <QMessageBox>
+#include <QMenu>
 
 using namespace std;
 
@@ -317,13 +318,15 @@ void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
 }
+//custommenu for scientist table
+
 
 // Delete scientist button
 void MainWindow::on_table_s_clicked()
 {
    ui->button_delete_scientist->setEnabled(true);
 }
-
+//delete scientist with button on main window
 void MainWindow::on_button_delete_scientist_clicked()
 {
     int currentlySelectedScientistIndex = ui->table_s->currentIndex().row();
@@ -348,7 +351,7 @@ void MainWindow::on_button_delete_scientist_clicked()
         }
     }
 }
-
+//shortcut icon for delete scientist
 void MainWindow::on_action_remove_scientist_triggered()
 {
     on_button_delete_scientist_clicked();
@@ -360,6 +363,7 @@ void MainWindow::on_table_c_clicked()
    ui->button_delete_computer->setEnabled(true);
 }
 
+//delete computer with button on main window
 void MainWindow::on_button_delete_computer_clicked()
 {
     int currentlySelectedComptuerIndex = ui->table_c->currentIndex().row();
@@ -384,11 +388,12 @@ void MainWindow::on_button_delete_computer_clicked()
         }
     }
 }
-
+//shortcut icon for delete computer
 void MainWindow::on_action_remove_computer_triggered()
 {
     on_button_delete_computer_clicked();
 }
+
 
 
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
@@ -536,10 +541,30 @@ bool MainWindow::ValidInput(string check, string allowed)
     }
     return false;
 }
+void MainWindow::on_action_details_triggered()
+{
+    //TODO DETAILS CONNECTION
+}
+void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
+{
+    qDebug() << "Right clicked menu requested on table";
 
+    //ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
 
+    QTableWidgetItem* computer = ui->table_c->itemAt(pos);
 
+    QMenu* menu =new QMenu(this);
+    menu->addAction(ui->action_remove_computer);
+    menu->addAction(ui->action_details);
+    menu->popup(ui->table_c->viewport()->mapFromGlobal(pos));
 
+}
+
+void MainWindow::on_table_s_customContextMenuRequested(const QPoint &pos)
+{
+    qDebug() << "Right clicked menu requested on table";
+
+}
 
 
 
