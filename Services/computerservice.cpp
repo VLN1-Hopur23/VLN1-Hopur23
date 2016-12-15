@@ -97,5 +97,18 @@ string ComputerService::editComputer(int index, string change, string input)
     {
         message = _data.editComputerType(index, input);
     }
+    else if(change == "built")
+    {
+        if(input =="1")
+        {
+            message == _data.editComputeBuilt(index, true);
+        }
+        else if(input=="0")
+        {
+            message == _data.editComputeBuilt(index, false);
+        }
+
+    }
     return message;
 }
+

@@ -221,15 +221,15 @@ void MainWindow::on_action_add_Scientist_triggered()
 
 void MainWindow::on_table_s_cellDoubleClicked(int row, int column)
 {
-    isDoubleClicked = true;
+    isDoubleClickedScientist = true;
 }
 
 
 void MainWindow::on_table_s_cellChanged(int row, int column)
 {
-    if(isDoubleClicked)
+    if(isDoubleClickedScientist)
     {
-        isDoubleClicked = false;
+        isDoubleClickedScientist = false;
         _service.retrieveScientists();
         vector <Scientist> scientists = _service.getScientistVector();
         Scientist oldScientist = scientists[row];
@@ -276,10 +276,9 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
         {
             QString newYearOfBirth = ui->table_s->item(row, column)->text();
             int newYearOfBirthInt = newYearOfBirth.toInt();
-            //if(ui->table_s->item(row, 3)==0)
             if(newYearOfBirth.isEmpty() || !(ValidInput(typeOf(newYearOfBirth.toStdString()),"I")) || newYearOfBirthInt>_time.getYearToDay() || newYearOfBirthInt<0 || (ui->table_s->item(row, 3)->text().toInt() < newYearOfBirthInt && ui->table_s->item(row, 3)->text().toInt() != 0 ))
             {
-                ui->table_s->setItem(oldScientist.getScientistID(),column,new QTableWidgetItem(QString::number(oldScientist.getYearOfBirth())));
+                ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfBirth())));
                 QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
             }
             else
@@ -318,7 +317,91 @@ void MainWindow::on_action_add_Computer_triggered()
 {
     on_button_add_computer_clicked();
 }
-//custommenu for scientist table
+
+void MainWindow::on_table_c_cellDoubleClicked(int row, int column)
+{
+    isDoubleClickedComputer = true;
+}
+
+void MainWindow::on_table_c_cellChanged(int row, int column)
+{
+    if(isDoubleClickedComputer)
+    {
+        isDoubleClickedComputer = false;
+        _computerservice.retrieveComputers();
+        vector <Computer> computers = _computerservice.getComputerVector();
+        Computer oldComputer = computers[row];
+
+        int id = oldComputer.getComputerID();
+
+        QString error = "Not validated input";
+        string toChange;
+        string message;
+
+        if(column ==0)
+        {
+            QString newName = ui->table_c->item(row, column)->text();
+            if(newName.isEmpty()||!(ValidInput(typeOf(newName.toStdString()), "ACI_AC_AI_A")))
+            {
+                ui->table_c->setItem(row,column, new QTableWidgetItem(QString::fromStdString(oldComputer.getName())));
+                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+            }
+            else
+            {
+                toChange ="name";
+                message = _computerservice.editComputer(id,toChange,newName.toStdString());
+            }
+        }
+        if(column == 1)
+        {
+            QString newYearBuilt = ui->table_c->item(row, column)->text();
+            int newYearBuiltInt = newYearBuilt.toInt();
+            if(newYearBuilt.isEmpty() || !(ValidInput(typeOf(newYearBuilt.toStdString()),"I")) || newYearBuiltInt>_time.getYearToDay() || newYearBuiltInt<0 )
+            {
+                ui->table_c->setItem(row,column, new QTableWidgetItem(QString::number(oldComputer.getYearBuilt())));
+                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+            }
+            else
+            {
+                toChange = "yearbuilt";
+                message = _computerservice.editComputer(id, toChange, newYearBuilt.toStdString());
+            }
+
+        }
+        if(column == 2)
+        {
+            QString newType = ui->table_c->item(row, column)->text();
+            if(newType.isEmpty() || !(ValidInput(typeOf(newType.toStdString()), "ACI_AC_AI_A")))
+            {
+                ui->table_c->setItem(row, column, new QTableWidgetItem(QString::fromStdString(oldComputer.getType())));
+                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+            }
+            else
+            {
+                toChange = "type";
+                message = _computerservice.editComputer(id, toChange, newType.toStdString());
+            }
+        }
+
+        if(column == 3)
+        {
+            QString newBuilt = ui->table_c->item(row, column)->text();
+            //int newBuiltInt = newBuilt.toInt();
+            if(newBuilt == "1" || newBuilt =="0")
+            {
+               toChange ="built";
+               message = _computerservice.editComputer(id,toChange, newBuilt.toStdString());
+            }
+            else
+            {
+                ui->table_c->setItem(row, column, new QTableWidgetItem(QString::number(oldComputer.getBuilt())));
+                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+            }
+
+        }
+        ui->statusBar->showMessage(QString::fromStdString(message), 4000);
+    }
+}
 
 
 // Delete scientist button
@@ -393,9 +476,6 @@ void MainWindow::on_action_remove_computer_triggered()
 {
     on_button_delete_computer_clicked();
 }
-
-
-
 // typeOf(command) gives back string if command =="A" it includes onli alphabetical char, c..="C" includes onlie allowed char(, .),c..="I",
 // includes onlie integers, if c..="Nv" input not validated, if c..="AC" includes Alphabet and allowed char, command can also be "AI",AC",ACI","CI","I","C","A","NV"
 string MainWindow::typeOf(string what)
@@ -430,7 +510,7 @@ string MainWindow::typeOf(string what)
         {
             whatIsAlphabet[i] = true;
         }
-        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
+        else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 || whatArrayInt[i] == 45 ) // 46='.', 44 = ',', 45 = '-'
         {
            whatIsAlowedChar[i] =true;
         }
@@ -542,7 +622,7 @@ bool MainWindow::ValidInput(string check, string allowed)
     return false;
 }
 
-void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
+void MainWindow::on_table_c_customContextMenuRequested()
 {
     qDebug() << "Right clicked menu requested on table";
 
@@ -553,7 +633,7 @@ void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
 
 }
 
-void MainWindow::on_table_s_customContextMenuRequested(const QPoint &pos)
+void MainWindow::on_table_s_customContextMenuRequested()
 {
     qDebug() << "Right clicked menu requested on table";
 
@@ -570,6 +650,7 @@ void MainWindow::on_action_details_s_triggered()
     Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
     Details details(0, &currentlySelectedScientist);
+
     details.exec();
 }
 
@@ -580,5 +661,6 @@ void MainWindow::on_action_details_c_triggered()
     Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
 
     Details details(0, &currentlySelectedComputer);
+
     details.exec();
 }

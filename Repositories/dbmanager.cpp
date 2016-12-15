@@ -671,6 +671,35 @@ string DbManager::editComputerType(const int& id, const string& newType)
     return message;
 }
 
+string DbManager::editComputeBuilt(const int &id, bool newWasBuilt)
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Computers SET Built=:Built WHERE ComputerID=:ComputerID");
+    query.bindValue(":Built", newWasBuilt);
+    query.bindValue(":ComputerID", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+    return message;
+}
+
 string DbManager::stringToLower(string str)
 {
     string result = "";
