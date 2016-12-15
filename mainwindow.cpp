@@ -1,10 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QStatusBar>
-//#include ""
-//#include ""
-
 #include <QMessageBox>
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Gender");
     ui->input_dropdown_sort_s->addItem("Birth");
     ui->input_dropdown_sort_s->addItem("Death");
-    connect( this->ui->input_dropdown_sort_s, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_s_textChanged()) );
+    connect(this->ui->input_dropdown_sort_s, SIGNAL(activated(int)), this, SLOT(on_input_keyword_s_textChanged()));
 
     ui->input_keyword_s->setPlaceholderText("search scientists...");
 
@@ -191,7 +189,7 @@ void MainWindow::on_action_add_Computer_triggered()
     on_button_add_computer_clicked();
 }
 
-void MainWindow::on_table_s_clicked(const QModelIndex &index)
+void MainWindow::on_table_s_clicked()
 {
    ui->button_delete_scientist->setEnabled(true);
 }

@@ -150,9 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-
      <height>26</height>
-
     </rect>
    </property>
    <property name="defaultUp">
@@ -206,7 +204,10 @@
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
    </property>
    <property name="text">
-    <string>remove_scientist</string>
+    <string>Remove Scientist</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Scientist</string>
    </property>
   </action>
  </widget>

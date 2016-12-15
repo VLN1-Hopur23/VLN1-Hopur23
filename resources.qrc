@@ -5,5 +5,5 @@
         <file>images/add_scientist.png</file>
         <file>images/remove_scientist.png</file>
     </qresource>
-    <qresource prefix="/db"/>
+    <qresource prefix="/db_images"/>
 </RCC>
