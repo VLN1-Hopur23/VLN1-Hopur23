@@ -50,7 +50,6 @@ vector<Scientist> DbManager::getScientists()
 
     while (querySort.next())
     {
-
         int scientistID = querySort.value("ScientistID").toUInt();
         string name = querySort.value("Name").toString().toStdString();
         string gender = querySort.value("Gender").toString().toStdString();
@@ -61,7 +60,6 @@ vector<Scientist> DbManager::getScientists()
 
         scientists.push_back(scientist);
     }
-
     return scientists;
 }
 
@@ -109,7 +107,8 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
 }
-//Deletes connection link between scientist and computer
+
+// Deletes connection link between scientist and computer
 void DbManager::deleteConnection(const int ID)
 {
     QSqlQuery queryDeleteConnection(_db);
@@ -355,7 +354,6 @@ vector<Scientist> DbManager::filterScientist(const string& Command, const string
 
     while (findquery.next())
     {
-
         int scientistID = findquery.value("ScientistID").toUInt();
         string name = findquery.value("Name").toString().toStdString();
         string gender = findquery.value("Gender").toString().toStdString();
@@ -458,7 +456,6 @@ string DbManager::editScientistGender(const int& id, const string& newGender)
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
@@ -517,7 +514,6 @@ string DbManager::editScientistDeathYear(const int& id, const string& newDeathYe
     {
         message = "Unkown error occurred";
     }
-
     return message;
 }
 
@@ -617,7 +613,6 @@ string DbManager::stringToLower(string str)
     {
         result += tolower(str[i]);
     }
-
     return result;
 }
 
