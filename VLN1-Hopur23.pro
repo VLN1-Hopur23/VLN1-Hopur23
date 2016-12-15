@@ -40,8 +40,7 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     ui/addstudentdialog.ui \
-    ui/addcomputerdialog.ui \
-    ui/connectiondialog.ui
+    ui/addcomputerdialog.ui
 INCLUDEPATH += ui \
     Models \
     Repositories \
