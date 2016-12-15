@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include "addstudentdialog.h"
 #include "addcomputerdialog.h"
+#include "details.h"
 #include <QLabel>
 #include <vector>
 
@@ -41,8 +42,9 @@ private slots:
     void on_action_add_Computer_triggered();
 
     // When user clickes a row in the table
-    void on_table_s_clicked(const QModelIndex &index);
-    void on_table_c_clicked(const QModelIndex &index);
+    void on_table_s_clicked();
+
+    void on_table_c_clicked();
 
     // To delete
     void on_button_delete_scientist_clicked();
