@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //From scientist tabs
+    // From scientist tabs
     currentScientistSortColumn = "Name";
 
     ui->input_dropdown_sort_s->addItem("Name");
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->input_keyword_s->setPlaceholderText("Search scientists...");
 
-    //From computer tabs
+    // From computer tabs
     currentComputerSortColumn = "Name";
 
     ui->input_dropdown_sort_c->addItem("Name");
@@ -60,7 +60,7 @@ void MainWindow::getAllComputers()
     displayAllComputers(computers);
 }
 
-//Displays table with all scientist
+// Displays table with all scientist
 void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 {
     ui->table_s->clearContents();
@@ -78,7 +78,7 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
     currentlyDisplayedScientist = scientists;
 }
 
-//Displays table with all computers
+// Displays table with all computers
 void MainWindow::displayAllComputers(const vector<Computer>& computers)
 {
     ui->table_c->clearContents();

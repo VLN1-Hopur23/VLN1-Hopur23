@@ -92,7 +92,7 @@ vector<Computer> DbManager::getComputers()
     return computers;
 }
 
-// adding to database
+// Adding to database
 bool DbManager::addScientist(const Scientist& scientist, int& id)
 {
     if (!_db.isOpen())
