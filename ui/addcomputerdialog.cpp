@@ -15,7 +15,7 @@ AddComputerDialog::~AddComputerDialog()
 
 void AddComputerDialog::on_button_add_computer_add_computer_clicked()
 {
-    QString error = "<span style='color:red'>Not validated input<\span>";
+    QString error = "<span style='color:red'>Not validated input<\\span>";
     QString name = ui->input_add_computer_name->text();
     QString buildingYear = ui->input_add_computer_building_year->text();
     QString typeOfComputer = ui->input_add_computer_type_of->text();

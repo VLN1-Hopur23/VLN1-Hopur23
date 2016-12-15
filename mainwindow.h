@@ -33,6 +33,10 @@ private slots:
 
     void on_button_add_computer_clicked();
 
+    void on_action_add_Scientist_triggered();
+
+    void on_action_add_Computer_triggered();
+
 private:
 
     void getAllScientist();
@@ -47,8 +51,6 @@ private:
 
     QString currentScientistSortColumn;
     QString currentComputerSortColumn;
-
-    QLabel* statusBarMessage;
 
     vector <Scientist> currentlyDisplayedScientist;
     vector <Computer> currentlyDisplayedComputers;

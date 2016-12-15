@@ -20,10 +20,14 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Scientists &amp; Computers</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/images/science.jpg</normaloff>:/icons/images/science.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTabWidget" name="tabs">
       <property name="currentIndex">
@@ -42,6 +46,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="table_s">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
@@ -133,8 +140,16 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-     <height>21</height>
+
+     <height>26</height>
+
     </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -144,10 +159,41 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_add_Scientist"/>
+   <addaction name="action_add_Computer"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_add_Scientist">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/add_scientist.png</normaloff>:/icons/images/add_scientist.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Scientist</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_add_Computer">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/add_computer.png</normaloff>:/icons/images/add_computer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Computer</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

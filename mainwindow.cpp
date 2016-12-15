@@ -13,13 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QStatusBar *statusBar = this->statusBar();
-    ui->statusBar->showMessage("Scientist successfully added", 4000);
-
     currentScientistSortColumn = "Name";
-
-    statusBarMessage = new QLabel();
-    ui->statusBar->addPermanentWidget(statusBarMessage,1);
 
     ui->input_dropdown_sort_s->addItem("Name");
     ui->input_dropdown_sort_s->addItem("Gender");
@@ -30,8 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentComputerSortColumn = "Name";
 
-    ui->statusBar->addPermanentWidget(statusBarMessage,1);
-
     ui->input_dropdown_sort_c->addItem("Name");
     ui->input_dropdown_sort_c->addItem("Year built");
     ui->input_dropdown_sort_c->addItem("Type");
@@ -41,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     getAllScientist();
     getAllComputers();
+
+    ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +51,7 @@ void MainWindow::on_button_add_scientist_clicked()
     {
         ui->statusBar->showMessage("Scientist successfully added", 4000);
 
-    }
+     }
     else if(addStudentReturnValue == 0)
     {
         ui->statusBar->showMessage("Scientist added was canceled", 4000);
@@ -145,7 +139,7 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
     currentlyDisplayedComputers = computers;
 }
 
-
+//To search the list
 void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
 {
     string userInput = ui->input_keyword_s->text().toStdString();
@@ -154,4 +148,13 @@ void MainWindow::on_input_keyword_s_textChanged(const QString& arg1)
     displayAllScientists(scientists);
 }
 
+//shortcut to add scientist with icon
+void MainWindow::on_action_add_Scientist_triggered()
+{
+    on_button_add_scientist_clicked();
+}
 
+void MainWindow::on_action_add_Computer_triggered()
+{
+    on_button_add_computer_clicked();
+}
