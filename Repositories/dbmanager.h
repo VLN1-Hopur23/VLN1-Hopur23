@@ -18,7 +18,7 @@ public:
 
     vector<Scientist> getScientists();
 
-    vector<Computer> getComputers(QString QSorder, QString QSfilter);
+    vector<Computer> getComputers();
 
     bool addScientist(const Scientist& scientist, int& id);
 
