@@ -34,7 +34,7 @@
        <enum>Qt::CustomContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_scientists">
        <attribute name="title">
@@ -96,7 +96,7 @@
         <item>
          <widget class="QPushButton" name="button_add_scientist">
           <property name="text">
-           <string>Add new scientist</string>
+           <string>Add a new scientist</string>
           </property>
          </widget>
         </item>
@@ -155,14 +155,14 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Delete Selected Computer</string>
+           <string>Delete selected computer</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="button_add_computer">
           <property name="text">
-           <string>Add new computer</string>
+           <string>Add a new computer</string>
           </property>
          </widget>
         </item>
@@ -178,7 +178,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -231,7 +231,10 @@
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
    </property>
    <property name="text">
-    <string>remove_scientist</string>
+    <string>Remove Scientist</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Scientist</string>
    </property>
   </action>
   <action name="action_remove_computer">

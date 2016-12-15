@@ -7,5 +7,5 @@
         <file>images/remove_computer.png</file>
         <file>images/details.png</file>
     </qresource>
-    <qresource prefix="/db"/>
+    <qresource prefix="/db_images"/>
 </RCC>
