@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_c->addItem("Year built");
     ui->input_dropdown_sort_c->addItem("Type");
     ui->input_dropdown_sort_c->addItem("Built");
+    connect( this->ui->input_dropdown_sort_c, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_c_textChanged()) );
 
     ui->input_keyword_c->setPlaceholderText("Search computers...");
 
@@ -169,8 +170,30 @@ void MainWindow::on_input_keyword_s_textChanged()
 void MainWindow::on_input_keyword_c_textChanged()
 {
     string userInput = ui->input_keyword_c->text().toStdString();
-
-    vector<Computer> computers = _computerservice.searchingComputerByFilter("Name", userInput);
+    vector<Computer> computers;
+    switch(this->ui->input_dropdown_sort_c->currentIndex())
+    {
+        case 0:
+        {
+            computers = _computerservice.searchingComputerByFilter("Name", userInput);
+            break;
+        }
+        case 1:
+        {
+            computers = _computerservice.searchingComputerByFilter("YearBuilt", userInput);
+            break;
+        }
+        case 2:
+        {
+            computers = _computerservice.searchingComputerByFilter("Type", userInput);
+            break;
+        }
+        case 3:
+        {
+            computers = _computerservice.searchingComputerByFilter("Built", userInput);
+            break;
+        }
+    }
     displayAllComputers(computers);
 }
 
