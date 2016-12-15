@@ -24,9 +24,9 @@ public:
 
     bool addComputer(const Computer& computer, int& id) const;
 
-    void deleteScientist(const int ID);
+    bool deleteScientist(const int ID);
 
-    void deleteComputer(const int ID);
+    bool deleteComputer(const int ID);
 
     void deleteConnection(const int ID);
 

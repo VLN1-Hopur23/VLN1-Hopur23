@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
-    ui->statusBar->showMessage("Booga! Booga!", 2000);
+    //ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
 MainWindow::~MainWindow()
@@ -191,7 +191,28 @@ void MainWindow::on_action_add_Computer_triggered()
     on_button_add_computer_clicked();
 }
 
-void MainWindow::on_Filter_select_triggered()
+void MainWindow::on_table_s_clicked(const QModelIndex &index)
 {
-    ui->statusBar->showMessage(QString::number(this->ui->input_dropdown_sort_s->currentIndex()));
+   ui->button_delete_scientist->setEnabled(true);
+}
+
+void MainWindow::on_button_delete_scientist_clicked()
+{
+    int currentlySelectedScientistIndex = ui->table_s->currentIndex().row();
+
+    Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
+
+    int scientistID = currentlySelectedScientist.getScientistID();
+
+    if (_service.deleteScientist(scientistID))
+    {
+        ui -> input_keyword_s->setText("");
+        displayAllScientists(currentlyDisplayedScientist);
+
+        ui->button_delete_scientist->setEnabled(false);
+    }
+    else
+    {
+        ui ->statusBar->showMessage("scientist not successfully removed",4000);
+    }
 }

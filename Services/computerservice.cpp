@@ -57,9 +57,9 @@ bool ComputerService::searchComputersByPeriod(int yearFrom, int yearTo)
     return false;
 }
 
-void ComputerService::deleteComputer(int index)
+bool ComputerService::deleteComputer(int index)
 {
-    _data.deleteComputer(index);
+    return _data.deleteComputer(index);
 }
 
 vector<Computer> ComputerService::searchingComputerByFilter(string command, string searchData)

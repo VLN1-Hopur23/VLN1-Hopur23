@@ -91,9 +91,6 @@ void AddStudentDialog::on_button_add_scientist_save_clicked()
        ui->input_add_scientist_year_of_death->setText("");
 
        this->done(1);//1 means successful
-
-
-
    }
    else
    {

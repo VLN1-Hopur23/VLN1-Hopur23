@@ -39,7 +39,9 @@ private slots:
 
     void on_action_add_Computer_triggered();
 
-    void on_Filter_select_triggered();
+    void on_table_s_clicked(const QModelIndex &index);
+
+    void on_button_delete_scientist_clicked();
 
 private:
 

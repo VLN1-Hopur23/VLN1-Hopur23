@@ -92,7 +92,7 @@ bool DbManager::addScientist(const Scientist& scientist, int& id)
 }
 
 // Deletes scientist with chosen ID number from database and his previous connection to computer
-void DbManager::deleteComputer(const int ID)
+bool DbManager::deleteComputer(const int ID)
 {
     if (!_db.isOpen())
     {
@@ -108,6 +108,15 @@ void DbManager::deleteComputer(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ComputerID = (:ComputerID)");
     queryDeleteConnection.bindValue(":ComputerID",ID);
     queryDeleteConnection.exec();
+
+    if(queryDelete.exec())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 //Deletes connection link between scientist and computer
 void DbManager::deleteConnection(const int ID)
@@ -119,7 +128,7 @@ void DbManager::deleteConnection(const int ID)
 }
 
 // Deletes computer with chosen ID number from database and his previous connection to scientist
-void DbManager::deleteScientist(const int ID)
+bool DbManager::deleteScientist(const int ID)
 {
     if (!_db.isOpen())
     {
@@ -135,6 +144,15 @@ void DbManager::deleteScientist(const int ID)
     queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE ScientistID = (:ScientistID)");
     queryDeleteConnection.bindValue(":ScientistID",ID);
     queryDeleteConnection.exec();
+
+    if(queryDelete.exec())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // Gets computer and his information from database(SQL) and reads into Computer vector

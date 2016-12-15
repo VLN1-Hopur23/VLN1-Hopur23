@@ -30,7 +30,7 @@ public:
 
     void getVectorFoundComputer(string& searchData);
 
-    void deleteComputer(int index);
+    bool deleteComputer(int index);
 
     //Searching computer list
     vector<Computer> searchingComputerByFilter(string command, string searchData);
