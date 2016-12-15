@@ -246,7 +246,19 @@
     <string>Remove computer</string>
    </property>
   </action>
-  <action name="action_details">
+  <action name="action_details_s">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/details.png</normaloff>:/icons/images/details.png</iconset>
+   </property>
+   <property name="text">
+    <string>Details</string>
+   </property>
+   <property name="toolTip">
+    <string>Details</string>
+   </property>
+  </action>
+  <action name="action_details_c">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/images/details.png</normaloff>:/icons/images/details.png</iconset>

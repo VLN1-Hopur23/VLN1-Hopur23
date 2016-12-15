@@ -47,6 +47,7 @@ private slots:
     void on_table_s_cellDoubleClicked(int row, int column);
 
     void on_table_s_clicked();
+
     void on_table_c_clicked();
 
     // To delete
@@ -62,8 +63,9 @@ private slots:
 
     void on_table_s_customContextMenuRequested(const QPoint &pos);
 
-    void on_action_details_triggered();
+    void on_action_details_s_triggered();
 
+    void on_action_details_c_triggered();
 
 private:
 
@@ -91,6 +93,10 @@ private:
     vector <Computer> currentlyDisplayedComputers;
 
     bool isDoubleClicked = false;
+
+    Scientist currentScientist;
+
+    Computer currentComputer;
 };
 
 #endif // MAINWINDOW_H
