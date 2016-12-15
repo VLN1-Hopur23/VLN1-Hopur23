@@ -61,7 +61,6 @@ void MainWindow::on_button_add_scientist_clicked()
     {
         ui->statusBar->showMessage("Something went wery wery wrong", 4000);
     }
-
     getAllScientist();
 }
 
@@ -116,7 +115,6 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
         ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
         ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
     }
-
     currentlyDisplayedScientist = scientists;
 }
 
@@ -167,7 +165,6 @@ void MainWindow::on_input_keyword_s_textChanged()
             break;
         }
     }
-
     displayAllScientists(scientists);
 }
 
@@ -179,6 +176,7 @@ void MainWindow::on_input_keyword_c_textChanged()
     vector<Computer> computers = _computerservice.searchingComputerByFilter("Name", userInput);
     displayAllComputers(computers);
 }
+
 //shortcut to add scientist with icon
 void MainWindow::on_action_add_Scientist_triggered()
 {
@@ -191,6 +189,7 @@ void MainWindow::on_action_add_Computer_triggered()
     on_button_add_computer_clicked();
 }
 
+//delete scientist button
 void MainWindow::on_table_s_clicked(const QModelIndex &index)
 {
    ui->button_delete_scientist->setEnabled(true);
@@ -207,12 +206,37 @@ void MainWindow::on_button_delete_scientist_clicked()
     if (_service.deleteScientist(scientistID))
     {
         ui -> input_keyword_s->setText("");
-        //displayAllScientists(currentlyDisplayedScientist);
         getAllScientist();
         ui->button_delete_scientist->setEnabled(false);
     }
     else
     {
         ui ->statusBar->showMessage("scientist not successfully removed",4000);
+    }
+}
+
+//delete computer button
+void MainWindow::on_table_c_clicked(const QModelIndex &index)
+{
+   ui->button_delete_computer->setEnabled(true);
+}
+
+void MainWindow::on_button_delete_computer_clicked()
+{
+    int currentlySelectedComptuerIndex = ui->table_c->currentIndex().row();
+
+    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComptuerIndex);
+
+    int computerID = currentlySelectedComputer.getComputerID();
+
+    if (_computerservice.deleteComputer(computerID))
+    {
+        ui->input_keyword_c->setText("");
+        getAllComputers();
+        ui->button_delete_computer->setEnabled(false);
+    }
+    else
+    {
+        ui ->statusBar->showMessage("Computer not successfully removed",4000);
     }
 }

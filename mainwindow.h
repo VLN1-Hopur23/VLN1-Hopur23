@@ -39,9 +39,13 @@ private slots:
 
     void on_action_add_Computer_triggered();
 
+    //When user clickes a row in the table
     void on_table_s_clicked(const QModelIndex &index);
+    void on_table_c_clicked(const QModelIndex &index);
 
+    //To delete
     void on_button_delete_scientist_clicked();
+    void on_button_delete_computer_clicked();
 
 private:
 

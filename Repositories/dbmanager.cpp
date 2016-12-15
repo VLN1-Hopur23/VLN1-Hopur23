@@ -65,6 +65,35 @@ vector<Scientist> DbManager::getScientists()
     return scientists;
 }
 
+// Gets computer and his information from database(SQL) and reads into Computer vector
+// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
+vector<Computer> DbManager::getComputers()
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    vector<Computer> computers;
+
+    QSqlQuery query(_db);
+
+    query.prepare("SELECT * FROM Computers");
+    query.exec();
+
+    while (query.next())
+    {
+        int computerID = query.value("ComputerID").toUInt();
+        string name = query.value("Name").toString().toStdString();
+        int yearBuilt = query.value("Yearbuilt").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool built = query.value("Built").toBool();
+        Computer computer(computerID, name, yearBuilt, type, built);
+        computers.push_back(computer);
+    }
+    return computers;
+}
+
 bool DbManager::addScientist(const Scientist& scientist, int& id)
 {
     if (!_db.isOpen())
@@ -153,41 +182,6 @@ bool DbManager::deleteScientist(const int ID)
     {
         return false;
     }
-}
-
-// Gets computer and his information from database(SQL) and reads into Computer vector
-// Optional (QS)order, Name, Gender, BirthYear, DeathYear. Optional (QS)filter DESC and ASC
-vector<Computer> DbManager::getComputers()
-{
-    if (!_db.isOpen())
-    {
-        _db.open();
-    }
-
-    vector<Computer> computers;
-
-    QSqlQuery query(_db);
-
-    query.prepare("SELECT * FROM Computers");
-    query.exec();
-
-    while (query.next())
-    {
-        int computerID = query.value("ComputerID").toUInt();
-
-        string name = query.value("Name").toString().toStdString();
-
-        int yearBuilt = query.value("Yearbuilt").toUInt();
-
-        string type = query.value("Type").toString().toStdString();
-
-        bool built = query.value("Built").toBool();
-
-        Computer computer(computerID, name, yearBuilt, type, built);
-
-        computers.push_back(computer);
-    }
-    return computers;
 }
 
 bool DbManager::addComputer(const Computer& computer, int& id)
