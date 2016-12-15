@@ -52,8 +52,6 @@ private:
     QString currentScientistSortColumn;
     QString currentComputerSortColumn;
 
-    QLabel* statusBarMessage;
-
     vector <Scientist> currentlyDisplayedScientist;
     vector <Computer> currentlyDisplayedComputers;
 };

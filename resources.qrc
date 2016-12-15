@@ -2,8 +2,7 @@
     <qresource prefix="/icons">
         <file>images/science.jpg</file>
         <file>images/add_computer.png</file>
-        <file>images/add_person.png</file>
-        <file>images/add_scientists.png</file>
         <file>images/add_scientist.png</file>
     </qresource>
+    <qresource prefix="/db"/>
 </RCC>
