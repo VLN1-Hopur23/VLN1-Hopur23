@@ -24,7 +24,6 @@ SOURCES += main.cpp \
     Services/computerservice.cpp \
     Services/localtime.cpp \
     Services/scientistservice.cpp \
-    Services/connectionservice.cpp \
 
 HEADERS  += mainwindow.h \
     ui/addstudentdialog.h \
@@ -36,7 +35,6 @@ HEADERS  += mainwindow.h \
     Services/computerservice.h \
     Services/localtime.h \
     Services/scientistservice.h \
-    Services/connectionservice.h \
 
 FORMS    += mainwindow.ui \
     ui/addstudentdialog.ui \

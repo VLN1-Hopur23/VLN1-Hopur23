@@ -12,13 +12,14 @@ using namespace std;
 class ConnectionService
 {
 public:
+
     ConnectionService();
 
     void deleteConnection(int index);
 
 private:
 
-     DbManager _data;
+    DbManager _data;
 };
 
 #endif // CONNECTIONSERVICE_H

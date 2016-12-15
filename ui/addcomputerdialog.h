@@ -8,8 +8,9 @@
 
 using namespace std;
 
-namespace Ui {
-class AddComputerDialog;
+namespace Ui
+{
+    class AddComputerDialog;
 }
 
 class AddComputerDialog : public QDialog
@@ -17,21 +18,28 @@ class AddComputerDialog : public QDialog
     Q_OBJECT
 
 public:
+
     explicit AddComputerDialog(QWidget *parent = 0);
+
     ~AddComputerDialog();
 
 private slots:
+
     void on_button_add_computer_add_computer_clicked();
 
     void on_button_add_computer_cancel_clicked();
 
 private:
-    Ui::AddComputerDialog *ui;
-    ComputerService _computers;
-    bool ValidInput(string check, string allowed);
-    string typeOf(string what);
-    LocalTime _time;
 
+    Ui::AddComputerDialog *ui;
+
+    ComputerService _computers;
+
+    bool ValidInput(string check, string allowed);
+
+    string typeOf(string what);
+
+    LocalTime _time;
 };
 
 #endif // ADDCOMPUTERDIALOG_H
