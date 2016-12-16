@@ -65,20 +65,44 @@
            <property name="text">
             <string>Name</string>
            </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
           </column>
           <column>
            <property name="text">
             <string>Gender</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
           </column>
           <column>
            <property name="text">
             <string>Year of birth</string>
            </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
           </column>
           <column>
            <property name="text">
             <string>Year of death</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
           </column>
          </widget>
@@ -131,20 +155,44 @@
            <property name="text">
             <string>Name</string>
            </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
           </column>
           <column>
            <property name="text">
             <string>Year built</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
           </column>
           <column>
            <property name="text">
             <string>Type</string>
            </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
           </column>
           <column>
            <property name="text">
             <string>Built</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
            </property>
           </column>
          </widget>
@@ -231,10 +279,10 @@
      <normaloff>:/icons/images/remove_scientist.png</normaloff>:/icons/images/remove_scientist.png</iconset>
    </property>
    <property name="text">
-    <string>Remove Scientist</string>
+    <string>Delete Scientist</string>
    </property>
    <property name="toolTip">
-    <string>Remove Scientist</string>
+    <string>Delete Scientist</string>
    </property>
   </action>
   <action name="action_remove_computer">
@@ -243,10 +291,25 @@
      <normaloff>:/icons/images/remove_computer.png</normaloff>:/icons/images/remove_computer.png</iconset>
    </property>
    <property name="text">
-    <string>Remove computer</string>
+    <string>Delete Computer</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete Computer</string>
    </property>
   </action>
-  <action name="action_details">
+  <action name="action_details_s">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/details.png</normaloff>:/icons/images/details.png</iconset>
+   </property>
+   <property name="text">
+    <string>Details</string>
+   </property>
+   <property name="toolTip">
+    <string>Details</string>
+   </property>
+  </action>
+  <action name="action_details_c">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/images/details.png</normaloff>:/icons/images/details.png</iconset>

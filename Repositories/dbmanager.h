@@ -20,10 +20,14 @@ public:
 
     vector<Computer> getComputers();
 
+    string getScientistPictureUrl(int scientistID);
+
     // Add:
     bool addScientist(const Scientist& scientist, int& id);
 
     bool addComputer(const Computer& computer, int& id);
+
+    void addScientistPictureUrl(int id, string url);
 
     bool addIntersect(const int& param1, const int& param2);
 
@@ -35,9 +39,9 @@ public:
     void deleteConnection(const int ID);
 
     // Connection:
-    vector<Computer> intersectScientist(const string& id);
+    vector<Computer> intersectScientist(const QString& id);
 
-    vector<Scientist> intersectComputer(const string& id);
+    vector<Scientist> intersectComputer(const QString& id);
 
     // Search:
     vector<Scientist> searchScientist(const string& searchData);
@@ -64,6 +68,8 @@ public:
     string editComputerYearBuilt(const int& id, const string& newName);
 
     string editComputerType(const int& id, const string& newName);
+
+    string editComputeBuilt(const int& id, bool newWasBuilt);
 
     string stringToLower(string str);
 

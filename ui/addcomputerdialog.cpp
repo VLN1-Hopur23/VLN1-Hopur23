@@ -22,7 +22,7 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
 
     bool InputIsNotValid = false;
 
-    bool built = 0;
+    bool built = false;
 
 
     int buildingYearInt = buildingYear.toInt();
@@ -56,7 +56,7 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
         ui->label_error_add_computer_built->setText(error);
         InputIsNotValid = true;
     }
-    else if(ui->button_radio_add_computer_no)
+    else if(ui->button_radio_add_computer_yes->isChecked())
     {
         built = true; // true (default is 0 false)
     }
@@ -196,10 +196,10 @@ string AddComputerDialog::typeOf(string what)
         return "error in localtime::typeOf(string what)";
     }
 }
+
 // Check can be "AI",AC",ACI","CI","I","C","A","NV" see ConsoleUI::typeOf() for mor info
 // Allowed can be "A_AC.._I" see above
 // Checks if input is allowed
-
 bool AddComputerDialog::ValidInput(string check, string allowed)
 {
     if( check == "NV")
@@ -234,7 +234,3 @@ bool AddComputerDialog::ValidInput(string check, string allowed)
     }
     return false;
 }
-
-
-
-

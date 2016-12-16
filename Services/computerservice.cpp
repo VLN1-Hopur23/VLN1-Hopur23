@@ -36,7 +36,7 @@ size_t ComputerService::getSize() const
 }
 
 // Connects the link function in console to dbmanager
-void ComputerService::retrieveIntersectScientist(const string& param)
+void ComputerService::retrieveIntersectScientist(const QString& param)
 {
     _computers = _data.intersectScientist(param);
 }
@@ -97,5 +97,18 @@ string ComputerService::editComputer(int index, string change, string input)
     {
         message = _data.editComputerType(index, input);
     }
+    else if(change == "built")
+    {
+        if(input =="1")
+        {
+            message = _data.editComputeBuilt(index, true);
+        }
+        else if(input=="0")
+        {
+            message = _data.editComputeBuilt(index, false);
+        }
+
+    }
     return message;
 }
+

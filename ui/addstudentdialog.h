@@ -2,6 +2,8 @@
 #define ADDSTUDENTDIALOG_H
 
 #include <QDialog>
+#include <QPixmap>
+#include <QFileDialog>
 #include "scientistservice.h"
 #include <string.h>
 #include "localtime.h"
@@ -29,6 +31,8 @@ private slots:
     void on_button_add_scientist_save_clicked();
 
     void on_button_add_scientist_cancel_clicked();
+
+    void on_PushButton_browse_s_picture_clicked();
 
 private:
 

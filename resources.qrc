@@ -6,6 +6,20 @@
         <file>images/remove_scientist.png</file>
         <file>images/remove_computer.png</file>
         <file>images/details.png</file>
+        <file>images/remove_link.png</file>
+        <file>images/add_link.png</file>
     </qresource>
-    <qresource prefix="/db_images"/>
+    <qresource prefix="/db_images">
+        <file>Images of scientists/GRACEHOPPER.jpg</file>
+        <file>Images of scientists/ANITABORG.jpg</file>
+        <file>Images of scientists/SVEVE.jpg</file>
+        <file>Images of scientists/BLAISEPASCAL.jpeg</file>
+        <file>Images of scientists/RICHARDSTALLMAN.jpg</file>
+        <file>Images of scientists/EDSGERWD.jpg</file>
+        <file>Images of scientists/CHARLESBABBAGE.jpg</file>
+        <file>Images of scientists/JohnvonNeumann.gif</file>
+        <file>Images of scientists/ADALOVELACE.jpg</file>
+        <file>Images of scientists/ALANTURING.jpg</file>
+        <file>Images of scientists/unknown.jpeg</file>
+    </qresource>
 </RCC>

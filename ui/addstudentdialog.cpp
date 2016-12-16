@@ -243,6 +243,34 @@ bool AddStudentDialog::ValidInput(string check, string allowed)
     return false;
 }
 
+void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
+{
+    //Need scientist id
+    //int scientistID = _scientist.getScientistID();
+    // That will map the right picture url in connection table
+    // We need to get the url from the table with the scientist ID
 
-
-
+    string url = ""; //":/db_images/Images of scientists/unknown.jpeg";
+    string filePath = QFileDialog::getOpenFileName(
+                this,
+                "Search for image",
+                "",
+                "Image files(*.png *.jpg)"
+                ).toStdString();
+    if(filePath.length())
+    {
+        // user select som file
+        QPixmap pixmap(QString::fromStdString(filePath));
+        ui->label_s_picture->setPixmap(pixmap);
+        ui->label_s_picture->setScaledContents(true);
+        url = filePath;
+    }
+    else
+    {
+        QPixmap pixmap(QString::fromStdString(filePath));
+        ui->label_s_picture->setPixmap(pixmap);
+        ui->label_s_picture->setScaledContents(true);
+        //didnt select file
+        //So we set the default
+    }
+}

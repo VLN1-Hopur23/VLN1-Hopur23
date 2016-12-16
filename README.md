@@ -1,6 +1,18 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
+##Brief description:
+<ul>
+    <li>User needs to use QT to run the program</li>
+    <li>This program contains two lists
+       <ul>
+       <li>List of scientists</li>
+       <li>List of computers</li>
+       </ul>
+       <li>User is to decide what to do with those lists with seven given options</li>
+       <li></li>
+</ul>
+    
 ###Digit application with the following functionality:
 <ul>
    <li>Users can register a known person and a known computer from the history of computer science

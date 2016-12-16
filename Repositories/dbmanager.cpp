@@ -92,6 +92,27 @@ vector<Computer> DbManager::getComputers()
     return computers;
 }
 
+string DbManager::getScientistPictureUrl(int scientistID)
+{
+    if (!_db.isOpen())
+    {
+     _db.open();
+    }
+
+    QSqlQuery query(_db);
+    string url;
+    query.prepare("SELECT * FROM ScientistsID_Pictures WHERE ScientistID = (:ScientistID)");
+    query.bindValue(":ScientistID", scientistID);
+
+    query.exec();
+
+    while(query.next())
+    {
+        url = query.value("url").toString().toStdString();
+    }
+    return url;
+}
+
 // Adding to database
 bool DbManager::addScientist(const Scientist& scientist, int& id)
 {
@@ -143,6 +164,31 @@ bool DbManager::addComputer(const Computer& computer, int& id)
     {
         return false;
     }
+}
+
+// Adding picture url to database
+void DbManager::addScientistPictureUrl(int id, string url)
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    QSqlQuery queryAdd(_db);
+
+    queryAdd.prepare("INSERT INTO ScientistsID_Pictures (ScientistID, Picture) VALUES (:ScientistID, :url)");
+    queryAdd.bindValue(":ScientistID", id);
+    queryAdd.bindValue(":url", QString::fromStdString(url));
+
+    /*if(queryAdd.exec())
+    {
+        //id = queryAdd.lastInsertId().toInt();
+        return true;
+    }
+    else
+    {
+        return false;
+    }*/
 }
 
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
@@ -233,7 +279,7 @@ void DbManager::deleteConnection(const int ID)
 }
 
 // Returns vector with all computers associated with the scientist/s
-vector<Computer> DbManager::intersectScientist(const string& id)
+vector<Computer> DbManager::intersectScientist(const QString& id)
 {
     if (!_db.isOpen())
     {
@@ -245,7 +291,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
     QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
-    intersectQuery.bindValue(":id", QString::fromStdString(id));
+    intersectQuery.bindValue(":id", id);
 
     intersectQuery.exec();
 
@@ -269,7 +315,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 }
 
 // Returns vector with all scientists associated with the computer/s
-vector<Scientist> DbManager::intersectComputer(const string& id)
+vector<Scientist> DbManager::intersectComputer(const QString& id)
 {
     if (!_db.isOpen())
     {
@@ -281,7 +327,7 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
     QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Scientists INNER JOIN Computers_Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID INNER JOIN Computers ON Computers.ComputerID = Computers_Scientists.ComputerID WHERE Computers.ComputerID = :id");
-    intersectQuery.bindValue(":id", QString::fromStdString(id));
+    intersectQuery.bindValue(":id", id);
 
     intersectQuery.exec();
 
@@ -654,6 +700,35 @@ string DbManager::editComputerType(const int& id, const string& newType)
 
     query.prepare("UPDATE Computers SET Type=:Type WHERE ComputerID=:ComputerID");
     query.bindValue(":Type", QString::fromStdString(newType));
+    query.bindValue(":ComputerID", id);
+
+    if (query.exec())
+    {
+        message = "Successfully edited!";
+    }
+    else if (!query.exec())
+    {
+        message = "Error occurred while editiing!";
+    }
+    else
+    {
+        message = "Unkown error occurred";
+    }
+    return message;
+}
+
+string DbManager::editComputeBuilt(const int &id, bool newWasBuilt)
+{
+    if (!_db.isOpen())
+    {
+        _db.open();
+    }
+
+    QSqlQuery query(_db);
+    string message;
+
+    query.prepare("UPDATE Computers SET Built=:Built WHERE ComputerID=:ComputerID");
+    query.bindValue(":Built", newWasBuilt);
     query.bindValue(":ComputerID", id);
 
     if (query.exec())

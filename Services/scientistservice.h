@@ -38,7 +38,7 @@ public:
 
     vector<Scientist> searchingByFilter(string command, string searchData);
 
-    void retrieveIntersectComputer(const string& param);
+    void retrieveIntersectComputer(const QString& param);
 
     int getLastInsertRowID();
 
