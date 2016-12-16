@@ -6,8 +6,8 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     ui(new Ui::Details)
 {
     ui->setupUi(this);
-    QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
-    ui->label_image->setPixmap(pix);
+    /*QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
+    ui->label_image->setPixmap(pix);*/
     ui->statusBar->showMessage("This guy!", 2000);
 
     _scientist = *pScientist;
@@ -18,10 +18,10 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     _tableAddConnectDisplays = "computers";
     ScientistDetails();
 
-    /*string filePath = _service.retrievePicUrl(_scientist.getScientistID());
+    string filePath = _service.retrievePicUrl(_scientist.getScientistID());
     QPixmap pixmap(QString::fromStdString(filePath));
     ui->label_image->setPixmap(pixmap);
-    ui->label_image->setScaledContents(true);*/
+    ui->label_image->setScaledContents(true);
 }
 
 Details::Details(QWidget* parent, Computer* pComputer, ScientistService* pService, ComputerService* pComputerService) :
@@ -264,12 +264,6 @@ void Details::on_browse_scientist_photo_clicked()
         ui->label_image->setPixmap(pixmap);
         ui->label_image->setScaledContents(true);
         _service.addPicUrl(scientistID, filePath);
-    }
-    else
-    {
-        //didnt select file
-        //So we set the default
-        _service.addPicUrl(scientistID, ":/db_images/Images of scientists/unknown.jpg");
     }
 }
 

@@ -8,12 +8,13 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
     ui(new Ui::AddStudentDialog)
 {
     ui->setupUi(this);
-    QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
-    ui->label_s_picture->setPixmap(pix);
+    /*QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
+    ui->label_s_picture->setPixmap(pix);*/
 
-    /*QPixmap pixmap(QString::fromStdString(_service.retrievePicUrl(_scientist.getScientistID())));
+    string picUrl = _service.retrievePicUrl(_scientist.getScientistID());
+    QPixmap pixmap(QString::fromStdString(picUrl));
     ui->label_s_picture->setPixmap(pixmap);
-    ui->label_s_picture->setScaledContents(true);*/
+    ui->label_s_picture->setScaledContents(true);
 }
 
 AddStudentDialog::~AddStudentDialog()
@@ -269,15 +270,6 @@ void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
         ui->label_s_picture->setScaledContents(true);
         // add the url to database
         _service.addPicUrl(_scientist.getScientistID(),filePath);
+    }
 
-    }
-    else
-    {
-        filePath = _service.retrievePicUrl(_scientist.getScientistID());
-        QPixmap pixmap(QString::fromStdString(filePath));
-        ui->label_s_picture->setPixmap(pixmap);
-        ui->label_s_picture->setScaledContents(true);
-        //didnt select file
-        //So we set the default
-    }
 }

@@ -177,8 +177,9 @@ void DbManager::addScientistPictureUrl(int id, string url)
     QSqlQuery queryAdd(_db);
 
     queryAdd.prepare("INSERT INTO ScienstistsID_Pictures (ScientistID, Picture) VALUES (:ScientistID, :url)");
-    queryAdd.bindValue(":ScientistID", QString::number(5));//id));
-    queryAdd.bindValue(":Picture", QString::fromStdString("RebekkaMynd"));//url));
+    queryAdd.bindValue(":ScientistID", QString::number(id));
+    queryAdd.bindValue(":Picture", QString::fromStdString(url));
+    queryAdd.exec();
 }
 
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
