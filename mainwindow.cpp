@@ -548,8 +548,7 @@ void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
 
     //ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
 
-    //QTableWidgetItem* computer = ui->table_c->itemAt(pos);
-    //QModelIndex index = ui->table_c->itemAt(pos)
+    QTableWidgetItem* computer = ui->table_c->itemAt(pos);
 
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_computer);
