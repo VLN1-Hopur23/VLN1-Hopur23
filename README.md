@@ -3,12 +3,14 @@
 
 ##Brief description:
 <ul>
+    <li>User needs to use QT to run the program</li>
     <li>This program contains two lists
-    <ul>
+       <ul>
        <li>List of scientists</li>
        <li>List of computers</li>
        </ul>
-       <li>User is able to decide what to do with those lists with seven given options</li>
+       <li>User is to decide what to do with those lists with seven given options</li>
+       <li></li>
 </ul>
     
 ###Digit application with the following functionality:
