@@ -81,14 +81,17 @@
 <ul>
    <li>Frequent users can use shortcuts to every category by
    <ul>
-   <li>using firts letter of commands</li>
+   <li>using first letter of commands</li>
    <li>using given integers of commands</li>
    </ul>
 </ul>  
 ###Features that group 23 is extra proud of:
 <ul>
-<li>README ;) (djokdjok)</li>
-<li> allir að bæta við einhverju kúl </li>
+<li>Our group is amazing, everyone worked so well!</li>
+<li>The ambition</li>
+<li>We are very thankful to our two minions</li>
+<li>The goal was to make this program easily accessible to customers</li>
+<li>Our indrodction video</li>
 </ul>
    
   
