@@ -169,7 +169,7 @@
           </column>
           <column>
            <property name="text">
-            <string>ID</string>
+            <string>YearBuilt</string>
            </property>
            <property name="font">
             <font>
@@ -202,7 +202,7 @@
           </column>
           <column>
            <property name="text">
-            <string>New Column</string>
+            <string>ID</string>
            </property>
           </column>
          </widget>
