@@ -7,13 +7,15 @@
 #include <string>
 #include <QMenu>
 #include <QMessageBox>
+
 #include "scientist.h"
 #include "computer.h"
 #include "scientistservice.h"
 #include "computerservice.h"
 
-namespace Ui {
-class Details;
+namespace Ui
+{
+    class Details;
 }
 
 class Details : public QDialog
@@ -30,16 +32,17 @@ public:
     ~Details();
 
 protected:
+
     void scientistListBuilder(const vector<Scientist> &scientists);
 
     void computerListBuilder(const vector<Computer> &computers);
 
     // Displays a list of all computers available to
-    // add as a connection
+    // Add as a connection
     void displayAllComputersAddConnection();
 
     // Displays a list of all scientists available to
-    // add as a connection
+    // Add as a connection
     void displayAllScientistsAddConnection();
 
 private slots:
@@ -62,7 +65,9 @@ private slots:
     void on_action_add_connection_triggered();
 
 private:
+
     Ui::Details *ui;
+
     Scientist _scientist;
     Computer _computer;
 

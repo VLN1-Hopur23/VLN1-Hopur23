@@ -16,8 +16,6 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
 
     _tableAddConnectDisplays = "computers";
 
-
-
     ScientistDetails();
 }
 
@@ -192,7 +190,6 @@ void Details::displayAllComputersAddConnection()
         ui->table_add_connect->setItem(row,4,new QTableWidgetItem(QString::number(currentComputer.getComputerID())));
     }
     ui->table_add_connect->setSortingEnabled(true);
-
 }
 
 void Details::on_connect_table_customContextMenuRequested()
@@ -215,6 +212,7 @@ void Details::on_action_remove_connection_triggered()
 
         QMessageBox::StandardButton sure;
         sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete this connection?", QMessageBox::No|QMessageBox::Yes);
+
         if(sure == QMessageBox::Yes)
         {
             ui->statusBar->showMessage(_pService->deleteConnection(scientistID, _computer.getComputerID()), 2000);
@@ -229,6 +227,7 @@ void Details::on_action_remove_connection_triggered()
 
         QMessageBox::StandardButton sure;
         sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete this connection?", QMessageBox::No|QMessageBox::Yes);
+
         if(sure == QMessageBox::Yes)
         {
             ui->statusBar->showMessage(_pComputerService->deleteConnection(_scientist.getScientistID(), computerID), 2000);
@@ -259,9 +258,10 @@ void Details::on_browse_scientist_photo_clicked()
                 "",
                 "Image files(*.png *.jpg)"
                 ).toStdString();
+
     if(filePath.length())
     {
-        // user select som file
+        // User select some file
         QPixmap pixmap(QString::fromStdString(filePath));
         ui->detail_image->setPixmap(pixmap);
         ui->detail_image->setScaledContents(true);
@@ -283,6 +283,7 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
         if(reply == QMessageBox::Yes)
         {
             bool addedsuccessfully = _computerservice.addIntersectScientist(_scientist.getScientistID(), currentComputer.getComputerID());
+
             if(addedsuccessfully)
             {
                 ui->statusBar->showMessage("Successfully connected", 4000);
@@ -301,9 +302,11 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
         Scientist currentScientist = scientists[row];
 
         int reply = QMessageBox::question(this, "Connections","Are you sure that you want to connect "+QString::fromStdString(currentScientist.getName())+" to "+QString::fromStdString(_computer.getName()), QMessageBox::Yes | QMessageBox::No);
+
         if(reply == QMessageBox::Yes)
         {
             bool addedsuccessfully = _computerservice.addIntersectScientist(currentScientist.getScientistID(), _computer.getComputerID());
+
             if(addedsuccessfully)
             {
                 ui->statusBar->showMessage("Successfully connected", 4000);

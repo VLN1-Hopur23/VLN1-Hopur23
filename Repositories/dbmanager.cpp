@@ -276,6 +276,7 @@ QString DbManager::deleteConnection(const int& scientistID, const int& computerI
         return "Delete connection failed!";
     }
 }
+
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const QString& id)
 {
@@ -754,4 +755,3 @@ string DbManager::stringToLower(string str)
     }
     return result;
 }
-
