@@ -81,6 +81,7 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
         ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
         ui->table_s->setItem(row,4,new QTableWidgetItem(QString::number(currentScientist.getScientistID())));
 
+
     }
     currentlyDisplayedScientist = scientists;
     ui->table_s->setSortingEnabled(true);
