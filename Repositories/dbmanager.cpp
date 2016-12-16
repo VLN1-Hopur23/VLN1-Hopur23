@@ -224,12 +224,20 @@ bool DbManager::deleteComputer(const int ID)
 }
 
 // Deletes connection link between scientist and computer
-void DbManager::deleteConnection(const int ID)
+QString DbManager::deleteConnection(const int& scientistID, const int& computerID)
 {
     QSqlQuery queryDeleteConnection(_db);
-    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE Computer_ScientistID = (:Computer_ScientistID)");
-    queryDeleteConnection.bindValue(":Computer_ScientistID",ID);
-    queryDeleteConnection.exec();
+    queryDeleteConnection.prepare("DELETE FROM Computers_Scientists WHERE (scientistID = :scientistID AND computerID = :computerID)");
+    queryDeleteConnection.bindValue(":scientistID",scientistID);
+    queryDeleteConnection.bindValue(":computerID",computerID);
+    if (queryDeleteConnection.exec())
+    {
+        return "Connection delete successfully!";
+    }
+    else
+    {
+        return "Delete connection failed!";
+    }
 }
 
 // Returns vector with all computers associated with the scientist/s
