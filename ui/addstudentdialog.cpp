@@ -9,7 +9,7 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QPixmap pixmap(QString::fromStdString(":/db_images/Images of scientists/unknown.jpg"));
+    QPixmap pixmap(QString::fromStdString(_service.retrievePicUrl(_scientist.getScientistID())));
     ui->label_s_picture->setPixmap(pixmap);
     ui->label_s_picture->setScaledContents(true);
 }
@@ -266,10 +266,12 @@ void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
         ui->label_s_picture->setPixmap(pixmap);
         ui->label_s_picture->setScaledContents(true);
         // add the url to database
+        _service.addPicUrl(_scientist.getScientistID(),filePath);
 
     }
     else
     {
+        filePath = _service.retrievePicUrl(_scientist.getScientistID());
         QPixmap pixmap(QString::fromStdString(filePath));
         ui->label_s_picture->setPixmap(pixmap);
         ui->label_s_picture->setScaledContents(true);

@@ -48,15 +48,18 @@ private slots:
 
     void on_table_add_connect_cellDoubleClicked(int row, int column);
 
+    void on_action_add_connection_triggered();
+
 private:
     Ui::Details *ui;
     Scientist _scientist;
     Computer _computer;
 
     ScientistService* _pService;
-    ScientistService _service;
 
     ComputerService* _pComputerService;
+
+    ScientistService _service;
     ComputerService _computerservice;
 
     vector <Scientist> _currentlyDisplayedScientists;

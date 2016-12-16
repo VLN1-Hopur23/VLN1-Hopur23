@@ -39,6 +39,7 @@ private:
     Ui::AddStudentDialog *ui;
 
     ScientistService _service;
+    Scientist _scientist;
 
     bool ValidInput(string check, string allowed);
 

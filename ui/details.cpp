@@ -16,8 +16,8 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
 
     _tableAddConnectDisplays = "computers";
     ScientistDetails();
-
-    QPixmap pixmap(QString::fromStdString(":/db_images/Images of scientists/unknown.jpg"));
+    string filePath = _service.retrievePicUrl(_scientist.getScientistID());
+    QPixmap pixmap(QString::fromStdString(filePath));
     ui->label_image->setPixmap(pixmap);
     ui->label_image->setScaledContents(true);
 }
@@ -118,13 +118,9 @@ void Details::displayAllScientists(const vector<Scientist>& scientists)
     ui->connect_table->clearContents();
     ui->connect_table->setRowCount(scientists.size());
 
-    qDebug() << "reached display";
-
     for(unsigned int row = 0; row < scientists.size(); row++)
     {
         Scientist currentScientist = scientists[row];
-
-        qDebug() << QString::fromStdString(currentScientist.getName());
 
         ui->connect_table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
         ui->connect_table->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
@@ -151,8 +147,6 @@ void Details::displayAllScientistsAddConnection()
         ui->table_add_connect->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
         ui->table_add_connect->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
         ui->table_add_connect->setItem(row,4,new QTableWidgetItem(QString::number(currentScientist.getScientistID())));
-
-
     }
     ui->table_add_connect->setSortingEnabled(true);
 }
@@ -299,7 +293,6 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
             {
                 ui->statusBar->showMessage("Connection failed", 4000);
             }
-
         }
     }
     else if (_tableAddConnectDisplays == "scientists")
@@ -323,6 +316,9 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
             }
         }
     }
-
 }
 
+void Details::on_action_add_connection_triggered()
+{
+    ui->tab_add_connect->setCurrentIndex(1);
+}

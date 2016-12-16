@@ -47,6 +47,10 @@ void ScientistService::retrieveScientists()
 string ScientistService::retrievePicUrl(int scientistID)
 {
     string url = _data.getScientistPictureUrl(scientistID);
+    if(url.empty())
+    {
+        url = ":/db_images/Images of scientists/unknown.jpeg";
+    }
     return url;
 }
 
