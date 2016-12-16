@@ -96,6 +96,8 @@
 <li>The goal was to make this program easily accessible to customers</li>
 <li>Our indrodction video</li>
 </ul>
+
+###A merry christmas to all of our teachers and thank you for the course
    
   
    
