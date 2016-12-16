@@ -25,8 +25,7 @@
                 <li>Input given numbers</li>
                 <li>Input first letter</li>
                 <li>Input whole sentence</li>
-                </ul>
-                
+                </ul>     
 </ul>
     
 ###Digit application with the following functionality:
@@ -85,6 +84,12 @@
    <li>using firts letter of commands</li>
    <li>using given integers of commands</li>
    </ul>
+</ul>  
+###Features that group 23 is extra proud of:
+<ul>
+<li>README ;) (djokdjok)</li>
+<li> allir að bæta við einhverju kúl </li>
+</ul>
    
   
    
