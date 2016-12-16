@@ -33,6 +33,9 @@ protected:
 
     void displayAllComputers(const vector<Computer> &computers);
 
+    void displayAllComputersAddConnection();
+    void displayAllScientistsAddConnection();
+
 private slots:
 
     void on_browse_scientist_photo_clicked();
@@ -43,14 +46,19 @@ private slots:
 
     void on_action_remove_connection_triggered();
 
+    void on_table_add_connect_cellDoubleClicked(int row, int column);
+
 private:
     Ui::Details *ui;
     Scientist _scientist;
     Computer _computer;
 
     ScientistService* _pService;
+
     ComputerService* _pComputerService;
+
     ScientistService _service;
+    ComputerService _computerservice;
 
     vector <Scientist> _currentlyDisplayedScientists;
     vector <Computer> _currentlyDisplayedComputers;
@@ -59,6 +67,8 @@ private:
     void displayScientists();
 
     short _active;
+
+    string _tableAddConnectDisplays;
 };
 
 #endif // DETAILS_H

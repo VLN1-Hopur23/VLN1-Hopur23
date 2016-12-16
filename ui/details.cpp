@@ -14,6 +14,7 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     _pComputerService = pComputerService;
     _active = 1;
 
+    _tableAddConnectDisplays = "computers";
     ScientistDetails();
     string filePath = _service.retrievePicUrl(_scientist.getScientistID());
     QPixmap pixmap(QString::fromStdString(filePath));
@@ -32,6 +33,7 @@ Details::Details(QWidget* parent, Computer* pComputer, ScientistService* pServic
     _pComputerService = pComputerService;
     _active = 2;
 
+    _tableAddConnectDisplays = "scientists";
     ComputerDetails();
 }
 
@@ -49,6 +51,7 @@ void Details::ScientistDetails()
     ui->first_detail->setText(QString::fromStdString("<b>Gender:</b> " + _scientist.getGender()));
     ui->second_detail->setText(QString::fromStdString("<b>Year Of Birth:</b> ") + QString::number(_scientist.getYearOfBirth()));
     ui->connect_table->setHorizontalHeaderLabels(labels);
+    ui->table_add_connect->setHorizontalHeaderLabels(labels);
 
     if (_scientist.getYearOfDeath())
     {
@@ -73,6 +76,7 @@ void Details::ComputerDetails()
     ui->first_detail->setText(QString::fromStdString("<b>Year built:</b> ") + QString::number(_computer.getYearBuilt()));
     ui->second_detail->setText(QString::fromStdString("<b>Type:</b> " + _computer.getType()));
     ui->connect_table->setHorizontalHeaderLabels(labels);
+    ui->table_add_connect->setHorizontalHeaderLabels(labels);
 
     if (_computer.getBuilt())
     {
@@ -95,6 +99,7 @@ void Details::displayComputers()
     vector<Computer> computers = _pComputerService->getComputerVector();
 
     displayAllComputers(computers);
+    displayAllComputersAddConnection();
 }
 
 void Details::displayScientists()
@@ -104,6 +109,7 @@ void Details::displayScientists()
     vector<Scientist> scientists = _pService->getScientistVector();
 
     displayAllScientists(scientists);
+    displayAllScientistsAddConnection();
 }
 
 // Displays table with all scientist
@@ -112,13 +118,9 @@ void Details::displayAllScientists(const vector<Scientist>& scientists)
     ui->connect_table->clearContents();
     ui->connect_table->setRowCount(scientists.size());
 
-    qDebug() << "reached display";
-
     for(unsigned int row = 0; row < scientists.size(); row++)
     {
         Scientist currentScientist = scientists[row];
-
-        qDebug() << QString::fromStdString(currentScientist.getName());
 
         ui->connect_table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
         ui->connect_table->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
@@ -127,6 +129,26 @@ void Details::displayAllScientists(const vector<Scientist>& scientists)
     }
 
     _currentlyDisplayedScientists = scientists;
+}
+void Details::displayAllScientistsAddConnection()
+{
+    _service.retrieveScientists();
+    vector <Scientist> scientists = _service.getScientistVector();
+    ui->table_add_connect->clearContents();
+    ui->table_add_connect->setRowCount(scientists.size());
+    ui->table_add_connect->setSortingEnabled(false);
+
+    for(unsigned int row = 0; row < scientists.size(); row++)
+    {
+        Scientist currentScientist = scientists[row];
+
+        ui->table_add_connect->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
+        ui->table_add_connect->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
+        ui->table_add_connect->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
+        ui->table_add_connect->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
+        ui->table_add_connect->setItem(row,4,new QTableWidgetItem(QString::number(currentScientist.getScientistID())));
+    }
+    ui->table_add_connect->setSortingEnabled(true);
 }
 
 // Displays table with all computers
@@ -145,6 +167,28 @@ void Details::displayAllComputers(const vector<Computer>& computers)
         ui->connect_table->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
     }
     _currentlyDisplayedComputers = computers;
+}
+
+void Details::displayAllComputersAddConnection()
+{
+    _computerservice.retrieveComputers();
+    vector <Computer> computers = _computerservice.getComputerVector();
+    ui->table_add_connect->clearContents();
+    ui->table_add_connect->setRowCount(computers.size());
+    ui->table_add_connect->setSortingEnabled(false);
+
+    for(unsigned int row = 0; row < computers.size(); row++)
+    {
+        Computer currentComputer = computers[row];
+
+        ui->table_add_connect->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentComputer.getName())));
+        ui->table_add_connect->setItem(row,1,new QTableWidgetItem(QString::number(currentComputer.getYearBuilt())));
+        ui->table_add_connect->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
+        ui->table_add_connect->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
+        ui->table_add_connect->setItem(row,4,new QTableWidgetItem(QString::number(currentComputer.getComputerID())));
+    }
+    ui->table_add_connect->setSortingEnabled(true);
+
 }
 
 void Details::on_connect_table_customContextMenuRequested()
@@ -224,4 +268,53 @@ void Details::on_browse_scientist_photo_clicked()
         //So we set the default
     }
     _pService->addPicUrl(scientistID, filePath);
+}
+
+void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
+{
+    if(_tableAddConnectDisplays == "computers")
+    {
+        _computerservice.retrieveComputers();
+        vector <Computer> computers = _computerservice.getComputerVector();
+        Computer currentComputer = computers[row];
+
+        ui->table_add_connect->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentComputer.getName())));
+
+        int reply = QMessageBox::question(this, "Connections","Are you sure that you want to connect "+QString::fromStdString(currentComputer.getName())+" to "+QString::fromStdString( _scientist.getName()), QMessageBox::Yes | QMessageBox::No);
+        if(reply == QMessageBox::Yes)
+        {
+            bool addedsuccessfully = _computerservice.addIntersectScientist(_scientist.getScientistID(), currentComputer.getComputerID());
+            if(addedsuccessfully)
+            {
+                ui->statusBar->showMessage("Successfully connected", 4000);
+                displayComputers();
+            }
+            else
+            {
+                ui->statusBar->showMessage("Connection failed", 4000);
+            }
+
+        }
+    }
+    else if (_tableAddConnectDisplays == "scientists")
+    {
+        _service.retrieveScientists();
+        vector <Scientist> scientists = _service.getScientistVector();
+        Scientist currentScientist = scientists[row];
+
+        int reply = QMessageBox::question(this, "Connections","Are you sure that you want to connect "+QString::fromStdString(currentScientist.getName())+" to "+QString::fromStdString(_computer.getName()), QMessageBox::Yes | QMessageBox::No);
+        if(reply == QMessageBox::Yes)
+        {
+            bool addedsuccessfully = _computerservice.addIntersectScientist(currentScientist.getScientistID(), _computer.getComputerID());
+            if(addedsuccessfully)
+            {
+                ui->statusBar->showMessage("Successfully connected", 4000);
+                displayScientists();
+            }
+            else
+            {
+                ui->statusBar->showMessage("Connection failed", 4000);
+            }
+        }
+    }
 }
