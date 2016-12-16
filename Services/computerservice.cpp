@@ -112,3 +112,7 @@ string ComputerService::editComputer(int index, string change, string input)
     return message;
 }
 
+QString ComputerService::deleteConnection(const int& scientistID, const int& computerID)
+{
+    return _data.deleteConnection(scientistID, computerID);
+}

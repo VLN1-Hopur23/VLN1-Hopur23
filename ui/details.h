@@ -6,7 +6,7 @@
 #include <QFileDialog>
 #include <string>
 #include <QMenu>
-
+#include <QMessageBox>
 #include "scientist.h"
 #include "computer.h"
 #include "scientistservice.h"
@@ -37,7 +37,7 @@ private slots:
 
     void on_browse_scientist_photo_clicked();
 
-    void on_connection_table_customContextMenuRequested();
+    void on_connect_table_customContextMenuRequested();
 
     void on_pushButton_clicked();
 
@@ -51,8 +51,13 @@ private:
     ScientistService* _pService;
     ComputerService* _pComputerService;
 
-    vector <Scientist> currentlyDisplayedScientist;
-    vector <Computer> currentlyDisplayedComputers;
+    vector <Scientist> _currentlyDisplayedScientists;
+    vector <Computer> _currentlyDisplayedComputers;
+
+    void displayComputers();
+    void displayScientists();
+
+    short _active;
 };
 
 #endif // DETAILS_H

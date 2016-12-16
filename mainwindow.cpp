@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QStatusBar>
 
-#include <QMessageBox>
-#include <QMenu>
 
 using namespace std;
 
@@ -12,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->table_s->setColumnHidden(4, true);
+    ui->table_c->setColumnHidden(4,true);
 
     // From scientist tabs
     currentScientistSortColumn = "Name";
@@ -38,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
+    ui->action_remove_scientist->setEnabled(false);
+    ui->action_remove_computer->setEnabled(false);
 
     ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
@@ -68,6 +69,7 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 {
     ui->table_s->clearContents();
     ui->table_s->setRowCount(scientists.size());
+    ui->table_s->setSortingEnabled(false);
 
     for(unsigned int row = 0; row < scientists.size(); row++)
     {
@@ -77,8 +79,11 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
         ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
         ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
         ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
+        ui->table_s->setItem(row,4,new QTableWidgetItem(QString::number(currentScientist.getScientistID())));
+
     }
     currentlyDisplayedScientist = scientists;
+    ui->table_s->setSortingEnabled(true);
 }
 
 // Displays table with all computers
@@ -86,6 +91,7 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
 {
     ui->table_c->clearContents();
     ui->table_c->setRowCount(computers.size());
+    ui->table_c->setSortingEnabled(false);
 
     for(unsigned int row = 0; row < computers.size(); row++)
     {
@@ -95,8 +101,10 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
         ui->table_c->setItem(row,1,new QTableWidgetItem(QString::number(currentComputer.getYearBuilt())));
         ui->table_c->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
         ui->table_c->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
+        ui->table_c->setItem(row,4,new QTableWidgetItem(QString::number(currentComputer.getComputerID())));
     }
     currentlyDisplayedComputers = computers;
+    ui->table_c->setSortingEnabled(true);
 }
 
 // To Add scientist to database
@@ -241,6 +249,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
         QString warningMessage = "please use valid input";
         string toChange;
         string message;
+        int reply;
 
         if(column == 0)
         {
@@ -255,8 +264,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange ="name";
-                message = _service.editScientist(id,toChange,newName.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldScientist.getName())+" << TO >> "+newName+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newName.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getName())));
+                }
             }
         }
         if(column == 1)
@@ -265,8 +282,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             if(newGender.toStdString() == "f" || newGender.toStdString() == "m")
             {
                 toChange ="gender";
-                message = _service.editScientist(id,toChange,newGender.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldScientist.getGender())+" << TO >> "+newGender+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newGender.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getGender())));
+                }
             }
             else
             {
@@ -286,15 +311,23 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange = "birth";
-                message = _service.editScientist(id,toChange,newYearOfBirth.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::number(oldScientist.getYearOfBirth())+" << TO >> "+newYearOfBirth+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newYearOfBirth.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfBirth())));
+                }
             }
         }
         if( column == 3)
         {
             QString newYearOfDeath = ui->table_s->item(row, column)->text();
             int newYearOfDeathInt = newYearOfDeath.toInt();
-            if(newYearOfDeathInt != 0 || newYearOfDeath.isEmpty() || !(ValidInput(typeOf(newYearOfDeath.toStdString()),"I")) || newYearOfDeathInt>_time.getYearToDay() || newYearOfDeathInt<0 || (ui->table_s->item(row, 2)->text().toInt()>newYearOfDeathInt && newYearOfDeathInt !=0))
+            if( newYearOfDeath.isEmpty() || !(ValidInput(typeOf(newYearOfDeath.toStdString()),"I")) || newYearOfDeathInt>_time.getYearToDay() || newYearOfDeathInt<0 || (ui->table_s->item(row, 2)->text().toInt()>newYearOfDeathInt && newYearOfDeathInt !=0))
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfDeath())));
                 QMessageBox::warning(this, warningTitle, warningMessage);
@@ -302,8 +335,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange = "death";
-                message = _service.editScientist(id,toChange,newYearOfDeath.toStdString());
-                // change SQL
+                QString questionM = "Do you want to change >> "+QString::number(oldScientist.getYearOfDeath())+" << TO >> "+newYearOfDeath+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                   message = _service.editScientist(id,toChange,newYearOfDeath.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfDeath())));
+                }
             }
         }
         ui->statusBar->showMessage(QString::fromStdString(message), 4000);
@@ -335,6 +376,7 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
         Computer oldComputer = computers[row];
 
         int id = oldComputer.getComputerID();
+        int reply;
 
         QString error = "Not validated input";
         string toChange;
@@ -351,7 +393,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange ="name";
-                message = _computerservice.editComputer(id,toChange,newName.toStdString());
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldComputer.getName())+" << TO >> "+newName+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                     message = _computerservice.editComputer(id,toChange,newName.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row,column, new QTableWidgetItem(QString::fromStdString(oldComputer.getName())));
+                }
             }
         }
         if(column == 1)
@@ -366,7 +417,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange = "yearbuilt";
-                message = _computerservice.editComputer(id, toChange, newYearBuilt.toStdString());
+                QString questionM = "Do you want to change >> "+QString::number(oldComputer.getYearBuilt())+" << TO >> "+newYearBuilt+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _computerservice.editComputer(id, toChange, newYearBuilt.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row,column, new QTableWidgetItem(QString::number(oldComputer.getYearBuilt())));
+                }
             }
 
         }
@@ -381,7 +441,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange = "type";
-                message = _computerservice.editComputer(id, toChange, newType.toStdString());
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldComputer.getType())+" << TO >> "+newType+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _computerservice.editComputer(id, toChange, newType.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row, column, new QTableWidgetItem(QString::fromStdString(oldComputer.getType())));
+                }
             }
         }
 
@@ -392,7 +461,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             if(newBuilt == "1" || newBuilt =="0")
             {
                toChange ="built";
-               message = _computerservice.editComputer(id,toChange, newBuilt.toStdString());
+               QString questionM = "Do you want to change >> "+QString::number(oldComputer.getBuilt())+" << TO >> "+newBuilt+" <<";
+               reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+               if(reply == QMessageBox::Yes)
+               {
+                   message = _computerservice.editComputer(id,toChange, newBuilt.toStdString());
+               }
+               else
+               {
+                   ui->table_c->setItem(row, column, new QTableWidgetItem(QString::number(oldComputer.getBuilt())));
+               }
             }
             else
             {
@@ -410,6 +488,7 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
 void MainWindow::on_table_s_clicked()
 {
    ui->button_delete_scientist->setEnabled(true);
+   ui->action_remove_scientist->setEnabled(true);
 }
 //delete scientist with button on main window
 void MainWindow::on_button_delete_scientist_clicked()
@@ -418,7 +497,7 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
-    int scientistID = currentlySelectedScientist.getScientistID();
+    int scientistID = ui->table_s->item(currentlySelectedScientistIndex, 4)->text().toInt();
 
     QMessageBox::StandardButton sure;
     sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
@@ -429,6 +508,7 @@ void MainWindow::on_button_delete_scientist_clicked()
             ui -> input_keyword_s->setText("");
             getAllScientist();
             ui->button_delete_scientist->setEnabled(false);
+            ui->action_remove_scientist->setEnabled(false);
         }
         else
         {
@@ -446,6 +526,7 @@ void MainWindow::on_action_remove_scientist_triggered()
 void MainWindow::on_table_c_clicked()
 {
    ui->button_delete_computer->setEnabled(true);
+   ui->action_remove_computer->setEnabled(true);
 }
 
 //delete computer with button on main window
@@ -455,7 +536,7 @@ void MainWindow::on_button_delete_computer_clicked()
 
     Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComptuerIndex);
 
-    int computerID = currentlySelectedComputer.getComputerID();
+    int computerID = ui->table_c->item(currentlySelectedComptuerIndex, 4)->text().toInt();
 
     QMessageBox::StandardButton sure;
     sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known computer?", QMessageBox::No|QMessageBox::Yes);
@@ -466,6 +547,7 @@ void MainWindow::on_button_delete_computer_clicked()
             ui->input_keyword_c->setText("");
             getAllComputers();
             ui->button_delete_computer->setEnabled(false);
+            ui->action_remove_computer->setEnabled(false);
         }
         else
         {
@@ -626,8 +708,6 @@ bool MainWindow::ValidInput(string check, string allowed)
 
 void MainWindow::on_table_c_customContextMenuRequested()
 {
-    qDebug() << "Right clicked menu requested on table";
-
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_computer);
     menu->addAction(ui->action_details_c);
@@ -637,8 +717,6 @@ void MainWindow::on_table_c_customContextMenuRequested()
 
 void MainWindow::on_table_s_customContextMenuRequested()
 {
-    qDebug() << "Right clicked menu requested on table";
-
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_scientist);
     menu->addAction(ui->action_details_s);
