@@ -24,8 +24,8 @@ public:
     void ComputerDetails();
 
 private slots:
-    void on_label_name_linkActivated();
-    void on_button_browse_image_clicked();
+
+    void on_browse_scientist_photo_clicked();
 
 private:
     Ui::Details *ui;
