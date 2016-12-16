@@ -8,10 +8,12 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
     ui(new Ui::AddStudentDialog)
 {
     ui->setupUi(this);
+    QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
+    ui->label_s_picture->setPixmap(pix);
 
-    QPixmap pixmap(QString::fromStdString(_service.retrievePicUrl(_scientist.getScientistID())));
+    /*QPixmap pixmap(QString::fromStdString(_service.retrievePicUrl(_scientist.getScientistID())));
     ui->label_s_picture->setPixmap(pixmap);
-    ui->label_s_picture->setScaledContents(true);
+    ui->label_s_picture->setScaledContents(true);*/
 }
 
 AddStudentDialog::~AddStudentDialog()

@@ -101,14 +101,14 @@ string DbManager::getScientistPictureUrl(int scientistID)
 
     QSqlQuery query(_db);
     string url;
-    query.prepare("SELECT * FROM ScientistsID_Pictures WHERE ScientistID = (:ScientistID)");
+    query.prepare("SELECT * FROM ScienstistsID_Pictures WHERE ScientistID = (:ScientistID)");
     query.bindValue(":ScientistID", scientistID);
 
     query.exec();
 
     while(query.next())
     {
-        url = query.value("url").toString().toStdString();
+        url = query.value("Picture").toString().toStdString();
     }
     return url;
 }
@@ -176,9 +176,9 @@ void DbManager::addScientistPictureUrl(int id, string url)
 
     QSqlQuery queryAdd(_db);
 
-    queryAdd.prepare("INSERT INTO ScientistsID_Pictures (ScientistID, Picture) VALUES (:ScientistID, :url)");
-    queryAdd.bindValue(":ScientistID", id);
-    queryAdd.bindValue(":url", QString::fromStdString(url));
+    queryAdd.prepare("INSERT INTO ScienstistsID_Pictures (ScientistID, Picture) VALUES (:ScientistID, :url)");
+    queryAdd.bindValue(":ScientistID", QString::number(5));//id));
+    queryAdd.bindValue(":Picture", QString::fromStdString("RebekkaMynd"));//url));
 }
 
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
