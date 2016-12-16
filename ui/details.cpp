@@ -6,9 +6,14 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     ui(new Ui::Details)
 {
     ui->setupUi(this);
-    _scientist = *pScientist;
 
-    ScientistDetails(pService, pComputerService);
+    ui->statusBar->showMessage("This guy!", 2000);
+
+    _scientist = *pScientist;
+    _pService = pService;
+    _pComputerService = pComputerService;
+
+    ScientistDetails();
 }
 
 Details::Details(QWidget* parent, Computer* pComputer, ScientistService* pService, ComputerService* pComputerService) :
@@ -16,9 +21,12 @@ Details::Details(QWidget* parent, Computer* pComputer, ScientistService* pServic
     ui(new Ui::Details)
 {
     ui->setupUi(this);
-    _computer = *pComputer;
 
-    ComputerDetails(pService, pComputerService);
+    _computer = *pComputer;
+    _pService = pService;
+    _pComputerService = pComputerService;
+
+    ComputerDetails();
 }
 
 Details::~Details()
@@ -26,7 +34,7 @@ Details::~Details()
     delete ui;
 }
 
-void Details::ScientistDetails(ScientistService* pService, ComputerService* pComputerService)
+void Details::ScientistDetails()
 {
     QStringList labels;
     labels << "Name" << "Year Built" << "Type" << "Was Built";
@@ -47,14 +55,14 @@ void Details::ScientistDetails(ScientistService* pService, ComputerService* pCom
 
     ui->fourth_detail->setText(QString::fromStdString("<b>Age:</b> ") + QString::number(_scientist.getAge()));
 
-    pComputerService->retrieveIntersectScientist(QString::number(_scientist.getScientistID()));
+    _pComputerService->retrieveIntersectScientist(QString::number(_scientist.getScientistID()));
 
-    vector<Computer> computers = pComputerService->getComputerVector();
+    vector<Computer> computers = _pComputerService->getComputerVector();
 
     displayAllComputers(computers);
 }
 
-void Details::ComputerDetails(ScientistService* pService, ComputerService* pComputerService)
+void Details::ComputerDetails()
 {
     QStringList labels;
     labels << "Name" << "Gender" << "Year Of Birth" << "Year Of Death";
@@ -75,9 +83,9 @@ void Details::ComputerDetails(ScientistService* pService, ComputerService* pComp
 
     ui->fourth_detail->setText("");
 
-    pService->retrieveIntersectComputer(QString::number(_computer.getComputerID()));
+    _pService->retrieveIntersectComputer(QString::number(_computer.getComputerID()));
 
-    vector<Scientist> scientists = pService->getScientistVector();
+    vector<Scientist> scientists = _pService->getScientistVector();
 
     displayAllScientists(scientists);
 
@@ -104,7 +112,7 @@ void Details::displayAllScientists(const vector<Scientist>& scientists)
         ui->connect_table->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
     }
 
-    //currentlyDisplayedScientist = scientists;
+    currentlyDisplayedScientist = scientists;
 }
 
 // Displays table with all computers
@@ -122,5 +130,50 @@ void Details::displayAllComputers(const vector<Computer>& computers)
         ui->connect_table->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
         ui->connect_table->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
     }
-    //currentlyDisplayedComputers = computers;
+    currentlyDisplayedComputers = computers;
+}
+
+void Details::on_connection_table_customContextMenuRequested()
+{
+    qDebug() << "Right clicked menu requested on table";
+
+    QMenu* menu =new QMenu(this);
+    menu->addAction(ui->action_remove_connection);
+    //menu->addAction(ui->action_details_c);
+    menu->exec(QCursor::pos());
+}
+
+void Details::on_action_remove_connection_triggered()
+{
+    int currentlySelectedIndex = ui->connect_table->currentIndex().row();
+/*
+    if (Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex))
+    {
+
+    }
+    else if (Scientist currentlySelectedComputer = currentlyDisplayedScientist.at(currentlySelectedScientistIndex))
+
+    int scientistID = currentlySelectedScientist.getScientistID();
+
+    QMessageBox::StandardButton sure;
+    sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
+    if(sure == QMessageBox::Yes)
+    {
+        if (_service.deleteScientist(scientistID))
+        {
+            ui -> input_keyword_s->setText("");
+            getAllScientist();
+            ui->button_delete_scientist->setEnabled(false);
+        }
+        else
+        {
+            ui->statusBar->showMessage("scientist not successfully removed",4000);
+        }
+    }
+    */
+}
+
+void Details::on_pushButton_clicked()
+{
+    this->close();
 }

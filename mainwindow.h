@@ -99,7 +99,6 @@ private:
     bool isDoubleClicked = false;
 
     Scientist currentScientist;
-
     Computer currentComputer;
 
     bool isDoubleClickedScientist = false;
