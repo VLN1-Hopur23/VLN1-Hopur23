@@ -34,7 +34,7 @@
        <enum>Qt::CustomContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_scientists">
        <attribute name="title">
@@ -178,9 +178,7 @@
      <x>0</x>
      <y>0</y>
      <width>613</width>
-
-     <height>22</height>
-
+     <height>26</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -202,7 +200,6 @@
    <addaction name="action_add_Computer"/>
    <addaction name="action_remove_scientist"/>
    <addaction name="action_remove_computer"/>
-   <addaction name="action_details"/>
   </widget>
   <action name="action_add_Scientist">
    <property name="checkable">

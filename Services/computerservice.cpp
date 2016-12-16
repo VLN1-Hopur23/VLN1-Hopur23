@@ -36,7 +36,7 @@ size_t ComputerService::getSize() const
 }
 
 // Connects the link function in console to dbmanager
-void ComputerService::retrieveIntersectScientist(const string& param)
+void ComputerService::retrieveIntersectScientist(const QString& param)
 {
     _computers = _data.intersectScientist(param);
 }

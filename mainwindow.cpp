@@ -649,7 +649,7 @@ void MainWindow::on_action_details_s_triggered()
 
     Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
-    Details details(0, &currentlySelectedScientist);
+    Details details(0, &currentlySelectedScientist, &_service, &_computerservice);
 
     details.exec();
 }
@@ -660,7 +660,7 @@ void MainWindow::on_action_details_c_triggered()
 
     Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
 
-    Details details(0, &currentlySelectedComputer);
+    Details details(0, &currentlySelectedComputer, &_service, &_computerservice);
 
     details.exec();
 }

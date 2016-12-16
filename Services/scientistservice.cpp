@@ -89,7 +89,7 @@ vector<Scientist> ScientistService::searchingByFilter(string command, string sea
 }
 
 // Connects link function in console to dbmanager
-void ScientistService::retrieveIntersectComputer(const string& param)
+void ScientistService::retrieveIntersectComputer(const QString& param)
 {
     _scientists = _data.intersectComputer(param);
 }
