@@ -34,6 +34,8 @@ public:
 
     void deleteConnection(const int ID);
 
+    void addConnection(const int ScientistID, const int ComputerID);
+
     // Connection:
     vector<Computer> intersectScientist(const QString& id);
 

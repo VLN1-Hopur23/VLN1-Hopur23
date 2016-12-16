@@ -232,6 +232,16 @@ void DbManager::deleteConnection(const int ID)
     queryDeleteConnection.exec();
 }
 
+// Deletes connection link between scientist and computer
+void DbManager::addConnection(const int ScientistID, const int ComputerID)
+{
+    QSqlQuery queryAddConnection(_db);
+    queryAddConnection.prepare("INSERT INTO Computers_Scientists (ComputerID,ScientistID) VALUES((:ComputerID), (:ScientistID))");
+    queryAddConnection.bindValue(":ComputerID", ComputerID);
+    queryAddConnection.bindValue(":ScientistID", ScientistID);
+    queryAddConnection.exec();
+}
+
 // Returns vector with all computers associated with the scientist/s
 vector<Computer> DbManager::intersectScientist(const QString& id)
 {
