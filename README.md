@@ -1,9 +1,19 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
+##Getting Started:
+<ul>
+<li>User will need QT to get started: https://www.qt.io/download-open-source/</li>
+<li>User needs to download the folder containg all documents though github and connect to QT
+    <ul>
+    <li>$ ls</li>
+    <li>$ cd build</li>
+    </ul>
+ <li>Now, user is ready to run the program</li>
+</ul>
+
 ##Brief description:
 <ul>
-    <li>User will need QT to get started</li>
     <li>This program contains two lists
        <ul>
        <li>List of scientists</li>
