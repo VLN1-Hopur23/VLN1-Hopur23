@@ -237,6 +237,8 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
         int id =  oldScientist.getScientistID();
 
         QString error = "Not validated input";
+        QString warningTitle = "No changes were made";
+        QString warningMessage = "please use valid input";
         string toChange;
         string message;
 
@@ -246,7 +248,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             if(newName.isEmpty()||!(ValidInput(typeOf(newName.toStdString()), "ACI_AC_AI_A")))
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getName())));
-                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+                QMessageBox::warning(this, warningTitle, warningMessage);
 
 
             }
@@ -269,7 +271,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getGender())));
-                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+                QMessageBox::warning(this, warningTitle, warningMessage);
             }
         }
         if(column == 2)
@@ -279,7 +281,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             if(newYearOfBirth.isEmpty() || !(ValidInput(typeOf(newYearOfBirth.toStdString()),"I")) || newYearOfBirthInt>_time.getYearToDay() || newYearOfBirthInt<0 || (ui->table_s->item(row, 3)->text().toInt() < newYearOfBirthInt && ui->table_s->item(row, 3)->text().toInt() != 0 ))
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfBirth())));
-                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+                QMessageBox::warning(this, warningTitle, warningMessage);
             }
             else
             {
@@ -295,7 +297,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             if(newYearOfDeathInt != 0 || newYearOfDeath.isEmpty() || !(ValidInput(typeOf(newYearOfDeath.toStdString()),"I")) || newYearOfDeathInt>_time.getYearToDay() || newYearOfDeathInt<0 || (ui->table_s->item(row, 2)->text().toInt()>newYearOfDeathInt && newYearOfDeathInt !=0))
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfDeath())));
-                QMessageBox::warning(this, "No changes were made", "Not allowed character used ");
+                QMessageBox::warning(this, warningTitle, warningMessage);
             }
             else
             {
