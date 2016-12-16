@@ -241,6 +241,7 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
         QString warningMessage = "please use valid input";
         string toChange;
         string message;
+        int reply;
 
         if(column == 0)
         {
@@ -255,8 +256,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange ="name";
-                message = _service.editScientist(id,toChange,newName.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldScientist.getName())+" << TO >> "+newName+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newName.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getName())));
+                }
             }
         }
         if(column == 1)
@@ -265,8 +274,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             if(newGender.toStdString() == "f" || newGender.toStdString() == "m")
             {
                 toChange ="gender";
-                message = _service.editScientist(id,toChange,newGender.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldScientist.getGender())+" << TO >> "+newGender+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newGender.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getGender())));
+                }
             }
             else
             {
@@ -286,15 +303,23 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange = "birth";
-                message = _service.editScientist(id,toChange,newYearOfBirth.toStdString());
-                // change sql
+                QString questionM = "Do you want to change >> "+QString::number(oldScientist.getYearOfBirth())+" << TO >> "+newYearOfBirth+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _service.editScientist(id,toChange,newYearOfBirth.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfBirth())));
+                }
             }
         }
         if( column == 3)
         {
             QString newYearOfDeath = ui->table_s->item(row, column)->text();
             int newYearOfDeathInt = newYearOfDeath.toInt();
-            if(newYearOfDeathInt != 0 || newYearOfDeath.isEmpty() || !(ValidInput(typeOf(newYearOfDeath.toStdString()),"I")) || newYearOfDeathInt>_time.getYearToDay() || newYearOfDeathInt<0 || (ui->table_s->item(row, 2)->text().toInt()>newYearOfDeathInt && newYearOfDeathInt !=0))
+            if( newYearOfDeath.isEmpty() || !(ValidInput(typeOf(newYearOfDeath.toStdString()),"I")) || newYearOfDeathInt>_time.getYearToDay() || newYearOfDeathInt<0 || (ui->table_s->item(row, 2)->text().toInt()>newYearOfDeathInt && newYearOfDeathInt !=0))
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfDeath())));
                 QMessageBox::warning(this, warningTitle, warningMessage);
@@ -302,8 +327,16 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             else
             {
                 toChange = "death";
-                message = _service.editScientist(id,toChange,newYearOfDeath.toStdString());
-                // change SQL
+                QString questionM = "Do you want to change >> "+QString::number(oldScientist.getYearOfDeath())+" << TO >> "+newYearOfDeath+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                   message = _service.editScientist(id,toChange,newYearOfDeath.toStdString());
+                }
+                else
+                {
+                    ui->table_s->setItem(row,column,new QTableWidgetItem(QString::number(oldScientist.getYearOfDeath())));
+                }
             }
         }
         ui->statusBar->showMessage(QString::fromStdString(message), 4000);
@@ -335,6 +368,7 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
         Computer oldComputer = computers[row];
 
         int id = oldComputer.getComputerID();
+        int reply;
 
         QString error = "Not validated input";
         string toChange;
@@ -351,7 +385,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange ="name";
-                message = _computerservice.editComputer(id,toChange,newName.toStdString());
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldComputer.getName())+" << TO >> "+newName+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                     message = _computerservice.editComputer(id,toChange,newName.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row,column, new QTableWidgetItem(QString::fromStdString(oldComputer.getName())));
+                }
             }
         }
         if(column == 1)
@@ -366,7 +409,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange = "yearbuilt";
-                message = _computerservice.editComputer(id, toChange, newYearBuilt.toStdString());
+                QString questionM = "Do you want to change >> "+QString::number(oldComputer.getYearBuilt())+" << TO >> "+newYearBuilt+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _computerservice.editComputer(id, toChange, newYearBuilt.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row,column, new QTableWidgetItem(QString::number(oldComputer.getYearBuilt())));
+                }
             }
 
         }
@@ -381,7 +433,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             else
             {
                 toChange = "type";
-                message = _computerservice.editComputer(id, toChange, newType.toStdString());
+                QString questionM = "Do you want to change >> "+QString::fromStdString(oldComputer.getType())+" << TO >> "+newType+" <<";
+                reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+                if(reply == QMessageBox::Yes)
+                {
+                    message = _computerservice.editComputer(id, toChange, newType.toStdString());
+                }
+                else
+                {
+                    ui->table_c->setItem(row, column, new QTableWidgetItem(QString::fromStdString(oldComputer.getType())));
+                }
             }
         }
 
@@ -392,7 +453,16 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
             if(newBuilt == "1" || newBuilt =="0")
             {
                toChange ="built";
-               message = _computerservice.editComputer(id,toChange, newBuilt.toStdString());
+               QString questionM = "Do you want to change >> "+QString::number(oldComputer.getBuilt())+" << TO >> "+newBuilt+" <<";
+               reply = QMessageBox::question(this, "Edit?", questionM, QMessageBox::Yes | QMessageBox::No);
+               if(reply == QMessageBox::Yes)
+               {
+                   message = _computerservice.editComputer(id,toChange, newBuilt.toStdString());
+               }
+               else
+               {
+                   ui->table_c->setItem(row, column, new QTableWidgetItem(QString::number(oldComputer.getBuilt())));
+               }
             }
             else
             {
