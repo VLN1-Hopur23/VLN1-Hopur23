@@ -233,7 +233,7 @@ void DbManager::deleteConnection(const int ID)
 }
 
 // Returns vector with all computers associated with the scientist/s
-vector<Computer> DbManager::intersectScientist(const string& id)
+vector<Computer> DbManager::intersectScientist(const QString& id)
 {
     if (!_db.isOpen())
     {
@@ -245,7 +245,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
     QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Computers INNER JOIN Computers_Scientists ON Computers.ComputerID = Computers_Scientists.ComputerID INNER JOIN Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID WHERE Scientists.ScientistID = :id");
-    intersectQuery.bindValue(":id", QString::fromStdString(id));
+    intersectQuery.bindValue(":id", id);
 
     intersectQuery.exec();
 
@@ -269,7 +269,7 @@ vector<Computer> DbManager::intersectScientist(const string& id)
 }
 
 // Returns vector with all scientists associated with the computer/s
-vector<Scientist> DbManager::intersectComputer(const string& id)
+vector<Scientist> DbManager::intersectComputer(const QString& id)
 {
     if (!_db.isOpen())
     {
@@ -281,7 +281,7 @@ vector<Scientist> DbManager::intersectComputer(const string& id)
     QSqlQuery intersectQuery(_db);
 
     intersectQuery.prepare("SELECT * FROM Scientists INNER JOIN Computers_Scientists ON Scientists.ScientistID = Computers_Scientists.ScientistID INNER JOIN Computers ON Computers.ComputerID = Computers_Scientists.ComputerID WHERE Computers.ComputerID = :id");
-    intersectQuery.bindValue(":id", QString::fromStdString(id));
+    intersectQuery.bindValue(":id", id);
 
     intersectQuery.exec();
 

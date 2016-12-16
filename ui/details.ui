@@ -42,16 +42,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QListView" name="listView">
-   <property name="geometry">
-    <rect>
-     <x>15</x>
-     <y>280</y>
-     <width>521</width>
-     <height>192</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_name">
    <property name="geometry">
     <rect>
@@ -70,7 +60,7 @@
     <rect>
      <x>20</x>
      <y>90</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -83,7 +73,7 @@
     <rect>
      <x>20</x>
      <y>120</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -96,7 +86,7 @@
     <rect>
      <x>20</x>
      <y>150</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -109,13 +99,46 @@
     <rect>
      <x>20</x>
      <y>180</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>Fourth Detail</string>
    </property>
+  </widget>
+  <widget class="QTableWidget" name="connect_table">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>531</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

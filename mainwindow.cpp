@@ -623,38 +623,46 @@ bool MainWindow::ValidInput(string check, string allowed)
     }
     return false;
 }
-void MainWindow::on_action_details_triggered()
-{
-    //TODO DETAILS CONNECTION
-}
-void MainWindow::on_table_c_customContextMenuRequested(const QPoint &pos)
+
+void MainWindow::on_table_c_customContextMenuRequested()
 {
     qDebug() << "Right clicked menu requested on table";
-
-    //ui->table_s->setItem(row,0,new QTableWidgetItem(QString::fromStdString(currentScientist.getName())));
-
-    QTableWidgetItem* computer = ui->table_c->itemAt(pos);
 
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_computer);
-    menu->addAction(ui->action_details);
-    menu->popup(ui->table_c->viewport()->mapFromGlobal(pos));
+    menu->addAction(ui->action_details_c);
+    menu->exec(QCursor::pos());
 
 }
 
-void MainWindow::on_table_s_customContextMenuRequested(const QPoint &pos)
+void MainWindow::on_table_s_customContextMenuRequested()
 {
     qDebug() << "Right clicked menu requested on table";
 
-    QTableWidgetItem* scientist = ui->table_s->itemAt(pos);
-
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_scientist);
-    menu->addAction(ui->action_details);
-    menu->popup(ui->table_s->viewport()->mapFromGlobal(pos));
-
+    menu->addAction(ui->action_details_s);
+    menu->exec(QCursor::pos());
 }
 
+void MainWindow::on_action_details_s_triggered()
+{
+    int currentlySelectedScientistIndex = ui->table_s->currentIndex().row();
 
+    Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
+    Details details(0, &currentlySelectedScientist, &_service, &_computerservice);
 
+    details.exec();
+}
+
+void MainWindow::on_action_details_c_triggered()
+{
+    int currentlySelectedComputerIndex = ui->table_c->currentIndex().row();
+
+    Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
+
+    Details details(0, &currentlySelectedComputer, &_service, &_computerservice);
+
+    details.exec();
+}

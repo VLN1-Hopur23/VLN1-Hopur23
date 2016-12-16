@@ -26,7 +26,7 @@ public:
     // Returns the size of the computer vector
     size_t getSize() const;
 
-    void retrieveIntersectScientist(const string& param);
+    void retrieveIntersectScientist(const QString& param);
 
     void getVectorFoundComputer(string& searchData);
 
