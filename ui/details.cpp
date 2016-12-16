@@ -261,15 +261,15 @@ void Details::on_browse_scientist_photo_clicked()
                 ).toStdString();
     if(filePath.length())
     {
-        // user select som file
+        // user select some file
         QPixmap pixmap(QString::fromStdString(filePath));
         ui->detail_image->setPixmap(pixmap);
         ui->detail_image->setScaledContents(true);
-        _service.addPicUrl(scientistID, filePath);
+        _pService->addPicUrl(scientistID, filePath);
     }
 }
 
-void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
+void Details::on_table_add_connect_cellDoubleClicked(int row)
 {
     if(_tableAddConnectDisplays == "computers")
     {

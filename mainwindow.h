@@ -47,7 +47,7 @@ private slots:
 
     void on_table_s_cellChanged(int row, int column);
 
-    void on_table_s_cellDoubleClicked(int row, int column);
+    void on_table_s_cellDoubleClicked();
 
     void on_table_s_clicked();
 
@@ -70,7 +70,7 @@ private slots:
 
     void on_action_details_c_triggered();
 
-    void on_table_c_cellDoubleClicked(int row, int column);
+    void on_table_c_cellDoubleClicked();
 
     void on_table_c_cellChanged(int row, int column);
 

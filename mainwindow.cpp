@@ -37,8 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
-    ui->action_remove_scientist->setEnabled(false);
-    ui->action_remove_computer->setEnabled(false);
+    ui->action_remove_scientist->setDisabled(true);
+    ui->action_remove_computer->setDisabled(true);
+    ui->action_details_s->setDisabled(true);
+    ui->action_details_c->setDisabled(true);
 
     ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
@@ -228,7 +230,7 @@ void MainWindow::on_action_add_Scientist_triggered()
 
 
 
-void MainWindow::on_table_s_cellDoubleClicked(int row, int column)
+void MainWindow::on_table_s_cellDoubleClicked()
 {
     isDoubleClickedScientist = true;
 }
@@ -259,8 +261,6 @@ void MainWindow::on_table_s_cellChanged(int row, int column)
             {
                 ui->table_s->setItem(row,column,new QTableWidgetItem(QString::fromStdString(oldScientist.getName())));
                 QMessageBox::warning(this, warningTitle, warningMessage);
-
-
             }
             else
             {
@@ -362,7 +362,7 @@ void MainWindow::on_action_add_Computer_triggered()
     on_button_add_computer_clicked();
 }
 
-void MainWindow::on_table_c_cellDoubleClicked(int row, int column)
+void MainWindow::on_table_c_cellDoubleClicked()
 {
     isDoubleClickedComputer = true;
 }
@@ -485,11 +485,12 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
 }
 
 
-// Delete scientist button
+// Enable scientist toolbar buttons
 void MainWindow::on_table_s_clicked()
 {
    ui->button_delete_scientist->setEnabled(true);
    ui->action_remove_scientist->setEnabled(true);
+   ui->action_details_s->setEnabled(true);
 }
 //delete scientist with button on main window
 void MainWindow::on_button_delete_scientist_clicked()
@@ -523,11 +524,12 @@ void MainWindow::on_action_remove_scientist_triggered()
     on_button_delete_scientist_clicked();
 }
 
-// Delete computer button
+// Enable computer toolbar buttons
 void MainWindow::on_table_c_clicked()
 {
    ui->button_delete_computer->setEnabled(true);
    ui->action_remove_computer->setEnabled(true);
+   ui->action_details_c->setEnabled(true);
 }
 
 //delete computer with button on main window
@@ -759,6 +761,12 @@ void MainWindow::on_tabs_tabBarClicked(int index)
         ui->action_add_Scientist->setVisible(true);
         ui->action_remove_scientist->setVisible(true);
 
+        ui->action_details_c->setDisabled(false);
+        ui->action_details_c->setVisible(false);
+
+        ui->action_details_s->setEnabled(false);
+        ui->action_details_s->setVisible(true);
+
         ui->action_add_Scientist->setEnabled(true);
     }
     else if (index == 1)
@@ -771,6 +779,12 @@ void MainWindow::on_tabs_tabBarClicked(int index)
 
         ui->action_add_Scientist->setVisible(false);
         ui->action_remove_scientist->setVisible(false);
+
+        ui->action_details_c->setDisabled(true);
+        ui->action_details_c->setVisible(true);
+
+        ui->action_details_s->setEnabled(false);
+        ui->action_details_s->setVisible(false);
 
         ui->action_add_Computer->setEnabled(true);
     }
