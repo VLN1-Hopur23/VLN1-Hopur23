@@ -1,6 +1,16 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
+##Brief description:
+<ul>
+    <li>This program contains two lists
+    <ul>
+       <li>List of scientists</li>
+       <li>List of computers</li>
+       </ul>
+       <li>User is able to decide what to do with those lists with seven given options</li>
+</ul>
+    
 ###Digit application with the following functionality:
 <ul>
    <li>Users can register a known person and a known computer from the history of computer science
