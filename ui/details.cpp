@@ -29,7 +29,7 @@ Details::~Details()
 void Details::ScientistDetails(ScientistService* pService, ComputerService* pComputerService)
 {
     QStringList labels;
-    labels << "Name" << "Gender" << "Year Of Birth" << "Year Of Death";
+    labels << "Name" << "Year Built" << "Type" << "Was Built";
 
     ui->label_name->setText(QString::fromStdString("<h2>" + _scientist.getName() + "</h2>"));
     ui->first_detail->setText(QString::fromStdString("<b>Gender:</b> " + _scientist.getGender()));
@@ -57,7 +57,7 @@ void Details::ScientistDetails(ScientistService* pService, ComputerService* pCom
 void Details::ComputerDetails(ScientistService* pService, ComputerService* pComputerService)
 {
     QStringList labels;
-    labels << "Name" << "Year Built" << "Type" << "Was Built";
+    labels << "Name" << "Gender" << "Year Of Birth" << "Year Of Death";
 
     ui->label_name->setText(QString::fromStdString("<h2>" + _computer.getName() + "</h2>"));
     ui->first_detail->setText(QString::fromStdString("<b>Year built:</b> ") + QString::number(_computer.getYearBuilt()));
