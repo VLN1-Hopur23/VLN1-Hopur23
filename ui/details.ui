@@ -117,19 +117,6 @@
     <string>Fourth Detail</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_image">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>40</y>
-     <width>201</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="browse_scientist_photo">
    <property name="geometry">
     <rect>

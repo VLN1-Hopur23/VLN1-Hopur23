@@ -6,8 +6,7 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     ui(new Ui::Details)
 {
     ui->setupUi(this);
-    /*QPixmap pix(":/db_images/Images of scientists/unknown.jpg");
-    ui->label_image->setPixmap(pix);*/
+
     ui->statusBar->showMessage("This guy!", 2000);
 
     _scientist = *pScientist;
@@ -16,12 +15,10 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     _active = 1;
 
     _tableAddConnectDisplays = "computers";
-    ScientistDetails();
 
-    string filePath = _service.retrievePicUrl(_scientist.getScientistID());
-    QPixmap pixmap(QString::fromStdString(filePath));
-    ui->label_image->setPixmap(pixmap);
-    ui->label_image->setScaledContents(true);
+
+
+    ScientistDetails();
 }
 
 Details::Details(QWidget* parent, Computer* pComputer, ScientistService* pService, ComputerService* pComputerService) :
@@ -65,6 +62,11 @@ void Details::ScientistDetails()
     }
 
     ui->fourth_detail->setText(QString::fromStdString("<b>Age:</b> ") + QString::number(_scientist.getAge()));
+
+    string filePath = _service.retrievePicUrl(_scientist.getScientistID());
+    QPixmap pixmap(QString::fromStdString(filePath));
+    ui->detail_image->setPixmap(pixmap);
+    ui->detail_image->setScaledContents(true);
 
     displayComputers();
 }
@@ -261,8 +263,8 @@ void Details::on_browse_scientist_photo_clicked()
     {
         // user select som file
         QPixmap pixmap(QString::fromStdString(filePath));
-        ui->label_image->setPixmap(pixmap);
-        ui->label_image->setScaledContents(true);
+        ui->detail_image->setPixmap(pixmap);
+        ui->detail_image->setScaledContents(true);
         _service.addPicUrl(scientistID, filePath);
     }
 }
