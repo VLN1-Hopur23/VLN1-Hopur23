@@ -1,6 +1,33 @@
 # VLN1-Semester Project 1, Reykjavik University
 ##Group 23 -
 
+##Getting Started:
+<ul>
+<li>User will need QT to get started: https://www.qt.io/download-open-source/</li>
+<li>User needs to download the folder containg all documents though github and connect to QT
+    <ul>
+    <li>$ ls</li>
+    <li>$ cd build</li>
+    </ul>
+ <li>Now, user is ready to run the program</li>
+</ul>
+
+##Brief description:
+<ul>
+    <li>This program contains two lists
+       <ul>
+       <li>List of scientists</li>
+       <li>List of computers</li>
+       </ul>
+     <li>User is to decide what to do with those lists with seven given options</li>
+     <li>User can choose following options by
+       <ul>
+                <li>Input given numbers</li>
+                <li>Input first letter</li>
+                <li>Input whole sentence</li>
+                </ul>     
+</ul>
+    
 ###Digit application with the following functionality:
 <ul>
    <li>Users can register a known person and a known computer from the history of computer science
@@ -54,9 +81,18 @@
 <ul>
    <li>Frequent users can use shortcuts to every category by
    <ul>
-   <li>using firts letter of commands</li>
+   <li>using first letter of commands</li>
    <li>using given integers of commands</li>
    </ul>
+</ul>  
+###Features that group 23 is extra proud of:
+<ul>
+<li>Our group is amazing, everyone worked so well!</li>
+<li>The ambition</li>
+<li>We are very thankful to our two minions</li>
+<li>The goal was to make this program easily accessible to customers</li>
+<li>Our indrodction video</li>
+</ul>
    
   
    
