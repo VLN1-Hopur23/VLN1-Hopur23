@@ -9,8 +9,14 @@
        <li>List of scientists</li>
        <li>List of computers</li>
        </ul>
-       <li>User is to decide what to do with those lists with seven given options</li>
-       <li></li>
+     <li>User is to decide what to do with those lists with seven given options</li>
+     <li>User can choose following options by
+       <ul>
+                <li>Input given numbers</li>
+                <li>Input first letter</li>
+                <li>Input whole sentence</li>
+                </ul>
+                
 </ul>
     
 ###Digit application with the following functionality:
