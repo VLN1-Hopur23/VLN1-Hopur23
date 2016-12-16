@@ -98,7 +98,7 @@ void Details::displayComputers()
 
     vector<Computer> computers = _pComputerService->getComputerVector();
 
-    displayAllComputers(computers);
+    computerListBuilder(computers);
     displayAllComputersAddConnection();
 }
 
@@ -108,12 +108,12 @@ void Details::displayScientists()
 
     vector<Scientist> scientists = _pService->getScientistVector();
 
-    displayAllScientists(scientists);
+    scientistListBuilder(scientists);
     displayAllScientistsAddConnection();
 }
 
-// Displays table with all scientist
-void Details::displayAllScientists(const vector<Scientist>& scientists)
+// Populates the list of connected scientists
+void Details::scientistListBuilder(const vector<Scientist>& scientists)
 {
     ui->connect_table->clearContents();
     ui->connect_table->setRowCount(scientists.size());
@@ -151,8 +151,8 @@ void Details::displayAllScientistsAddConnection()
     ui->table_add_connect->setSortingEnabled(true);
 }
 
-// Displays table with all computers
-void Details::displayAllComputers(const vector<Computer>& computers)
+// Populates the list of connected computers
+void Details::computerListBuilder(const vector<Computer>& computers)
 {
     ui->connect_table->clearContents();
     ui->connect_table->setRowCount(computers.size());

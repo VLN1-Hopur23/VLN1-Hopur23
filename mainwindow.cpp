@@ -752,20 +752,26 @@ void MainWindow::on_tabs_tabBarClicked(int index)
     {
         ui->action_add_Computer->setDisabled(true);
         ui->action_remove_computer->setDisabled(true);
+
         ui->action_add_Computer->setVisible(false);
         ui->action_remove_computer->setVisible(false);
+
         ui->action_add_Scientist->setVisible(true);
         ui->action_remove_scientist->setVisible(true);
+
         ui->action_add_Scientist->setEnabled(true);
     }
     else if (index == 1)
     {
         ui->action_add_Scientist->setDisabled(true);
         ui->action_remove_scientist->setDisabled(true);
+
         ui->action_add_Computer->setVisible(true);
         ui->action_remove_computer->setVisible(true);
+
         ui->action_add_Scientist->setVisible(false);
         ui->action_remove_scientist->setVisible(false);
+
         ui->action_add_Computer->setEnabled(true);
     }
 }
