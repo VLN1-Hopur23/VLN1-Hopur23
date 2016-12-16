@@ -15,8 +15,8 @@ Details::Details(QWidget* parent, Scientist* pScientist, ScientistService* pServ
     _active = 1;
 
     ScientistDetails();
-
-    QPixmap pixmap(QString::fromStdString(":/db_images/Images of scientists/unknown.jpg"));
+    string filePath = _service.retrievePicUrl(_scientist.getScientistID());
+    QPixmap pixmap(QString::fromStdString(filePath));
     ui->label_image->setPixmap(pixmap);
     ui->label_image->setScaledContents(true);
 }

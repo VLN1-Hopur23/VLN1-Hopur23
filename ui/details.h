@@ -50,6 +50,7 @@ private:
 
     ScientistService* _pService;
     ComputerService* _pComputerService;
+    ScientistService _service;
 
     vector <Scientist> _currentlyDisplayedScientists;
     vector <Computer> _currentlyDisplayedComputers;
