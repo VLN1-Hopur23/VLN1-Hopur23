@@ -3,7 +3,7 @@
 
 ##Brief description:
 <ul>
-    <li>User needs to use QT to run the program</li>
+    <li>User will need QT to get started</li>
     <li>This program contains two lists
        <ul>
        <li>List of scientists</li>
