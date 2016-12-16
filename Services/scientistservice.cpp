@@ -43,6 +43,20 @@ void ScientistService::retrieveScientists()
     _scientists = _data.getScientists();
 }
 
+// Fetches a url string from db
+string ScientistService::retrievePicUrl(int scientistID)
+{
+    string url = _data.getScientistPictureUrl(scientistID);
+    return url;
+}
+
+void ScientistService::addPicUrl(int scientistID, string url)
+{
+    _data.addScientistPictureUrl(scientistID, url);
+}
+
+
+
 // Edit function takes input from the user and fetches data from the dbmanagar
 string ScientistService::editScientist(int index, string change, string input)
 {

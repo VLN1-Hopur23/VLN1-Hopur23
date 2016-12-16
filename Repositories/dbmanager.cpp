@@ -179,16 +179,6 @@ void DbManager::addScientistPictureUrl(int id, string url)
     queryAdd.prepare("INSERT INTO ScientistsID_Pictures (ScientistID, Picture) VALUES (:ScientistID, :url)");
     queryAdd.bindValue(":ScientistID", id);
     queryAdd.bindValue(":url", QString::fromStdString(url));
-
-    /*if(queryAdd.exec())
-    {
-        //id = queryAdd.lastInsertId().toInt();
-        return true;
-    }
-    else
-    {
-        return false;
-    }*/
 }
 
 bool DbManager::addIntersect(const int& scientistID, const int& computerID)
