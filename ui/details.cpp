@@ -296,7 +296,6 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
             {
                 ui->statusBar->showMessage("Connection failed", 4000);
             }
-
         }
     }
     else if (_tableAddConnectDisplays == "scientists")
@@ -320,4 +319,9 @@ void Details::on_table_add_connect_cellDoubleClicked(int row, int column)
             }
         }
     }
+}
+
+void Details::on_action_add_connection_triggered()
+{
+    ui->tab_add_connect->setCurrentIndex(1);
 }

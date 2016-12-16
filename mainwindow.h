@@ -74,6 +74,8 @@ private slots:
 
     void on_table_c_cellChanged(int row, int column);
 
+    void on_tabs_tabBarClicked(int index);
+
 private:
 
     void getAllScientist();
