@@ -8,6 +8,7 @@
 #include "addcomputerdialog.h"
 #include "localtime.h"
 #include "details.h"
+
 #include <QLabel>
 #include <vector>
 #include <QStatusBar>
@@ -85,7 +86,9 @@ private:
     void displayAllScientists(const vector<Scientist>& scientists);
 
     void displayAllComputers(const vector<Computer>& computers);
+
     string typeOf(string what);
+
     bool ValidInput(string check, string allowed);
 
     Ui::MainWindow *ui;

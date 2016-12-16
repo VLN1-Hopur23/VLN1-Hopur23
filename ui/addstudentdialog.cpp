@@ -262,6 +262,7 @@ void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
                 "",
                 "Image files(*.png *.jpg)"
                 ).toStdString();
+
     if(filePath.length())
     {
         // user select som file
@@ -271,5 +272,4 @@ void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
         // add the url to database
         _service.addPicUrl(_scientist.getScientistID(),filePath);
     }
-
 }

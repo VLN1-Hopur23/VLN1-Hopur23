@@ -107,7 +107,6 @@ string ComputerService::editComputer(int index, string change, string input)
         {
             message = _data.editComputeBuilt(index, false);
         }
-
     }
     return message;
 }

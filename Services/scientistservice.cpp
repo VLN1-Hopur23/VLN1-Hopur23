@@ -47,6 +47,7 @@ void ScientistService::retrieveScientists()
 string ScientistService::retrievePicUrl(int scientistID)
 {
     string url = _data.getScientistPictureUrl(scientistID);
+
     if(url.empty())
     {
         url = ":/db_images/Images of scientists/unknown.jpeg";
@@ -58,8 +59,6 @@ void ScientistService::addPicUrl(int scientistID, string url)
 {
     _data.addScientistPictureUrl(scientistID, url);
 }
-
-
 
 // Edit function takes input from the user and fetches data from the dbmanagar
 string ScientistService::editScientist(int index, string change, string input)

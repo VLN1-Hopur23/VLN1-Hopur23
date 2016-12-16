@@ -24,7 +24,6 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
 
     bool built = false;
 
-
     int buildingYearInt = buildingYear.toInt();
 
     ui->label_error_add_computer_building_year->setText("");
@@ -42,7 +41,6 @@ void AddComputerDialog::on_button_add_computer_add_computer_clicked()
     {
         ui->label_error_add_computer_building_year->setText(error);
         InputIsNotValid = true;
-
     }
 
     if(typeOfComputer.isEmpty() || !(ValidInput(typeOf(typeOfComputer.toStdString()),"ACI_AC_AI_A")))
@@ -126,7 +124,7 @@ string AddComputerDialog::typeOf(string what)
         }
         else if(whatArrayInt[i] == 46 || whatArrayInt[i] == 44 ) // 46='.', 44 = ',',
         {
-           whatIsAlowedChar[i] =true;
+           whatIsAlowedChar[i] = true;
         }
         else
         {
