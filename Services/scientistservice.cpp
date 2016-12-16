@@ -98,3 +98,8 @@ bool ScientistService::addIntersectComputer(const int& scientistID, const int& c
 {
     return _data.addIntersect(scientistID, computerID);
 }
+
+QString ScientistService::deleteConnection(const int& scientistID, const int& computerID)
+{
+    return _data.deleteConnection(scientistID, computerID);
+}

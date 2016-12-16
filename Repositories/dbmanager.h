@@ -41,6 +41,8 @@ public:
 
     vector<Scientist> intersectComputer(const QString& id);
 
+    QString deleteConnection(const int& scientistID, const int& computerID);
+
     // Search:
     vector<Scientist> searchScientist(const string& searchData);
 

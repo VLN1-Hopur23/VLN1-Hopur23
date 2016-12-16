@@ -41,6 +41,10 @@ public:
 
     bool searchComputersByPeriod(int yearFrom, int yearTo);
 
+    QString deleteConnection(const int &scientistID, const int &computerID);
+
+private slots:
+
 private:
 
     vector<Computer> _computers;

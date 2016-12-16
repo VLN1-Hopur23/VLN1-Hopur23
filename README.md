@@ -6,10 +6,13 @@
 <li>User will need QT to get started: https://www.qt.io/download-open-source/</li>
 <li>User needs to download the folder containg all documents though github and connect to QT
     <ul>
-    <li>$ ls</li>
-    <li>$ cd build</li>
+    <li>User makes a folder on they're own computer</li>
+    <li>User finds the folder though terminal by using "ls" and "cd" commands</li>
+    <li>User clones git file by using the commands "git clone https://github.com/VLN1-Hopur23/VLN1-Hopur23.git"</li>
+    <li>Then user opens the project with QT and builds it</li>
+    <li>Finally, user copies the SQL file from the github document and into the build document</li>
     </ul>
- <li>Now, user is ready to run the program</li>
+ <li>Now, user is ready to run the program through QT</li>
 </ul>
 
 ##Brief description:

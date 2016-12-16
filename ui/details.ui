@@ -126,6 +126,12 @@
      <height>192</height>
     </rect>
    </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectRows</enum>
    </property>

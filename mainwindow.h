@@ -10,6 +10,9 @@
 #include "details.h"
 #include <QLabel>
 #include <vector>
+#include <QStatusBar>
+#include <QMessageBox>
+#include <QMenu>
 
 using namespace std;
 
@@ -88,7 +91,6 @@ private:
     ScientistService _service;
     ComputerService _computerservice;
     LocalTime _time;
-
 
     QString currentScientistSortColumn;
     QString currentComputerSortColumn;
