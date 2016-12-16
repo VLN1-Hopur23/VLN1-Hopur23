@@ -43,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     getAllScientist();
     getAllComputers();
 
+    ui->action_remove_scientist->setEnabled(false);
+    ui->action_remove_computer->setEnabled(false);
+
     ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
 
@@ -496,6 +499,7 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
 void MainWindow::on_table_s_clicked()
 {
    ui->button_delete_scientist->setEnabled(true);
+   ui->action_remove_scientist->setEnabled(true);
 }
 //delete scientist with button on main window
 void MainWindow::on_button_delete_scientist_clicked()
@@ -515,6 +519,7 @@ void MainWindow::on_button_delete_scientist_clicked()
             ui -> input_keyword_s->setText("");
             getAllScientist();
             ui->button_delete_scientist->setEnabled(false);
+            ui->action_remove_scientist->setEnabled(false);
         }
         else
         {
@@ -532,6 +537,7 @@ void MainWindow::on_action_remove_scientist_triggered()
 void MainWindow::on_table_c_clicked()
 {
    ui->button_delete_computer->setEnabled(true);
+   ui->action_remove_computer->setEnabled(true);
 }
 
 //delete computer with button on main window
@@ -552,6 +558,7 @@ void MainWindow::on_button_delete_computer_clicked()
             ui->input_keyword_c->setText("");
             getAllComputers();
             ui->button_delete_computer->setEnabled(false);
+            ui->action_remove_computer->setEnabled(false);
         }
         else
         {
