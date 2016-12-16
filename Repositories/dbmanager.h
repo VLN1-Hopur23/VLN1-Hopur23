@@ -35,9 +35,9 @@ public:
     void deleteConnection(const int ID);
 
     // Connection:
-    vector<Computer> intersectScientist(const string& id);
+    vector<Computer> intersectScientist(const QString& id);
 
-    vector<Scientist> intersectComputer(const string& id);
+    vector<Scientist> intersectComputer(const QString& id);
 
     // Search:
     vector<Scientist> searchScientist(const string& searchData);
@@ -64,6 +64,8 @@ public:
     string editComputerYearBuilt(const int& id, const string& newName);
 
     string editComputerType(const int& id, const string& newName);
+
+    string editComputeBuilt(const int& id, bool newWasBuilt);
 
     string stringToLower(string str);
 

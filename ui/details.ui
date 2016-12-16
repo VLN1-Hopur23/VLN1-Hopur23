@@ -16,6 +16,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>490</y>
+     <width>551</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
@@ -39,30 +49,20 @@
     </rect>
    </property>
    <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QListView" name="listView">
-   <property name="geometry">
-    <rect>
-     <x>15</x>
-     <y>280</y>
-     <width>521</width>
-     <height>192</height>
-    </rect>
+    <string>Picture</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_name">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>241</width>
-     <height>41</height>
+     <x>10</x>
+     <y>10</y>
+     <width>341</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>Name</string>
    </property>
   </widget>
   <widget class="QLabel" name="first_detail">
@@ -70,7 +70,7 @@
     <rect>
      <x>20</x>
      <y>90</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -83,7 +83,7 @@
     <rect>
      <x>20</x>
      <y>120</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -96,7 +96,7 @@
     <rect>
      <x>20</x>
      <y>150</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -109,7 +109,7 @@
     <rect>
      <x>20</x>
      <y>180</y>
-     <width>131</width>
+     <width>221</width>
      <height>21</height>
     </rect>
    </property>
@@ -117,7 +117,106 @@
     <string>Fourth Detail</string>
    </property>
   </widget>
+  <widget class="QTableWidget" name="connect_table">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>531</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Conncetions:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <action name="action_remove_connection">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/images/remove_link.png</normaloff>:/icons/images/remove_link.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Connection</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Connection</string>
+   </property>
+  </action>
+  <action name="action_add_connection">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/images/add_link.png</normaloff>:/icons/images/add_link.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Connection</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Connection</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
