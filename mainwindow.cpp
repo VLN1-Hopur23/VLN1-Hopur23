@@ -463,9 +463,8 @@ void MainWindow::on_table_c_cellChanged(int row, int column)
         if(column == 3)
         {
             QString newBuilt = ui->table_c->item(row, column)->text();
-            //int newBuiltInt = newBuilt.toInt();
 
-            if(newBuilt == "1" || newBuilt =="0")
+            if(newBuilt == "1" || newBuilt == "0")
             {
                toChange ="built";
                QString questionM = "Do you want to change >> "+QString::number(oldComputer.getBuilt())+" << TO >> "+newBuilt+" <<";
