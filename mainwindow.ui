@@ -260,7 +260,9 @@
    <addaction name="action_add_Scientist"/>
    <addaction name="action_add_Computer"/>
    <addaction name="action_remove_scientist"/>
+   <addaction name="action_details_s"/>
    <addaction name="action_remove_computer"/>
+   <addaction name="action_details_c"/>
   </widget>
   <action name="action_add_Scientist">
    <property name="checkable">
@@ -323,6 +325,9 @@
    </property>
   </action>
   <action name="action_details_s">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/images/details.png</normaloff>:/icons/images/details.png</iconset>
@@ -344,6 +349,9 @@
    </property>
    <property name="toolTip">
     <string>Details</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>

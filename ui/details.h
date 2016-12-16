@@ -59,7 +59,7 @@ private slots:
     void on_action_remove_connection_triggered();
 
     // Double click to add a connection
-    void on_table_add_connect_cellDoubleClicked(int row, int column);
+    void on_table_add_connect_cellDoubleClicked(int row);
 
     // Add connection right click menu selected
     void on_action_add_connection_triggered();
