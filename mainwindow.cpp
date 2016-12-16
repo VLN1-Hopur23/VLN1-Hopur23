@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QMenu>
 
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -12,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->table_s->setColumnHidden(4, true);
+    ui->table_c->setColumnHidden(4,true);
 
     // From scientist tabs
     currentScientistSortColumn = "Name";
@@ -39,7 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     getAllScientist();
     getAllComputers();
-
 
     ui->statusBar->showMessage("Booga! Booga!", 2000);
 }
@@ -70,6 +72,7 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
 {
     ui->table_s->clearContents();
     ui->table_s->setRowCount(scientists.size());
+    ui->table_s->setSortingEnabled(false);
 
     for(unsigned int row = 0; row < scientists.size(); row++)
     {
@@ -79,8 +82,11 @@ void MainWindow::displayAllScientists(const vector<Scientist>& scientists)
         ui->table_s->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currentScientist.getGender())));
         ui->table_s->setItem(row,2,new QTableWidgetItem(QString::number(currentScientist.getYearOfBirth())));
         ui->table_s->setItem(row,3,new QTableWidgetItem(QString::number(currentScientist.getYearOfDeath())));
+        ui->table_s->setItem(row,4,new QTableWidgetItem(QString::number(currentScientist.getScientistID())));
+
     }
     currentlyDisplayedScientist = scientists;
+    ui->table_s->setSortingEnabled(true);
 }
 
 // Displays table with all computers
@@ -88,6 +94,7 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
 {
     ui->table_c->clearContents();
     ui->table_c->setRowCount(computers.size());
+    ui->table_c->setSortingEnabled(false);
 
     for(unsigned int row = 0; row < computers.size(); row++)
     {
@@ -97,8 +104,10 @@ void MainWindow::displayAllComputers(const vector<Computer>& computers)
         ui->table_c->setItem(row,1,new QTableWidgetItem(QString::number(currentComputer.getYearBuilt())));
         ui->table_c->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currentComputer.getType())));
         ui->table_c->setItem(row,3,new QTableWidgetItem(QString::number(currentComputer.getBuilt())));
+        ui->table_c->setItem(row,4,new QTableWidgetItem(QString::number(currentComputer.getComputerID())));
     }
     currentlyDisplayedComputers = computers;
+    ui->table_c->setSortingEnabled(true);
 }
 
 // To Add scientist to database
@@ -425,7 +434,7 @@ void MainWindow::on_button_delete_scientist_clicked()
 
     Scientist currentlySelectedScientist = currentlyDisplayedScientist.at(currentlySelectedScientistIndex);
 
-    int scientistID = currentlySelectedScientist.getScientistID();
+    int scientistID = ui->table_s->item(currentlySelectedScientistIndex, 4)->text().toInt();
 
     QMessageBox::StandardButton sure;
     sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known scientist?", QMessageBox::No|QMessageBox::Yes);
@@ -462,7 +471,7 @@ void MainWindow::on_button_delete_computer_clicked()
 
     Computer currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComptuerIndex);
 
-    int computerID = currentlySelectedComputer.getComputerID();
+    int computerID = ui->table_c->item(currentlySelectedComptuerIndex, 4)->text().toInt();
 
     QMessageBox::StandardButton sure;
     sure = QMessageBox::question(this, "Delete", "Are you sure you want to delete a known computer?", QMessageBox::No|QMessageBox::Yes);
@@ -633,8 +642,6 @@ bool MainWindow::ValidInput(string check, string allowed)
 
 void MainWindow::on_table_c_customContextMenuRequested()
 {
-    qDebug() << "Right clicked menu requested on table";
-
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_computer);
     menu->addAction(ui->action_details_c);
@@ -644,8 +651,6 @@ void MainWindow::on_table_c_customContextMenuRequested()
 
 void MainWindow::on_table_s_customContextMenuRequested()
 {
-    qDebug() << "Right clicked menu requested on table";
-
     QMenu* menu =new QMenu(this);
     menu->addAction(ui->action_remove_scientist);
     menu->addAction(ui->action_details_s);
