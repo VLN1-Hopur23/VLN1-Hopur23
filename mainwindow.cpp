@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_s->addItem("Gender");
     ui->input_dropdown_sort_s->addItem("Birth");
     ui->input_dropdown_sort_s->addItem("Death");
+    ui->input_dropdown_sort_s->addItem("Life");
     connect(this->ui->input_dropdown_sort_s, SIGNAL(activated(int)), this, SLOT(on_input_keyword_s_textChanged()));
 
     ui->input_keyword_s->setPlaceholderText("Search scientists...");
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->input_dropdown_sort_c->addItem("Year built");
     ui->input_dropdown_sort_c->addItem("Type");
     ui->input_dropdown_sort_c->addItem("Built");
+    ui->input_dropdown_sort_c->addItem("Life");
     connect( this->ui->input_dropdown_sort_c, SIGNAL( activated(int) ), this, SLOT(on_input_keyword_c_textChanged()) );
 
     ui->input_keyword_c->setPlaceholderText("Search computers...");
@@ -170,6 +172,11 @@ void MainWindow::on_input_keyword_s_textChanged()
         case 3:
         {
             scientists = _service.searchingByFilter("Deathyear", userInput);
+            break;
+        }
+        case 4:
+        {
+
             break;
         }
     }
