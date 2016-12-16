@@ -8,6 +8,10 @@ AddStudentDialog::AddStudentDialog(QWidget *parent) :
     ui(new Ui::AddStudentDialog)
 {
     ui->setupUi(this);
+
+    QPixmap pixmap(QString::fromStdString(":/db_images/Images of scientists/unknown.jpg"));
+    ui->label_s_picture->setPixmap(pixmap);
+    ui->label_s_picture->setScaledContents(true);
 }
 
 AddStudentDialog::~AddStudentDialog()
@@ -245,9 +249,7 @@ bool AddStudentDialog::ValidInput(string check, string allowed)
 
 void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
 {
-    //Need scientist id
-    //int scientistID = _scientist.getScientistID();
-    // That will map the right picture url in connection table
+    // ScierntistID will map the right picture url in connection table
     // We need to get the url from the table with the scientist ID
 
     string url = ""; //":/db_images/Images of scientists/unknown.jpeg";
@@ -263,7 +265,8 @@ void AddStudentDialog::on_PushButton_browse_s_picture_clicked()
         QPixmap pixmap(QString::fromStdString(filePath));
         ui->label_s_picture->setPixmap(pixmap);
         ui->label_s_picture->setScaledContents(true);
-        url = filePath;
+        // add the url to database
+
     }
     else
     {

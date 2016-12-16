@@ -32,6 +32,9 @@ public:
 
     void retrieveScientists();
 
+    string retrievePicUrl(int scientistID);
+    void addPicUrl(int scientistID, string url);
+
     string editScientist(int index, string change, string input);
 
     bool deleteScientist(int index);
